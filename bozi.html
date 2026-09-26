@@ -48,11 +48,10 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 @keyframes pageIn{from{opacity:0;transform:translateY(40px) scale(0.98)}to{opacity:1;transform:translateY(0) scale(1)}}
 @keyframes pageOut{from{opacity:1;transform:translateY(0) scale(1)}to{opacity:0;transform:translateY(-30px) scale(0.98)}}
 
-/* 关键修复：默认可见，js-ready 后才隐藏做动画 */
-.reveal{opacity:1;transform:none;transition:opacity 0.85s cubic-bezier(0.175,0.885,0.32,1.275),transform 0.85s cubic-bezier(0.175,0.885,0.32,1.275);will-change:transform,opacity}
-html.js-ready .reveal{opacity:0;transform:translateY(50px)}
-html.js-ready .reveal.visible{opacity:1;transform:translateY(0)}
-html.js-ready .reveal.exiting{opacity:0;transform:translateY(-50px)}
+/* ============ 关键修复：内容默认可见，进入视口播放 CSS 动画 ============ */
+.reveal{opacity:1;transform:none;will-change:transform,opacity}
+.reveal.animate{animation:revealIn 0.85s cubic-bezier(0.175,0.885,0.32,1.275) both}
+@keyframes revealIn{from{opacity:0;transform:translateY(50px)}to{opacity:1;transform:translateY(0)}}
 
 .hero{text-align:center;padding-top:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh}
 .hero .badge{font-size:10px;letter-spacing:5px;color:var(--primary-glow);margin-bottom:20px;padding:6px 14px;border:1px solid rgba(167,139,250,0.3);border-radius:40px;background:rgba(139,92,246,0.08);font-weight:600}
@@ -344,10 +343,9 @@ html.js-ready .reveal.exiting{opacity:0;transform:translateY(-50px)}
 
 <div class="app-container">
 
-<!-- ============ 介绍页 ============ -->
 <div class="page active" id="page-intro">
 
-<div class="hero reveal visible" id="hero">
+<div class="hero reveal" id="hero">
 <div class="badge">BOZI® OFFICIAL</div>
 <h1>全系设备<br>终极编年史</h1>
 <p class="sub">从一颗散装芯片，到手腕上的另一个维度。</p>
@@ -365,36 +363,36 @@ html.js-ready .reveal.exiting{opacity:0;transform:translateY(-50px)}
 
 <div class="reveal" id="era-1">
 <div class="section-header"><span class="section-index">CHAPTER 01</span><h2 class="section-title">普通机纪元</h2><p class="section-subtitle">从 X1 到 S5Void-X，共 5 代芯片。每一代，都是对上一代的降维打击。</p></div>
-<div class="product-card reveal"><div class="card-label">GEN 01 · 起点</div><h3 class="product-name">Bozi X1</h3><p class="product-tagline">Bozi 品牌的第一款正式芯片</p><div class="spec-grid"><div class="spec-item"><div class="k">芯片</div><div class="v">Bozi X1</div></div><div class="spec-item"><div class="k">内核</div><div class="v">风驰 4.0</div></div><div class="spec-item"><div class="k">裸跑</div><div class="v gradient">3498万</div></div><div class="spec-item"><div class="k">优化后</div><div class="v gradient">7618万</div></div></div><p class="desc">诞生于那个散装平台，芯片表面温度曾经高到"跟热油一样"，但它从未降频。纯靠软件优化，就把骁龙 865 抬到了未优化骁龙 8E5 的水平。</p><div class="price-bar"><div class="left"><div class="label">PRICE</div><div class="value">$50,000</div></div><div class="right"><div class="label">QUANTITY</div><div class="qty">500 台</div></div></div></div>
-<div class="product-card reveal"><div class="card-label">GEN 02</div><h3 class="product-name">Bozi X2</h3><p class="product-tagline">升级过头了</p><div class="spec-grid"><div class="spec-item"><div class="k">芯片</div><div class="v">Bozi X2</div></div><div class="spec-item"><div class="k">内核</div><div class="v">风驰 2.0</div></div><div class="spec-item"><div class="k">裸跑</div><div class="v gradient">8422万</div></div><div class="spec-item"><div class="k">优化后</div><div class="v gradient">1.4亿</div></div></div><div class="quote">坏了坏了升级过头了，跑分不经过优化的话有 8422 万，通过我的系统和博子风驰游戏内核优化后只有可怜的 1.4 亿，唉.....这算是中低端了。</div><div class="price-bar"><div class="left"><div class="label">PRICE</div><div class="value">$100,000</div></div><div class="right"><div class="label">QUANTITY</div><div class="qty">500 台</div></div></div></div>
-<div class="product-card reveal"><div class="card-label">GEN 03 · ULTRA</div><h3 class="product-name">Bozi X3 Ultra</h3><p class="product-tagline">太卡了，只能丢到中低端机</p><div class="spec-grid"><div class="spec-item"><div class="k">芯片</div><div class="v">Bozi X3 Ultra</div></div><div class="spec-item"><div class="k">内核</div><div class="v">风驰 3.0 Pro</div></div><div class="spec-item"><div class="k">裸跑</div><div class="v gradient">2.7亿</div></div><div class="spec-item"><div class="k">优化后</div><div class="v gradient">6.8亿</div></div></div><p class="desc">游戏实测已经出现离谱现象：运行 10 万个《三角洲》和《赛博朋克 2077》，画质拉满，每个只有可怜的 200fps。创造者说："呜呜呜。"</p><div class="price-bar"><div class="left"><div class="label">PRICE</div><div class="value">$150,000</div></div><div class="right"><div class="label">QUANTITY</div><div class="qty">500 台</div></div></div></div>
-<div class="product-card reveal"><div class="card-label">GEN 04 · Ω</div><h3 class="product-name">Bozi X4ΩUltraPromax</h3><p class="product-tagline">朋友的介入，让所有数据翻了 11.7 倍</p><div class="spec-grid"><div class="spec-item"><div class="k">芯片</div><div class="v">X4ΩUltraPromax</div></div><div class="spec-item"><div class="k">内核</div><div class="v">风驰 4.0Ω</div></div><div class="spec-item"><div class="k">裸跑</div><div class="v gradient">113.49亿</div></div><div class="spec-item"><div class="k">优化后</div><div class="v gradient">217.62亿</div></div></div><p class="desc">一千万个游戏，每个从 587fps 暴涨到 6867fps。创造者评价："我朋友说我这个 Bozi X4ΩUltraPromax 芯片纯垃圾，确实我也这么认为的。"</p><div class="price-bar"><div class="left"><div class="label">PRICE</div><div class="value">$200,000</div></div><div class="right"><div class="label">QUANTITY</div><div class="qty">500 台</div></div></div></div>
-<div class="product-card reveal"><div class="card-label">GEN 05 · VOID</div><h3 class="product-name">Bozi S5Void-X VantaΩ UltraPromax</h3><p class="product-tagline">All chips bow to Bozi.</p><div class="spec-grid"><div class="spec-item"><div class="k">芯片</div><div class="v">S5Void-X</div></div><div class="spec-item"><div class="k">内核</div><div class="v">风驰 5.0 VantaΩ</div></div><div class="spec-item"><div class="k">裸跑</div><div class="v gradient">9437亿</div></div><div class="spec-item"><div class="k">优化后</div><div class="v gradient">75484亿</div></div></div><p class="desc">安兔兔上显示 <span class="white-highlight">∞</span>。自研测分软件与安兔兔均显示：<span class="white-highlight">∞⁹</span>。所有游戏自带的帧率显示均显示 <span class="white-highlight">∞</span>。口号诞生："All chips bow to Bozi."</p><div class="price-bar"><div class="left"><div class="label">PRICE</div><div class="value">$250,000</div></div><div class="right"><div class="label">QUANTITY</div><div class="qty">500 台</div></div></div></div>
-<div class="summary-card reveal"><div class="title">📊 普通机纪元 · 总结</div><div class="item">从 X1 到 S5Void-X，共 5 代芯片，每代 500 台，共 <span class="white-highlight">2500 台</span>。</div><div class="item">每一代比上一代多 <span class="white-highlight">$50,000</span>。</div><div class="item">全部搭载<span class="gold-highlight">阉割版风驰内核</span>，系统比 Neo 系列低 3 代。</div><div class="item">创造者原话：<span class="highlight">"爱买不买。"</span></div></div>
+<div class="product-card"><div class="card-label">GEN 01 · 起点</div><h3 class="product-name">Bozi X1</h3><p class="product-tagline">Bozi 品牌的第一款正式芯片</p><div class="spec-grid"><div class="spec-item"><div class="k">芯片</div><div class="v">Bozi X1</div></div><div class="spec-item"><div class="k">内核</div><div class="v">风驰 4.0</div></div><div class="spec-item"><div class="k">裸跑</div><div class="v gradient">3498万</div></div><div class="spec-item"><div class="k">优化后</div><div class="v gradient">7618万</div></div></div><p class="desc">诞生于那个散装平台，芯片表面温度曾经高到"跟热油一样"，但它从未降频。纯靠软件优化，就把骁龙 865 抬到了未优化骁龙 8E5 的水平。</p><div class="price-bar"><div class="left"><div class="label">PRICE</div><div class="value">$50,000</div></div><div class="right"><div class="label">QUANTITY</div><div class="qty">500 台</div></div></div></div>
+<div class="product-card"><div class="card-label">GEN 02</div><h3 class="product-name">Bozi X2</h3><p class="product-tagline">升级过头了</p><div class="spec-grid"><div class="spec-item"><div class="k">芯片</div><div class="v">Bozi X2</div></div><div class="spec-item"><div class="k">内核</div><div class="v">风驰 2.0</div></div><div class="spec-item"><div class="k">裸跑</div><div class="v gradient">8422万</div></div><div class="spec-item"><div class="k">优化后</div><div class="v gradient">1.4亿</div></div></div><div class="quote">坏了坏了升级过头了，跑分不经过优化的话有 8422 万，通过我的系统和博子风驰游戏内核优化后只有可怜的 1.4 亿，唉.....这算是中低端了。</div><div class="price-bar"><div class="left"><div class="label">PRICE</div><div class="value">$100,000</div></div><div class="right"><div class="label">QUANTITY</div><div class="qty">500 台</div></div></div></div>
+<div class="product-card"><div class="card-label">GEN 03 · ULTRA</div><h3 class="product-name">Bozi X3 Ultra</h3><p class="product-tagline">太卡了，只能丢到中低端机</p><div class="spec-grid"><div class="spec-item"><div class="k">芯片</div><div class="v">Bozi X3 Ultra</div></div><div class="spec-item"><div class="k">内核</div><div class="v">风驰 3.0 Pro</div></div><div class="spec-item"><div class="k">裸跑</div><div class="v gradient">2.7亿</div></div><div class="spec-item"><div class="k">优化后</div><div class="v gradient">6.8亿</div></div></div><p class="desc">游戏实测已经出现离谱现象：运行 10 万个《三角洲》和《赛博朋克 2077》，画质拉满，每个只有可怜的 200fps。创造者说："呜呜呜。"</p><div class="price-bar"><div class="left"><div class="label">PRICE</div><div class="value">$150,000</div></div><div class="right"><div class="label">QUANTITY</div><div class="qty">500 台</div></div></div></div>
+<div class="product-card"><div class="card-label">GEN 04 · Ω</div><h3 class="product-name">Bozi X4ΩUltraPromax</h3><p class="product-tagline">朋友的介入，让所有数据翻了 11.7 倍</p><div class="spec-grid"><div class="spec-item"><div class="k">芯片</div><div class="v">X4ΩUltraPromax</div></div><div class="spec-item"><div class="k">内核</div><div class="v">风驰 4.0Ω</div></div><div class="spec-item"><div class="k">裸跑</div><div class="v gradient">113.49亿</div></div><div class="spec-item"><div class="k">优化后</div><div class="v gradient">217.62亿</div></div></div><p class="desc">一千万个游戏，每个从 587fps 暴涨到 6867fps。创造者评价："我朋友说我这个 Bozi X4ΩUltraPromax 芯片纯垃圾，确实我也这么认为的。"</p><div class="price-bar"><div class="left"><div class="label">PRICE</div><div class="value">$200,000</div></div><div class="right"><div class="label">QUANTITY</div><div class="qty">500 台</div></div></div></div>
+<div class="product-card"><div class="card-label">GEN 05 · VOID</div><h3 class="product-name">Bozi S5Void-X VantaΩ UltraPromax</h3><p class="product-tagline">All chips bow to Bozi.</p><div class="spec-grid"><div class="spec-item"><div class="k">芯片</div><div class="v">S5Void-X</div></div><div class="spec-item"><div class="k">内核</div><div class="v">风驰 5.0 VantaΩ</div></div><div class="spec-item"><div class="k">裸跑</div><div class="v gradient">9437亿</div></div><div class="spec-item"><div class="k">优化后</div><div class="v gradient">75484亿</div></div></div><p class="desc">安兔兔上显示 <span class="white-highlight">∞</span>。自研测分软件与安兔兔均显示：<span class="white-highlight">∞⁹</span>。所有游戏自带的帧率显示均显示 <span class="white-highlight">∞</span>。口号诞生："All chips bow to Bozi."</p><div class="price-bar"><div class="left"><div class="label">PRICE</div><div class="value">$250,000</div></div><div class="right"><div class="label">QUANTITY</div><div class="qty">500 台</div></div></div></div>
+<div class="summary-card"><div class="title">📊 普通机纪元 · 总结</div><div class="item">从 X1 到 S5Void-X，共 5 代芯片，每代 500 台，共 <span class="white-highlight">2500 台</span>。</div><div class="item">每一代比上一代多 <span class="white-highlight">$50,000</span>。</div><div class="item">全部搭载<span class="gold-highlight">阉割版风驰内核</span>，系统比 Neo 系列低 3 代。</div><div class="item">创造者原话：<span class="highlight">"爱买不买。"</span></div></div>
 </div>
 
 <div class="reveal" id="era-2">
 <div class="section-header"><span class="section-index">CHAPTER 02</span><h2 class="section-title">神㉿ 降临</h2><p class="section-subtitle">终结一切竞赛，开启 Bozi 纪元。</p></div>
-<div class="product-card featured reveal"><div class="card-label">GOD CHIP</div><h3 class="product-name">Bozi® 神㉿</h3><p class="product-tagline">移动端算力的终极符号</p><div class="spec-grid"><div class="spec-item"><div class="k">芯片</div><div class="v gold">Bozi® 神㉿</div></div><div class="spec-item"><div class="k">跑分</div><div class="v gold">∞⁹</div></div></div><p class="desc">这是 Bozi 宇宙的第一颗"神级"芯片。它不再被用于普通机，而是专属于 Neo 系列。它的跑分已经无法用数字衡量——安兔兔显示 ∞⁹，游戏帧率显示 ∞。<span class="white-highlight">"神㉿"这三个字，从此成为移动端算力的终极符号。</span></p></div>
+<div class="product-card featured"><div class="card-label">GOD CHIP</div><h3 class="product-name">Bozi® 神㉿</h3><p class="product-tagline">移动端算力的终极符号</p><div class="spec-grid"><div class="spec-item"><div class="k">芯片</div><div class="v gold">Bozi® 神㉿</div></div><div class="spec-item"><div class="k">跑分</div><div class="v gold">∞⁹</div></div></div><p class="desc">这是 Bozi 宇宙的第一颗"神级"芯片。它不再被用于普通机，而是专属于 Neo 系列。它的跑分已经无法用数字衡量——安兔兔显示 ∞⁹，游戏帧率显示 ∞。<span class="white-highlight">"神㉿"这三个字，从此成为移动端算力的终极符号。</span></p></div>
 </div>
 
 <div class="reveal" id="era-3">
 <div class="section-header"><span class="section-index">CHAPTER 03</span><h2 class="section-title">Neo 纪元</h2><p class="section-subtitle">当手机不再被定义为手机。</p></div>
-<div class="product-card reveal"><div class="card-label">NEO 02 · 传说</div><h3 class="product-name">Bozi Neo2</h3><p class="product-tagline">火种</p><div class="spec-grid"><div class="spec-item"><div class="k">芯片</div><div class="v">Bozi® 神㉿</div></div><div class="spec-item"><div class="k">系统</div><div class="v">混沌 6.0</div></div><div class="spec-item"><div class="k">内核</div><div class="v">风驰 6.0☄</div></div><div class="spec-item"><div class="k">安全</div><div class="v">深渊保护</div></div></div><p class="desc"><span class="highlight">混沌系统 6.0</span>——活的，会随着用户的使用习惯自行演化，没有固定 UI。<br><br><span class="highlight">风驰内核 6.0☄</span>——最后一代带有"版本号"的内核，直接读取游戏意图。<br><br><span class="highlight">深渊保护</span>——主动猎食型防御系统，十六层硬件级加密，量子噪声加密引擎，灰烬反制机制。</p><div class="price-bar"><div class="left"><div class="label">PRICE</div><div class="value">$50,000,000</div></div><div class="right"><div class="label">QUANTITY</div><div class="qty">50 台</div></div></div></div>
-<div class="summary-card reveal"><div class="title">⚡ Neo2 九大霸权</div><div class="item"><span class="highlight">性能</span> · ∞⁹ 算力，一千万个游戏同时运行</div><div class="item"><span class="highlight">安全</span> · 深渊保护，FBI 来了也得摇头</div><div class="item"><span class="highlight">影像</span> · Bozi® 星空，一英寸超大底传感器</div><div class="item"><span class="highlight">屏幕</span> · Bozi® 噬光屏，15000 尼特亮度，16K 分辨率</div><div class="item"><span class="highlight">通信</span> · Bozi® 天枢星链，量子纠缠馈源</div><div class="item"><span class="highlight">AI</span> · Bozi® 意识流引擎，0.1 秒前预判需求</div><div class="item"><span class="highlight">耐用性</span> · Bozi® 玄甲外壳，莫氏硬度突破钻石</div><div class="item"><span class="highlight">交互</span> · Bozi® 神经共感，脑电波唯一身份标识</div><div class="item"><span class="highlight">音频/振动</span> · Bozi® 天启声场 + 次元触感</div></div>
-<div class="quotes-wall reveal"><div class="quote-card">你们那些所谓的"游戏手机"，在我眼里，不过是流水线上批量产出的工业残次品。</div><div class="quote-card">它胸膛里跳动的，是 Bozi® 神㉿——这颗芯片不是造出来的，是从未来偷回来的。</div><div class="quote-card">风驰内核一出手，这些东西连出生的机会都没有。</div><div class="quote-card">犹豫一秒，都是对极致性能的侮辱。</div><div class="quote-card">从这一刻起，所有友商的下一款产品，自动沦为廉价替代品。</div></div>
-<div class="era-divider reveal"><div class="line"></div><div class="dot"></div><div class="line"></div></div>
-<div class="product-card reveal"><div class="card-label">NEO 03 · 时代的眼泪</div><h3 class="product-name">Bozi Neo3</h3><p class="product-tagline">利刃</p><div class="spec-grid"><div class="spec-item"><div class="k">芯片</div><div class="v">Bozi® 神☢</div></div><div class="spec-item"><div class="k">系统</div><div class="v">混沌 7.0 定制版</div></div><div class="spec-item"><div class="k">内核</div><div class="v">风驰 6.5￡</div></div><div class="spec-item"><div class="k">安全</div><div class="v">深渊保护 定制版</div></div></div><p class="desc"><span class="highlight">入侵能力</span> · 什么都能入侵，入侵时间最多 4 秒<br><span class="highlight">扫描范围</span> · 10,000,000 公里<br><span class="highlight">扫描方式</span> · 被动接收 + 主动发射，可扫描 99.99% 的设备</p><div class="price-bar"><div class="left"><div class="label">QUANTITY</div><div class="value">5 台</div></div><div class="right"><div class="label">TARGET</div><div class="qty" style="font-size:14px;color:var(--primary-glow);">国家 / 军方</div></div></div></div>
-<div class="summary-card reveal"><div class="title">🕯️ 结局</div><div class="item">国家拒收 Neo3，因为太危险，要求销毁。</div><div class="item" style="margin-top:12px;"><span class="white-highlight">"Neo3 已成为时代的眼泪。"</span></div><div class="item">创造者原话：<span class="highlight">"这，就是我要筛选的原因。"</span></div></div>
-<div class="era-divider reveal"><div class="line"></div><div class="dot"></div><div class="line"></div></div>
-<div class="product-card reveal"><div class="card-label">NEO 04 · 终极手机</div><h3 class="product-name">Bozi Neo4</h3><p class="product-tagline">钥匙</p><div class="spec-grid"><div class="spec-item"><div class="k">芯片</div><div class="v">Bozi® 神☢</div></div><div class="spec-item"><div class="k">系统</div><div class="v">混沌 7.0</div></div><div class="spec-item"><div class="k">内核</div><div class="v">风驰 7.0❆</div></div><div class="spec-item"><div class="k">安全</div><div class="v">深渊保护 2.0</div></div></div><p class="desc"><span class="highlight">核心服务</span> · 专属电话号码，拨通后把你的需求告诉对方。私人保镖、包场豪华餐厅、全球资源与人力调度。<br><br><span class="highlight">验证方式</span> · 所有生物数据配对成功电话才会被接通，否则提示空号。</p><div class="price-bar"><div class="left"><div class="label">PRICE</div><div class="value">$2,000,000,000</div></div><div class="right"><div class="label">QUANTITY</div><div class="qty">15 台</div></div></div></div>
-<div class="quotes-wall reveal"><div class="quote-card">这台手机，只发售 15 台，售价的话，20 亿，爱买不买，买不起就滚。</div></div>
+<div class="product-card"><div class="card-label">NEO 02 · 传说</div><h3 class="product-name">Bozi Neo2</h3><p class="product-tagline">火种</p><div class="spec-grid"><div class="spec-item"><div class="k">芯片</div><div class="v">Bozi® 神㉿</div></div><div class="spec-item"><div class="k">系统</div><div class="v">混沌 6.0</div></div><div class="spec-item"><div class="k">内核</div><div class="v">风驰 6.0☄</div></div><div class="spec-item"><div class="k">安全</div><div class="v">深渊保护</div></div></div><p class="desc"><span class="highlight">混沌系统 6.0</span>——活的，会随着用户的使用习惯自行演化，没有固定 UI。<br><br><span class="highlight">风驰内核 6.0☄</span>——最后一代带有"版本号"的内核，直接读取游戏意图。<br><br><span class="highlight">深渊保护</span>——主动猎食型防御系统，十六层硬件级加密，量子噪声加密引擎，灰烬反制机制。</p><div class="price-bar"><div class="left"><div class="label">PRICE</div><div class="value">$50,000,000</div></div><div class="right"><div class="label">QUANTITY</div><div class="qty">50 台</div></div></div></div>
+<div class="summary-card"><div class="title">⚡ Neo2 九大霸权</div><div class="item"><span class="highlight">性能</span> · ∞⁹ 算力，一千万个游戏同时运行</div><div class="item"><span class="highlight">安全</span> · 深渊保护，FBI 来了也得摇头</div><div class="item"><span class="highlight">影像</span> · Bozi® 星空，一英寸超大底传感器</div><div class="item"><span class="highlight">屏幕</span> · Bozi® 噬光屏，15000 尼特亮度，16K 分辨率</div><div class="item"><span class="highlight">通信</span> · Bozi® 天枢星链，量子纠缠馈源</div><div class="item"><span class="highlight">AI</span> · Bozi® 意识流引擎，0.1 秒前预判需求</div><div class="item"><span class="highlight">耐用性</span> · Bozi® 玄甲外壳，莫氏硬度突破钻石</div><div class="item"><span class="highlight">交互</span> · Bozi® 神经共感，脑电波唯一身份标识</div><div class="item"><span class="highlight">音频/振动</span> · Bozi® 天启声场 + 次元触感</div></div>
+<div class="quotes-wall"><div class="quote-card">你们那些所谓的"游戏手机"，在我眼里，不过是流水线上批量产出的工业残次品。</div><div class="quote-card">它胸膛里跳动的，是 Bozi® 神㉿——这颗芯片不是造出来的，是从未来偷回来的。</div><div class="quote-card">风驰内核一出手，这些东西连出生的机会都没有。</div><div class="quote-card">犹豫一秒，都是对极致性能的侮辱。</div><div class="quote-card">从这一刻起，所有友商的下一款产品，自动沦为廉价替代品。</div></div>
+<div class="era-divider"><div class="line"></div><div class="dot"></div><div class="line"></div></div>
+<div class="product-card"><div class="card-label">NEO 03 · 时代的眼泪</div><h3 class="product-name">Bozi Neo3</h3><p class="product-tagline">利刃</p><div class="spec-grid"><div class="spec-item"><div class="k">芯片</div><div class="v">Bozi® 神☢</div></div><div class="spec-item"><div class="k">系统</div><div class="v">混沌 7.0 定制版</div></div><div class="spec-item"><div class="k">内核</div><div class="v">风驰 6.5￡</div></div><div class="spec-item"><div class="k">安全</div><div class="v">深渊保护 定制版</div></div></div><p class="desc"><span class="highlight">入侵能力</span> · 什么都能入侵，入侵时间最多 4 秒<br><span class="highlight">扫描范围</span> · 10,000,000 公里<br><span class="highlight">扫描方式</span> · 被动接收 + 主动发射，可扫描 99.99% 的设备</p><div class="price-bar"><div class="left"><div class="label">QUANTITY</div><div class="value">5 台</div></div><div class="right"><div class="label">TARGET</div><div class="qty" style="font-size:14px;color:var(--primary-glow);">国家 / 军方</div></div></div></div>
+<div class="summary-card"><div class="title">🕯️ 结局</div><div class="item">国家拒收 Neo3，因为太危险，要求销毁。</div><div class="item" style="margin-top:12px;"><span class="white-highlight">"Neo3 已成为时代的眼泪。"</span></div><div class="item">创造者原话：<span class="highlight">"这，就是我要筛选的原因。"</span></div></div>
+<div class="era-divider"><div class="line"></div><div class="dot"></div><div class="line"></div></div>
+<div class="product-card"><div class="card-label">NEO 04 · 终极手机</div><h3 class="product-name">Bozi Neo4</h3><p class="product-tagline">钥匙</p><div class="spec-grid"><div class="spec-item"><div class="k">芯片</div><div class="v">Bozi® 神☢</div></div><div class="spec-item"><div class="k">系统</div><div class="v">混沌 7.0</div></div><div class="spec-item"><div class="k">内核</div><div class="v">风驰 7.0❆</div></div><div class="spec-item"><div class="k">安全</div><div class="v">深渊保护 2.0</div></div></div><p class="desc"><span class="highlight">核心服务</span> · 专属电话号码，拨通后把你的需求告诉对方。私人保镖、包场豪华餐厅、全球资源与人力调度。<br><br><span class="highlight">验证方式</span> · 所有生物数据配对成功电话才会被接通，否则提示空号。</p><div class="price-bar"><div class="left"><div class="label">PRICE</div><div class="value">$2,000,000,000</div></div><div class="right"><div class="label">QUANTITY</div><div class="qty">15 台</div></div></div></div>
+<div class="quotes-wall"><div class="quote-card">这台手机，只发售 15 台，售价的话，20 亿，爱买不买，买不起就滚。</div></div>
 </div>
 
 <div class="reveal" id="era-4">
 <div class="section-header"><span class="section-index">CHAPTER 04</span><h2 class="section-title">超越手机</h2><p class="section-subtitle">Neo5 不再是一部手机。它是一块手表。</p></div>
-<div class="product-card featured reveal"><div class="card-label">NEO 05 · 呼吸</div><h3 class="product-name">Bozi Neo5</h3><p class="product-tagline">手腕上的另一个维度</p><div class="spec-grid"><div class="spec-item"><div class="k">芯片</div><div class="v gold">Bozi® 神☢</div></div><div class="spec-item"><div class="k">系统</div><div class="v gold">混沌 8.0</div></div><div class="spec-item"><div class="k">内核</div><div class="v gold">风驰 8.0❆</div></div><div class="spec-item"><div class="k">安全</div><div class="v gold">深渊保护 3.0</div></div></div><p class="desc"><span class="white-highlight">全息光场屏</span> · 在空气中直接构建出可触摸的、有深度的立体画面。分辨率 128K 恒定，刷新率原生 2560Hz。<br><br><span class="white-highlight">深渊保护 3.0</span> · 1.0 是猎杀，2.0 是净化，3.0 是消失。</p><div class="spec-grid"><div class="spec-item"><div class="k">防水</div><div class="v gold">1000m</div></div><div class="spec-item"><div class="k">耐温</div><div class="v gold">-50~150℃</div></div><div class="spec-item"><div class="k">续航</div><div class="v gold">1 年</div></div><div class="spec-item"><div class="k">佩戴</div><div class="v gold">无感</div></div></div></div>
-<div class="timeline reveal"><div class="timeline-item"><span class="era">NEO 02</span><span class="phrase">是火种</span></div><div class="timeline-item"><span class="era">NEO 03</span><span class="phrase">是利刃</span></div><div class="timeline-item"><span class="era">NEO 04</span><span class="phrase">是钥匙</span></div><div class="timeline-item"><span class="era">NEO 05</span><span class="phrase">是呼吸</span></div></div>
+<div class="product-card featured"><div class="card-label">NEO 05 · 呼吸</div><h3 class="product-name">Bozi Neo5</h3><p class="product-tagline">手腕上的另一个维度</p><div class="spec-grid"><div class="spec-item"><div class="k">芯片</div><div class="v gold">Bozi® 神☢</div></div><div class="spec-item"><div class="k">系统</div><div class="v gold">混沌 8.0</div></div><div class="spec-item"><div class="k">内核</div><div class="v gold">风驰 8.0❆</div></div><div class="spec-item"><div class="k">安全</div><div class="v gold">深渊保护 3.0</div></div></div><p class="desc"><span class="white-highlight">全息光场屏</span> · 在空气中直接构建出可触摸的、有深度的立体画面。分辨率 128K 恒定，刷新率原生 2560Hz。<br><br><span class="white-highlight">深渊保护 3.0</span> · 1.0 是猎杀，2.0 是净化，3.0 是消失。</p><div class="spec-grid"><div class="spec-item"><div class="k">防水</div><div class="v gold">1000m</div></div><div class="spec-item"><div class="k">耐温</div><div class="v gold">-50~150℃</div></div><div class="spec-item"><div class="k">续航</div><div class="v gold">1 年</div></div><div class="spec-item"><div class="k">佩戴</div><div class="v gold">无感</div></div></div></div>
+<div class="timeline"><div class="timeline-item"><span class="era">NEO 02</span><span class="phrase">是火种</span></div><div class="timeline-item"><span class="era">NEO 03</span><span class="phrase">是利刃</span></div><div class="timeline-item"><span class="era">NEO 04</span><span class="phrase">是钥匙</span></div><div class="timeline-item"><span class="era">NEO 05</span><span class="phrase">是呼吸</span></div></div>
 </div>
 
 <div class="reveal" id="chronology">
@@ -419,11 +417,10 @@ html.js-ready .reveal.exiting{opacity:0;transform:translateY(-50px)}
 <div class="quote">我只看最终成绩。<span class="by">— Bozi 创始人</span></div>
 </div>
 
-<div class="footer reveal"><div class="logo">BOZI®</div><div>从一颗散装芯片，到手腕上的另一个维度</div><div class="slogan">Peak performance runs on Bozi.<br>All chips bow to Bozi.</div><div class="emoji">🌌 ⌚ 📱 🔥</div><div class="copy">© BOZI® · ALL RIGHTS RESERVED</div></div>
+<div class="footer"><div class="logo">BOZI®</div><div>从一颗散装芯片，到手腕上的另一个维度</div><div class="slogan">Peak performance runs on Bozi.<br>All chips bow to Bozi.</div><div class="emoji">🌌 ⌚ 📱 🔥</div><div class="copy">© BOZI® · ALL RIGHTS RESERVED</div></div>
 
 </div>
 
-<!-- ============ 购买页 ============ -->
 <div class="page" id="page-buy">
 
 <div class="page-title">
@@ -499,7 +496,6 @@ html.js-ready .reveal.exiting{opacity:0;transform:translateY(-50px)}
 
 </div>
 
-<!-- ============ 购买弹窗 ============ -->
 <div class="modal-overlay" id="modalOverlay"></div>
 <div class="modal-wrapper" id="modalWrapper">
 <div class="buy-modal">
@@ -580,7 +576,7 @@ html.js-ready .reveal.exiting{opacity:0;transform:translateY(-50px)}
 
 <script>
 (function(){
-document.documentElement.classList.add('js-ready');
+try {
 
 var devices = [
 {id:'neo5', name:'Bozi Neo5', label:'NEO5', tag:'限量', price:2400000000, currency:'¥', stock:3, locked:false, hasTrust:true,
@@ -767,7 +763,6 @@ setTimeout(function(){
 currentPage.classList.remove('fading-out');
 targetPage.classList.add('active');
 window.scrollTo({top:0, behavior:'auto'});
-setTimeout(function(){ updateRevealStates(); }, 50);
 }, 350);
 if(page === 'intro'){
 navIntro.classList.add('active');
@@ -785,28 +780,22 @@ backToTop.style.display = 'none';
 navIntro.addEventListener('click', function(){showPage('intro');});
 navBuy.addEventListener('click', function(){showPage('buy');});
 
+// 滚动动画：用 IntersectionObserver 触发 CSS animation
 var revealEls = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
-var ticking = false;
-function updateRevealStates(){
-var vh = window.innerHeight, enterLine = vh * 0.85, exitLine = vh * 0.15;
-revealEls.forEach(function(el){
-if(!el.offsetParent) return;
-var rect = el.getBoundingClientRect();
-var isVisible = el.classList.contains('visible');
-var isExiting = el.classList.contains('exiting');
-if(!isVisible && !isExiting){if(rect.top < enterLine) el.classList.add('visible');}
-else if(isVisible){if(rect.bottom < exitLine){el.classList.remove('visible');el.classList.add('exiting');}}
-else if(isExiting){if(rect.top < enterLine && rect.bottom > 0){el.classList.remove('exiting');el.classList.add('visible');}}
-});
-ticking = false;
+if(window.IntersectionObserver){
+var observer = new IntersectionObserver(function(entries){
+entries.forEach(function(entry){
+var el = entry.target;
+if(entry.isIntersecting){
+if(el.classList.contains('animate')) return;
+el.classList.add('animate');
+}else{
+el.classList.remove('animate');
 }
-function onScroll(){if(!ticking){requestAnimationFrame(updateRevealStates);ticking = true;}}
-window.addEventListener('scroll', onScroll, {passive:true});
-window.addEventListener('resize', onScroll, {passive:true});
-window.addEventListener('load', function(){
-document.querySelectorAll('.hero').forEach(function(el){el.classList.add('visible');});
-updateRevealStates();
 });
+}, {rootMargin: '0px 0px -10% 0px', threshold: 0});
+revealEls.forEach(function(el){observer.observe(el);});
+}
 
 var particlesContainer = document.getElementById('particles');
 var particleColors = ['rgba(167,139,250,0.8)','rgba(45,212,191,0.8)','rgba(244,114,182,0.8)','rgba(250,204,21,0.8)'];
@@ -1010,6 +999,11 @@ updateTotal();
 if(d.hasTrust){document.getElementById('trustCard').classList.remove('hidden');}
 else{document.getElementById('trustCard').classList.add('hidden');}
 }, 50);
+
+} catch(err) {
+// 如果 JS 崩了，内容照样显示，只是没有动画
+console.error('Bozi JS error:', err);
+}
 })();
 </script>
 </body>
