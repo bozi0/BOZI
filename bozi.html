@@ -48,9 +48,11 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 @keyframes pageIn{from{opacity:0;transform:translateY(40px) scale(0.98)}to{opacity:1;transform:translateY(0) scale(1)}}
 @keyframes pageOut{from{opacity:1;transform:translateY(0) scale(1)}to{opacity:0;transform:translateY(-30px) scale(0.98)}}
 
-.reveal{opacity:0;transform:translateY(50px);transition:opacity 0.85s cubic-bezier(0.175,0.885,0.32,1.275),transform 0.85s cubic-bezier(0.175,0.885,0.32,1.275);will-change:transform,opacity}
-.reveal.visible{opacity:1;transform:translateY(0)}
-.reveal.exiting{opacity:0;transform:translateY(-50px)}
+/* 关键修复：默认可见，js-ready 后才隐藏做动画 */
+.reveal{opacity:1;transform:none;transition:opacity 0.85s cubic-bezier(0.175,0.885,0.32,1.275),transform 0.85s cubic-bezier(0.175,0.885,0.32,1.275);will-change:transform,opacity}
+html.js-ready .reveal{opacity:0;transform:translateY(50px)}
+html.js-ready .reveal.visible{opacity:1;transform:translateY(0)}
+html.js-ready .reveal.exiting{opacity:0;transform:translateY(-50px)}
 
 .hero{text-align:center;padding-top:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh}
 .hero .badge{font-size:10px;letter-spacing:5px;color:var(--primary-glow);margin-bottom:20px;padding:6px 14px;border:1px solid rgba(167,139,250,0.3);border-radius:40px;background:rgba(139,92,246,0.08);font-weight:600}
@@ -578,7 +580,8 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 
 <script>
 (function(){
-// ==================== 设备数据 ====================
+document.documentElement.classList.add('js-ready');
+
 var devices = [
 {id:'neo5', name:'Bozi Neo5', label:'NEO5', tag:'限量', price:2400000000, currency:'¥', stock:3, locked:false, hasTrust:true,
 specs:[
@@ -681,7 +684,6 @@ specs:[
 var currentDevice = devices[0];
 var qty = 1;
 
-// ==================== 渲染设备选择器 ====================
 var deviceScroll = document.getElementById('deviceScroll');
 devices.forEach(function(d, i){
 var btn = document.createElement('button');
@@ -700,32 +702,23 @@ qty = 1;
 document.querySelectorAll('.device-chip').forEach(function(c){
 c.classList.toggle('active', c.getAttribute('data-id') === id);
 });
-
 var panel = document.getElementById('devicePanel');
 panel.classList.add('switching');
-
 setTimeout(function(){
 document.getElementById('productName').textContent = d.name;
 document.getElementById('productBadge').textContent = d.tag;
 document.getElementById('stockNum').textContent = d.stock;
 document.getElementById('productWatch').setAttribute('data-label', d.label);
 document.getElementById('qtyNum').textContent = qty;
-
 var specHtml = '';
 d.specs.forEach(function(s){
 specHtml += '<div class="spec-line"><span class="k">' + s.k + '</span><span class="v ' + (s.cls || '') + '">' + s.v + '</span></div>';
 });
 document.getElementById('specFull').innerHTML = specHtml;
-
 var trustCard = document.getElementById('trustCard');
-if(d.hasTrust){
-trustCard.classList.remove('hidden');
-}else{
-trustCard.classList.add('hidden');
-}
-
+if(d.hasTrust){trustCard.classList.remove('hidden');}
+else{trustCard.classList.add('hidden');}
 updateTotal();
-
 var btn = document.getElementById('buyBtn');
 if(d.locked){
 btn.classList.add('locked');
@@ -734,7 +727,6 @@ btn.innerHTML = '申请特殊渠道';
 btn.classList.remove('locked');
 btn.innerHTML = '<span class="btn-shine"></span>立即购买';
 }
-
 panel.classList.remove('switching');
 }, 200);
 }
@@ -758,7 +750,6 @@ document.getElementById('qtyNum').textContent = qty;
 document.getElementById('qtyPlus').addEventListener('click', function(){if(qty < 5){qty++; updateTotal();}});
 document.getElementById('qtyMinus').addEventListener('click', function(){if(qty > 1){qty--; updateTotal();}});
 
-// ==================== 页面切换 ====================
 var navIntro = document.getElementById('navIntro');
 var navBuy = document.getElementById('navBuy');
 var pageIntro = document.getElementById('page-intro');
@@ -794,7 +785,6 @@ backToTop.style.display = 'none';
 navIntro.addEventListener('click', function(){showPage('intro');});
 navBuy.addEventListener('click', function(){showPage('buy');});
 
-// ==================== 滚动浮入 ====================
 var revealEls = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
 var ticking = false;
 function updateRevealStates(){
@@ -818,7 +808,6 @@ document.querySelectorAll('.hero').forEach(function(el){el.classList.add('visibl
 updateRevealStates();
 });
 
-// ==================== 粒子 ====================
 var particlesContainer = document.getElementById('particles');
 var particleColors = ['rgba(167,139,250,0.8)','rgba(45,212,191,0.8)','rgba(244,114,182,0.8)','rgba(250,204,21,0.8)'];
 for(var i = 0; i < 40; i++){
@@ -887,7 +876,6 @@ if(t) t.scrollIntoView({behavior:'smooth', block:'start'});
 });
 });
 
-// ==================== 多步骤购买流程 ====================
 var modalOverlay = document.getElementById('modalOverlay');
 var modalWrapper = document.getElementById('modalWrapper');
 var modalClose = document.getElementById('modalClose');
@@ -901,18 +889,15 @@ function goToStep(n){
 currentStep = n;
 document.querySelectorAll('.step-panel').forEach(function(p){p.classList.remove('active');});
 document.getElementById('panel' + n).classList.add('active');
-
 document.querySelectorAll('.step-item').forEach(function(item){
 var s = parseInt(item.getAttribute('data-step'));
 item.classList.remove('active','done');
 if(s < n) item.classList.add('done');
 else if(s === n) item.classList.add('active');
 });
-
 modalBackBtn.style.display = 'none';
 modalCloseBtn.style.display = 'none';
 modalNextBtn.style.display = 'block';
-
 if(n === 1){
 modalNextBtn.textContent = '确认并继续';
 modalNextBtn.className = 'modal-btn';
@@ -947,7 +932,6 @@ var verifyBar = document.getElementById('verifyBar');
 verifyBar.style.width = '0%';
 verifyText.textContent = '正在验证身份';
 verifySub.textContent = '正在比对腕部脉搏频率、皮肤微电流、肌肉记忆...';
-
 var stages = [
 {text:'正在验证身份', sub:'正在比对腕部脉搏频率、皮肤微电流、肌肉记忆...', prog:25, delay:0},
 {text:'正在核验订单', sub:'正在从库存中锁定 ' + currentDevice.label + '...', prog:50, delay:900},
@@ -992,12 +976,10 @@ document.getElementById('sumSystem').textContent = currentDevice.specs[1] ? curr
 document.getElementById('sumUnit').textContent = formatPrice(currentDevice, 1);
 document.getElementById('sumQty').textContent = qty;
 document.getElementById('sumTotal').textContent = formatPrice(currentDevice, qty);
-
 document.querySelectorAll('.step-item').forEach(function(item){
 item.classList.remove('active','done');
 });
 document.querySelector('.step-item[data-step="1"]').classList.add('active');
-
 goToStep(1);
 modalOverlay.classList.add('show');
 modalWrapper.classList.add('show');
@@ -1018,7 +1000,6 @@ buyBtn.textContent = '处理中...';
 openModal();
 });
 
-// ==================== 初始化 ====================
 selectDevice('neo5');
 setTimeout(function(){
 var d = currentDevice;
