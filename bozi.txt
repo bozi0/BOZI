@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Bozi® 官方网站</title>
+<style>
+:root{--bg-dark:#050507;--text-main:#f8fafc;--text-sub:#94a3b8;--primary:#8b5cf6;--primary-glow:#a78bfa;--secondary:#2dd4bf;--accent:#f472b6;--gold:#facc15;--radius-lg:28px;--radius-md:18px;--safe-bottom:env(safe-area-inset-bottom,24px)}
+*{box-sizing:border-box;font-family:system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',sans-serif;-webkit-tap-highlight-color:transparent;-webkit-font-smoothing:antialiased}
+html{scroll-behavior:smooth}
+body{background-color:var(--bg-dark);margin:0;min-height:100vh;min-height:100dvh;display:flex;justify-content:center;color:var(--text-main);overflow-x:hidden;position:relative;user-select:none}
+body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-25vw;background:radial-gradient(circle at 20% 20%,rgba(139,92,246,0.18) 0%,transparent 40%),radial-gradient(circle at 80% 80%,rgba(45,212,191,0.12) 0%,transparent 40%),radial-gradient(circle at 50% 50%,rgba(244,114,182,0.08) 0%,transparent 60%);animation:aurora 12s ease-in-out infinite alternate;z-index:0;pointer-events:none}
+@keyframes aurora{0%{transform:translate(0,0) scale(1)}100%{transform:translate(-5%,-5%) scale(1.1)}}
+.grid-bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(139,92,246,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(139,92,246,0.05) 1px,transparent 1px);background-size:50px 50px;mask-image:radial-gradient(ellipse at center,black 30%,transparent 80%);-webkit-mask-image:radial-gradient(ellipse at center,black 30%,transparent 80%);animation:grid-move 20s linear infinite}
+@keyframes grid-move{0%{background-position:0 0}100%{background-position:50px 50px}}
+.particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:hidden}
+.particle{position:absolute;border-radius:50%;animation:float-up linear infinite;will-change:transform,opacity}
+@keyframes float-up{0%{transform:translate3d(0,100vh,0) scale(0.5);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translate3d(20px,-10vh,0) scale(1);opacity:0}}
+.scan-line{position:fixed;top:0;left:0;width:100%;height:2px;background:linear-gradient(90deg,transparent,rgba(167,139,250,0.6),transparent);z-index:10;pointer-events:none;animation:scan 8s linear infinite;opacity:0.4}
+@keyframes scan{0%{transform:translateY(0);opacity:0}10%{opacity:0.5}90%{opacity:0.5}100%{transform:translateY(100vh);opacity:0}}
+.progress-bar{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--primary),var(--secondary),var(--accent));z-index:999;transition:width 0.1s ease;box-shadow:0 0 15px rgba(139,92,246,0.6)}
+
+.topbar{position:fixed;top:0;left:0;width:100%;padding:calc(10px + env(safe-area-inset-top)) 20px 10px;display:flex;justify-content:space-between;align-items:center;z-index:200;background:linear-gradient(180deg,rgba(5,5,7,0.98),rgba(5,5,7,0.85));border-bottom:1px solid rgba(167,139,250,0.08)}
+.topbar .brand{font-size:16px;font-weight:800;letter-spacing:2px;background:linear-gradient(90deg,#fff,#a78bfa);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.topbar .nav-pill{display:flex;gap:4px;padding:4px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:40px}
+.topbar .nav-pill button{padding:7px 16px;border-radius:40px;font-size:12px;font-weight:700;letter-spacing:1px;color:var(--text-sub);transition:all 0.3s ease;white-space:nowrap;background:transparent;border:none;cursor:pointer;font-family:inherit}
+.topbar .nav-pill button.active{background:linear-gradient(135deg,var(--primary),#6d28d9);color:#fff;box-shadow:0 4px 12px rgba(139,92,246,0.4)}
+.topbar .nav-pill button.active.gold{background:linear-gradient(135deg,var(--gold),#f59e0b);color:#1a1a1a;box-shadow:0 4px 12px rgba(250,204,21,0.4)}
+
+.banner{position:fixed;top:calc(64px + env(safe-area-inset-top));left:0;width:100%;padding:8px 20px;z-index:190;background:linear-gradient(90deg,rgba(139,92,246,0.15),rgba(45,212,191,0.1),rgba(139,92,246,0.15));border-bottom:1px solid rgba(167,139,250,0.1);overflow:hidden}
+.banner-track{display:flex;gap:40px;animation:banner-scroll 20s linear infinite;white-space:nowrap}
+@keyframes banner-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.banner-track span{font-size:11px;letter-spacing:2px;color:var(--primary-glow);font-weight:600;flex-shrink:0}
+.banner-track span::before{content:'◆';margin-right:10px;color:var(--gold);font-size:8px}
+
+.back-to-top{position:fixed;bottom:calc(24px + var(--safe-bottom));right:24px;width:48px;height:48px;border-radius:50%;background:rgba(139,92,246,0.15);border:1px solid rgba(167,139,250,0.3);display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;z-index:100;opacity:0;transform:translateY(20px);transition:all 0.4s cubic-bezier(0.175,0.885,0.32,1.275);pointer-events:none}
+.back-to-top.show{opacity:1;transform:translateY(0);pointer-events:auto}
+.back-to-top:active{transform:scale(0.9);background:rgba(139,92,246,0.3)}
+
+.ripple{position:fixed;border-radius:50%;background:radial-gradient(circle,rgba(167,139,250,0.4) 0%,transparent 70%);pointer-events:none;z-index:9999;transform:translate3d(-50%,-50%,0) scale(0);animation:ripple-anim 0.8s ease-out forwards}
+@keyframes ripple-anim{0%{transform:translate3d(-50%,-50%,0) scale(0);opacity:1}100%{transform:translate3d(-50%,-50%,0) scale(1);opacity:0}}
+
+.app-container{width:100%;max-width:560px;position:relative;z-index:2;padding:40px 20px;padding-top:calc(140px + env(safe-area-inset-top));padding-bottom:calc(120px + var(--safe-bottom))}
+
+.page{display:none;flex-direction:column;gap:90px}
+.page.active{display:flex;animation:pageIn 0.55s cubic-bezier(0.175,0.885,0.32,1.275)}
+.page.fading-out{display:flex;animation:pageOut 0.35s ease forwards}
+@keyframes pageIn{from{opacity:0;transform:translateY(40px) scale(0.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes pageOut{from{opacity:1;transform:translateY(0) scale(1)}to{opacity:0;transform:translateY(-30px) scale(0.98)}}
+
+/* ============ 关键修复：内容默认可见，进入视口播放 CSS 动画 ============ */
+.reveal{opacity:1;transform:none;will-change:transform,opacity}
+.reveal.animate{animation:revealIn 0.85s cubic-bezier(0.175,0.885,0.32,1.275) both}
+@keyframes revealIn{from{opacity:0;transform:translateY(50px)}to{opacity:1;transform:translateY(0)}}
+
+.hero{text-align:center;padding-top:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh}
+.hero .badge{font-size:10px;letter-spacing:5px;color:var(--primary-glow);margin-bottom:20px;padding:6px 14px;border:1px solid rgba(167,139,250,0.3);border-radius:40px;background:rgba(139,92,246,0.08);font-weight:600}
+.hero h1{font-size:clamp(40px,12vw,68px);font-weight:900;line-height:1.05;letter-spacing:-2px;margin:0 0 20px 0;background:linear-gradient(135deg,#fff,#a78bfa,#2dd4bf,#fff);background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shine 5s linear infinite,hero-breathe 4s ease-in-out infinite}
+@keyframes shine{to{background-position:200% center}}
+@keyframes hero-breathe{0%,100%{filter:drop-shadow(0 0 20px rgba(167,139,250,0.3))}50%{filter:drop-shadow(0 0 50px rgba(167,139,250,0.7))}}
+.hero .sub{font-size:15px;color:var(--text-sub);line-height:1.8;max-width:380px;margin:0 auto}
+.hero .slogans{margin-top:40px;display:flex;flex-direction:column;gap:8px;font-size:12px;color:var(--text-sub);letter-spacing:1px;opacity:0.7}
+.hero .slogans .en{font-style:italic;color:var(--primary-glow)}
+.audio-bars{display:flex;align-items:flex-end;justify-content:center;gap:4px;height:40px;margin:36px auto 0}
+.audio-bars span{display:block;width:3px;background:linear-gradient(180deg,var(--primary-glow),var(--primary));border-radius:2px;animation:audio-wave 1.2s ease-in-out infinite;box-shadow:0 0 8px rgba(167,139,250,0.5)}
+.audio-bars span:nth-child(1){animation-delay:0s}.audio-bars span:nth-child(2){animation-delay:0.1s}.audio-bars span:nth-child(3){animation-delay:0.2s}.audio-bars span:nth-child(4){animation-delay:0.3s}.audio-bars span:nth-child(5){animation-delay:0.4s}.audio-bars span:nth-child(6){animation-delay:0.5s}.audio-bars span:nth-child(7){animation-delay:0.4s}.audio-bars span:nth-child(8){animation-delay:0.3s}.audio-bars span:nth-child(9){animation-delay:0.2s}.audio-bars span:nth-child(10){animation-delay:0.1s}.audio-bars span:nth-child(11){animation-delay:0s}
+@keyframes audio-wave{0%,100%{height:8px;opacity:0.4}50%{height:40px;opacity:1}}
+.scroll-hint{margin-top:60px;font-size:11px;color:var(--text-sub);letter-spacing:3px;animation:bounce 2s infinite;opacity:0.5}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(10px)}}
+
+.section-header{margin-bottom:32px;position:relative}
+.section-index{font-size:11px;font-weight:700;color:var(--primary-glow);letter-spacing:5px;text-transform:uppercase;display:block;margin-bottom:10px}
+.section-title{font-size:clamp(26px,7.5vw,34px);font-weight:800;line-height:1.2;margin:0;letter-spacing:-1px;background:linear-gradient(90deg,#fff,#a78bfa);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;position:relative}
+.section-title::after{content:'';position:absolute;bottom:-10px;left:0;width:40px;height:3px;background:linear-gradient(90deg,var(--primary),var(--secondary),transparent);border-radius:2px;animation:line-sweep 3s ease-in-out infinite}
+@keyframes line-sweep{0%,100%{width:40px;opacity:0.6}50%{width:100px;opacity:1}}
+.section-subtitle{font-size:13px;color:var(--text-sub);margin-top:16px;line-height:1.7}
+
+.text-body{font-size:15px;color:#cbd5e1;line-height:1.9;margin-bottom:24px}
+.text-body p{margin:0 0 16px 0}.text-body p:last-child{margin-bottom:0}
+.highlight{color:var(--primary-glow);font-weight:600}
+.white-highlight{color:#fff;font-weight:700}
+.gold-highlight{color:var(--gold);font-weight:700}
+
+.quote{position:relative;padding:20px 22px 20px 28px;background:rgba(139,92,246,0.05);border-left:3px solid var(--primary);border-radius:0 16px 16px 0;margin:24px 0;font-size:15px;line-height:1.7;color:#e2e8f0;font-style:italic}
+.quote::before{content:'"';position:absolute;top:-8px;left:12px;font-size:48px;color:var(--primary-glow);opacity:0.3;font-family:Georgia,serif;line-height:1}
+.quote .by{display:block;margin-top:12px;font-size:12px;color:var(--text-sub);font-style:normal;letter-spacing:1px}
+
+.product-card{position:relative;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius-lg);padding:24px;margin:24px 0;overflow:hidden}
+.product-card::before{content:'';position:absolute;top:-30px;left:-30px;width:140px;height:140px;background:radial-gradient(circle,rgba(139,92,246,0.4) 0%,transparent 70%);opacity:0.6;pointer-events:none}
+.product-card::after{content:'';position:absolute;top:20px;bottom:20px;left:0;width:3px;background:linear-gradient(180deg,var(--primary),var(--secondary),transparent);border-radius:0 3px 3px 0;opacity:0.7}
+.product-card.featured::after{background:linear-gradient(180deg,var(--gold),var(--accent),transparent);opacity:1}
+.product-card.featured{border-color:rgba(250,204,21,0.3);box-shadow:0 0 60px rgba(250,204,21,0.1)}
+.card-label{display:inline-block;font-size:10px;letter-spacing:3px;color:var(--primary-glow);font-weight:700;padding:4px 10px;background:rgba(139,92,246,0.12);border-radius:40px;margin-bottom:14px;position:relative}
+.product-card.featured .card-label{color:var(--gold);background:rgba(250,204,21,0.12)}
+.product-name{font-size:22px;font-weight:900;line-height:1.25;margin:0 0 6px 0;letter-spacing:-0.5px;color:#fff;position:relative;word-break:break-word}
+.product-card.featured .product-name{background:linear-gradient(90deg,#fff,var(--gold));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.product-tagline{font-size:13px;color:var(--text-sub);margin-bottom:18px;position:relative}
+
+.spec-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:18px 0;position:relative}
+.spec-item{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:12px;padding:12px}
+.spec-item .k{font-size:10px;letter-spacing:1px;color:var(--text-sub);margin-bottom:5px;text-transform:uppercase}
+.spec-item .v{font-size:14px;font-weight:700;color:#fff;line-height:1.3;word-break:break-word}
+.spec-item .v.gradient{background:linear-gradient(180deg,#fff,#a78bfa);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.spec-item .v.gold{background:linear-gradient(180deg,#fff,var(--gold));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.product-card .desc{font-size:14px;color:#cbd5e1;line-height:1.8;margin:18px 0 0 0;position:relative}
+.price-bar{display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:18px;border-top:1px solid rgba(255,255,255,0.06);position:relative}
+.price-bar .left{display:flex;flex-direction:column;gap:3px}
+.price-bar .label{font-size:10px;color:var(--text-sub);letter-spacing:2px}
+.price-bar .value{font-size:22px;font-weight:900;background:linear-gradient(180deg,#fff,#a78bfa);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.price-bar .right{text-align:right;display:flex;flex-direction:column;gap:3px}
+.price-bar .qty{font-size:22px;font-weight:900;color:#fff}
+
+.quotes-wall{display:flex;flex-direction:column;gap:14px;margin-top:24px}
+.quote-card{position:relative;padding:20px 22px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:16px;font-size:14px;line-height:1.75;color:#e2e8f0}
+.quote-card::before{content:'';position:absolute;top:12px;left:12px;width:6px;height:6px;border-radius:50%;background:var(--primary-glow);box-shadow:0 0 10px var(--primary-glow)}
+
+.era-divider{display:flex;align-items:center;gap:16px;margin:20px 0;opacity:0.6}
+.era-divider .line{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(167,139,250,0.4),transparent)}
+.era-divider .dot{width:6px;height:6px;border-radius:50%;background:var(--primary-glow);box-shadow:0 0 10px var(--primary-glow)}
+
+.summary-card{background:linear-gradient(135deg,rgba(139,92,246,0.08),rgba(45,212,191,0.04));border:1px solid rgba(167,139,250,0.2);border-radius:var(--radius-lg);padding:24px;margin:24px 0;position:relative;overflow:hidden}
+.summary-card::before{content:'';position:absolute;top:-50%;right:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(139,92,246,0.15) 0%,transparent 60%);animation:rotate-glow 20s linear infinite;pointer-events:none}
+@keyframes rotate-glow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.summary-card .title{font-size:16px;font-weight:700;color:#fff;margin-bottom:14px;position:relative}
+.summary-card .item{font-size:13px;color:#cbd5e1;line-height:1.8;margin-bottom:8px;position:relative}
+.summary-card .item:last-child{margin-bottom:0}
+
+.timeline{position:relative;padding-left:24px;margin:20px 0}
+.timeline::before{content:'';position:absolute;left:6px;top:8px;bottom:8px;width:1px;background:linear-gradient(180deg,var(--primary),var(--secondary),transparent);opacity:0.4}
+.timeline-item{position:relative;padding:6px 0 16px 0;font-size:14px;color:#cbd5e1;line-height:1.7}
+.timeline-item::before{content:'';position:absolute;left:-22px;top:12px;width:8px;height:8px;border-radius:50%;background:var(--primary-glow);box-shadow:0 0 10px var(--primary-glow)}
+.timeline-item .era{display:block;font-size:11px;letter-spacing:2px;color:var(--primary-glow);margin-bottom:4px;font-weight:700}
+.timeline-item .phrase{font-size:18px;font-weight:800;color:#fff}
+
+.table-scroll{display:flex;gap:12px;overflow-x:auto;padding:8px 0 20px;margin:0 -20px;padding-left:20px;padding-right:20px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.table-scroll::-webkit-scrollbar{display:none}
+.table-card{scroll-snap-align:start;min-width:200px;flex-shrink:0;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:18px;padding:18px;position:relative}
+.table-card.god{border-color:rgba(250,204,21,0.3);background:rgba(250,204,21,0.03)}
+.table-card.god .tc-name{background:linear-gradient(180deg,#fff,var(--gold));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.table-card .tc-gen{font-size:10px;color:var(--text-sub);letter-spacing:2px;margin-bottom:6px}
+.table-card .tc-name{font-size:16px;font-weight:800;color:#fff;margin-bottom:12px;line-height:1.2;word-break:break-word}
+.table-card .tc-row{display:flex;justify-content:space-between;font-size:11px;padding:5px 0;border-bottom:1px dashed rgba(255,255,255,0.05)}
+.table-card .tc-row:last-child{border-bottom:none}
+.table-card .tc-row .k{color:var(--text-sub)}
+.table-card .tc-row .v{color:#fff;font-weight:600;text-align:right;max-width:60%;word-break:break-word}
+.table-card .tc-row .v.gold{color:var(--gold)}.table-card .tc-row .v.purple{color:var(--primary-glow)}
+
+.footer{text-align:center;padding-top:60px;padding-bottom:30px;color:var(--text-sub);font-size:13px;letter-spacing:1px;position:relative}
+.footer .logo{font-size:32px;font-weight:900;margin-bottom:14px;background:linear-gradient(90deg,#a78bfa,#2dd4bf,#f472b6,#a78bfa);background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shine 4s linear infinite}
+.footer .slogan{font-style:italic;color:var(--primary-glow);margin-top:16px;font-size:12px;line-height:1.9}
+.footer .copy{margin-top:24px;font-size:11px;opacity:0.5;letter-spacing:2px}
+.footer .emoji{margin-top:18px;font-size:20px;letter-spacing:8px}
+
+.page-title{text-align:center;margin-bottom:12px}
+.page-title h1{font-size:clamp(32px,9vw,44px);font-weight:900;line-height:1.15;letter-spacing:-1.5px;margin:0 0 12px 0;background:linear-gradient(135deg,#fff,#facc15,#fff);background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shine 5s linear infinite}
+.page-title .sub{font-size:14px;color:var(--text-sub);line-height:1.7}
+.live-badge{display:inline-flex;align-items:center;gap:8px;font-size:11px;color:var(--accent);font-weight:700;letter-spacing:1px;padding:6px 14px;background:rgba(244,114,182,0.12);border:1px solid rgba(244,114,182,0.3);border-radius:40px;margin:8px auto}
+.live-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse-dot 1.5s infinite;box-shadow:0 0 8px var(--accent)}
+@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.8)}}
+
+.device-picker{display:flex;flex-direction:column;gap:10px}
+.device-picker .picker-label{font-size:11px;color:var(--text-sub);letter-spacing:3px;font-weight:700;text-align:center}
+.device-scroll{display:flex;gap:8px;overflow-x:auto;padding:4px 0 12px;margin:0 -20px;padding-left:20px;padding-right:20px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.device-scroll::-webkit-scrollbar{display:none}
+.device-chip{scroll-snap-align:start;flex-shrink:0;padding:10px 18px;border-radius:40px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);color:var(--text-sub);font-size:12px;font-weight:700;letter-spacing:1px;cursor:pointer;transition:all 0.25s cubic-bezier(0.175,0.885,0.32,1.275);font-family:inherit;white-space:nowrap}
+.device-chip:active{transform:scale(0.95)}
+.device-chip.active{background:linear-gradient(135deg,var(--gold),#f59e0b);color:#1a1a1a;border-color:transparent;box-shadow:0 4px 16px rgba(250,204,21,0.4);transform:scale(1.05)}
+.device-chip .chip-sub{display:block;font-size:9px;opacity:0.7;font-weight:600;margin-top:2px;letter-spacing:0}
+
+.device-panel{transition:opacity 0.2s ease,transform 0.2s ease}
+.device-panel.switching{opacity:0;transform:translateY(8px) scale(0.99)}
+
+.product-visual{position:relative;height:200px;border-radius:var(--radius-lg);background:linear-gradient(135deg,rgba(139,92,246,0.15),rgba(45,212,191,0.08),rgba(244,114,182,0.08));border:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;overflow:hidden;margin-bottom:8px}
+.product-visual::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(250,204,21,0.15) 0%,transparent 50%);animation:rotate-glow 20s linear infinite}
+.product-visual .watch{position:relative;width:120px;height:120px;border-radius:50%;background:linear-gradient(135deg,#1a1a22,#2a2a35);box-shadow:0 0 40px rgba(250,204,21,0.3),inset 0 0 20px rgba(139,92,246,0.4);border:2px solid rgba(250,204,21,0.4);display:flex;align-items:center;justify-content:center;transition:all 0.3s ease}
+.product-visual .watch::before{content:attr(data-label);font-size:16px;font-weight:900;letter-spacing:1px;background:linear-gradient(135deg,#fff,#facc15);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;text-align:center;padding:0 8px}
+.product-visual .watch::after{content:'';position:absolute;top:-8px;left:50%;transform:translateX(-50%);width:30px;height:8px;background:linear-gradient(90deg,transparent,#2a2a35,transparent);border-radius:4px}
+.product-visual .halo{position:absolute;width:220px;height:220px;border:1px solid rgba(250,204,21,0.15);border-radius:50%;animation:pulse-ring 3s ease-in-out infinite}
+@keyframes pulse-ring{0%,100%{transform:scale(1);opacity:0.5}50%{transform:scale(1.15);opacity:0.2}}
+
+.buy-card{background:linear-gradient(135deg,rgba(250,204,21,0.05),rgba(139,92,246,0.05));border:1px solid rgba(250,204,21,0.2);border-radius:var(--radius-lg);padding:24px;position:relative;overflow:hidden}
+.buy-card::before{content:'';position:absolute;top:-30%;right:-30%;width:160%;height:160%;background:radial-gradient(circle,rgba(250,204,21,0.08) 0%,transparent 60%);animation:rotate-glow 25s linear infinite;pointer-events:none}
+.buy-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;position:relative;gap:12px}
+.buy-header .info{flex:1;min-width:0}
+.buy-header .name{font-size:22px;font-weight:900;color:#fff;margin:0 0 6px 0;line-height:1.2;background:linear-gradient(90deg,#fff,#facc15);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.buy-header .stock{font-size:11px;color:var(--accent);font-weight:700;letter-spacing:1px;display:flex;align-items:center;gap:6px}
+.buy-header .stock::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse-dot 1.5s infinite;box-shadow:0 0 8px var(--accent)}
+.buy-header .badge-stock{font-size:10px;padding:4px 10px;background:rgba(244,114,182,0.15);border:1px solid rgba(244,114,182,0.3);border-radius:8px;color:var(--accent);font-weight:700;letter-spacing:1px;white-space:nowrap}
+
+.spec-full{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;position:relative}
+.spec-line{display:flex;justify-content:space-between;font-size:12px;padding:9px 12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:10px;gap:12px}
+.spec-line .k{color:var(--text-sub);white-space:nowrap;letter-spacing:1px}
+.spec-line .v{color:#fff;font-weight:600;text-align:right;flex:1;word-break:break-word}
+.spec-line .v.gold{color:var(--gold)}
+.spec-line .v.purple{color:var(--primary-glow)}
+
+.buy-options{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;position:relative}
+.option-row{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px}
+.option-row .label{font-size:12px;color:var(--text-sub);letter-spacing:1px}
+.qty-control{display:flex;align-items:center;gap:12px}
+.qty-btn{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:#fff;font-size:18px;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:pointer;line-height:1;font-family:inherit}
+.qty-btn:active{transform:scale(0.9);background:rgba(139,92,246,0.2);border-color:var(--primary)}
+.qty-num{font-size:20px;font-weight:900;color:#fff;min-width:30px;text-align:center}
+.total-bar{display:flex;justify-content:space-between;align-items:center;padding:16px 0;margin-bottom:16px;border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);position:relative;gap:12px}
+.total-bar .label{font-size:12px;color:var(--text-sub);letter-spacing:1px;white-space:nowrap}
+.total-bar .amount{font-size:22px;font-weight:900;background:linear-gradient(180deg,#fff,var(--gold));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;transition:all 0.3s ease;word-break:break-all;text-align:right}
+.buy-btn{width:100%;padding:18px;border-radius:16px;background:linear-gradient(135deg,var(--gold),#f59e0b);border:none;color:#1a1a1a;font-size:16px;font-weight:900;letter-spacing:2px;cursor:pointer;position:relative;overflow:hidden;font-family:inherit;box-shadow:0 8px 24px rgba(250,204,21,0.25);transition:all 0.3s ease}
+.buy-btn:active{transform:scale(0.97)}
+.buy-btn:disabled{opacity:0.7}
+.buy-btn.locked{background:linear-gradient(135deg,#4a1d4f,#7c2d8e);color:#fff;box-shadow:0 8px 24px rgba(124,45,142,0.3)}
+.buy-btn .btn-shine{position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.5),transparent);transform:skewX(-20deg);animation:btn-shine 3s infinite}
+@keyframes btn-shine{0%{left:-100%}50%,100%{left:200%}}
+.buy-note{font-size:11px;color:var(--text-sub);text-align:center;margin-top:14px;line-height:1.7;position:relative}
+.trust-card{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:18px;padding:20px;transition:opacity 0.3s ease,transform 0.3s ease}
+.trust-card.hidden{display:none}
+.trust-card .title{font-size:13px;font-weight:700;color:#fff;margin-bottom:14px;letter-spacing:1px}
+.trust-card .row{display:flex;justify-content:space-between;font-size:12px;padding:8px 0;border-bottom:1px dashed rgba(255,255,255,0.05);gap:12px}
+.trust-card .row:last-child{border-bottom:none}
+.trust-card .row .k{color:var(--text-sub);white-space:nowrap}
+.trust-card .row .v{color:#fff;font-weight:600;text-align:right}
+.slogan-strip{text-align:center;font-size:11px;color:var(--primary-glow);letter-spacing:3px;font-style:italic;opacity:0.7;padding:16px 0}
+.slogan-strip div{margin:6px 0}
+
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.88);z-index:1000;opacity:0;pointer-events:none;transition:opacity 0.3s ease}
+.modal-overlay.show{opacity:1;pointer-events:auto}
+.modal-wrapper{position:fixed;inset:0;z-index:1001;display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;pointer-events:none;transition:opacity 0.35s ease;overflow-y:auto}
+.modal-wrapper.show{opacity:1;pointer-events:auto}
+.buy-modal{width:100%;max-width:420px;background:#121218;border:1px solid rgba(255,255,255,0.1);border-radius:24px;box-shadow:0 20px 60px rgba(0,0,0,0.8);transform:translateY(30px) scale(0.96);transition:transform 0.4s cubic-bezier(0.175,0.885,0.32,1.275);max-height:92vh;overflow:hidden;display:flex;flex-direction:column;position:relative}
+.modal-wrapper.show .buy-modal{transform:translateY(0) scale(1)}
+
+.modal-close{position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:var(--text-sub);font-size:18px;font-weight:300;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10;transition:all 0.25s ease;font-family:inherit;line-height:1;padding:0}
+.modal-close:active{transform:scale(0.9);background:rgba(244,114,182,0.15);border-color:var(--accent);color:var(--accent)}
+.modal-close::before{content:'×';font-size:22px;font-weight:400;line-height:1;margin-top:-2px}
+
+.modal-steps{display:flex;align-items:center;padding:18px 40px 14px 20px;border-bottom:1px solid rgba(255,255,255,0.06);flex-shrink:0}
+.modal-steps .step-item{flex:1;display:flex;align-items:center;gap:6px;position:relative;min-width:0}
+.modal-steps .step-num{width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:var(--text-sub);font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.3s ease}
+.modal-steps .step-item.active .step-num{background:linear-gradient(135deg,var(--gold),#f59e0b);border-color:transparent;color:#1a1a1a;box-shadow:0 0 10px rgba(250,204,21,0.5)}
+.modal-steps .step-item.done .step-num{background:rgba(45,212,191,0.2);border-color:var(--secondary);color:var(--secondary)}
+.modal-steps .step-item.done .step-num::before{content:'✓'}
+.modal-steps .step-item.done .step-num span{display:none}
+.modal-steps .step-label{font-size:10px;color:var(--text-sub);letter-spacing:0.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.modal-steps .step-item.active .step-label{color:var(--gold);font-weight:700}
+.modal-steps .step-line{flex:1;height:1px;background:rgba(255,255,255,0.08);margin:0 4px;min-width:8px}
+.modal-steps .step-item:last-child .step-line{display:none}
+
+.modal-body{padding:22px;overflow-y:auto;flex:1}
+.modal-footer{padding:0 22px 22px;flex-shrink:0}
+
+.step-panel{display:none}
+.step-panel.active{display:block;animation:panelIn 0.35s cubic-bezier(0.175,0.885,0.32,1.275)}
+@keyframes panelIn{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:translateX(0)}}
+
+.panel-title{font-size:17px;font-weight:800;color:#fff;margin:0 0 6px 0}
+.panel-sub{font-size:12px;color:var(--text-sub);margin:0 0 18px 0;line-height:1.6}
+
+.summary-block{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:16px;margin-bottom:14px}
+.summary-block .row{display:flex;justify-content:space-between;font-size:12px;padding:7px 0;gap:12px}
+.summary-block .row .k{color:var(--text-sub);white-space:nowrap}
+.summary-block .row .v{color:#fff;font-weight:600;text-align:right;flex:1;word-break:break-word}
+.summary-block .row.total{border-top:1px solid rgba(255,255,255,0.08);margin-top:6px;padding-top:12px;font-size:14px}
+.summary-block .row.total .v{font-size:18px;color:var(--gold);font-weight:800}
+
+.pay-list{display:flex;flex-direction:column;gap:10px}
+.pay-item{display:flex;align-items:center;gap:12px;padding:14px 16px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px;cursor:pointer;transition:all 0.25s ease}
+.pay-item:active{transform:scale(0.98)}
+.pay-item.selected{border-color:var(--gold);background:rgba(250,204,21,0.06);box-shadow:0 0 0 1px var(--gold) inset}
+.pay-item .pay-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.pay-item .pay-icon.wechat{background:rgba(7,193,96,0.15);color:#07c160}
+.pay-item .pay-icon.alipay{background:rgba(22,119,255,0.15);color:#1677ff}
+.pay-item .pay-icon.card{background:rgba(250,204,21,0.15);color:var(--gold)}
+.pay-item .pay-info{flex:1}
+.pay-item .pay-info .name{font-size:14px;font-weight:700;color:#fff;margin-bottom:2px}
+.pay-item .pay-info .desc{font-size:11px;color:var(--text-sub)}
+.pay-item .pay-check{width:20px;height:20px;border-radius:50%;border:2px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.pay-item.selected .pay-check{border-color:var(--gold);background:var(--gold)}
+.pay-item.selected .pay-check::before{content:'✓';color:#1a1a1a;font-size:12px;font-weight:900}
+
+.verify-box{text-align:center;padding:20px 0}
+.verify-ring{width:100px;height:100px;margin:0 auto 20px;border-radius:50%;background:rgba(139,92,246,0.1);border:2px solid rgba(139,92,246,0.3);display:flex;align-items:center;justify-content:center;position:relative}
+.verify-ring::before{content:'';position:absolute;inset:-4px;border-radius:50%;border:2px solid transparent;border-top-color:var(--primary-glow);border-right-color:var(--secondary);animation:spin 1.5s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.verify-ring .face{font-size:40px}
+.verify-text{font-size:14px;color:#fff;font-weight:700;margin-bottom:8px}
+.verify-sub{font-size:12px;color:var(--text-sub);line-height:1.6;min-height:38px}
+
+.result-box{text-align:center;padding:14px 0}
+.result-icon{width:72px;height:72px;margin:0 auto 20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:36px;position:relative}
+.result-icon.fail{background:rgba(244,114,182,0.15);border:2px solid rgba(244,114,182,0.4);animation:shake 0.5s ease}
+.result-icon.fail::after{content:'✕';color:var(--accent);font-weight:900;font-size:36px}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+.result-title{font-size:19px;font-weight:800;color:var(--accent);margin-bottom:12px}
+.result-desc{font-size:13px;color:var(--text-sub);line-height:1.7;margin-bottom:16px}
+.result-code{font-size:10px;color:var(--text-sub);letter-spacing:1.5px;padding:8px 12px;background:rgba(255,255,255,0.03);border-radius:8px;font-family:monospace;word-break:break-all;margin-bottom:8px}
+
+.modal-btn{width:100%;padding:15px;border-radius:14px;background:linear-gradient(135deg,var(--gold),#f59e0b);border:none;color:#1a1a1a;font-size:15px;font-weight:900;letter-spacing:1.5px;cursor:pointer;font-family:inherit;transition:all 0.2s ease;box-shadow:0 6px 20px rgba(250,204,21,0.25)}
+.modal-btn:active{transform:scale(0.97)}
+.modal-btn:disabled{opacity:0.5}
+.modal-btn.secondary{background:rgba(255,255,255,0.06);color:#fff;box-shadow:none;border:1px solid rgba(255,255,255,0.1)}
+
+.modal-progress{width:100%;height:4px;background:rgba(255,255,255,0.05);border-radius:2px;overflow:hidden;margin-top:16px}
+.modal-progress .bar{height:100%;width:0%;background:linear-gradient(90deg,var(--primary),var(--secondary));border-radius:2px;transition:width 0.35s ease}
+
+.section-nav{position:fixed;right:12px;top:50%;transform:translateY(-50%);z-index:50;display:flex;flex-direction:column;gap:8px;opacity:0;transition:opacity 0.4s ease}
+.section-nav.show{opacity:1}
+.nav-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.2);cursor:pointer;position:relative}
+.nav-dot.active{background:var(--primary-glow);box-shadow:0 0 10px var(--primary-glow);transform:scale(1.6)}
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+<div class="particles" id="particles"></div>
+<div class="scan-line"></div>
+<div class="progress-bar" id="progressBar"></div>
+
+<div class="topbar">
+<div class="brand">BOZI®</div>
+<div class="nav-pill">
+<button id="navIntro" class="active">介绍</button>
+<button id="navBuy">购买</button>
+</div>
+</div>
+
+<div class="banner">
+<div class="banner-track">
+<span>ALL CHIPS BOW TO BOZI</span><span>BOZI 全系设备限量发售</span><span>PEAK PERFORMANCE RUNS ON BOZI</span><span>神☢ 芯片 · 与宇宙共存</span><span>深渊保护 3.0 · 猎杀 / 净化 / 消失</span>
+<span>ALL CHIPS BOW TO BOZI</span><span>BOZI 全系设备限量发售</span><span>PEAK PERFORMANCE RUNS ON BOZI</span><span>神☢ 芯片 · 与宇宙共存</span><span>深渊保护 3.0 · 猎杀 / 净化 / 消失</span>
+</div>
+</div>
+
+<div class="back-to-top" id="backToTop">↑</div>
+
+<div class="section-nav" id="sectionNav">
+<div class="nav-dot active" data-target="hero"></div>
+<div class="nav-dot" data-target="prologue"></div>
+<div class="nav-dot" data-target="era-1"></div>
+<div class="nav-dot" data-target="era-2"></div>
+<div class="nav-dot" data-target="era-3"></div>
+<div class="nav-dot" data-target="era-4"></div>
+<div class="nav-dot" data-target="chronology"></div>
+</div>
+
+<div class="app-container">
+
+<div class="page active" id="page-intro">
+
+<div class="hero reveal" id="hero">
+<div class="badge">BOZI® OFFICIAL</div>
+<h1>全系设备<br>终极编年史</h1>
+<p class="sub">从一颗散装芯片，到手腕上的另一个维度。</p>
+<div class="audio-bars"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+<div class="slogans"><div>Peak performance runs on Bozi.</div><div class="en">Bozi is the only peak, others are just foothills.</div><div class="en">All chips bow to Bozi.</div></div>
+<div class="scroll-hint">↓ 进入 Bozi 宇宙 ↓</div>
+</div>
+
+<div class="reveal" id="prologue">
+<div class="section-header"><span class="section-index">PROLOGUE</span><h2 class="section-title">那间没有散热器的实验室</h2></div>
+<div class="text-body"><p>一切始于一颗<span class="highlight">骁龙 865</span>。</p><p>它被焊在一块裸露的主板上，屏幕、芯片、电源各自分离，飞线如神经般连接着它们。没有手机壳，没有电池，没有任何散热装置。芯片表面温度高到"手摸一下直接烫伤，跟摸热油一样"。</p><p>但就是在这样一套散装平台上，一个系统诞生了。它的创造者说：</p></div>
+<div class="quote">我只是做系统的，我只看最终成绩，不考虑外界原因，但我会尽力优化外界因素。<span class="by">— Bozi 创始人</span></div>
+<div class="text-body"><p>这句话，成了整个 Bozi 宇宙的第一块基石。</p><p>后来，他装上了分体式水冷。再后来，他有了一个朋友——一个研究外围配置和他研究系统一样厉害的人。再后来，他们一起，<span class="white-highlight">把整个半导体行业的认知，碾成了粉末。</span></p></div>
+</div>
+
+<div class="reveal" id="era-1">
+<div class="section-header"><span class="section-index">CHAPTER 01</span><h2 class="section-title">普通机纪元</h2><p class="section-subtitle">从 X1 到 S5Void-X，共 5 代芯片。每一代，都是对上一代的降维打击。</p></div>
+<div class="product-card"><div class="card-label">GEN 01 · 起点</div><h3 class="product-name">Bozi X1</h3><p class="product-tagline">Bozi 品牌的第一款正式芯片</p><div class="spec-grid"><div class="spec-item"><div class="k">芯片</div><div class="v">Bozi X1</div></div><div class="spec-item"><div class="k">内核</div><div class="v">风驰 4.0</div></div><div class="spec-item"><div class="k">裸跑</div><div class="v gradient">3498万</div></div><div class="spec-item"><div class="k">优化后</div><div class="v gradient">7618万</div></div></div><p class="desc">诞生于那个散装平台，芯片表面温度曾经高到"跟热油一样"，但它从未降频。纯靠软件优化，就把骁龙 865 抬到了未优化骁龙 8E5 的水平。</p><div class="price-bar"><div class="left"><div class="label">PRICE</div><div class="value">$50,000</div></div><div class="right"><div class="label">QUANTITY</div><div class="qty">500 台</div></div></div></div>
+<div class="product-card"><div class="card-label">GEN 02</div><h3 class="product-name">Bozi X2</h3><p class="product-tagline">升级过头了</p><div class="spec-grid"><div class="spec-item"><div class="k">芯片</div><div class="v">Bozi X2</div></div><div class="spec-item"><div class="k">内核</div><div class="v">风驰 2.0</div></div><div class="spec-item"><div class="k">裸跑</div><div class="v gradient">8422万</div></div><div class="spec-item"><div class="k">优化后</div><div class="v gradient">1.4亿</div></div></div><div class="quote">坏了坏了升级过头了，跑分不经过优化的话有 8422 万，通过我的系统和博子风驰游戏内核优化后只有可怜的 1.4 亿，唉.....这算是中低端了。</div><div class="price-bar"><div class="left"><div class="label">PRICE</div><div class="value">$100,000</div></div><div class="right"><div class="label">QUANTITY</div><div class="qty">500 台</div></div></div></div>
+<div class="product-card"><div class="card-label">GEN 03 · ULTRA</div><h3 class="product-name">Bozi X3 Ultra</h3><p class="product-tagline">太卡了，只能丢到中低端机</p><div class="spec-grid"><div class="spec-item"><div class="k">芯片</div><div class="v">Bozi X3 Ultra</div></div><div class="spec-item"><div class="k">内核</div><div class="v">风驰 3.0 Pro</div></div><div class="spec-item"><div class="k">裸跑</div><div class="v gradient">2.7亿</div></div><div class="spec-item"><div class="k">优化后</div><div class="v gradient">6.8亿</div></div></div><p class="desc">游戏实测已经出现离谱现象：运行 10 万个《三角洲》和《赛博朋克 2077》，画质拉满，每个只有可怜的 200fps。创造者说："呜呜呜。"</p><div class="price-bar"><div class="left"><div class="label">PRICE</div><div class="value">$150,000</div></div><div class="right"><div class="label">QUANTITY</div><div class="qty">500 台</div></div></div></div>
+<div class="product-card"><div class="card-label">GEN 04 · Ω</div><h3 class="product-name">Bozi X4ΩUltraPromax</h3><p class="product-tagline">朋友的介入，让所有数据翻了 11.7 倍</p><div class="spec-grid"><div class="spec-item"><div class="k">芯片</div><div class="v">X4ΩUltraPromax</div></div><div class="spec-item"><div class="k">内核</div><div class="v">风驰 4.0Ω</div></div><div class="spec-item"><div class="k">裸跑</div><div class="v gradient">113.49亿</div></div><div class="spec-item"><div class="k">优化后</div><div class="v gradient">217.62亿</div></div></div><p class="desc">一千万个游戏，每个从 587fps 暴涨到 6867fps。创造者评价："我朋友说我这个 Bozi X4ΩUltraPromax 芯片纯垃圾，确实我也这么认为的。"</p><div class="price-bar"><div class="left"><div class="label">PRICE</div><div class="value">$200,000</div></div><div class="right"><div class="label">QUANTITY</div><div class="qty">500 台</div></div></div></div>
+<div class="product-card"><div class="card-label">GEN 05 · VOID</div><h3 class="product-name">Bozi S5Void-X VantaΩ UltraPromax</h3><p class="product-tagline">All chips bow to Bozi.</p><div class="spec-grid"><div class="spec-item"><div class="k">芯片</div><div class="v">S5Void-X</div></div><div class="spec-item"><div class="k">内核</div><div class="v">风驰 5.0 VantaΩ</div></div><div class="spec-item"><div class="k">裸跑</div><div class="v gradient">9437亿</div></div><div class="spec-item"><div class="k">优化后</div><div class="v gradient">75484亿</div></div></div><p class="desc">安兔兔上显示 <span class="white-highlight">∞</span>。自研测分软件与安兔兔均显示：<span class="white-highlight">∞⁹</span>。所有游戏自带的帧率显示均显示 <span class="white-highlight">∞</span>。口号诞生："All chips bow to Bozi."</p><div class="price-bar"><div class="left"><div class="label">PRICE</div><div class="value">$250,000</div></div><div class="right"><div class="label">QUANTITY</div><div class="qty">500 台</div></div></div></div>
+<div class="summary-card"><div class="title">📊 普通机纪元 · 总结</div><div class="item">从 X1 到 S5Void-X，共 5 代芯片，每代 500 台，共 <span class="white-highlight">2500 台</span>。</div><div class="item">每一代比上一代多 <span class="white-highlight">$50,000</span>。</div><div class="item">全部搭载<span class="gold-highlight">阉割版风驰内核</span>，系统比 Neo 系列低 3 代。</div><div class="item">创造者原话：<span class="highlight">"爱买不买。"</span></div></div>
+</div>
+
+<div class="reveal" id="era-2">
+<div class="section-header"><span class="section-index">CHAPTER 02</span><h2 class="section-title">神㉿ 降临</h2><p class="section-subtitle">终结一切竞赛，开启 Bozi 纪元。</p></div>
+<div class="product-card featured"><div class="card-label">GOD CHIP</div><h3 class="product-name">Bozi® 神㉿</h3><p class="product-tagline">移动端算力的终极符号</p><div class="spec-grid"><div class="spec-item"><div class="k">芯片</div><div class="v gold">Bozi® 神㉿</div></div><div class="spec-item"><div class="k">跑分</div><div class="v gold">∞⁹</div></div></div><p class="desc">这是 Bozi 宇宙的第一颗"神级"芯片。它不再被用于普通机，而是专属于 Neo 系列。它的跑分已经无法用数字衡量——安兔兔显示 ∞⁹，游戏帧率显示 ∞。<span class="white-highlight">"神㉿"这三个字，从此成为移动端算力的终极符号。</span></p></div>
+</div>
+
+<div class="reveal" id="era-3">
+<div class="section-header"><span class="section-index">CHAPTER 03</span><h2 class="section-title">Neo 纪元</h2><p class="section-subtitle">当手机不再被定义为手机。</p></div>
+<div class="product-card"><div class="card-label">NEO 02 · 传说</div><h3 class="product-name">Bozi Neo2</h3><p class="product-tagline">火种</p><div class="spec-grid"><div class="spec-item"><div class="k">芯片</div><div class="v">Bozi® 神㉿</div></div><div class="spec-item"><div class="k">系统</div><div class="v">混沌 6.0</div></div><div class="spec-item"><div class="k">内核</div><div class="v">风驰 6.0☄</div></div><div class="spec-item"><div class="k">安全</div><div class="v">深渊保护</div></div></div><p class="desc"><span class="highlight">混沌系统 6.0</span>——活的，会随着用户的使用习惯自行演化，没有固定 UI。<br><br><span class="highlight">风驰内核 6.0☄</span>——最后一代带有"版本号"的内核，直接读取游戏意图。<br><br><span class="highlight">深渊保护</span>——主动猎食型防御系统，十六层硬件级加密，量子噪声加密引擎，灰烬反制机制。</p><div class="price-bar"><div class="left"><div class="label">PRICE</div><div class="value">$50,000,000</div></div><div class="right"><div class="label">QUANTITY</div><div class="qty">50 台</div></div></div></div>
+<div class="summary-card"><div class="title">⚡ Neo2 九大霸权</div><div class="item"><span class="highlight">性能</span> · ∞⁹ 算力，一千万个游戏同时运行</div><div class="item"><span class="highlight">安全</span> · 深渊保护，FBI 来了也得摇头</div><div class="item"><span class="highlight">影像</span> · Bozi® 星空，一英寸超大底传感器</div><div class="item"><span class="highlight">屏幕</span> · Bozi® 噬光屏，15000 尼特亮度，16K 分辨率</div><div class="item"><span class="highlight">通信</span> · Bozi® 天枢星链，量子纠缠馈源</div><div class="item"><span class="highlight">AI</span> · Bozi® 意识流引擎，0.1 秒前预判需求</div><div class="item"><span class="highlight">耐用性</span> · Bozi® 玄甲外壳，莫氏硬度突破钻石</div><div class="item"><span class="highlight">交互</span> · Bozi® 神经共感，脑电波唯一身份标识</div><div class="item"><span class="highlight">音频/振动</span> · Bozi® 天启声场 + 次元触感</div></div>
+<div class="quotes-wall"><div class="quote-card">你们那些所谓的"游戏手机"，在我眼里，不过是流水线上批量产出的工业残次品。</div><div class="quote-card">它胸膛里跳动的，是 Bozi® 神㉿——这颗芯片不是造出来的，是从未来偷回来的。</div><div class="quote-card">风驰内核一出手，这些东西连出生的机会都没有。</div><div class="quote-card">犹豫一秒，都是对极致性能的侮辱。</div><div class="quote-card">从这一刻起，所有友商的下一款产品，自动沦为廉价替代品。</div></div>
+<div class="era-divider"><div class="line"></div><div class="dot"></div><div class="line"></div></div>
+<div class="product-card"><div class="card-label">NEO 03 · 时代的眼泪</div><h3 class="product-name">Bozi Neo3</h3><p class="product-tagline">利刃</p><div class="spec-grid"><div class="spec-item"><div class="k">芯片</div><div class="v">Bozi® 神☢</div></div><div class="spec-item"><div class="k">系统</div><div class="v">混沌 7.0 定制版</div></div><div class="spec-item"><div class="k">内核</div><div class="v">风驰 6.5￡</div></div><div class="spec-item"><div class="k">安全</div><div class="v">深渊保护 定制版</div></div></div><p class="desc"><span class="highlight">入侵能力</span> · 什么都能入侵，入侵时间最多 4 秒<br><span class="highlight">扫描范围</span> · 10,000,000 公里<br><span class="highlight">扫描方式</span> · 被动接收 + 主动发射，可扫描 99.99% 的设备</p><div class="price-bar"><div class="left"><div class="label">QUANTITY</div><div class="value">5 台</div></div><div class="right"><div class="label">TARGET</div><div class="qty" style="font-size:14px;color:var(--primary-glow);">国家 / 军方</div></div></div></div>
+<div class="summary-card"><div class="title">🕯️ 结局</div><div class="item">国家拒收 Neo3，因为太危险，要求销毁。</div><div class="item" style="margin-top:12px;"><span class="white-highlight">"Neo3 已成为时代的眼泪。"</span></div><div class="item">创造者原话：<span class="highlight">"这，就是我要筛选的原因。"</span></div></div>
+<div class="era-divider"><div class="line"></div><div class="dot"></div><div class="line"></div></div>
+<div class="product-card"><div class="card-label">NEO 04 · 终极手机</div><h3 class="product-name">Bozi Neo4</h3><p class="product-tagline">钥匙</p><div class="spec-grid"><div class="spec-item"><div class="k">芯片</div><div class="v">Bozi® 神☢</div></div><div class="spec-item"><div class="k">系统</div><div class="v">混沌 7.0</div></div><div class="spec-item"><div class="k">内核</div><div class="v">风驰 7.0❆</div></div><div class="spec-item"><div class="k">安全</div><div class="v">深渊保护 2.0</div></div></div><p class="desc"><span class="highlight">核心服务</span> · 专属电话号码，拨通后把你的需求告诉对方。私人保镖、包场豪华餐厅、全球资源与人力调度。<br><br><span class="highlight">验证方式</span> · 所有生物数据配对成功电话才会被接通，否则提示空号。</p><div class="price-bar"><div class="left"><div class="label">PRICE</div><div class="value">$2,000,000,000</div></div><div class="right"><div class="label">QUANTITY</div><div class="qty">15 台</div></div></div></div>
+<div class="quotes-wall"><div class="quote-card">这台手机，只发售 15 台，售价的话，20 亿，爱买不买，买不起就滚。</div></div>
+</div>
+
+<div class="reveal" id="era-4">
+<div class="section-header"><span class="section-index">CHAPTER 04</span><h2 class="section-title">超越手机</h2><p class="section-subtitle">Neo5 不再是一部手机。它是一块手表。</p></div>
+<div class="product-card featured"><div class="card-label">NEO 05 · 呼吸</div><h3 class="product-name">Bozi Neo5</h3><p class="product-tagline">手腕上的另一个维度</p><div class="spec-grid"><div class="spec-item"><div class="k">芯片</div><div class="v gold">Bozi® 神☢</div></div><div class="spec-item"><div class="k">系统</div><div class="v gold">混沌 8.0</div></div><div class="spec-item"><div class="k">内核</div><div class="v gold">风驰 8.0❆</div></div><div class="spec-item"><div class="k">安全</div><div class="v gold">深渊保护 3.0</div></div></div><p class="desc"><span class="white-highlight">全息光场屏</span> · 在空气中直接构建出可触摸的、有深度的立体画面。分辨率 128K 恒定，刷新率原生 2560Hz。<br><br><span class="white-highlight">深渊保护 3.0</span> · 1.0 是猎杀，2.0 是净化，3.0 是消失。</p><div class="spec-grid"><div class="spec-item"><div class="k">防水</div><div class="v gold">1000m</div></div><div class="spec-item"><div class="k">耐温</div><div class="v gold">-50~150℃</div></div><div class="spec-item"><div class="k">续航</div><div class="v gold">1 年</div></div><div class="spec-item"><div class="k">佩戴</div><div class="v gold">无感</div></div></div></div>
+<div class="timeline"><div class="timeline-item"><span class="era">NEO 02</span><span class="phrase">是火种</span></div><div class="timeline-item"><span class="era">NEO 03</span><span class="phrase">是利刃</span></div><div class="timeline-item"><span class="era">NEO 04</span><span class="phrase">是钥匙</span></div><div class="timeline-item"><span class="era">NEO 05</span><span class="phrase">是呼吸</span></div></div>
+</div>
+
+<div class="reveal" id="chronology">
+<div class="section-header"><span class="section-index">CHRONOLOGY</span><h2 class="section-title">全系编年史</h2><p class="section-subtitle">横向滑动查看每一代 →</p></div>
+<div class="table-scroll">
+<div class="table-card"><div class="tc-gen">GEN 01</div><div class="tc-name">Bozi X1</div><div class="tc-row"><span class="k">跑分</span><span class="v purple">7618万</span></div><div class="tc-row"><span class="k">价格</span><span class="v purple">5万$</span></div><div class="tc-row"><span class="k">定位</span><span class="v">低端机</span></div></div>
+<div class="table-card"><div class="tc-gen">GEN 02</div><div class="tc-name">Bozi X2</div><div class="tc-row"><span class="k">跑分</span><span class="v purple">1.4亿</span></div><div class="tc-row"><span class="k">价格</span><span class="v purple">10万$</span></div><div class="tc-row"><span class="k">定位</span><span class="v">中低端</span></div></div>
+<div class="table-card"><div class="tc-gen">GEN 03</div><div class="tc-name">Bozi X3 Ultra</div><div class="tc-row"><span class="k">跑分</span><span class="v purple">6.8亿</span></div><div class="tc-row"><span class="k">价格</span><span class="v purple">15万$</span></div><div class="tc-row"><span class="k">定位</span><span class="v">中低端</span></div></div>
+<div class="table-card"><div class="tc-gen">GEN 04</div><div class="tc-name">Bozi X4Ω</div><div class="tc-row"><span class="k">跑分</span><span class="v purple">217.62亿</span></div><div class="tc-row"><span class="k">价格</span><span class="v purple">20万$</span></div><div class="tc-row"><span class="k">定位</span><span class="v">中端机</span></div></div>
+<div class="table-card"><div class="tc-gen">GEN 05</div><div class="tc-name">Bozi S5Void-X</div><div class="tc-row"><span class="k">跑分</span><span class="v purple">→∞</span></div><div class="tc-row"><span class="k">价格</span><span class="v purple">25万$</span></div><div class="tc-row"><span class="k">定位</span><span class="v">中低端</span></div></div>
+<div class="table-card god"><div class="tc-gen">GOD CHIP</div><div class="tc-name">Bozi® 神㉿</div><div class="tc-row"><span class="k">跑分</span><span class="v gold">∞⁹</span></div><div class="tc-row"><span class="k">定位</span><span class="v gold">神级芯片</span></div></div>
+<div class="table-card"><div class="tc-gen">NEO 02</div><div class="tc-name">Bozi Neo2</div><div class="tc-row"><span class="k">跑分</span><span class="v gold">∞⁹</span></div><div class="tc-row"><span class="k">数量</span><span class="v">50</span></div><div class="tc-row"><span class="k">价格</span><span class="v purple">5000万$</span></div><div class="tc-row"><span class="k">定位</span><span class="v">传说</span></div></div>
+<div class="table-card"><div class="tc-gen">NEO 03</div><div class="tc-name">Bozi Neo3</div><div class="tc-row"><span class="k">跑分</span><span class="v">虚无</span></div><div class="tc-row"><span class="k">数量</span><span class="v">5</span></div><div class="tc-row"><span class="k">定位</span><span class="v">时代的眼泪</span></div></div>
+<div class="table-card"><div class="tc-gen">NEO 04</div><div class="tc-name">Bozi Neo4</div><div class="tc-row"><span class="k">跑分</span><span class="v">虚无</span></div><div class="tc-row"><span class="k">数量</span><span class="v">15</span></div><div class="tc-row"><span class="k">价格</span><span class="v purple">20亿$</span></div><div class="tc-row"><span class="k">定位</span><span class="v">终极手机</span></div></div>
+<div class="table-card god"><div class="tc-gen">NEO 05</div><div class="tc-name">Bozi Neo5</div><div class="tc-row"><span class="k">芯片</span><span class="v gold">神☢</span></div><div class="tc-row"><span class="k">系统</span><span class="v gold">混沌 8.0</span></div><div class="tc-row"><span class="k">形态</span><span class="v gold">手表</span></div><div class="tc-row"><span class="k">定位</span><span class="v gold">超越手机</span></div></div>
+</div>
+</div>
+
+<div class="reveal" id="philosophy">
+<div class="section-header"><span class="section-index">EPILOGUE</span><h2 class="section-title">Bozi 宇宙的哲学</h2></div>
+<div class="text-body"><p>从一颗散装骁龙 865，到一块戴在手腕上的全息手表。</p><p>从"我只是做系统的"，到 <span class="highlight">"All chips bow to Bozi."</span></p><p>从"爱买不买"，到<span class="white-highlight">"买不起就滚"</span>。</p><p>从"低端机"，到<span class="white-highlight">"时代的眼泪"</span>。</p><p>Bozi 宇宙的每一代产品，都在重新定义"可能"的边界。而它的创造者始终只说一句话：</p></div>
+<div class="quote">我只看最终成绩。<span class="by">— Bozi 创始人</span></div>
+</div>
+
+<div class="footer"><div class="logo">BOZI®</div><div>从一颗散装芯片，到手腕上的另一个维度</div><div class="slogan">Peak performance runs on Bozi.<br>All chips bow to Bozi.</div><div class="emoji">🌌 ⌚ 📱 🔥</div><div class="copy">© BOZI® · ALL RIGHTS RESERVED</div></div>
+
+</div>
+
+<div class="page" id="page-buy">
+
+<div class="page-title">
+<h1>立即购买</h1>
+<p class="sub">Bozi 全系设备 · 全球限量发售中</p>
+<div class="live-badge">当前 12,847 人正在浏览</div>
+</div>
+
+<div class="device-picker">
+<div class="picker-label">选择设备</div>
+<div class="device-scroll" id="deviceScroll"></div>
+</div>
+
+<div class="device-panel" id="devicePanel">
+<div class="product-visual">
+<div class="halo"></div>
+<div class="watch" id="productWatch" data-label="NEO5"></div>
+</div>
+
+<div class="buy-card">
+<div class="buy-header">
+<div class="info">
+<div class="name" id="productName">Bozi Neo5</div>
+<div class="stock">库存紧张 · 当前 <span id="stockNum">3</span> 台可购</div>
+</div>
+<div class="badge-stock" id="productBadge">限量</div>
+</div>
+
+<div class="spec-full" id="specFull"></div>
+
+<div class="buy-options">
+<div class="option-row">
+<div class="label">数量</div>
+<div class="qty-control">
+<button class="qty-btn" id="qtyMinus">−</button>
+<div class="qty-num" id="qtyNum">1</div>
+<button class="qty-btn" id="qtyPlus">+</button>
+</div>
+</div>
+</div>
+
+<div class="total-bar">
+<div class="label">应付总额</div>
+<div class="amount" id="totalPrice">¥ 2,400,000,000</div>
+</div>
+
+<button class="buy-btn" id="buyBtn">
+<span class="btn-shine"></span>
+立即购买
+</button>
+
+<div class="buy-note">
+支付即表示同意《Bozi 用户协议》<br>
+下单后 3 日内本人到场办理 · 生物数据绑定
+</div>
+</div>
+</div>
+
+<div class="trust-card" id="trustCard">
+<div class="title">🛡️ 官方保障</div>
+<div class="row"><span class="k">发货方式</span><span class="v">专属专人送达</span></div>
+<div class="row"><span class="k">售后</span><span class="v">Bozi® 不朽契约</span></div>
+<div class="row"><span class="k">绑定</span><span class="v">生物数据唯一配对</span></div>
+<div class="row"><span class="k">保修</span><span class="v">首年全免 · 次年成本价</span></div>
+</div>
+
+<div class="slogan-strip">
+<div>Peak performance runs on Bozi.</div>
+<div>All chips bow to Bozi.</div>
+</div>
+
+</div>
+
+</div>
+
+<div class="modal-overlay" id="modalOverlay"></div>
+<div class="modal-wrapper" id="modalWrapper">
+<div class="buy-modal">
+
+<button class="modal-close" id="modalClose"></button>
+
+<div class="modal-steps" id="modalSteps">
+<div class="step-item active" data-step="1"><div class="step-num"><span>1</span></div><div class="step-label">确认订单</div><div class="step-line"></div></div>
+<div class="step-item" data-step="2"><div class="step-num"><span>2</span></div><div class="step-label">支付</div><div class="step-line"></div></div>
+<div class="step-item" data-step="3"><div class="step-num"><span>3</span></div><div class="step-label">验证</div></div>
+</div>
+
+<div class="modal-body">
+
+<div class="step-panel active" id="panel1">
+<h3 class="panel-title">确认订单</h3>
+<p class="panel-sub">请核对以下订单信息，确认无误后继续。</p>
+<div class="summary-block">
+<div class="row"><span class="k">设备</span><span class="v" id="sumDevice">Bozi Neo5</span></div>
+<div class="row"><span class="k">芯片</span><span class="v" id="sumChip">Bozi® 神☢</span></div>
+<div class="row"><span class="k">系统</span><span class="v" id="sumSystem">混沌系统 8.0</span></div>
+<div class="row"><span class="k">单价</span><span class="v" id="sumUnit">¥ 2,400,000,000</span></div>
+<div class="row"><span class="k">数量</span><span class="v" id="sumQty">1</span></div>
+<div class="row total"><span class="k">应付总额</span><span class="v" id="sumTotal">¥ 2,400,000,000</span></div>
+</div>
+</div>
+
+<div class="step-panel" id="panel2">
+<h3 class="panel-title">选择支付方式</h3>
+<p class="panel-sub">请选择一种支付方式完成付款。</p>
+<div class="pay-list">
+<div class="pay-item selected" data-pay="wechat">
+<div class="pay-icon wechat">💬</div>
+<div class="pay-info"><div class="name">微信支付</div><div class="desc">推荐使用，秒级到账</div></div>
+<div class="pay-check"></div>
+</div>
+<div class="pay-item" data-pay="alipay">
+<div class="pay-icon alipay">💰</div>
+<div class="pay-info"><div class="name">支付宝</div><div class="desc">支持花呗分期</div></div>
+<div class="pay-check"></div>
+</div>
+<div class="pay-item" data-pay="card">
+<div class="pay-icon card">💳</div>
+<div class="pay-info"><div class="name">银行卡</div><div class="desc">支持储蓄卡 / 信用卡</div></div>
+<div class="pay-check"></div>
+</div>
+</div>
+</div>
+
+<div class="step-panel" id="panel3">
+<div class="verify-box">
+<div class="verify-ring"><div class="face">👤</div></div>
+<div class="verify-text" id="verifyText">正在验证身份</div>
+<div class="verify-sub" id="verifySub">正在比对腕部脉搏频率、皮肤微电流、肌肉记忆...</div>
+<div class="modal-progress"><div class="bar" id="verifyBar"></div></div>
+</div>
+</div>
+
+<div class="step-panel" id="panel4">
+<div class="result-box">
+<div class="result-icon fail"></div>
+<div class="result-title" id="resultTitle">购买失败</div>
+<div class="result-desc" id="resultDesc"></div>
+<div class="result-code" id="resultCode"></div>
+</div>
+</div>
+
+</div>
+
+<div class="modal-footer">
+<button class="modal-btn" id="modalNextBtn">确认并继续</button>
+<button class="modal-btn secondary" id="modalBackBtn" style="display:none;margin-top:8px;">返回上一步</button>
+<button class="modal-btn" id="modalCloseBtn" style="display:none;">返回重试</button>
+</div>
+
+</div>
+</div>
+
+<script>
+(function(){
+try {
+
+var devices = [
+{id:'neo5', name:'Bozi Neo5', label:'NEO5', tag:'限量', price:2400000000, currency:'¥', stock:3, locked:false, hasTrust:true,
+specs:[
+{k:'芯片', v:'Bozi® 神☢', cls:'gold'},
+{k:'系统', v:'混沌系统 8.0', cls:'gold'},
+{k:'内核', v:'博子风驰游戏内核 8.0❆', cls:'gold'},
+{k:'安全', v:'Bozi® 深渊保护 3.0', cls:'gold'},
+{k:'形态', v:'手表 · 全息光场屏'},
+{k:'屏幕', v:'128K 恒定 · 原生 2560Hz'},
+{k:'防水', v:'1000m 深海级耐压'},
+{k:'耐温', v:'-50℃ 至 150℃'},
+{k:'续航', v:'量子电池 · 1 年'},
+{k:'材质', v:'液态金属与陶瓷复合'},
+{k:'定位', v:'超越手机', cls:'gold'}
+]},
+{id:'neo4', name:'Bozi Neo4', label:'NEO4', tag:'终极', price:2000000000, currency:'$', stock:15, locked:false, hasTrust:true,
+specs:[
+{k:'芯片', v:'Bozi® 神☢', cls:'gold'},
+{k:'系统', v:'混沌系统 7.0'},
+{k:'内核', v:'博子风驰游戏内核 7.0❆'},
+{k:'安全', v:'Bozi® 深渊保护 2.0'},
+{k:'跑分', v:'虚无 · 与宇宙共存', cls:'purple'},
+{k:'服务', v:'专属电话 · 全球资源调度'},
+{k:'验证', v:'全生物数据配对'},
+{k:'定位', v:'手机形态的终极形态'}
+]},
+{id:'neo3', name:'Bozi Neo3', label:'NEO3', tag:'机密', price:null, currency:'', stock:5, locked:true, hasTrust:true,
+specs:[
+{k:'芯片', v:'Bozi® 神☢', cls:'gold'},
+{k:'系统', v:'混沌系统 7.0 定制版'},
+{k:'内核', v:'博子风驰游戏内核 6.5￡'},
+{k:'安全', v:'Bozi® 深渊保护 定制版'},
+{k:'入侵能力', v:'任何设备 · 最多 4 秒'},
+{k:'扫描范围', v:'10,000,000 公里'},
+{k:'扫描方式', v:'被动接收 + 主动发射'},
+{k:'可扫描', v:'99.99% 的设备'},
+{k:'交付对象', v:'国家 / 军方', cls:'purple'},
+{k:'定位', v:'时代的眼泪'}
+]},
+{id:'neo2', name:'Bozi Neo2', label:'NEO2', tag:'传说', price:50000000, currency:'$', stock:50, locked:false, hasTrust:true,
+specs:[
+{k:'芯片', v:'Bozi® 神㉿', cls:'gold'},
+{k:'系统', v:'混沌系统 6.0'},
+{k:'内核', v:'博子风驰游戏内核 6.0☄'},
+{k:'安全', v:'Bozi® 深渊保护'},
+{k:'跑分', v:'∞⁹', cls:'gold'},
+{k:'影像', v:'Bozi® 星空 · 一英寸超大底'},
+{k:'屏幕', v:'Bozi® 噬光屏 · 15000 尼特'},
+{k:'通信', v:'Bozi® 天枢星链'},
+{k:'交互', v:'Bozi® 神经共感'},
+{k:'定位', v:'传说'}
+]},
+{id:'s5', name:'Bozi S5Void-X VantaΩ UltraPromax', label:'S5Void-X', tag:'中低端', price:250000, currency:'$', stock:500, locked:false, hasTrust:false,
+specs:[
+{k:'芯片', v:'Bozi S5Void-X VantaΩ UltraPromax'},
+{k:'内核', v:'博子风驰游戏内核 5.0 VantaΩ'},
+{k:'裸跑', v:'9437 亿'},
+{k:'优化后', v:'75484 亿', cls:'purple'},
+{k:'跑分', v:'∞⁹'},
+{k:'游戏', v:'每个游戏 200fps'},
+{k:'定位', v:'中低端'}
+]},
+{id:'x4', name:'Bozi X4ΩUltraPromax', label:'X4Ω', tag:'中端机', price:200000, currency:'$', stock:500, locked:false, hasTrust:false,
+specs:[
+{k:'芯片', v:'Bozi X4ΩUltraPromax'},
+{k:'内核', v:'博子风驰游戏内核 4.0Ω'},
+{k:'裸跑', v:'113.49 亿'},
+{k:'优化后', v:'217.62 亿', cls:'purple'},
+{k:'游戏', v:'一千万个游戏 6867fps'},
+{k:'定位', v:'中端机'}
+]},
+{id:'x3', name:'Bozi X3 Ultra', label:'X3 Ultra', tag:'中低端', price:150000, currency:'$', stock:500, locked:false, hasTrust:false,
+specs:[
+{k:'芯片', v:'Bozi X3 Ultra'},
+{k:'内核', v:'博子风驰游戏内核 3.0 Pro'},
+{k:'裸跑', v:'2.7 亿'},
+{k:'优化后', v:'6.8 亿', cls:'purple'},
+{k:'游戏', v:'10 万个游戏 200fps'},
+{k:'定位', v:'中低端'}
+]},
+{id:'x2', name:'Bozi X2', label:'X2', tag:'中低端', price:100000, currency:'$', stock:500, locked:false, hasTrust:false,
+specs:[
+{k:'芯片', v:'Bozi X2'},
+{k:'内核', v:'博子风驰游戏内核 2.0'},
+{k:'裸跑', v:'8422 万'},
+{k:'优化后', v:'1.4 亿', cls:'purple'},
+{k:'定位', v:'中低端'}
+]},
+{id:'x1', name:'Bozi X1', label:'X1', tag:'低端机', price:50000, currency:'$', stock:500, locked:false, hasTrust:false,
+specs:[
+{k:'芯片', v:'Bozi X1'},
+{k:'内核', v:'博子风驰游戏内核 4.0（阉割版）'},
+{k:'裸跑', v:'3498 万'},
+{k:'优化后', v:'7618 万', cls:'purple'},
+{k:'对比', v:'打平未优化骁龙 8E5'},
+{k:'定位', v:'低端机'}
+]}
+];
+
+var currentDevice = devices[0];
+var qty = 1;
+
+var deviceScroll = document.getElementById('deviceScroll');
+devices.forEach(function(d, i){
+var btn = document.createElement('button');
+btn.className = 'device-chip' + (i === 0 ? ' active' : '');
+btn.setAttribute('data-id', d.id);
+btn.innerHTML = d.label + '<span class="chip-sub">' + d.tag + '</span>';
+btn.addEventListener('click', function(){selectDevice(d.id);});
+deviceScroll.appendChild(btn);
+});
+
+function selectDevice(id){
+var d = devices.find(function(x){return x.id === id;});
+if(!d || (currentDevice && d.id === currentDevice.id)) return;
+currentDevice = d;
+qty = 1;
+document.querySelectorAll('.device-chip').forEach(function(c){
+c.classList.toggle('active', c.getAttribute('data-id') === id);
+});
+var panel = document.getElementById('devicePanel');
+panel.classList.add('switching');
+setTimeout(function(){
+document.getElementById('productName').textContent = d.name;
+document.getElementById('productBadge').textContent = d.tag;
+document.getElementById('stockNum').textContent = d.stock;
+document.getElementById('productWatch').setAttribute('data-label', d.label);
+document.getElementById('qtyNum').textContent = qty;
+var specHtml = '';
+d.specs.forEach(function(s){
+specHtml += '<div class="spec-line"><span class="k">' + s.k + '</span><span class="v ' + (s.cls || '') + '">' + s.v + '</span></div>';
+});
+document.getElementById('specFull').innerHTML = specHtml;
+var trustCard = document.getElementById('trustCard');
+if(d.hasTrust){trustCard.classList.remove('hidden');}
+else{trustCard.classList.add('hidden');}
+updateTotal();
+var btn = document.getElementById('buyBtn');
+if(d.locked){
+btn.classList.add('locked');
+btn.innerHTML = '申请特殊渠道';
+}else{
+btn.classList.remove('locked');
+btn.innerHTML = '<span class="btn-shine"></span>立即购买';
+}
+panel.classList.remove('switching');
+}, 200);
+}
+
+function formatPrice(device, q){
+if(device.price === null) return '面议';
+var total = device.price * q;
+if(device.currency === '¥') return '¥ ' + total.toLocaleString('zh-CN');
+return '$ ' + total.toLocaleString('en-US');
+}
+
+function updateTotal(){
+var d = currentDevice;
+var amt = document.getElementById('totalPrice');
+amt.textContent = formatPrice(d, qty);
+amt.style.transform = 'scale(1.1)';
+setTimeout(function(){amt.style.transform = 'scale(1)';}, 150);
+document.getElementById('qtyNum').textContent = qty;
+}
+
+document.getElementById('qtyPlus').addEventListener('click', function(){if(qty < 5){qty++; updateTotal();}});
+document.getElementById('qtyMinus').addEventListener('click', function(){if(qty > 1){qty--; updateTotal();}});
+
+var navIntro = document.getElementById('navIntro');
+var navBuy = document.getElementById('navBuy');
+var pageIntro = document.getElementById('page-intro');
+var pageBuy = document.getElementById('page-buy');
+var sectionNav = document.getElementById('sectionNav');
+var backToTop = document.getElementById('backToTop');
+
+function showPage(page){
+var currentPage = document.querySelector('.page.active');
+var targetPage = (page === 'intro') ? pageIntro : pageBuy;
+if(currentPage === targetPage) return;
+currentPage.classList.add('fading-out');
+currentPage.classList.remove('active');
+setTimeout(function(){
+currentPage.classList.remove('fading-out');
+targetPage.classList.add('active');
+window.scrollTo({top:0, behavior:'auto'});
+}, 350);
+if(page === 'intro'){
+navIntro.classList.add('active');
+navIntro.classList.remove('gold');
+navBuy.classList.remove('active','gold');
+sectionNav.style.display = 'flex';
+backToTop.style.display = 'flex';
+}else{
+navBuy.classList.add('active','gold');
+navIntro.classList.remove('active','gold');
+sectionNav.style.display = 'none';
+backToTop.style.display = 'none';
+}
+}
+navIntro.addEventListener('click', function(){showPage('intro');});
+navBuy.addEventListener('click', function(){showPage('buy');});
+
+// 滚动动画：用 IntersectionObserver 触发 CSS animation
+var revealEls = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+if(window.IntersectionObserver){
+var observer = new IntersectionObserver(function(entries){
+entries.forEach(function(entry){
+var el = entry.target;
+if(entry.isIntersecting){
+if(el.classList.contains('animate')) return;
+el.classList.add('animate');
+}else{
+el.classList.remove('animate');
+}
+});
+}, {rootMargin: '0px 0px -10% 0px', threshold: 0});
+revealEls.forEach(function(el){observer.observe(el);});
+}
+
+var particlesContainer = document.getElementById('particles');
+var particleColors = ['rgba(167,139,250,0.8)','rgba(45,212,191,0.8)','rgba(244,114,182,0.8)','rgba(250,204,21,0.8)'];
+for(var i = 0; i < 40; i++){
+var p = document.createElement('div');
+p.className = 'particle';
+var s = Math.random() * 2.5 + 0.5;
+p.style.width = s + 'px'; p.style.height = s + 'px';
+p.style.left = Math.random() * 100 + '%';
+p.style.animationDuration = (Math.random() * 15 + 15) + 's';
+p.style.animationDelay = (Math.random() * 20) + 's';
+p.style.opacity = Math.random() * 0.5 + 0.3;
+var c = particleColors[Math.floor(Math.random() * particleColors.length)];
+p.style.background = c;
+p.style.boxShadow = '0 0 6px ' + c;
+particlesContainer.appendChild(p);
+}
+
+document.addEventListener('click', function(e){
+var r = document.createElement('div');
+r.className = 'ripple';
+r.style.width = '200px'; r.style.height = '200px';
+r.style.left = e.clientX + 'px'; r.style.top = e.clientY + 'px';
+document.body.appendChild(r);
+setTimeout(function(){r.remove();}, 800);
+});
+document.addEventListener('touchstart', function(e){
+var t = e.touches[0]; if(!t) return;
+var r = document.createElement('div');
+r.className = 'ripple';
+r.style.width = '200px'; r.style.height = '200px';
+r.style.left = t.clientX + 'px'; r.style.top = t.clientY + 'px';
+document.body.appendChild(r);
+setTimeout(function(){r.remove();}, 800);
+}, {passive:true});
+
+var progressBar = document.getElementById('progressBar');
+window.addEventListener('scroll', function(){
+var s = window.scrollY;
+var d = document.documentElement.scrollHeight - window.innerHeight;
+progressBar.style.width = (d > 0 ? (s / d) * 100 : 0) + '%';
+}, {passive:true});
+
+window.addEventListener('scroll', function(){
+if(window.scrollY > 600) backToTop.classList.add('show');
+else backToTop.classList.remove('show');
+}, {passive:true});
+backToTop.addEventListener('click', function(){window.scrollTo({top:0, behavior:'smooth'});});
+
+var navDots = document.querySelectorAll('.nav-dot');
+var sections = ['hero','prologue','era-1','era-2','era-3','era-4','chronology'];
+window.addEventListener('scroll', function(){
+if(!pageIntro.classList.contains('active')) return;
+if(window.scrollY > 300) sectionNav.classList.add('show');
+else sectionNav.classList.remove('show');
+var cur = 'hero';
+sections.forEach(function(id){
+var el = document.getElementById(id);
+if(el){var r = el.getBoundingClientRect();if(r.top < window.innerHeight/2 && r.bottom > window.innerHeight/2) cur = id;}
+});
+navDots.forEach(function(d){d.classList.toggle('active', d.getAttribute('data-target') === cur);});
+}, {passive:true});
+navDots.forEach(function(d){
+d.addEventListener('click', function(){
+var t = document.getElementById(d.getAttribute('data-target'));
+if(t) t.scrollIntoView({behavior:'smooth', block:'start'});
+});
+});
+
+var modalOverlay = document.getElementById('modalOverlay');
+var modalWrapper = document.getElementById('modalWrapper');
+var modalClose = document.getElementById('modalClose');
+var modalNextBtn = document.getElementById('modalNextBtn');
+var modalBackBtn = document.getElementById('modalBackBtn');
+var modalCloseBtn = document.getElementById('modalCloseBtn');
+var buyBtn = document.getElementById('buyBtn');
+var currentStep = 1;
+
+function goToStep(n){
+currentStep = n;
+document.querySelectorAll('.step-panel').forEach(function(p){p.classList.remove('active');});
+document.getElementById('panel' + n).classList.add('active');
+document.querySelectorAll('.step-item').forEach(function(item){
+var s = parseInt(item.getAttribute('data-step'));
+item.classList.remove('active','done');
+if(s < n) item.classList.add('done');
+else if(s === n) item.classList.add('active');
+});
+modalBackBtn.style.display = 'none';
+modalCloseBtn.style.display = 'none';
+modalNextBtn.style.display = 'block';
+if(n === 1){
+modalNextBtn.textContent = '确认并继续';
+modalNextBtn.className = 'modal-btn';
+}else if(n === 2){
+modalNextBtn.textContent = '确认支付';
+modalNextBtn.className = 'modal-btn';
+modalBackBtn.style.display = 'block';
+modalBackBtn.textContent = '返回上一步';
+}else if(n === 3){
+modalNextBtn.style.display = 'none';
+modalBackBtn.style.display = 'none';
+startVerify();
+}else if(n === 4){
+modalNextBtn.style.display = 'none';
+modalBackBtn.style.display = 'none';
+modalCloseBtn.style.display = 'block';
+modalCloseBtn.textContent = currentDevice.locked ? '知道了' : '返回重试';
+}
+}
+
+document.querySelectorAll('.pay-item').forEach(function(item){
+item.addEventListener('click', function(){
+document.querySelectorAll('.pay-item').forEach(function(x){x.classList.remove('selected');});
+item.classList.add('selected');
+});
+});
+
+function startVerify(){
+var verifyText = document.getElementById('verifyText');
+var verifySub = document.getElementById('verifySub');
+var verifyBar = document.getElementById('verifyBar');
+verifyBar.style.width = '0%';
+verifyText.textContent = '正在验证身份';
+verifySub.textContent = '正在比对腕部脉搏频率、皮肤微电流、肌肉记忆...';
+var stages = [
+{text:'正在验证身份', sub:'正在比对腕部脉搏频率、皮肤微电流、肌肉记忆...', prog:25, delay:0},
+{text:'正在核验订单', sub:'正在从库存中锁定 ' + currentDevice.label + '...', prog:50, delay:900},
+{text:'正在建立加密通道', sub:'正在通过神☢芯片建立混沌链路...', prog:75, delay:1800},
+{text:'正在提交订单', sub:'正在将订单发送至 Bozi 全球调度中心...', prog:95, delay:2700}
+];
+stages.forEach(function(s){
+setTimeout(function(){
+verifyText.textContent = s.text;
+verifySub.textContent = s.sub;
+verifyBar.style.width = s.prog + '%';
+}, s.delay);
+});
+setTimeout(function(){
+document.getElementById('resultTitle').textContent = currentDevice.locked ? '申请已驳回' : '购买失败';
+if(currentDevice.locked){
+document.getElementById('resultDesc').innerHTML = '<span style="color: var(--accent); font-weight: 700;">该型号仅对国家 / 军方开放</span><br><span style="font-size: 13px; margin-top: 8px; display: block;">你的申请已被驳回，请勿再次尝试</span>';
+document.getElementById('resultCode').textContent = 'ERROR CODE: CLEARANCE_DENIED_0x03';
+}else{
+document.getElementById('resultDesc').innerHTML = '<span style="color: var(--accent); font-weight: 700;">当前购买人数过多</span><br><span style="font-size: 13px; margin-top: 8px; display: block;">排队人数已超过 10,000,000+<br>请稍后再试</span>';
+document.getElementById('resultCode').textContent = 'ERROR CODE: QUEUE_OVERFLOW_0x09';
+}
+goToStep(4);
+}, 3600);
+}
+
+modalNextBtn.addEventListener('click', function(){
+if(currentStep === 1){goToStep(2);}
+else if(currentStep === 2){goToStep(3);}
+});
+modalBackBtn.addEventListener('click', function(){
+if(currentStep > 1) goToStep(currentStep - 1);
+});
+modalCloseBtn.addEventListener('click', closeModal);
+modalClose.addEventListener('click', closeModal);
+modalOverlay.addEventListener('click', closeModal);
+
+function openModal(){
+document.getElementById('sumDevice').textContent = currentDevice.name;
+document.getElementById('sumChip').textContent = currentDevice.specs[0].v;
+document.getElementById('sumSystem').textContent = currentDevice.specs[1] ? currentDevice.specs[1].v : '—';
+document.getElementById('sumUnit').textContent = formatPrice(currentDevice, 1);
+document.getElementById('sumQty').textContent = qty;
+document.getElementById('sumTotal').textContent = formatPrice(currentDevice, qty);
+document.querySelectorAll('.step-item').forEach(function(item){
+item.classList.remove('active','done');
+});
+document.querySelector('.step-item[data-step="1"]').classList.add('active');
+goToStep(1);
+modalOverlay.classList.add('show');
+modalWrapper.classList.add('show');
+}
+
+function closeModal(){
+modalOverlay.classList.remove('show');
+modalWrapper.classList.remove('show');
+setTimeout(function(){
+buyBtn.disabled = false;
+buyBtn.textContent = currentDevice.locked ? '申请特殊渠道' : '立即购买';
+}, 400);
+}
+
+buyBtn.addEventListener('click', function(){
+buyBtn.disabled = true;
+buyBtn.textContent = '处理中...';
+openModal();
+});
+
+selectDevice('neo5');
+setTimeout(function(){
+var d = currentDevice;
+document.getElementById('specFull').innerHTML = d.specs.map(function(s){
+return '<div class="spec-line"><span class="k">' + s.k + '</span><span class="v ' + (s.cls || '') + '">' + s.v + '</span></div>';
+}).join('');
+updateTotal();
+if(d.hasTrust){document.getElementById('trustCard').classList.remove('hidden');}
+else{document.getElementById('trustCard').classList.add('hidden');}
+}, 50);
+
+} catch(err) {
+// 如果 JS 崩了，内容照样显示，只是没有动画
+console.error('Bozi JS error:', err);
+}
+})();
+</script>
+</body>
+</html>
