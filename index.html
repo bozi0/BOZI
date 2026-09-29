@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>Bozi® 官方网站</title>
 <style>
-:root{--bg-dark:#050507;--text-main:#f8fafc;--text-sub:#94a3b8;--primary:#8b5cf6;--primary-glow:#a78bfa;--secondary:#2dd4bf;--accent:#f472b6;--gold:#facc15;--radius-lg:28px;--radius-md:18px;--safe-bottom:env(safe-area-inset-bottom,24px)}
+:root{--bg-dark:#050507;--text-main:#f8fafc;--text-sub:#94a3b8;--primary:#8b5cf6;--primary-glow:#a78bfa;--secondary:#2dd4bf;--accent:#f472b6;--gold:#facc15;--success:#22c55e;--radius-lg:28px;--radius-md:18px;--safe-bottom:env(safe-area-inset-bottom,24px)}
 *{box-sizing:border-box;font-family:system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',sans-serif;-webkit-tap-highlight-color:transparent;-webkit-font-smoothing:antialiased}
 html{scroll-behavior:smooth}
 body{background-color:var(--bg-dark);margin:0;min-height:100vh;min-height:100dvh;display:flex;justify-content:center;color:var(--text-main);overflow-x:hidden;position:relative;user-select:none}
@@ -17,12 +17,14 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 @keyframes float-up{0%{transform:translate3d(0,100vh,0) scale(0.5);opacity:0}10%{opacity:0.7}90%{opacity:0.7}100%{transform:translate3d(20px,-10vh,0) scale(1);opacity:0}}
 .progress-bar{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--primary),var(--secondary),var(--accent));z-index:999;transition:width 0.1s ease}
 
-.topbar{position:fixed;top:0;left:0;width:100%;padding:calc(10px + env(safe-area-inset-top)) 20px 10px;display:flex;justify-content:space-between;align-items:center;z-index:200;background:rgba(5,5,7,0.98);border-bottom:1px solid rgba(167,139,250,0.08)}
-.topbar .brand{font-size:16px;font-weight:800;letter-spacing:2px;background:linear-gradient(90deg,#fff,#a78bfa);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-.topbar .nav-pill{display:flex;gap:4px;padding:4px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:40px}
+.topbar{position:fixed;top:0;left:0;width:100%;padding:calc(10px + env(safe-area-inset-top)) 20px 10px;display:flex;justify-content:flex-start;align-items:center;gap:10px;z-index:200;background:rgba(5,5,7,0.98);border-bottom:1px solid rgba(167,139,250,0.08)}
+.topbar .back-btn{display:none;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:#fff;font-size:17px;cursor:pointer;align-items:center;justify-content:center;font-family:inherit;padding:0;flex-shrink:0;transition:background 0.2s ease,transform 0.15s ease;line-height:1}
+.topbar .back-btn:active{transform:scale(0.92);background:rgba(139,92,246,0.25)}
+.topbar .back-btn.show{display:flex}
+.topbar .brand{font-size:16px;font-weight:800;letter-spacing:2px;background:linear-gradient(90deg,#fff,#a78bfa);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;cursor:pointer;flex:1}
+.topbar .nav-pill{display:flex;gap:4px;padding:4px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:40px;flex-shrink:0}
 .topbar .nav-pill button{padding:7px 16px;border-radius:40px;font-size:12px;font-weight:700;letter-spacing:1px;color:var(--text-sub);transition:background 0.25s ease,color 0.25s ease;white-space:nowrap;background:transparent;border:none;cursor:pointer;font-family:inherit}
 .topbar .nav-pill button.active{background:linear-gradient(135deg,var(--primary),#6d28d9);color:#fff}
-.topbar .nav-pill button.active.gold{background:linear-gradient(135deg,var(--gold),#f59e0b);color:#1a1a1a}
 
 .banner{position:fixed;top:calc(64px + env(safe-area-inset-top));left:0;width:100%;padding:8px 20px;z-index:190;background:rgba(20,15,35,0.95);border-bottom:1px solid rgba(167,139,250,0.1);overflow:hidden}
 .banner-track{display:flex;gap:40px;animation:banner-scroll 30s linear infinite;white-space:nowrap;will-change:transform}
@@ -39,20 +41,44 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 
 .app-container{width:100%;max-width:560px;position:relative;z-index:2;padding:40px 20px;padding-top:calc(140px + env(safe-area-inset-top));padding-bottom:calc(120px + var(--safe-bottom))}
 
-.page{display:none;flex-direction:column;gap:90px}
+.page{display:none;flex-direction:column;gap:80px}
 .page.active{display:flex;animation:pageIn 0.5s cubic-bezier(0.175,0.885,0.32,1.275)}
 .page.fading-out{display:flex;animation:pageOut 0.3s ease forwards}
 @keyframes pageIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
 @keyframes pageOut{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(-20px)}}
 
-/* ============ 关键：单向动画，播放一次就永久保持 ============ */
+.home-hero{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 260px);text-align:center;padding:20px 0 40px}
+.home-hero .badge{font-size:10px;letter-spacing:5px;color:var(--primary-glow);margin-bottom:24px;padding:6px 16px;border:1px solid rgba(167,139,250,0.3);border-radius:40px;background:rgba(139,92,246,0.08);font-weight:600;animation:pulse-soft 2.5s ease-in-out infinite}
+@keyframes pulse-soft{0%,100%{opacity:1}50%{opacity:0.6}}
+.home-hero h1{font-size:clamp(56px,18vw,96px);font-weight:900;line-height:1;letter-spacing:-4px;margin:0 0 20px 0;background:linear-gradient(135deg,#fff,#a78bfa,#2dd4bf,#fff);background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shine 6s linear infinite}
+@keyframes shine{to{background-position:200% center}}
+.home-hero .sub{font-size:14px;color:var(--text-sub);line-height:1.8;max-width:360px;margin:0 auto 36px}
+.home-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:100%;max-width:460px;margin-bottom:36px}
+.home-stat{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:16px 6px}
+.home-stat .num{font-size:14px;font-weight:900;background:linear-gradient(180deg,#fff,#a78bfa);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px;word-break:break-all}
+.home-stat .lbl{font-size:10px;color:var(--text-sub);letter-spacing:1px}
+.home-actions{display:flex;gap:12px;width:100%;max-width:460px;flex-wrap:wrap}
+.home-btn{flex:1;min-width:140px;padding:17px 24px;border-radius:16px;font-size:15px;font-weight:800;letter-spacing:1.5px;cursor:pointer;font-family:inherit;transition:transform 0.2s ease;border:none}
+.home-btn:active{transform:scale(0.97)}
+.home-btn.primary{background:linear-gradient(135deg,var(--gold),#f59e0b);color:#1a1a1a;box-shadow:0 8px 24px rgba(250,204,21,0.25)}
+.home-btn.secondary{background:rgba(255,255,255,0.05);color:#fff;border:1px solid rgba(255,255,255,0.15)}
+.scroll-hint2{margin-top:50px;font-size:11px;color:var(--text-sub);letter-spacing:3px;animation:bounce 2.4s infinite;opacity:0.5}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(10px)}}
+
+.home-highlights{display:flex;flex-direction:column;gap:14px}
+.hl-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:22px;position:relative;overflow:hidden}
+.hl-card::before{content:'';position:absolute;top:-30px;left:-30px;width:120px;height:120px;background:radial-gradient(circle,rgba(139,92,246,0.35) 0%,transparent 70%);opacity:0.5;pointer-events:none}
+.hl-card .hl-tag{font-size:10px;letter-spacing:3px;color:var(--primary-glow);font-weight:700;margin-bottom:10px;position:relative;display:inline-block;padding:3px 10px;background:rgba(139,92,246,0.12);border-radius:40px}
+.hl-card .hl-title{font-size:17px;font-weight:800;color:#fff;margin-bottom:8px;position:relative;line-height:1.3}
+.hl-card .hl-desc{font-size:13px;color:#cbd5e1;line-height:1.75;position:relative}
+.hl-card .hl-big{font-size:28px;font-weight:900;background:linear-gradient(180deg,#fff,#facc15);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;margin:8px 0;position:relative;line-height:1.1;word-break:break-all}
+
 .reveal{opacity:0;transform:translateY(30px);transition:opacity 0.6s ease,transform 0.6s cubic-bezier(0.175,0.885,0.32,1.275);will-change:transform,opacity}
 .reveal.show{opacity:1;transform:translateY(0)}
 
-.hero{text-align:center;padding-top:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:60vh}
+.hero{text-align:center;padding-top:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:50vh}
 .hero .badge{font-size:10px;letter-spacing:5px;color:var(--primary-glow);margin-bottom:20px;padding:6px 14px;border:1px solid rgba(167,139,250,0.3);border-radius:40px;background:rgba(139,92,246,0.08);font-weight:600}
 .hero h1{font-size:clamp(40px,12vw,68px);font-weight:900;line-height:1.05;letter-spacing:-2px;margin:0 0 20px 0;background:linear-gradient(135deg,#fff,#a78bfa,#2dd4bf,#fff);background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shine 6s linear infinite}
-@keyframes shine{to{background-position:200% center}}
 .hero .sub{font-size:15px;color:var(--text-sub);line-height:1.8;max-width:380px;margin:0 auto}
 .hero .slogans{margin-top:40px;display:flex;flex-direction:column;gap:8px;font-size:12px;color:var(--text-sub);letter-spacing:1px;opacity:0.7}
 .hero .slogans .en{font-style:italic;color:var(--primary-glow)}
@@ -60,8 +86,6 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .audio-bars span{display:block;width:3px;background:linear-gradient(180deg,var(--primary-glow),var(--primary));border-radius:2px;animation:audio-wave 1.4s ease-in-out infinite}
 .audio-bars span:nth-child(1){animation-delay:0s}.audio-bars span:nth-child(2){animation-delay:0.1s}.audio-bars span:nth-child(3){animation-delay:0.2s}.audio-bars span:nth-child(4){animation-delay:0.3s}.audio-bars span:nth-child(5){animation-delay:0.4s}.audio-bars span:nth-child(6){animation-delay:0.5s}.audio-bars span:nth-child(7){animation-delay:0.4s}.audio-bars span:nth-child(8){animation-delay:0.3s}.audio-bars span:nth-child(9){animation-delay:0.2s}.audio-bars span:nth-child(10){animation-delay:0.1s}.audio-bars span:nth-child(11){animation-delay:0s}
 @keyframes audio-wave{0%,100%{height:8px;opacity:0.4}50%{height:40px;opacity:1}}
-.scroll-hint{margin-top:60px;font-size:11px;color:var(--text-sub);letter-spacing:3px;animation:bounce 2.4s infinite;opacity:0.5}
-@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(10px)}}
 
 .section-header{margin-bottom:32px;position:relative}
 .section-index{font-size:11px;font-weight:700;color:var(--primary-glow);letter-spacing:5px;text-transform:uppercase;display:block;margin-bottom:10px}
@@ -137,6 +161,19 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .table-card .tc-row .v{color:#fff;font-weight:600;text-align:right;max-width:60%;word-break:break-word}
 .table-card .tc-row .v.gold{color:var(--gold)}.table-card .tc-row .v.purple{color:var(--primary-glow)}
 
+.spec-table{display:flex;flex-direction:column;gap:8px;margin:20px 0;position:relative}
+.spec-row{display:flex;justify-content:space-between;font-size:12px;padding:10px 14px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:10px;gap:12px}
+.spec-row .k{color:var(--text-sub);white-space:nowrap;letter-spacing:1px}
+.spec-row .v{color:#fff;font-weight:600;text-align:right;flex:1;word-break:break-word}
+.spec-row .v.gold{color:var(--gold)}
+
+.price-versions{display:flex;flex-direction:column;gap:10px;margin:20px 0;position:relative}
+.price-version{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px;transition:border-color 0.2s ease}
+.price-version.featured{border-color:rgba(250,204,21,0.3);background:rgba(250,204,21,0.04)}
+.price-version .ver{font-size:14px;font-weight:700;color:#fff;letter-spacing:1px}
+.price-version .price{font-size:20px;font-weight:900;background:linear-gradient(180deg,#fff,var(--gold));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.price-version .badge-mini{font-size:9px;padding:3px 8px;background:rgba(250,204,21,0.15);border:1px solid rgba(250,204,21,0.3);border-radius:6px;color:var(--gold);font-weight:700;letter-spacing:1px;margin-left:8px}
+
 .footer{text-align:center;padding-top:60px;padding-bottom:30px;color:var(--text-sub);font-size:13px;letter-spacing:1px;position:relative}
 .footer .logo{font-size:32px;font-weight:900;margin-bottom:14px;background:linear-gradient(90deg,#a78bfa,#2dd4bf,#f472b6,#a78bfa);background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shine 5s linear infinite}
 .footer .slogan{font-style:italic;color:var(--primary-glow);margin-top:16px;font-size:12px;line-height:1.9}
@@ -158,7 +195,6 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .device-chip:active{transform:scale(0.95)}
 .device-chip.active{background:linear-gradient(135deg,var(--gold),#f59e0b);color:#1a1a1a;border-color:transparent}
 .device-chip .chip-sub{display:block;font-size:9px;opacity:0.7;font-weight:600;margin-top:2px;letter-spacing:0}
-
 .device-panel{transition:opacity 0.18s ease,transform 0.18s ease}
 .device-panel.switching{opacity:0;transform:translateY(6px)}
 
@@ -169,33 +205,21 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .buy-header .stock{font-size:11px;color:var(--accent);font-weight:700;letter-spacing:1px;display:flex;align-items:center;gap:6px}
 .buy-header .stock::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse-dot 1.8s infinite}
 .buy-header .badge-stock{font-size:10px;padding:4px 10px;background:rgba(244,114,182,0.15);border:1px solid rgba(244,114,182,0.3);border-radius:8px;color:var(--accent);font-weight:700;letter-spacing:1px;white-space:nowrap}
-
 .spec-full{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;position:relative}
 .spec-line{display:flex;justify-content:space-between;font-size:12px;padding:9px 12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:10px;gap:12px}
 .spec-line .k{color:var(--text-sub);white-space:nowrap;letter-spacing:1px}
 .spec-line .v{color:#fff;font-weight:600;text-align:right;flex:1;word-break:break-word}
 .spec-line .v.gold{color:var(--gold)}
-.spec-line .v.purple{color:var(--primary-glow)}
-
-.buy-options{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;position:relative}
-.option-row{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px}
-.option-row .label{font-size:12px;color:var(--text-sub);letter-spacing:1px}
-.qty-control{display:flex;align-items:center;gap:12px}
-.qty-btn{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:#fff;font-size:18px;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:pointer;line-height:1;font-family:inherit}
-.qty-btn:active{transform:scale(0.9);background:rgba(139,92,246,0.2);border-color:var(--primary)}
-.qty-num{font-size:20px;font-weight:900;color:#fff;min-width:30px;text-align:center}
 .total-bar{display:flex;justify-content:space-between;align-items:center;padding:16px 0;margin-bottom:16px;border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);position:relative;gap:12px}
 .total-bar .label{font-size:12px;color:var(--text-sub);letter-spacing:1px;white-space:nowrap}
 .total-bar .amount{font-size:22px;font-weight:900;background:linear-gradient(180deg,#fff,var(--gold));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;word-break:break-all;text-align:right}
 .buy-btn{width:100%;padding:18px;border-radius:16px;background:linear-gradient(135deg,var(--gold),#f59e0b);border:none;color:#1a1a1a;font-size:16px;font-weight:900;letter-spacing:2px;cursor:pointer;position:relative;overflow:hidden;font-family:inherit;transition:transform 0.2s ease}
 .buy-btn:active{transform:scale(0.97)}
 .buy-btn:disabled{opacity:0.7}
-.buy-btn.locked{background:linear-gradient(135deg,#4a1d4f,#7c2d8e);color:#fff}
 .buy-btn .btn-shine{position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.5),transparent);transform:skewX(-20deg);animation:btn-shine 4s infinite}
 @keyframes btn-shine{0%{left:-100%}50%,100%{left:200%}}
 .buy-note{font-size:11px;color:var(--text-sub);text-align:center;margin-top:14px;line-height:1.7;position:relative}
-.trust-card{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:18px;padding:20px;transition:opacity 0.3s ease}
-.trust-card.hidden{display:none}
+.trust-card{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:18px;padding:20px}
 .trust-card .title{font-size:13px;font-weight:700;color:#fff;margin-bottom:14px;letter-spacing:1px}
 .trust-card .row{display:flex;justify-content:space-between;font-size:12px;padding:8px 0;border-bottom:1px dashed rgba(255,255,255,0.05);gap:12px}
 .trust-card .row:last-child{border-bottom:none}
@@ -210,11 +234,9 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .modal-wrapper.show{opacity:1;pointer-events:auto}
 .buy-modal{width:100%;max-width:420px;background:#121218;border:1px solid rgba(255,255,255,0.1);border-radius:24px;box-shadow:0 20px 60px rgba(0,0,0,0.8);transform:translateY(30px);transition:transform 0.35s cubic-bezier(0.175,0.885,0.32,1.275);max-height:92vh;overflow:hidden;display:flex;flex-direction:column;position:relative}
 .modal-wrapper.show .buy-modal{transform:translateY(0)}
-
 .modal-close{position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:var(--text-sub);font-size:18px;font-weight:300;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10;transition:all 0.2s ease;font-family:inherit;line-height:1;padding:0}
 .modal-close:active{transform:scale(0.9);background:rgba(244,114,182,0.15);border-color:var(--accent);color:var(--accent)}
 .modal-close::before{content:'×';font-size:22px;font-weight:400;line-height:1;margin-top:-2px}
-
 .modal-steps{display:flex;align-items:center;padding:18px 40px 14px 20px;border-bottom:1px solid rgba(255,255,255,0.06);flex-shrink:0}
 .modal-steps .step-item{flex:1;display:flex;align-items:center;gap:6px;position:relative;min-width:0}
 .modal-steps .step-num{width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:var(--text-sub);font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.25s ease}
@@ -226,24 +248,19 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .modal-steps .step-item.active .step-label{color:var(--gold);font-weight:700}
 .modal-steps .step-line{flex:1;height:1px;background:rgba(255,255,255,0.08);margin:0 4px;min-width:8px}
 .modal-steps .step-item:last-child .step-line{display:none}
-
 .modal-body{padding:22px;overflow-y:auto;flex:1;-webkit-overflow-scrolling:touch}
 .modal-footer{padding:0 22px 22px;flex-shrink:0}
-
 .step-panel{display:none}
 .step-panel.active{display:block;animation:panelIn 0.3s ease}
 @keyframes panelIn{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:translateX(0)}}
-
 .panel-title{font-size:17px;font-weight:800;color:#fff;margin:0 0 6px 0}
 .panel-sub{font-size:12px;color:var(--text-sub);margin:0 0 14px 0;line-height:1.6}
-
 .summary-block{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:16px;margin-bottom:14px}
 .summary-block .row{display:flex;justify-content:space-between;font-size:12px;padding:7px 0;gap:12px}
 .summary-block .row .k{color:var(--text-sub);white-space:nowrap}
 .summary-block .row .v{color:#fff;font-weight:600;text-align:right;flex:1;word-break:break-word}
 .summary-block .row.total{border-top:1px solid rgba(255,255,255,0.08);margin-top:6px;padding-top:12px;font-size:14px}
 .summary-block .row.total .v{font-size:18px;color:var(--gold);font-weight:800}
-
 .pay-list{display:flex;flex-direction:column;gap:10px}
 .pay-item{display:flex;align-items:center;gap:12px;padding:14px 16px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px;cursor:pointer;transition:border-color 0.2s ease,background 0.2s ease}
 .pay-item:active{transform:scale(0.98)}
@@ -259,7 +276,6 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .pay-item .pay-check{width:20px;height:20px;border-radius:50%;border:2px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .pay-item.selected .pay-check{border-color:var(--gold);background:var(--gold)}
 .pay-item.selected .pay-check::before{content:'✓';color:#1a1a1a;font-size:12px;font-weight:900}
-
 .agreement-box{max-height:280px;overflow-y:auto;-webkit-overflow-scrolling:touch;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:16px;font-size:12px;line-height:1.9;color:#cbd5e1;position:relative}
 .agreement-box::-webkit-scrollbar{width:4px}
 .agreement-box::-webkit-scrollbar-thumb{background:rgba(167,139,250,0.4);border-radius:2px}
@@ -270,10 +286,8 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .agreement-box .em{color:var(--gold);font-weight:600}
 .agreement-box .warn{color:var(--accent);font-weight:600}
 .agreement-end{text-align:center;font-size:11px;color:var(--text-sub);padding:16px 0 6px 0;opacity:0.5;letter-spacing:2px}
-
 .agreement-hint{text-align:center;font-size:11px;color:var(--text-sub);margin-top:12px;transition:color 0.3s ease;letter-spacing:1px}
 .agreement-hint.ready{color:var(--secondary);font-weight:700}
-
 .verify-box{text-align:center;padding:20px 0}
 .verify-ring{width:100px;height:100px;margin:0 auto 20px;border-radius:50%;background:rgba(139,92,246,0.1);border:2px solid rgba(139,92,246,0.3);display:flex;align-items:center;justify-content:center;position:relative}
 .verify-ring::before{content:'';position:absolute;inset:-4px;border-radius:50%;border:2px solid transparent;border-top-color:var(--primary-glow);border-right-color:var(--secondary);animation:spin 1.5s linear infinite;will-change:transform}
@@ -283,24 +297,18 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .verify-sub{font-size:12px;color:var(--text-sub);line-height:1.6;min-height:38px}
 .verify-bar-wrap{width:100%;height:4px;background:rgba(255,255,255,0.05);border-radius:2px;overflow:hidden;margin-top:18px}
 .verify-bar-wrap .bar{height:100%;width:0%;background:linear-gradient(90deg,var(--primary),var(--secondary));border-radius:2px;transition:width 0.35s ease}
-
 .result-box{text-align:center;padding:14px 0}
 .result-icon{width:72px;height:72px;margin:0 auto 20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:36px;position:relative}
-.result-icon.fail{background:rgba(244,114,182,0.15);border:2px solid rgba(244,114,182,0.4)}
-.result-icon.fail::after{content:'✕';color:var(--accent);font-weight:900;font-size:36px}
-.result-title{font-size:19px;font-weight:800;color:var(--accent);margin-bottom:12px}
+.result-icon.success{background:rgba(34,197,94,0.15);border:2px solid rgba(34,197,94,0.5);animation:success-pop 0.5s cubic-bezier(0.175,0.885,0.32,1.275)}
+.result-icon.success::after{content:'✓';color:var(--success);font-weight:900;font-size:38px}
+@keyframes success-pop{0%{transform:scale(0.5);opacity:0}60%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
+.result-title{font-size:19px;font-weight:800;color:var(--success);margin-bottom:12px}
 .result-desc{font-size:13px;color:var(--text-sub);line-height:1.7;margin-bottom:16px}
 .result-code{font-size:10px;color:var(--text-sub);letter-spacing:1.5px;padding:8px 12px;background:rgba(255,255,255,0.03);border-radius:8px;font-family:monospace;word-break:break-all;margin-bottom:8px}
-
 .modal-btn{width:100%;padding:15px;border-radius:14px;background:linear-gradient(135deg,var(--gold),#f59e0b);border:none;color:#1a1a1a;font-size:15px;font-weight:900;letter-spacing:1.5px;cursor:pointer;font-family:inherit;transition:transform 0.15s ease}
 .modal-btn:active{transform:scale(0.97)}
 .modal-btn:disabled{opacity:0.35;cursor:not-allowed;background:linear-gradient(135deg,#3a3a42,#2a2a32);color:#64748b}
 .modal-btn.secondary{background:rgba(255,255,255,0.06);color:#fff;border:1px solid rgba(255,255,255,0.1)}
-
-.section-nav{position:fixed;right:12px;top:50%;transform:translateY(-50%);z-index:50;display:flex;flex-direction:column;gap:8px;opacity:0;transition:opacity 0.3s ease}
-.section-nav.show{opacity:1}
-.nav-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,0.2);cursor:pointer;position:relative}
-.nav-dot.active{background:var(--primary-glow);transform:scale(1.6)}
 
 @media (prefers-reduced-motion: reduce){
 *{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important}
@@ -315,87 +323,441 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <div class="progress-bar" id="progressBar"></div>
 
 <div class="topbar">
-<div class="brand">BOZI®</div>
+<button class="back-btn" id="backBtn">←</button>
+<div class="brand" id="brandBtn">BOZI®</div>
 <div class="nav-pill">
-<button id="navIntro" class="active">介绍</button>
-<button id="navBuy">购买</button>
+<button id="navHistory">神级设备史</button>
 </div>
 </div>
 
 <div class="banner">
 <div class="banner-track">
-<span>ALL CHIPS BOW TO BOZI</span><span>BOZI 全系设备限量发售</span><span>PEAK PERFORMANCE RUNS ON BOZI</span><span>神☢ 芯片 · 与宇宙共存</span><span>深渊保护 3.0 · 猎杀 / 净化 / 消失</span>
-<span>ALL CHIPS BOW TO BOZI</span><span>BOZI 全系设备限量发售</span><span>PEAK PERFORMANCE RUNS ON BOZI</span><span>神☢ 芯片 · 与宇宙共存</span><span>深渊保护 3.0 · 猎杀 / 净化 / 消失</span>
+<span>BOZI NEO6 即将发布</span><span>Bozi 纪元终章 · 回归人间</span><span>第5代骁龙8至尊</span><span>全新 boziOS · 全新 boziAI</span><span>￥4299 起 · 量产发售</span>
+<span>BOZI NEO6 即将发布</span><span>Bozi 纪元终章 · 回归人间</span><span>第5代骁龙8至尊</span><span>全新 boziOS · 全新 boziAI</span><span>￥4299 起 · 量产发售</span>
 </div>
 </div>
 
 <div class="back-to-top" id="backToTop">↑</div>
 
-<div class="section-nav" id="sectionNav">
-<div class="nav-dot active" data-target="hero"></div>
-<div class="nav-dot" data-target="prologue"></div>
-<div class="nav-dot" data-target="era-1"></div>
-<div class="nav-dot" data-target="era-2"></div>
-<div class="nav-dot" data-target="era-3"></div>
-<div class="nav-dot" data-target="era-4"></div>
-<div class="nav-dot" data-target="chronology"></div>
-</div>
-
 <div class="app-container">
 
-<div class="page active" id="page-intro">
+<!-- ==================== 首页 ==================== -->
+<div class="page active" id="page-home">
 
-<div class="hero reveal" id="hero">
+<div class="home-hero reveal">
+<div class="badge">BOZI® NEW</div>
+<h1>Bozi Neo6</h1>
+<p class="sub">Bozi 纪元的终章，也是 Bozi 回归人间的第一台普通手机。</p>
+
+<div class="home-stats">
+<div class="home-stat"><div class="num">4,784,383</div><div class="lbl">安兔兔跑分</div></div>
+<div class="home-stat"><div class="num">165Hz</div><div class="lbl">原生高刷</div></div>
+<div class="home-stat"><div class="num">8000mAh</div><div class="lbl">冰川电池</div></div>
+</div>
+
+<div class="home-actions">
+<button class="home-btn primary" id="homeBuyBtn">立即购买</button>
+<button class="home-btn secondary" id="homeMoreBtn">了解更多</button>
+</div>
+
+<div class="scroll-hint2">↓ 向下滑动，查看亮点 ↓</div>
+</div>
+
+<div class="home-highlights">
+<div class="hl-card reveal">
+<div class="hl-tag">性能</div>
+<div class="hl-title">第5代骁龙8至尊</div>
+<div class="hl-desc">当前主流旗舰级芯片。配合博子风驰游戏内核 1.0，专注日常使用与游戏体验的平衡。</div>
+<div class="hl-big">4,784,383</div>
+<div class="hl-desc">安兔兔跑分。一个可以被正常显示、被排行榜收录的成绩。</div>
+</div>
+
+<div class="hl-card reveal">
+<div class="hl-tag">系统 & AI</div>
+<div class="hl-title">全新 boziOS + 全新 boziAI</div>
+<div class="hl-desc">不再是混沌系统，没有自我演化。boziOS 流畅、稳定、干净，该有的都有，不该有的都不碰。boziAI 更懂你，但不会越界。</div>
+</div>
+
+<div class="hl-card reveal">
+<div class="hl-tag">影像</div>
+<div class="hl-title">5000万像素潜望长焦</div>
+<div class="hl-desc">3.5 倍潜望长焦 + 自研 LUMO 凝光影像系统 + 全新「大师模式」+ 4K 120帧 杜比视界专业视频。</div>
+</div>
+
+<div class="hl-card reveal">
+<div class="hl-tag">续航 & 防护</div>
+<div class="hl-title">8000mAh 冰川电池</div>
+<div class="hl-desc">旗舰级第一梯队续航。5000mm² VC 散热。IP66 / IP68 / IP69 / IP69K 全覆盖防护。3D 超声波指纹。</div>
+</div>
+</div>
+
+</div>
+
+<!-- ==================== Neo6 详情页 ==================== -->
+<div class="page" id="page-neo6">
+
+<div class="hero reveal">
+<div class="badge">BOZI® NEO6</div>
+<h1>回归人间</h1>
+<p class="sub">它不再是一部神机。它是一台属于这个时代的，好用的手机。</p>
+</div>
+
+<div class="reveal">
+<div class="section-header"><span class="section-index">POSITIONING</span><h2 class="section-title">Bozi 纪元的终章</h2></div>
+<div class="text-body"><p>Neo6 是 Neo 系列的最后一款产品。</p><p>在此之前的 Bozi 神级设备——Neo2、Neo3、Neo4、Neo5——因为"不属于这个时代"，收到了匿名警告。为了给时代一个自然的演变过程，Bozi 决定关闭旧系统、物理销毁部分芯片，并让 Neo6 成为一台真正属于这个时代的手机。</p><p>它不再追求"凡人无法触及神明"，不再让安兔兔显示 ∞，不再让游戏帧率溢出。</p><p><span class="white-highlight">它是一台可以量产、可以二次售卖、可以像普通手机一样被使用的设备。</span></p></div>
+</div>
+
+<div class="reveal">
+<div class="section-header"><span class="section-index">SPECS</span><h2 class="section-title">核心参数总表</h2></div>
+<div class="spec-table">
+<div class="spec-row"><span class="k">产品名称</span><span class="v">Bozi Neo6</span></div>
+<div class="spec-row"><span class="k">产品定位</span><span class="v">Neo 系列最后一款</span></div>
+<div class="spec-row"><span class="k">芯片</span><span class="v gold">第5代骁龙8至尊</span></div>
+<div class="spec-row"><span class="k">系统</span><span class="v gold">全新 boziOS</span></div>
+<div class="spec-row"><span class="k">AI</span><span class="v">全新 boziAI</span></div>
+<div class="spec-row"><span class="k">游戏内核</span><span class="v">博子风驰游戏内核 1.0</span></div>
+<div class="spec-row"><span class="k">屏幕</span><span class="v">1.5K · 原生 165Hz</span></div>
+<div class="spec-row"><span class="k">影像</span><span class="v">5000万潜望长焦</span></div>
+<div class="spec-row"><span class="k">影像系统</span><span class="v">自研 LUMO 凝光</span></div>
+<div class="spec-row"><span class="k">特色模式</span><span class="v">全新「大师模式」</span></div>
+<div class="spec-row"><span class="k">视频</span><span class="v">4K 120帧 杜比视界</span></div>
+<div class="spec-row"><span class="k">防护</span><span class="v">IP66 / 68 / 69 / 69K</span></div>
+<div class="spec-row"><span class="k">指纹</span><span class="v">3D 超声波指纹</span></div>
+<div class="spec-row"><span class="k">电池</span><span class="v gold">8000mAh 冰川电池</span></div>
+<div class="spec-row"><span class="k">散热</span><span class="v">VC 5000mm²</span></div>
+<div class="spec-row"><span class="k">安兔兔跑分</span><span class="v gold">4,784,383</span></div>
+<div class="spec-row"><span class="k">销售方式</span><span class="v">量产 · 支持二次售卖</span></div>
+</div>
+</div>
+
+<div class="reveal">
+<div class="section-header"><span class="section-index">PERFORMANCE</span><h2 class="section-title">性能</h2></div>
+<div class="product-card">
+<div class="card-label">CHIP</div>
+<h3 class="product-name">第5代骁龙8至尊</h3>
+<p class="product-tagline">当前主流旗舰级芯片</p>
+<p class="desc">配合<span class="highlight">博子风驰游戏内核 1.0</span>，性能调度依然流畅稳定，但强度已经削减。它不再试图突破物理极限，而是专注于日常使用与游戏体验的平衡。</p>
+<div class="spec-grid">
+<div class="spec-item"><div class="k">安兔兔跑分</div><div class="v gold">4,784,383</div></div>
+<div class="spec-item"><div class="k">游戏内核</div><div class="v">风驰 1.0</div></div>
+</div>
+<p class="desc">这是一个可以被正常显示、被排行榜收录、被拿来和其他旗舰比较的成绩。它依然很快，但终于落回了人间。</p>
+</div>
+</div>
+
+<div class="reveal">
+<div class="section-header"><span class="section-index">OS & AI</span><h2 class="section-title">系统与 AI</h2></div>
+<div class="product-card">
+<div class="card-label">boziOS</div>
+<h3 class="product-name">全新 boziOS</h3>
+<p class="product-tagline">流畅、稳定、干净</p>
+<p class="desc">boziOS 不再是混沌系统。<br><br>没有自我演化，没有意识流预判，没有"长成你的形状"。它是一个流畅、稳定、干净的操作系统——<span class="white-highlight">该有的都有，不该有的都不碰。</span></p>
+</div>
+<div class="product-card">
+<div class="card-label">boziAI</div>
+<h3 class="product-name">全新 boziAI</h3>
+<p class="product-tagline">更懂你，但不会越界</p>
+<p class="desc">它会在你需要时出现，在你不需要时安静。它是一个好用的 AI 助手，而不是试图成为你另一个自己的存在。</p>
+</div>
+</div>
+
+<div class="reveal">
+<div class="section-header"><span class="section-index">DISPLAY</span><h2 class="section-title">屏幕</h2></div>
+<div class="product-card">
+<div class="card-label">1.5K · 165Hz</div>
+<h3 class="product-name">属于这个时代的好屏幕</h3>
+<p class="product-tagline">清晰、流畅、跟手</p>
+<p class="desc">Neo6 采用 <span class="highlight">1.5K 分辨率</span> 屏幕，支持 <span class="highlight">原生 165Hz 高刷新率</span>。<br><br>这不是 128K 全息光场屏，也不是 2560Hz 原生刷新率。它是一块属于这个时代的、优秀的手机屏幕。</p>
+<div class="spec-grid">
+<div class="spec-item"><div class="k">分辨率</div><div class="v">1.5K</div></div>
+<div class="spec-item"><div class="k">刷新率</div><div class="v gold">165Hz</div></div>
+</div>
+</div>
+</div>
+
+<div class="reveal">
+<div class="section-header"><span class="section-index">CAMERA</span><h2 class="section-title">影像</h2></div>
+<div class="product-card">
+<div class="card-label">LUMO</div>
+<h3 class="product-name">5000万像素 3.5倍潜望长焦</h3>
+<p class="product-tagline">自研 LUMO 凝光影像系统</p>
+<p class="desc">后置影像系统包括：<br><br>· 5000万像素 3.5倍潜望长焦<br>· 自研 LUMO 凝光影像系统<br>· 全新「大师模式」<br>· 4K 120帧 杜比视界专业视频</p>
+<p class="desc">它不再叫"星空"，不再有"光子暴君引擎"。但它依然能拍出好照片，依然能录出专业级视频。<span class="white-highlight">这是一套旗舰机该有的影像配置，只是不再超越时代。</span></p>
+</div>
+</div>
+
+<div class="reveal">
+<div class="section-header"><span class="section-index">BATTERY</span><h2 class="section-title">续航与散热</h2></div>
+<div class="product-card">
+<div class="card-label">8000mAh</div>
+<h3 class="product-name">冰川电池</h3>
+<p class="product-tagline">旗舰级第一梯队续航</p>
+<div class="spec-grid">
+<div class="spec-item"><div class="k">电池</div><div class="v gold">8000mAh</div></div>
+<div class="spec-item"><div class="k">散热</div><div class="v">VC 5000mm²</div></div>
+</div>
+<p class="desc">它不再有量子电池，不再有虚空冷却。它是一台需要正常充电、正常散热的手机——<span class="white-highlight">但它的续航和散热，依然足够优秀。</span></p>
+</div>
+</div>
+
+<div class="reveal">
+<div class="section-header"><span class="section-index">PROTECTION</span><h2 class="section-title">防护与解锁</h2></div>
+<div class="product-card">
+<div class="card-label">IP69K</div>
+<h3 class="product-name">全覆盖防护</h3>
+<p class="product-tagline">IP66 / IP68 / IP69 / IP69K</p>
+<p class="desc">防护等级覆盖日常与极端场景。解锁方式为 <span class="highlight">3D 超声波指纹</span>，快速、安全、无感。</p>
+</div>
+</div>
+
+<div class="reveal">
+<div class="section-header"><span class="section-index">PRICE</span><h2 class="section-title">价格与版本</h2></div>
+<div class="price-versions">
+<div class="price-version"><span class="ver">12GB + 256GB</span><span class="price">￥4299</span></div>
+<div class="price-version"><span class="ver">16GB + 256GB</span><span class="price">￥4599</span></div>
+<div class="price-version"><span class="ver">12GB + 512GB</span><span class="price">￥5079</span></div>
+<div class="price-version"><span class="ver">16GB + 512GB</span><span class="price">￥5100</span></div>
+<div class="price-version featured"><span class="ver">16GB + 1TB<span class="badge-mini">顶配</span></span><span class="price">￥5999</span></div>
+</div>
+</div>
+
+<div class="reveal">
+<div class="section-header"><span class="section-index">EPILOGUE</span><h2 class="section-title">结语</h2></div>
+<div class="text-body"><p>Bozi 发布史中，那些神级设备会安静地躺在角落里。</p><p>从 X1 到 S5Void-X，从 Neo2 到 Neo5，它们值得被铭记。</p><p>而 Neo6，是 Bozi 纪元的终点，也是新一页的开始。</p><p><span class="white-highlight">它不再是一部神机。它是一台属于这个时代的，好用的手机。</span></p></div>
+</div>
+
+</div>
+
+<!-- ==================== 神级设备史 ==================== -->
+<div class="page" id="page-intro">
+
+<div class="hero reveal">
 <div class="badge">BOZI® OFFICIAL</div>
 <h1>全系设备<br>终极编年史</h1>
 <p class="sub">从一颗散装芯片，到手腕上的另一个维度。</p>
 <div class="audio-bars"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
 <div class="slogans"><div>Peak performance runs on Bozi.</div><div class="en">Bozi is the only peak, others are just foothills.</div><div class="en">All chips bow to Bozi.</div></div>
-<div class="scroll-hint">↓ 进入 Bozi 宇宙 ↓</div>
 </div>
 
-<div class="reveal" id="prologue">
+<div class="reveal">
 <div class="section-header"><span class="section-index">PROLOGUE</span><h2 class="section-title">那间没有散热器的实验室</h2></div>
 <div class="text-body"><p>一切始于一颗<span class="highlight">骁龙 865</span>。</p><p>它被焊在一块裸露的主板上，屏幕、芯片、电源各自分离，飞线如神经般连接着它们。没有手机壳，没有电池，没有任何散热装置。芯片表面温度高到"手摸一下直接烫伤，跟摸热油一样"。</p><p>但就是在这样一套散装平台上，一个系统诞生了。它的创造者说：</p></div>
 <div class="quote">我只是做系统的，我只看最终成绩，不考虑外界原因，但我会尽力优化外界因素。<span class="by">— Bozi 创始人</span></div>
 <div class="text-body"><p>这句话，成了整个 Bozi 宇宙的第一块基石。</p><p>后来，他装上了分体式水冷。再后来，他有了一个朋友——一个研究外围配置和他研究系统一样厉害的人。再后来，他们一起，<span class="white-highlight">把整个半导体行业的认知，碾成了粉末。</span></p></div>
 </div>
 
-<div class="reveal" id="era-1">
+<div class="reveal">
 <div class="section-header"><span class="section-index">CHAPTER 01</span><h2 class="section-title">普通机纪元</h2><p class="section-subtitle">从 X1 到 S5Void-X，共 5 代芯片。每一代，都是对上一代的降维打击。</p></div>
-<div class="product-card"><div class="card-label">GEN 01 · 起点</div><h3 class="product-name">Bozi X1</h3><p class="product-tagline">Bozi 品牌的第一款正式芯片</p><div class="spec-grid"><div class="spec-item"><div class="k">芯片</div><div class="v">Bozi X1</div></div><div class="spec-item"><div class="k">内核</div><div class="v">风驰 4.0</div></div><div class="spec-item"><div class="k">裸跑</div><div class="v gradient">3498万</div></div><div class="spec-item"><div class="k">优化后</div><div class="v gradient">7618万</div></div></div><p class="desc">诞生于那个散装平台，芯片表面温度曾经高到"跟热油一样"，但它从未降频。纯靠软件优化，就把骁龙 865 抬到了未优化骁龙 8E5 的水平。</p><div class="price-bar"><div class="left"><div class="label">PRICE</div><div class="value">$50,000</div></div><div class="right"><div class="label">QUANTITY</div><div class="qty">500 台</div></div></div></div>
-<div class="product-card"><div class="card-label">GEN 02</div><h3 class="product-name">Bozi X2</h3><p class="product-tagline">升级过头了</p><div class="spec-grid"><div class="spec-item"><div class="k">芯片</div><div class="v">Bozi X2</div></div><div class="spec-item"><div class="k">内核</div><div class="v">风驰 2.0</div></div><div class="spec-item"><div class="k">裸跑</div><div class="v gradient">8422万</div></div><div class="spec-item"><div class="k">优化后</div><div class="v gradient">1.4亿</div></div></div><div class="quote">坏了坏了升级过头了，跑分不经过优化的话有 8422 万，通过我的系统和博子风驰游戏内核优化后只有可怜的 1.4 亿，唉.....这算是中低端了。</div><div class="price-bar"><div class="left"><div class="label">PRICE</div><div class="value">$100,000</div></div><div class="right"><div class="label">QUANTITY</div><div class="qty">500 台</div></div></div></div>
-<div class="product-card"><div class="card-label">GEN 03 · ULTRA</div><h3 class="product-name">Bozi X3 Ultra</h3><p class="product-tagline">太卡了，只能丢到中低端机</p><div class="spec-grid"><div class="spec-item"><div class="k">芯片</div><div class="v">Bozi X3 Ultra</div></div><div class="spec-item"><div class="k">内核</div><div class="v">风驰 3.0 Pro</div></div><div class="spec-item"><div class="k">裸跑</div><div class="v gradient">2.7亿</div></div><div class="spec-item"><div class="k">优化后</div><div class="v gradient">6.8亿</div></div></div><p class="desc">游戏实测已经出现离谱现象：运行 10 万个《三角洲》和《赛博朋克 2077》，画质拉满，每个只有可怜的 200fps。创造者说："呜呜呜。"</p><div class="price-bar"><div class="left"><div class="label">PRICE</div><div class="value">$150,000</div></div><div class="right"><div class="label">QUANTITY</div><div class="qty">500 台</div></div></div></div>
-<div class="product-card"><div class="card-label">GEN 04 · Ω</div><h3 class="product-name">Bozi X4ΩUltraPromax</h3><p class="product-tagline">朋友的介入，让所有数据翻了 11.7 倍</p><div class="spec-grid"><div class="spec-item"><div class="k">芯片</div><div class="v">X4ΩUltraPromax</div></div><div class="spec-item"><div class="k">内核</div><div class="v">风驰 4.0Ω</div></div><div class="spec-item"><div class="k">裸跑</div><div class="v gradient">113.49亿</div></div><div class="spec-item"><div class="k">优化后</div><div class="v gradient">217.62亿</div></div></div><p class="desc">一千万个游戏，每个从 587fps 暴涨到 6867fps。创造者评价："我朋友说我这个 Bozi X4ΩUltraPromax 芯片纯垃圾，确实我也这么认为的。"</p><div class="price-bar"><div class="left"><div class="label">PRICE</div><div class="value">$200,000</div></div><div class="right"><div class="label">QUANTITY</div><div class="qty">500 台</div></div></div></div>
-<div class="product-card"><div class="card-label">GEN 05 · VOID</div><h3 class="product-name">Bozi S5Void-X VantaΩ UltraPromax</h3><p class="product-tagline">All chips bow to Bozi.</p><div class="spec-grid"><div class="spec-item"><div class="k">芯片</div><div class="v">S5Void-X</div></div><div class="spec-item"><div class="k">内核</div><div class="v">风驰 5.0 VantaΩ</div></div><div class="spec-item"><div class="k">裸跑</div><div class="v gradient">9437亿</div></div><div class="spec-item"><div class="k">优化后</div><div class="v gradient">75484亿</div></div></div><p class="desc">安兔兔上显示 <span class="white-highlight">∞</span>。自研测分软件与安兔兔均显示：<span class="white-highlight">∞⁹</span>。所有游戏自带的帧率显示均显示 <span class="white-highlight">∞</span>。口号诞生："All chips bow to Bozi."</p><div class="price-bar"><div class="left"><div class="label">PRICE</div><div class="value">$250,000</div></div><div class="right"><div class="label">QUANTITY</div><div class="qty">500 台</div></div></div></div>
-<div class="summary-card"><div class="title">📊 普通机纪元 · 总结</div><div class="item">从 X1 到 S5Void-X，共 5 代芯片，每代 500 台，共 <span class="white-highlight">2500 台</span>。</div><div class="item">每一代比上一代多 <span class="white-highlight">$50,000</span>。</div><div class="item">全部搭载<span class="gold-highlight">阉割版风驰内核</span>，系统比 Neo 系列低 3 代。</div><div class="item">创造者原话：<span class="highlight">"爱买不买。"</span></div></div>
+
+<div class="product-card">
+<div class="card-label">GEN 01 · 起点</div>
+<h3 class="product-name">Bozi X1</h3>
+<p class="product-tagline">Bozi 品牌的第一款正式芯片</p>
+<div class="spec-grid">
+<div class="spec-item"><div class="k">芯片</div><div class="v">Bozi X1</div></div>
+<div class="spec-item"><div class="k">内核</div><div class="v">风驰 4.0</div></div>
+<div class="spec-item"><div class="k">裸跑</div><div class="v gradient">3498万</div></div>
+<div class="spec-item"><div class="k">优化后</div><div class="v gradient">7618万</div></div>
+</div>
+<p class="desc">诞生于那个散装平台，芯片表面温度曾经高到"跟热油一样"，但它从未降频。纯靠软件优化，就把骁龙 865 抬到了未优化骁龙 8E5 的水平。</p>
+<div class="price-bar"><div class="left"><div class="label">PRICE</div><div class="value">$50,000</div></div><div class="right"><div class="label">QUANTITY</div><div class="qty">500 台</div></div></div>
 </div>
 
-<div class="reveal" id="era-2">
+<div class="product-card">
+<div class="card-label">GEN 02</div>
+<h3 class="product-name">Bozi X2</h3>
+<p class="product-tagline">升级过头了</p>
+<div class="spec-grid">
+<div class="spec-item"><div class="k">芯片</div><div class="v">Bozi X2</div></div>
+<div class="spec-item"><div class="k">内核</div><div class="v">风驰 2.0</div></div>
+<div class="spec-item"><div class="k">裸跑</div><div class="v gradient">8422万</div></div>
+<div class="spec-item"><div class="k">优化后</div><div class="v gradient">1.4亿</div></div>
+</div>
+<div class="quote">坏了坏了升级过头了，跑分不经过优化的话有 8422 万，通过我的系统和博子风驰游戏内核优化后只有可怜的 1.4 亿，唉.....这算是中低端了。</div>
+<div class="price-bar"><div class="left"><div class="label">PRICE</div><div class="value">$100,000</div></div><div class="right"><div class="label">QUANTITY</div><div class="qty">500 台</div></div></div>
+</div>
+
+<div class="product-card">
+<div class="card-label">GEN 03 · ULTRA</div>
+<h3 class="product-name">Bozi X3 Ultra</h3>
+<p class="product-tagline">太卡了，只能丢到中低端机</p>
+<div class="spec-grid">
+<div class="spec-item"><div class="k">芯片</div><div class="v">Bozi X3 Ultra</div></div>
+<div class="spec-item"><div class="k">内核</div><div class="v">风驰 3.0 Pro</div></div>
+<div class="spec-item"><div class="k">裸跑</div><div class="v gradient">2.7亿</div></div>
+<div class="spec-item"><div class="k">优化后</div><div class="v gradient">6.8亿</div></div>
+</div>
+<p class="desc">游戏实测已经出现离谱现象：运行 10 万个《三角洲》和《赛博朋克 2077》，画质拉满，每个只有可怜的 200fps。创造者说："呜呜呜。"</p>
+<div class="price-bar"><div class="left"><div class="label">PRICE</div><div class="value">$150,000</div></div><div class="right"><div class="label">QUANTITY</div><div class="qty">500 台</div></div></div>
+</div>
+
+<div class="product-card">
+<div class="card-label">GEN 04 · Ω</div>
+<h3 class="product-name">Bozi X4ΩUltraPromax</h3>
+<p class="product-tagline">朋友的介入，让所有数据翻了 11.7 倍</p>
+<div class="spec-grid">
+<div class="spec-item"><div class="k">芯片</div><div class="v">X4ΩUltraPromax</div></div>
+<div class="spec-item"><div class="k">内核</div><div class="v">风驰 4.0Ω</div></div>
+<div class="spec-item"><div class="k">裸跑</div><div class="v gradient">113.49亿</div></div>
+<div class="spec-item"><div class="k">优化后</div><div class="v gradient">217.62亿</div></div>
+</div>
+<p class="desc">一千万个游戏，每个从 587fps 暴涨到 6867fps。创造者评价："我朋友说我这个 Bozi X4ΩUltraPromax 芯片纯垃圾，确实我也这么认为的。"</p>
+<div class="price-bar"><div class="left"><div class="label">PRICE</div><div class="value">$200,000</div></div><div class="right"><div class="label">QUANTITY</div><div class="qty">500 台</div></div></div>
+</div>
+
+<div class="product-card">
+<div class="card-label">GEN 05 · VOID</div>
+<h3 class="product-name">Bozi S5Void-X VantaΩ UltraPromax</h3>
+<p class="product-tagline">All chips bow to Bozi.</p>
+<div class="spec-grid">
+<div class="spec-item"><div class="k">芯片</div><div class="v">S5Void-X</div></div>
+<div class="spec-item"><div class="k">内核</div><div class="v">风驰 5.0 VantaΩ</div></div>
+<div class="spec-item"><div class="k">裸跑</div><div class="v gradient">9437亿</div></div>
+<div class="spec-item"><div class="k">优化后</div><div class="v gradient">75484亿</div></div>
+</div>
+<p class="desc">安兔兔上显示 <span class="white-highlight">∞</span>。自研测分软件与安兔兔均显示：<span class="white-highlight">∞⁹</span>。所有游戏自带的帧率显示均显示 <span class="white-highlight">∞</span>。口号诞生："All chips bow to Bozi."</p>
+<div class="price-bar"><div class="left"><div class="label">PRICE</div><div class="value">$250,000</div></div><div class="right"><div class="label">QUANTITY</div><div class="qty">500 台</div></div></div>
+</div>
+
+<div class="summary-card">
+<div class="title">📊 普通机纪元 · 总结</div>
+<div class="item">从 X1 到 S5Void-X，共 5 代芯片，每代 500 台，共 <span class="white-highlight">2500 台</span>。</div>
+<div class="item">每一代比上一代多 <span class="white-highlight">$50,000</span>。</div>
+<div class="item">全部搭载<span class="gold-highlight">阉割版风驰内核</span>，系统比 Neo 系列低 3 代。</div>
+<div class="item">创造者原话：<span class="highlight">"爱买不买。"</span></div>
+</div>
+
+</div>
+
+<div class="reveal">
 <div class="section-header"><span class="section-index">CHAPTER 02</span><h2 class="section-title">神㉿ 降临</h2><p class="section-subtitle">终结一切竞赛，开启 Bozi 纪元。</p></div>
-<div class="product-card featured"><div class="card-label">GOD CHIP</div><h3 class="product-name">Bozi® 神㉿</h3><p class="product-tagline">移动端算力的终极符号</p><div class="spec-grid"><div class="spec-item"><div class="k">芯片</div><div class="v gold">Bozi® 神㉿</div></div><div class="spec-item"><div class="k">跑分</div><div class="v gold">∞⁹</div></div></div><p class="desc">这是 Bozi 宇宙的第一颗"神级"芯片。它不再被用于普通机，而是专属于 Neo 系列。它的跑分已经无法用数字衡量——安兔兔显示 ∞⁹，游戏帧率显示 ∞。<span class="white-highlight">"神㉿"这三个字，从此成为移动端算力的终极符号。</span></p></div>
+<div class="product-card featured">
+<div class="card-label">GOD CHIP</div>
+<h3 class="product-name">Bozi® 神㉿</h3>
+<p class="product-tagline">移动端算力的终极符号</p>
+<div class="spec-grid">
+<div class="spec-item"><div class="k">芯片</div><div class="v gold">Bozi® 神㉿</div></div>
+<div class="spec-item"><div class="k">跑分</div><div class="v gold">∞⁹</div></div>
+</div>
+<p class="desc">这是 Bozi 宇宙的第一颗"神级"芯片。它不再被用于普通机，而是专属于 Neo 系列。它的跑分已经无法用数字衡量——安兔兔显示 ∞⁹，游戏帧率显示 ∞。<span class="white-highlight">"神㉿"这三个字，从此成为移动端算力的终极符号。</span></p>
+</div>
 </div>
 
-<div class="reveal" id="era-3">
+<div class="reveal">
 <div class="section-header"><span class="section-index">CHAPTER 03</span><h2 class="section-title">Neo 纪元</h2><p class="section-subtitle">当手机不再被定义为手机。</p></div>
-<div class="product-card"><div class="card-label">NEO 02 · 传说</div><h3 class="product-name">Bozi Neo2</h3><p class="product-tagline">火种</p><div class="spec-grid"><div class="spec-item"><div class="k">芯片</div><div class="v">Bozi® 神㉿</div></div><div class="spec-item"><div class="k">系统</div><div class="v">混沌 6.0</div></div><div class="spec-item"><div class="k">内核</div><div class="v">风驰 6.0☄</div></div><div class="spec-item"><div class="k">安全</div><div class="v">深渊保护</div></div></div><p class="desc"><span class="highlight">混沌系统 6.0</span>——活的，会随着用户的使用习惯自行演化，没有固定 UI。<br><br><span class="highlight">风驰内核 6.0☄</span>——最后一代带有"版本号"的内核，直接读取游戏意图。<br><br><span class="highlight">深渊保护</span>——主动猎食型防御系统，十六层硬件级加密，量子噪声加密引擎，灰烬反制机制。</p><div class="price-bar"><div class="left"><div class="label">PRICE</div><div class="value">$50,000,000</div></div><div class="right"><div class="label">QUANTITY</div><div class="qty">50 台</div></div></div></div>
-<div class="summary-card"><div class="title">⚡ Neo2 九大霸权</div><div class="item"><span class="highlight">性能</span> · ∞⁹ 算力，一千万个游戏同时运行</div><div class="item"><span class="highlight">安全</span> · 深渊保护，FBI 来了也得摇头</div><div class="item"><span class="highlight">影像</span> · Bozi® 星空，一英寸超大底传感器</div><div class="item"><span class="highlight">屏幕</span> · Bozi® 噬光屏，15000 尼特亮度，16K 分辨率</div><div class="item"><span class="highlight">通信</span> · Bozi® 天枢星链，量子纠缠馈源</div><div class="item"><span class="highlight">AI</span> · Bozi® 意识流引擎，0.1 秒前预判需求</div><div class="item"><span class="highlight">耐用性</span> · Bozi® 玄甲外壳，莫氏硬度突破钻石</div><div class="item"><span class="highlight">交互</span> · Bozi® 神经共感，脑电波唯一身份标识</div><div class="item"><span class="highlight">音频/振动</span> · Bozi® 天启声场 + 次元触感</div></div>
-<div class="quotes-wall"><div class="quote-card">你们那些所谓的"游戏手机"，在我眼里，不过是流水线上批量产出的工业残次品。</div><div class="quote-card">它胸膛里跳动的，是 Bozi® 神㉿——这颗芯片不是造出来的，是从未来偷回来的。</div><div class="quote-card">风驰内核一出手，这些东西连出生的机会都没有。</div><div class="quote-card">犹豫一秒，都是对极致性能的侮辱。</div><div class="quote-card">从这一刻起，所有友商的下一款产品，自动沦为廉价替代品。</div></div>
-<div class="era-divider"><div class="line"></div><div class="dot"></div><div class="line"></div></div>
-<div class="product-card"><div class="card-label">NEO 03 · 时代的眼泪</div><h3 class="product-name">Bozi Neo3</h3><p class="product-tagline">利刃</p><div class="spec-grid"><div class="spec-item"><div class="k">芯片</div><div class="v">Bozi® 神☢</div></div><div class="spec-item"><div class="k">系统</div><div class="v">混沌 7.0 定制版</div></div><div class="spec-item"><div class="k">内核</div><div class="v">风驰 6.5￡</div></div><div class="spec-item"><div class="k">安全</div><div class="v">深渊保护 定制版</div></div></div><p class="desc"><span class="highlight">入侵能力</span> · 什么都能入侵，入侵时间最多 4 秒<br><span class="highlight">扫描范围</span> · 10,000,000 公里<br><span class="highlight">扫描方式</span> · 被动接收 + 主动发射，可扫描 99.99% 的设备</p><div class="price-bar"><div class="left"><div class="label">QUANTITY</div><div class="value">5 台</div></div><div class="right"><div class="label">TARGET</div><div class="qty" style="font-size:14px;color:var(--primary-glow);">国家 / 军方</div></div></div></div>
-<div class="summary-card"><div class="title">🕯️ 结局</div><div class="item">国家拒收 Neo3，因为太危险，要求销毁。</div><div class="item" style="margin-top:12px;"><span class="white-highlight">"Neo3 已成为时代的眼泪。"</span></div><div class="item">创造者原话：<span class="highlight">"这，就是我要筛选的原因。"</span></div></div>
-<div class="era-divider"><div class="line"></div><div class="dot"></div><div class="line"></div></div>
-<div class="product-card"><div class="card-label">NEO 04 · 终极手机</div><h3 class="product-name">Bozi Neo4</h3><p class="product-tagline">钥匙</p><div class="spec-grid"><div class="spec-item"><div class="k">芯片</div><div class="v">Bozi® 神☢</div></div><div class="spec-item"><div class="k">系统</div><div class="v">混沌 7.0</div></div><div class="spec-item"><div class="k">内核</div><div class="v">风驰 7.0❆</div></div><div class="spec-item"><div class="k">安全</div><div class="v">深渊保护 2.0</div></div></div><p class="desc"><span class="highlight">核心服务</span> · 专属电话号码，拨通后把你的需求告诉对方。私人保镖、包场豪华餐厅、全球资源与人力调度。<br><br><span class="highlight">验证方式</span> · 所有生物数据配对成功电话才会被接通，否则提示空号。</p><div class="price-bar"><div class="left"><div class="label">PRICE</div><div class="value">$2,000,000,000</div></div><div class="right"><div class="label">QUANTITY</div><div class="qty">15 台</div></div></div></div>
-<div class="quotes-wall"><div class="quote-card">这台手机，只发售 15 台，售价的话，20 亿，爱买不买，买不起就滚。</div></div>
+
+<div class="product-card">
+<div class="card-label">NEO 02 · 传说</div>
+<h3 class="product-name">Bozi Neo2</h3>
+<p class="product-tagline">火种</p>
+<div class="spec-grid">
+<div class="spec-item"><div class="k">芯片</div><div class="v">Bozi® 神㉿</div></div>
+<div class="spec-item"><div class="k">系统</div><div class="v">混沌 6.0</div></div>
+<div class="spec-item"><div class="k">内核</div><div class="v">风驰 6.0☄</div></div>
+<div class="spec-item"><div class="k">安全</div><div class="v">深渊保护</div></div>
+</div>
+<p class="desc"><span class="highlight">混沌系统 6.0</span>——活的，会随着用户的使用习惯自行演化，没有固定 UI。<br><br><span class="highlight">风驰内核 6.0☄</span>——最后一代带有"版本号"的内核，直接读取游戏意图。<br><br><span class="highlight">深渊保护</span>——主动猎食型防御系统，十六层硬件级加密，量子噪声加密引擎，灰烬反制机制。</p>
+<div class="price-bar"><div class="left"><div class="label">PRICE</div><div class="value">$50,000,000</div></div><div class="right"><div class="label">QUANTITY</div><div class="qty">50 台</div></div></div>
 </div>
 
-<div class="reveal" id="era-4">
+<div class="summary-card">
+<div class="title">⚡ Neo2 九大霸权</div>
+<div class="item"><span class="highlight">性能</span> · ∞⁹ 算力，一千万个游戏同时运行</div>
+<div class="item"><span class="highlight">安全</span> · 深渊保护，FBI 来了也得摇头</div>
+<div class="item"><span class="highlight">影像</span> · Bozi® 星空，一英寸超大底传感器</div>
+<div class="item"><span class="highlight">屏幕</span> · Bozi® 噬光屏，15000 尼特亮度，16K 分辨率</div>
+<div class="item"><span class="highlight">通信</span> · Bozi® 天枢星链，量子纠缠馈源</div>
+<div class="item"><span class="highlight">AI</span> · Bozi® 意识流引擎，0.1 秒前预判需求</div>
+<div class="item"><span class="highlight">耐用性</span> · Bozi® 玄甲外壳，莫氏硬度突破钻石</div>
+<div class="item"><span class="highlight">交互</span> · Bozi® 神经共感，脑电波唯一身份标识</div>
+<div class="item"><span class="highlight">音频/振动</span> · Bozi® 天启声场 + 次元触感</div>
+</div>
+
+<div class="quotes-wall">
+<div class="quote-card">你们那些所谓的"游戏手机"，在我眼里，不过是流水线上批量产出的工业残次品。</div>
+<div class="quote-card">它胸膛里跳动的，是 Bozi® 神㉿——这颗芯片不是造出来的，是从未来偷回来的。</div>
+<div class="quote-card">风驰内核一出手，这些东西连出生的机会都没有。</div>
+<div class="quote-card">犹豫一秒，都是对极致性能的侮辱。</div>
+<div class="quote-card">从这一刻起，所有友商的下一款产品，自动沦为廉价替代品。</div>
+</div>
+
+<div class="era-divider"><div class="line"></div><div class="dot"></div><div class="line"></div></div>
+
+<div class="product-card">
+<div class="card-label">NEO 03 · 时代的眼泪</div>
+<h3 class="product-name">Bozi Neo3</h3>
+<p class="product-tagline">利刃</p>
+<div class="spec-grid">
+<div class="spec-item"><div class="k">芯片</div><div class="v">Bozi® 神☢</div></div>
+<div class="spec-item"><div class="k">系统</div><div class="v">混沌 7.0 定制版</div></div>
+<div class="spec-item"><div class="k">内核</div><div class="v">风驰 6.5￡</div></div>
+<div class="spec-item"><div class="k">安全</div><div class="v">深渊保护 定制版</div></div>
+</div>
+<p class="desc"><span class="highlight">入侵能力</span> · 什么都能入侵，入侵时间最多 4 秒<br><span class="highlight">扫描范围</span> · 10,000,000 公里<br><span class="highlight">扫描方式</span> · 被动接收 + 主动发射，可扫描 99.99% 的设备</p>
+<div class="price-bar"><div class="left"><div class="label">QUANTITY</div><div class="value">5 台</div></div><div class="right"><div class="label">TARGET</div><div class="qty" style="font-size:14px;color:var(--primary-glow);">国家 / 军方</div></div></div>
+</div>
+
+<div class="summary-card">
+<div class="title">🕯️ 结局</div>
+<div class="item">国家拒收 Neo3，因为太危险，要求销毁。</div>
+<div class="item" style="margin-top:12px;"><span class="white-highlight">"Neo3 已成为时代的眼泪。"</span></div>
+<div class="item">创造者原话：<span class="highlight">"这，就是我要筛选的原因。"</span></div>
+</div>
+
+<div class="era-divider"><div class="line"></div><div class="dot"></div><div class="line"></div></div>
+
+<div class="product-card">
+<div class="card-label">NEO 04 · 终极手机</div>
+<h3 class="product-name">Bozi Neo4</h3>
+<p class="product-tagline">钥匙</p>
+<div class="spec-grid">
+<div class="spec-item"><div class="k">芯片</div><div class="v">Bozi® 神☢</div></div>
+<div class="spec-item"><div class="k">系统</div><div class="v">混沌 7.0</div></div>
+<div class="spec-item"><div class="k">内核</div><div class="v">风驰 7.0❆</div></div>
+<div class="spec-item"><div class="k">安全</div><div class="v">深渊保护 2.0</div></div>
+</div>
+<p class="desc"><span class="highlight">核心服务</span> · 专属电话号码，拨通后把你的需求告诉对方。私人保镖、包场豪华餐厅、全球资源与人力调度。<br><br><span class="highlight">验证方式</span> · 所有生物数据配对成功电话才会被接通，否则提示空号。</p>
+<div class="price-bar"><div class="left"><div class="label">PRICE</div><div class="value">$2,000,000,000</div></div><div class="right"><div class="label">QUANTITY</div><div class="qty">15 台</div></div></div>
+</div>
+
+<div class="quotes-wall">
+<div class="quote-card">这台手机，只发售 15 台，售价的话，20 亿，爱买不买，买不起就滚。</div>
+</div>
+
+</div>
+
+<div class="reveal">
 <div class="section-header"><span class="section-index">CHAPTER 04</span><h2 class="section-title">超越手机</h2><p class="section-subtitle">Neo5 不再是一部手机。它是一块手表。</p></div>
-<div class="product-card featured"><div class="card-label">NEO 05 · 呼吸</div><h3 class="product-name">Bozi Neo5</h3><p class="product-tagline">手腕上的另一个维度</p><div class="spec-grid"><div class="spec-item"><div class="k">芯片</div><div class="v gold">Bozi® 神☢</div></div><div class="spec-item"><div class="k">系统</div><div class="v gold">混沌 8.0</div></div><div class="spec-item"><div class="k">内核</div><div class="v gold">风驰 8.0❆</div></div><div class="spec-item"><div class="k">安全</div><div class="v gold">深渊保护 3.0</div></div></div><p class="desc"><span class="white-highlight">全息光场屏</span> · 在空气中直接构建出可触摸的、有深度的立体画面。分辨率 128K 恒定，刷新率原生 2560Hz。<br><br><span class="white-highlight">深渊保护 3.0</span> · 1.0 是猎杀，2.0 是净化，3.0 是消失。</p><div class="spec-grid"><div class="spec-item"><div class="k">防水</div><div class="v gold">1000m</div></div><div class="spec-item"><div class="k">耐温</div><div class="v gold">-50~150℃</div></div><div class="spec-item"><div class="k">续航</div><div class="v gold">1 年</div></div><div class="spec-item"><div class="k">佩戴</div><div class="v gold">无感</div></div></div></div>
-<div class="timeline"><div class="timeline-item"><span class="era">NEO 02</span><span class="phrase">是火种</span></div><div class="timeline-item"><span class="era">NEO 03</span><span class="phrase">是利刃</span></div><div class="timeline-item"><span class="era">NEO 04</span><span class="phrase">是钥匙</span></div><div class="timeline-item"><span class="era">NEO 05</span><span class="phrase">是呼吸</span></div></div>
+
+<div class="product-card featured">
+<div class="card-label">NEO 05 · 呼吸</div>
+<h3 class="product-name">Bozi Neo5</h3>
+<p class="product-tagline">手腕上的另一个维度</p>
+<div class="spec-grid">
+<div class="spec-item"><div class="k">芯片</div><div class="v gold">Bozi® 神☢</div></div>
+<div class="spec-item"><div class="k">系统</div><div class="v gold">混沌 8.0</div></div>
+<div class="spec-item"><div class="k">内核</div><div class="v gold">风驰 8.0❆</div></div>
+<div class="spec-item"><div class="k">安全</div><div class="v gold">深渊保护 3.0</div></div>
+</div>
+<p class="desc"><span class="white-highlight">全息光场屏</span> · 在空气中直接构建出可触摸的、有深度的立体画面。分辨率 128K 恒定，刷新率原生 2560Hz。<br><br><span class="white-highlight">深渊保护 3.0</span> · 1.0 是猎杀，2.0 是净化，3.0 是消失。</p>
+<div class="spec-grid">
+<div class="spec-item"><div class="k">防水</div><div class="v gold">1000m</div></div>
+<div class="spec-item"><div class="k">耐温</div><div class="v gold">-50~150℃</div></div>
+<div class="spec-item"><div class="k">续航</div><div class="v gold">1 年</div></div>
+<div class="spec-item"><div class="k">佩戴</div><div class="v gold">无感</div></div>
+</div>
 </div>
 
-<div class="reveal" id="chronology">
+<div class="timeline">
+<div class="timeline-item"><span class="era">NEO 02</span><span class="phrase">是火种</span></div>
+<div class="timeline-item"><span class="era">NEO 03</span><span class="phrase">是利刃</span></div>
+<div class="timeline-item"><span class="era">NEO 04</span><span class="phrase">是钥匙</span></div>
+<div class="timeline-item"><span class="era">NEO 05</span><span class="phrase">是呼吸</span></div>
+</div>
+
+</div>
+
+<div class="reveal">
 <div class="section-header"><span class="section-index">CHRONOLOGY</span><h2 class="section-title">全系编年史</h2><p class="section-subtitle">横向滑动查看每一代 →</p></div>
 <div class="table-scroll">
 <div class="table-card"><div class="tc-gen">GEN 01</div><div class="tc-name">Bozi X1</div><div class="tc-row"><span class="k">跑分</span><span class="v purple">7618万</span></div><div class="tc-row"><span class="k">价格</span><span class="v purple">5万$</span></div><div class="tc-row"><span class="k">定位</span><span class="v">低端机</span></div></div>
@@ -411,26 +773,33 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 </div>
 </div>
 
-<div class="reveal" id="philosophy">
+<div class="reveal">
 <div class="section-header"><span class="section-index">EPILOGUE</span><h2 class="section-title">Bozi 宇宙的哲学</h2></div>
 <div class="text-body"><p>从一颗散装骁龙 865，到一块戴在手腕上的全息手表。</p><p>从"我只是做系统的"，到 <span class="highlight">"All chips bow to Bozi."</span></p><p>从"爱买不买"，到<span class="white-highlight">"买不起就滚"</span>。</p><p>从"低端机"，到<span class="white-highlight">"时代的眼泪"</span>。</p><p>Bozi 宇宙的每一代产品，都在重新定义"可能"的边界。而它的创造者始终只说一句话：</p></div>
 <div class="quote">我只看最终成绩。<span class="by">— Bozi 创始人</span></div>
 </div>
 
-<div class="footer"><div class="logo">BOZI®</div><div>从一颗散装芯片，到手腕上的另一个维度</div><div class="slogan">Peak performance runs on Bozi.<br>All chips bow to Bozi.</div><div class="emoji">🌌 ⌚ 📱 🔥</div><div class="copy">© BOZI® · ALL RIGHTS RESERVED</div></div>
+<div class="footer">
+<div class="logo">BOZI®</div>
+<div>从一颗散装芯片，到手腕上的另一个维度</div>
+<div class="slogan">Peak performance runs on Bozi.<br>All chips bow to Bozi.</div>
+<div class="emoji">🌌 ⌚ 📱 🔥</div>
+<div class="copy">© BOZI® · ALL RIGHTS RESERVED</div>
+</div>
 
 </div>
 
+<!-- ==================== 购买页 ==================== -->
 <div class="page" id="page-buy">
 
 <div class="page-title">
 <h1>立即购买</h1>
-<p class="sub">Bozi 全系设备 · 全球限量发售中</p>
+<p class="sub">Bozi Neo6 · 量产发售 · 不会缺货</p>
 <div class="live-badge">当前 12,847 人正在浏览</div>
 </div>
 
 <div class="device-picker">
-<div class="picker-label">选择设备</div>
+<div class="picker-label">选择版本</div>
 <div class="device-scroll" id="deviceScroll"></div>
 </div>
 
@@ -439,28 +808,17 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <div class="buy-card">
 <div class="buy-header">
 <div class="info">
-<div class="name" id="productName">Bozi Neo5</div>
-<div class="stock">库存紧张 · 当前 <span id="stockNum">3</span> 台可购</div>
+<div class="name" id="productName">Bozi Neo6</div>
+<div class="stock">现货 · 当前 <span id="stockNum">9999</span> 台可购</div>
 </div>
-<div class="badge-stock" id="productBadge">限量</div>
+<div class="badge-stock" id="productBadge">量产</div>
 </div>
 
 <div class="spec-full" id="specFull"></div>
 
-<div class="buy-options">
-<div class="option-row">
-<div class="label">数量</div>
-<div class="qty-control">
-<button class="qty-btn" id="qtyMinus">−</button>
-<div class="qty-num" id="qtyNum">1</div>
-<button class="qty-btn" id="qtyPlus">+</button>
-</div>
-</div>
-</div>
-
 <div class="total-bar">
 <div class="label">应付总额</div>
-<div class="amount" id="totalPrice">¥ 2,400,000,000</div>
+<div class="amount" id="totalPrice">￥4299</div>
 </div>
 
 <button class="buy-btn" id="buyBtn">
@@ -470,17 +828,17 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 
 <div class="buy-note">
 支付即表示同意《Bozi 用户协议》<br>
-下单后 3 日内本人到场办理 · 生物数据绑定
+量产发售 · 支持二次售卖 · 无身份绑定
 </div>
 </div>
 </div>
 
 <div class="trust-card" id="trustCard">
 <div class="title">🛡️ 官方保障</div>
-<div class="row"><span class="k">发货方式</span><span class="v">专属专人送达</span></div>
-<div class="row"><span class="k">售后</span><span class="v">Bozi® 不朽契约</span></div>
-<div class="row"><span class="k">绑定</span><span class="v">生物数据唯一配对</span></div>
-<div class="row"><span class="k">保修</span><span class="v">首年全免 · 次年成本价</span></div>
+<div class="row"><span class="k">发货方式</span><span class="v">顺丰包邮</span></div>
+<div class="row"><span class="k">售后</span><span class="v">全国联保</span></div>
+<div class="row"><span class="k">退换</span><span class="v">7 天无理由</span></div>
+<div class="row"><span class="k">保修</span><span class="v">首年整机保修</span></div>
 </div>
 
 <div class="slogan-strip">
@@ -492,6 +850,9 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 
 </div>
 
+</div>
+
+<!-- ==================== 购买弹窗 ==================== -->
 <div class="modal-overlay" id="modalOverlay"></div>
 <div class="modal-wrapper" id="modalWrapper">
 <div class="buy-modal">
@@ -511,12 +872,11 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <h3 class="panel-title">确认订单</h3>
 <p class="panel-sub">请核对以下订单信息，确认无误后继续。</p>
 <div class="summary-block">
-<div class="row"><span class="k">设备</span><span class="v" id="sumDevice">Bozi Neo5</span></div>
-<div class="row"><span class="k">芯片</span><span class="v" id="sumChip">Bozi® 神☢</span></div>
-<div class="row"><span class="k">系统</span><span class="v" id="sumSystem">混沌系统 8.0</span></div>
-<div class="row"><span class="k">单价</span><span class="v" id="sumUnit">¥ 2,400,000,000</span></div>
-<div class="row"><span class="k">数量</span><span class="v" id="sumQty">1</span></div>
-<div class="row total"><span class="k">应付总额</span><span class="v" id="sumTotal">¥ 2,400,000,000</span></div>
+<div class="row"><span class="k">设备</span><span class="v" id="sumDevice">Bozi Neo6</span></div>
+<div class="row"><span class="k">版本</span><span class="v" id="sumChip">12GB + 256GB</span></div>
+<div class="row"><span class="k">芯片</span><span class="v" id="sumSystem">第5代骁龙8至尊</span></div>
+<div class="row"><span class="k">单价</span><span class="v" id="sumUnit">￥4299</span></div>
+<div class="row total"><span class="k">应付总额</span><span class="v" id="sumTotal">￥4299</span></div>
 </div>
 </div>
 
@@ -551,32 +911,32 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <h3 class="panel-title">服务协议与免责声明</h3>
 <p class="panel-sub">请仔细阅读以下条款，滑动至底部后方可确认。</p>
 <div class="agreement-box" id="agreementBox">
-<h4>一、生物数据绑定条款</h4>
-<p>您知悉并同意，Bozi® 全系 Neo 设备在首次激活时，将采集您的<span class="em">腕部脉搏频率、皮肤微电流、肌肉记忆曲线</span>，用于生成唯一的生物身份标识。该标识与设备进行单向绑定，绑定成功后<span class="warn">不可转让、不可解除、不可修改</span>。设备一旦脱离绑定者腕部超过 120 秒，全息光场屏将自动关闭并进入休眠状态。</p>
+<h4>一、产品与销售条款</h4>
+<p>Bozi Neo6 为<span class="em">量产机型</span>，不限制购买数量，不支持身份绑定，<span class="em">支持二次售卖</span>。本产品无生物数据绑定、无芯片自毁机制，与 Neo 系列神级设备存在本质区别。</p>
 
-<h4>二、全息光场屏使用条款</h4>
-<p>私密模式下，全息画面仅对绑定者本人可见，不对环境产生任何物理投影。您在使用公开模式时，应确保投射区域<span class="em">不涉及他人隐私、不违反当地法律法规、不影响公共秩序</span>。Bozi® 不对您在公开模式下展示的内容承担任何法律责任。</p>
+<h4>二、性能与跑分说明</h4>
+<p>Bozi Neo6 搭载第5代骁龙8至尊，安兔兔跑分约 <span class="em">4,784,383</span>。此数据为实验室环境下的实测值，实际使用中可能因环境温度、系统负载、后台应用等因素产生波动，属正常现象。</p>
 
-<h4>三、神☢芯片不可测量性说明</h4>
-<p>Bozi® 神☢ 芯片的算力不以常规跑分衡量。任何第三方性能测试软件对本设备的结果，均可能显示为<span class="em">∞、∞⁹ 或直接崩溃</span>，此为芯片设计特性，不构成设备故障。您不得以"跑分异常"为由申请退换。</p>
+<h4>三、系统与 AI 条款</h4>
+<p>boziOS 与 boziAI 为<span class="em">常规操作系统与 AI 助手</span>，不包含自我演化、意识流预判等特殊能力。用户在使用 boziAI 过程中产生的数据，将按照相关隐私政策处理，Bozi® 不会越界采集个人信息。</p>
 
-<h4>四、混沌系统自演化条款</h4>
-<p>混沌系统 8.0 为自演化操作系统，将在您使用过程中<span class="em">持续调整 UI、交互逻辑与预测模型</span>。系统演化结果因人而异，您可能发现界面布局、图标位置、通知方式与出厂状态存在差异，此为正常现象。Bozi® 不提供"系统重置为出厂状态"服务。</p>
+<h4>四、影像与拍摄条款</h4>
+<p>Neo6 搭载 5000万像素 3.5 倍潜望长焦与 LUMO 凝光影像系统。用户使用「大师模式」及 4K 120帧 杜比视界录制时，请确保<span class="em">不侵犯他人肖像权、不违反当地法律法规</span>。</p>
 
-<h4>五、深渊保护免责声明</h4>
-<p>深渊保护 3.0 采用混沌场加密，您的所有数据、隐私与数字身份将被压缩为只有本设备可解读的形态。若您遗忘生物密钥、自行拆解设备或遭遇不可抗力的物理损坏，导致数据无法恢复，<span class="warn">Bozi® 不承担数据恢复责任</span>。</p>
+<h4>五、防护等级说明</h4>
+<p>Neo6 支持 IP66 / IP68 / IP69 / IP69K 防尘防水。防水性能为实验室条件下测得，<span class="warn">不构成永久防护</span>。日常使用中请避免长时间浸泡、高温高压冲洗等可能造成损坏的行为。因人为使用不当造成的进水损坏，不在保修范围内。</p>
 
-<h4>六、库存、排队与交付条款</h4>
-<p>Bozi® 全系设备均为限量发售，实际库存以系统实时显示为准。购买过程中可能因<span class="em">并发请求、身份校验、库存锁定</span>等环节导致排队或失败，Bozi® 不因此承担赔偿责任。订单成功后，需在 <span class="em">3 日内本人到场办理</span>，签署纸质文件并完成生物数据绑定，逾期视为自动放弃。</p>
+<h4>六、电池与散热条款</h4>
+<p>8000mAh 冰川电池为<span class="em">常规锂离子电池</span>，需正常充电、正常散热。不建议长时间高强度使用，不建议在高温或低温环境下充电。电池为消耗品，容量衰减属正常现象。</p>
 
-<h4>七、不可撤销与不可退换条款</h4>
-<p>由于每台设备均与购买者进行<span class="warn">唯一生物绑定</span>，订单在身份验证通过后即不可撤销。设备一经激活，不支持七天无理由退货、不支持转让、不支持二次销售。任何试图绕过生物绑定进行转售的行为，将触发芯片自毁机制。</p>
+<h4>七、退换货政策</h4>
+<p>Bozi Neo6 支持 <span class="em">7 天无理由退换货</span>。退货时请确保商品、包装、配件、赠品完好，不影响二次销售。人为损坏、进水、私自拆机等情形，不在退换货范围内。</p>
 
-<h4>八、跨境与出口管制条款</h4>
-<p>Bozi® 设备含高阶加密技术，可能受购买者所在地出口管制法规约束。您承诺不将设备用于<span class="em">任何违反当地法律、危害公共安全、侵犯他人权益</span>的用途。因违规使用产生的一切后果由购买者自行承担。</p>
+<h4>八、二次售卖说明</h4>
+<p>Neo6 不绑定生物数据，<span class="em">用户有权将设备转让、出售、赠与他人</span>。转让后，Bozi® 保修服务随设备转移，以设备序列号为准，不因用户变更而失效。</p>
 
 <h4>九、不可抗力与免责</h4>
-<p>因自然灾害、战争、政策调整、卫星链路中断、量子通道扰动等不可抗力因素，导致服务延迟或中断的，Bozi® <span class="em">不承担违约责任</span>，但将在合理范围内协助恢复。</p>
+<p>因自然灾害、战争、政策调整、物流中断等不可抗力因素，导致发货延迟或服务中断的，Bozi® <span class="em">不承担违约责任</span>，但将在合理范围内协助恢复。</p>
 
 <h4>十、协议接受</h4>
 <p>您继续操作即视为已阅读、理解并同意上述全部条款。本协议最终解释权归 Bozi® 所有。</p>
@@ -588,17 +948,17 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 
 <div class="step-panel" id="panel4">
 <div class="verify-box">
-<div class="verify-ring"><div class="face">👤</div></div>
-<div class="verify-text" id="verifyText">正在验证身份</div>
-<div class="verify-sub" id="verifySub">正在比对腕部脉搏频率、皮肤微电流、肌肉记忆...</div>
+<div class="verify-ring"><div class="face">📦</div></div>
+<div class="verify-text" id="verifyText">正在确认库存</div>
+<div class="verify-sub" id="verifySub">正在为你的订单锁定现货...</div>
 <div class="verify-bar-wrap"><div class="bar" id="verifyBar"></div></div>
 </div>
 </div>
 
 <div class="step-panel" id="panel5">
 <div class="result-box">
-<div class="result-icon fail"></div>
-<div class="result-title" id="resultTitle">购买失败</div>
+<div class="result-icon success"></div>
+<div class="result-title" id="resultTitle">购买成功</div>
 <div class="result-desc" id="resultDesc"></div>
 <div class="result-code" id="resultCode"></div>
 </div>
@@ -609,7 +969,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <div class="modal-footer">
 <button class="modal-btn" id="modalNextBtn">确认并继续</button>
 <button class="modal-btn secondary" id="modalBackBtn" style="display:none;margin-top:8px;">返回上一步</button>
-<button class="modal-btn" id="modalCloseBtn" style="display:none;">返回重试</button>
+<button class="modal-btn" id="modalCloseBtn" style="display:none;">完成</button>
 </div>
 
 </div>
@@ -619,236 +979,65 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 (function(){
 try {
 
-var devices = [
-{id:'neo5', name:'Bozi Neo5', label:'NEO5', tag:'限量', price:2400000000, currency:'¥', stock:10, locked:false, hasTrust:true,
-specs:[
-{k:'芯片', v:'Bozi® 神☢', cls:'gold'},
-{k:'系统', v:'混沌系统 8.0', cls:'gold'},
-{k:'内核', v:'博子风驰游戏内核 8.0❆', cls:'gold'},
-{k:'安全', v:'Bozi® 深渊保护 3.0', cls:'gold'},
-{k:'形态', v:'手表 · 全息光场屏'},
-{k:'屏幕', v:'128K 恒定 · 原生 2560Hz'},
-{k:'防水', v:'1000m 深海级耐压'},
-{k:'耐温', v:'-50℃ 至 150℃'},
-{k:'续航', v:'量子电池 · 1 年'},
-{k:'材质', v:'液态金属与陶瓷复合'},
-{k:'定位', v:'超越手机', cls:'gold'}
-]},
-{id:'neo4', name:'Bozi Neo4', label:'NEO4', tag:'终极', price:2000000000, currency:'$', stock:15, locked:false, hasTrust:true,
-specs:[
-{k:'芯片', v:'Bozi® 神☢', cls:'gold'},
-{k:'系统', v:'混沌系统 7.0'},
-{k:'内核', v:'博子风驰游戏内核 7.0❆'},
-{k:'安全', v:'Bozi® 深渊保护 2.0'},
-{k:'跑分', v:'虚无 · 与宇宙共存', cls:'purple'},
-{k:'服务', v:'专属电话 · 全球资源调度'},
-{k:'验证', v:'全生物数据配对'},
-{k:'定位', v:'手机形态的终极形态'}
-]},
-{id:'neo3', name:'Bozi Neo3', label:'NEO3', tag:'机密', price:null, currency:'', stock:5, locked:true, hasTrust:true,
-specs:[
-{k:'芯片', v:'Bozi® 神☢', cls:'gold'},
-{k:'系统', v:'混沌系统 7.0 定制版'},
-{k:'内核', v:'博子风驰游戏内核 6.5￡'},
-{k:'安全', v:'Bozi® 深渊保护 定制版'},
-{k:'入侵能力', v:'任何设备 · 最多 4 秒'},
-{k:'扫描范围', v:'10,000,000 公里'},
-{k:'扫描方式', v:'被动接收 + 主动发射'},
-{k:'可扫描', v:'99.99% 的设备'},
-{k:'交付对象', v:'国家 / 军方', cls:'purple'},
-{k:'定位', v:'时代的眼泪'}
-]},
-{id:'neo2', name:'Bozi Neo2', label:'NEO2', tag:'传说', price:50000000, currency:'$', stock:50, locked:false, hasTrust:true,
-specs:[
-{k:'芯片', v:'Bozi® 神㉿', cls:'gold'},
-{k:'系统', v:'混沌系统 6.0'},
-{k:'内核', v:'博子风驰游戏内核 6.0☄'},
-{k:'安全', v:'Bozi® 深渊保护'},
-{k:'跑分', v:'∞⁹', cls:'gold'},
-{k:'影像', v:'Bozi® 星空 · 一英寸超大底'},
-{k:'屏幕', v:'Bozi® 噬光屏 · 15000 尼特'},
-{k:'通信', v:'Bozi® 天枢星链'},
-{k:'交互', v:'Bozi® 神经共感'},
-{k:'定位', v:'传说'}
-]},
-{id:'s5', name:'Bozi S5Void-X VantaΩ UltraPromax', label:'S5Void-X', tag:'中低端', price:250000, currency:'$', stock:500, locked:false, hasTrust:false,
-specs:[
-{k:'芯片', v:'Bozi S5Void-X VantaΩ UltraPromax'},
-{k:'内核', v:'博子风驰游戏内核 5.0 VantaΩ'},
-{k:'裸跑', v:'9437 亿'},
-{k:'优化后', v:'75484 亿', cls:'purple'},
-{k:'跑分', v:'∞⁹'},
-{k:'游戏', v:'每个游戏 200fps'},
-{k:'定位', v:'中低端'}
-]},
-{id:'x4', name:'Bozi X4ΩUltraPromax', label:'X4Ω', tag:'中端机', price:200000, currency:'$', stock:500, locked:false, hasTrust:false,
-specs:[
-{k:'芯片', v:'Bozi X4ΩUltraPromax'},
-{k:'内核', v:'博子风驰游戏内核 4.0Ω'},
-{k:'裸跑', v:'113.49 亿'},
-{k:'优化后', v:'217.62 亿', cls:'purple'},
-{k:'游戏', v:'一千万个游戏 6867fps'},
-{k:'定位', v:'中端机'}
-]},
-{id:'x3', name:'Bozi X3 Ultra', label:'X3 Ultra', tag:'中低端', price:150000, currency:'$', stock:500, locked:false, hasTrust:false,
-specs:[
-{k:'芯片', v:'Bozi X3 Ultra'},
-{k:'内核', v:'博子风驰游戏内核 3.0 Pro'},
-{k:'裸跑', v:'2.7 亿'},
-{k:'优化后', v:'6.8 亿', cls:'purple'},
-{k:'游戏', v:'10 万个游戏 200fps'},
-{k:'定位', v:'中低端'}
-]},
-{id:'x2', name:'Bozi X2', label:'X2', tag:'中低端', price:100000, currency:'$', stock:500, locked:false, hasTrust:false,
-specs:[
-{k:'芯片', v:'Bozi X2'},
-{k:'内核', v:'博子风驰游戏内核 2.0'},
-{k:'裸跑', v:'8422 万'},
-{k:'优化后', v:'1.4 亿', cls:'purple'},
-{k:'定位', v:'中低端'}
-]},
-{id:'x1', name:'Bozi X1', label:'X1', tag:'低端机', price:50000, currency:'$', stock:500, locked:false, hasTrust:false,
-specs:[
-{k:'芯片', v:'Bozi X1'},
-{k:'内核', v:'博子风驰游戏内核 4.0（阉割版）'},
-{k:'裸跑', v:'3498 万'},
-{k:'优化后', v:'7618 万', cls:'purple'},
-{k:'对比', v:'打平未优化骁龙 8E5'},
-{k:'定位', v:'低端机'}
-]}
-];
-
-var payMethods = {
-wechat: '微信支付',
-alipay: '支付宝',
-card: '银行卡',
-balance: 'Bozi 余额'
-};
-var currentPay = 'wechat';
-var agreementRead = false;
-
-var currentDevice = devices[0];
-var qty = 1;
-
-var deviceScroll = document.getElementById('deviceScroll');
-devices.forEach(function(d, i){
-var btn = document.createElement('button');
-btn.className = 'device-chip' + (i === 0 ? ' active' : '');
-btn.setAttribute('data-id', d.id);
-btn.innerHTML = d.label + '<span class="chip-sub">' + d.tag + '</span>';
-btn.addEventListener('click', function(){selectDevice(d.id);});
-deviceScroll.appendChild(btn);
-});
-
-function selectDevice(id){
-var d = devices.find(function(x){return x.id === id;});
-if(!d || (currentDevice && d.id === currentDevice.id)) return;
-currentDevice = d;
-qty = 1;
-document.querySelectorAll('.device-chip').forEach(function(c){
-c.classList.toggle('active', c.getAttribute('data-id') === id);
-});
-var panel = document.getElementById('devicePanel');
-panel.classList.add('switching');
-setTimeout(function(){
-document.getElementById('productName').textContent = d.name;
-document.getElementById('productBadge').textContent = d.tag;
-document.getElementById('stockNum').textContent = d.stock;
-document.getElementById('qtyNum').textContent = qty;
-var specHtml = '';
-d.specs.forEach(function(s){
-specHtml += '<div class="spec-line"><span class="k">' + s.k + '</span><span class="v ' + (s.cls || '') + '">' + s.v + '</span></div>';
-});
-document.getElementById('specFull').innerHTML = specHtml;
-var trustCard = document.getElementById('trustCard');
-if(d.hasTrust){trustCard.classList.remove('hidden');}
-else{trustCard.classList.add('hidden');}
-updateTotal();
-var btn = document.getElementById('buyBtn');
-if(d.locked){
-btn.classList.add('locked');
-btn.innerHTML = '申请特殊渠道';
-}else{
-btn.classList.remove('locked');
-btn.innerHTML = '<span class="btn-shine"></span>立即购买';
-}
-panel.classList.remove('switching');
-}, 180);
-}
-
-function formatPrice(device, q){
-if(device.price === null) return '面议';
-var total = device.price * q;
-if(device.currency === '¥') return '¥ ' + total.toLocaleString('zh-CN');
-return '$ ' + total.toLocaleString('en-US');
-}
-
-function updateTotal(){
-var d = currentDevice;
-var amt = document.getElementById('totalPrice');
-amt.textContent = formatPrice(d, qty);
-document.getElementById('qtyNum').textContent = qty;
-}
-
-document.getElementById('qtyPlus').addEventListener('click', function(){if(qty < 5){qty++; updateTotal();}});
-document.getElementById('qtyMinus').addEventListener('click', function(){if(qty > 1){qty--; updateTotal();}});
-
-var navIntro = document.getElementById('navIntro');
-var navBuy = document.getElementById('navBuy');
-var pageIntro = document.getElementById('page-intro');
-var pageBuy = document.getElementById('page-buy');
-var sectionNav = document.getElementById('sectionNav');
+// ==================== 视图切换 ====================
+var viewHome = document.getElementById('page-home');
+var viewNeo6 = document.getElementById('page-neo6');
+var viewIntro = document.getElementById('page-intro');
+var viewBuy = document.getElementById('page-buy');
+var brandBtn = document.getElementById('brandBtn');
+var navHistory = document.getElementById('navHistory');
 var backToTop = document.getElementById('backToTop');
 
-function showPage(page){
-var currentPage = document.querySelector('.page.active');
-var targetPage = (page === 'intro') ? pageIntro : pageBuy;
-if(currentPage === targetPage) return;
-currentPage.classList.add('fading-out');
-currentPage.classList.remove('active');
+function showView(id){
+var current = document.querySelector('.page.active');
+var target = document.getElementById(id);
+if(!current || current === target) return;
+current.classList.add('fading-out');
+current.classList.remove('active');
 setTimeout(function(){
-currentPage.classList.remove('fading-out');
-targetPage.classList.add('active');
+current.classList.remove('fading-out');
+target.classList.add('active');
 window.scrollTo({top:0, behavior:'auto'});
+updateBackToTop();
+setTimeout(triggerReveal, 60);
 }, 300);
-if(page === 'intro'){
-navIntro.classList.add('active');
-navIntro.classList.remove('gold');
-navBuy.classList.remove('active','gold');
-sectionNav.style.display = 'flex';
-backToTop.style.display = 'flex';
-}else{
-navBuy.classList.add('active','gold');
-navIntro.classList.remove('active','gold');
-sectionNav.style.display = 'none';
-backToTop.style.display = 'none';
 }
-}
-navIntro.addEventListener('click', function(){showPage('intro');});
-navBuy.addEventListener('click', function(){showPage('buy');});
 
-// ============ 单向滚动动画：播放一次就永久保持可见 ============
-// 元素进入视口时加 .show，离开视口时不做任何事 —— 这样无论向上还是向下滑，都不会抽搐
+function updateBackToTop(){
+var onHome = viewHome.classList.contains('active');
+var backBtn = document.getElementById('backBtn');
+if(onHome){backToTop.style.display = 'none';backBtn.classList.remove('show');}
+else{backToTop.style.display = 'flex';backBtn.classList.add('show');}
+}
+updateBackToTop();
+
+document.getElementById('backBtn').addEventListener('click', function(){showView('page-home');});
+brandBtn.addEventListener('click', function(){showView('page-home');});
+navHistory.addEventListener('click', function(){
+if(viewIntro.classList.contains('active')){showView('page-home');}
+else{showView('page-intro');}
+});
+
+document.getElementById('homeBuyBtn').addEventListener('click', function(){showView('page-buy');});
+document.getElementById('homeMoreBtn').addEventListener('click', function(){showView('page-neo6');});
+
+// ==================== 滚动浮入 ====================
 var revealEls = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
-if(window.IntersectionObserver){
-var observer = new IntersectionObserver(function(entries){
-entries.forEach(function(entry){
-if(entry.isIntersecting){
-var el = entry.target;
-if(el.classList.contains('show')) return;
+function triggerReveal(){
+var vh = window.innerHeight;
+revealEls.forEach(function(el){
+if(!el.offsetParent) return;
+var r = el.getBoundingClientRect();
+if(r.top < vh * 0.9 && r.bottom > 0){
+if(!el.classList.contains('show')){
 el.classList.add('show');
-// 播完动画后释放 will-change
 setTimeout(function(){el.style.willChange = 'auto';}, 700);
-observer.unobserve(el);
+}
 }
 });
-}, {rootMargin: '0px 0px -5% 0px', threshold: 0});
-revealEls.forEach(function(el){observer.observe(el);});
-}else{
-// 不支持 IntersectionObserver 的浏览器，直接全部显示
-revealEls.forEach(function(el){el.classList.add('show');});
 }
 
+// ==================== 粒子 ====================
 var particlesContainer = document.getElementById('particles');
 var particleColors = ['rgba(167,139,250,0.7)','rgba(45,212,191,0.7)','rgba(244,114,182,0.7)','rgba(250,204,21,0.7)'];
 for(var i = 0; i < 12; i++){
@@ -864,8 +1053,9 @@ p.style.background = particleColors[Math.floor(Math.random() * particleColors.le
 particlesContainer.appendChild(p);
 }
 
+// ==================== 涟漪 ====================
 function spawnRipple(e){
-var target = e.target.closest('button, .device-chip, .pay-item, .nav-dot, .buy-btn, .modal-btn, .back-to-top');
+var target = e.target.closest('button, .device-chip, .pay-item, .buy-btn, .modal-btn, .back-to-top, .brand');
 if(!target) return;
 var x = e.clientX || (e.touches && e.touches[0] ? e.touches[0].clientX : 0);
 var y = e.clientY || (e.touches && e.touches[0] ? e.touches[0].clientY : 0);
@@ -879,6 +1069,7 @@ setTimeout(function(){r.remove();}, 600);
 }
 document.addEventListener('click', spawnRipple, {passive:true});
 
+// ==================== 滚动 ====================
 var progressBar = document.getElementById('progressBar');
 var ticking = false;
 function onScroll(){
@@ -888,35 +1079,88 @@ requestAnimationFrame(function(){
 var s = window.scrollY;
 var d = document.documentElement.scrollHeight - window.innerHeight;
 progressBar.style.width = (d > 0 ? (s / d) * 100 : 0) + '%';
-if(s > 600) backToTop.classList.add('show');
+if(s > 600 && !viewHome.classList.contains('active')) backToTop.classList.add('show');
 else backToTop.classList.remove('show');
-if(pageIntro.classList.contains('active')){
-if(s > 300) sectionNav.classList.add('show');
-else sectionNav.classList.remove('show');
-var cur = 'hero';
-sections.forEach(function(id){
-var el = document.getElementById(id);
-if(el){var r = el.getBoundingClientRect();if(r.top < window.innerHeight/2 && r.bottom > window.innerHeight/2) cur = id;}
-});
-navDots.forEach(function(d){d.classList.toggle('active', d.getAttribute('data-target') === cur);});
-}
+triggerReveal();
 ticking = false;
 });
 }
 window.addEventListener('scroll', onScroll, {passive:true});
 window.addEventListener('resize', onScroll, {passive:true});
+window.addEventListener('load', function(){setTimeout(triggerReveal, 100);});
+setTimeout(triggerReveal, 200);
 
 backToTop.addEventListener('click', function(){window.scrollTo({top:0, behavior:'smooth'});});
 
-var navDots = document.querySelectorAll('.nav-dot');
-var sections = ['hero','prologue','era-1','era-2','era-3','era-4','chronology'];
-navDots.forEach(function(d){
-d.addEventListener('click', function(){
-var t = document.getElementById(d.getAttribute('data-target'));
-if(t) t.scrollIntoView({behavior:'smooth', block:'start'});
-});
+// ==================== 购买数据 ====================
+var devices = [
+{id:'v1', name:'Bozi Neo6', label:'12+256', tag:'￥4299', price:4299, currency:'￥', stock:9999, hasTrust:true,
+specs:[{k:'版本', v:'12GB + 256GB', cls:'gold'},{k:'芯片', v:'第5代骁龙8至尊', cls:'gold'},{k:'系统', v:'全新 boziOS'},{k:'AI', v:'全新 boziAI'},{k:'屏幕', v:'1.5K · 165Hz'},{k:'影像', v:'5000万潜望长焦'},{k:'电池', v:'8000mAh 冰川'},{k:'散热', v:'VC 5000mm²'},{k:'防护', v:'IP69K'},{k:'跑分', v:'4,784,383', cls:'gold'}]},
+{id:'v2', name:'Bozi Neo6', label:'16+256', tag:'￥4599', price:4599, currency:'￥', stock:9999, hasTrust:true,
+specs:[{k:'版本', v:'16GB + 256GB', cls:'gold'},{k:'芯片', v:'第5代骁龙8至尊', cls:'gold'},{k:'系统', v:'全新 boziOS'},{k:'AI', v:'全新 boziAI'},{k:'屏幕', v:'1.5K · 165Hz'},{k:'影像', v:'5000万潜望长焦'},{k:'电池', v:'8000mAh 冰川'},{k:'散热', v:'VC 5000mm²'},{k:'防护', v:'IP69K'},{k:'跑分', v:'4,784,383', cls:'gold'}]},
+{id:'v3', name:'Bozi Neo6', label:'12+512', tag:'￥5079', price:5079, currency:'￥', stock:9999, hasTrust:true,
+specs:[{k:'版本', v:'12GB + 512GB', cls:'gold'},{k:'芯片', v:'第5代骁龙8至尊', cls:'gold'},{k:'系统', v:'全新 boziOS'},{k:'AI', v:'全新 boziAI'},{k:'屏幕', v:'1.5K · 165Hz'},{k:'影像', v:'5000万潜望长焦'},{k:'电池', v:'8000mAh 冰川'},{k:'散热', v:'VC 5000mm²'},{k:'防护', v:'IP69K'},{k:'跑分', v:'4,784,383', cls:'gold'}]},
+{id:'v4', name:'Bozi Neo6', label:'16+512', tag:'￥5100', price:5100, currency:'￥', stock:9999, hasTrust:true,
+specs:[{k:'版本', v:'16GB + 512GB', cls:'gold'},{k:'芯片', v:'第5代骁龙8至尊', cls:'gold'},{k:'系统', v:'全新 boziOS'},{k:'AI', v:'全新 boziAI'},{k:'屏幕', v:'1.5K · 165Hz'},{k:'影像', v:'5000万潜望长焦'},{k:'电池', v:'8000mAh 冰川'},{k:'散热', v:'VC 5000mm²'},{k:'防护', v:'IP69K'},{k:'跑分', v:'4,784,383', cls:'gold'}]},
+{id:'v5', name:'Bozi Neo6', label:'16+1TB', tag:'顶配', price:5999, currency:'￥', stock:9999, hasTrust:true,
+specs:[{k:'版本', v:'16GB + 1TB', cls:'gold'},{k:'芯片', v:'第5代骁龙8至尊', cls:'gold'},{k:'系统', v:'全新 boziOS'},{k:'AI', v:'全新 boziAI'},{k:'屏幕', v:'1.5K · 165Hz'},{k:'影像', v:'5000万潜望长焦'},{k:'电池', v:'8000mAh 冰川'},{k:'散热', v:'VC 5000mm²'},{k:'防护', v:'IP69K'},{k:'跑分', v:'4,784,383', cls:'gold'}]}
+];
+
+var payMethods = {
+wechat: '微信支付',
+alipay: '支付宝',
+card: '银行卡',
+balance: 'Bozi 余额'
+};
+var currentPay = 'wechat';
+var agreementRead = false;
+
+var currentDevice = devices[0];
+
+var deviceScroll = document.getElementById('deviceScroll');
+devices.forEach(function(d, i){
+var btn = document.createElement('button');
+btn.className = 'device-chip' + (i === 0 ? ' active' : '');
+btn.setAttribute('data-id', d.id);
+btn.innerHTML = d.label + '<span class="chip-sub">' + d.tag + '</span>';
+btn.addEventListener('click', function(){selectDevice(d.id);});
+deviceScroll.appendChild(btn);
 });
 
+function selectDevice(id){
+var d = devices.find(function(x){return x.id === id;});
+if(!d || (currentDevice && d.id === currentDevice.id)) return;
+currentDevice = d;
+document.querySelectorAll('.device-chip').forEach(function(c){
+c.classList.toggle('active', c.getAttribute('data-id') === id);
+});
+var panel = document.getElementById('devicePanel');
+panel.classList.add('switching');
+setTimeout(function(){
+document.getElementById('productName').textContent = d.name;
+document.getElementById('productBadge').textContent = d.tag;
+document.getElementById('stockNum').textContent = d.stock;
+var specHtml = '';
+d.specs.forEach(function(s){
+specHtml += '<div class="spec-line"><span class="k">' + s.k + '</span><span class="v ' + (s.cls || '') + '">' + s.v + '</span></div>';
+});
+document.getElementById('specFull').innerHTML = specHtml;
+updateTotal();
+panel.classList.remove('switching');
+}, 180);
+}
+
+function formatPrice(device){
+if(device.price === null) return '面议';
+return device.currency + ' ' + device.price.toLocaleString('zh-CN');
+}
+
+function updateTotal(){
+var amt = document.getElementById('totalPrice');
+amt.textContent = formatPrice(currentDevice);
+}
+
+// ==================== 购买弹窗 ====================
 var modalOverlay = document.getElementById('modalOverlay');
 var modalWrapper = document.getElementById('modalWrapper');
 var modalClose = document.getElementById('modalClose');
@@ -996,7 +1240,7 @@ startVerify();
 modalNextBtn.style.display = 'none';
 modalBackBtn.style.display = 'none';
 modalCloseBtn.style.display = 'block';
-modalCloseBtn.textContent = currentDevice.locked ? '知道了' : '返回重试';
+modalCloseBtn.textContent = '完成';
 }
 }
 
@@ -1013,15 +1257,14 @@ var verifyText = document.getElementById('verifyText');
 var verifySub = document.getElementById('verifySub');
 var verifyBar = document.getElementById('verifyBar');
 verifyBar.style.width = '0%';
-verifyText.textContent = '正在验证身份';
-verifySub.textContent = '正在比对腕部脉搏频率、皮肤微电流、肌肉记忆...';
+verifyText.textContent = '正在确认库存';
+verifySub.textContent = '正在为你的订单锁定现货...';
 var stages = [
-{text:'正在验证身份', sub:'正在比对腕部脉搏频率、皮肤微电流、肌肉记忆...', prog:20, delay:0},
+{text:'正在确认库存', sub:'正在为你的订单锁定现货...', prog:20, delay:0},
 {text:'正在校验支付凭证', sub:'正在通过 ' + payMethods[currentPay] + ' 通道校验...', prog:40, delay:900},
 {text:'正在核验协议签署', sub:'正在读取您刚刚同意的服务条款...', prog:55, delay:1800},
-{text:'正在生成加密订单', sub:'正在通过神☢芯片生成一次性混沌订单...', prog:70, delay:2700},
-{text:'正在锁定库存', sub:'正在从 Bozi 全球仓储锁定 ' + currentDevice.label + '...', prog:85, delay:3600},
-{text:'正在提交', sub:'正在将订单发送至 Bozi 全球调度中心...', prog:95, delay:4500}
+{text:'正在生成订单', sub:'正在生成正式订单...', prog:75, delay:2700},
+{text:'正在提交', sub:'正在将订单发送至 Bozi 订单中心...', prog:95, delay:3600}
 ];
 stages.forEach(function(s){
 setTimeout(function(){
@@ -1031,16 +1274,11 @@ verifyBar.style.width = s.prog + '%';
 }, s.delay);
 });
 setTimeout(function(){
-document.getElementById('resultTitle').textContent = currentDevice.locked ? '申请已驳回' : '购买失败';
-if(currentDevice.locked){
-document.getElementById('resultDesc').innerHTML = '<span style="color: var(--accent); font-weight: 700;">该型号仅对国家 / 军方开放</span><br><span style="font-size: 13px; margin-top: 8px; display: block;">你的申请已被驳回，请勿再次尝试</span>';
-document.getElementById('resultCode').textContent = 'ERROR CODE: CLEARANCE_DENIED_0x03';
-}else{
-document.getElementById('resultDesc').innerHTML = '<span style="color: var(--accent); font-weight: 700;">当前购买人数过多</span><br><span style="font-size: 13px; margin-top: 8px; display: block;">排队人数已超过 10,000,000+<br>请稍后再试</span>';
-document.getElementById('resultCode').textContent = 'ERROR CODE: QUEUE_OVERFLOW_0x09';
-}
+var orderNo = 'BOZI-' + new Date().getFullYear() + '-' + String(Math.floor(Math.random() * 99999999)).padStart(8, '0');
+document.getElementById('resultDesc').innerHTML = '你的订单已提交成功<br><span style="font-size: 13px; margin-top: 8px; display: block; color: var(--success); font-weight: 700;">' + currentDevice.specs[0].v + ' · ' + formatPrice(currentDevice) + '</span><span style="font-size: 12px; margin-top: 8px; display: block; color: var(--text-sub);">我们将在 24 小时内为你发货</span>';
+document.getElementById('resultCode').textContent = 'ORDER NO: ' + orderNo;
 goToStep(5);
-}, 5400);
+}, 4500);
 }
 
 modalNextBtn.addEventListener('click', function(){
@@ -1059,9 +1297,8 @@ function openModal(){
 document.getElementById('sumDevice').textContent = currentDevice.name;
 document.getElementById('sumChip').textContent = currentDevice.specs[0].v;
 document.getElementById('sumSystem').textContent = currentDevice.specs[1] ? currentDevice.specs[1].v : '—';
-document.getElementById('sumUnit').textContent = formatPrice(currentDevice, 1);
-document.getElementById('sumQty').textContent = qty;
-document.getElementById('sumTotal').textContent = formatPrice(currentDevice, qty);
+document.getElementById('sumUnit').textContent = formatPrice(currentDevice);
+document.getElementById('sumTotal').textContent = formatPrice(currentDevice);
 document.querySelectorAll('.step-item').forEach(function(item){
 item.classList.remove('active','done');
 });
@@ -1076,7 +1313,7 @@ modalOverlay.classList.remove('show');
 modalWrapper.classList.remove('show');
 setTimeout(function(){
 buyBtn.disabled = false;
-buyBtn.textContent = currentDevice.locked ? '申请特殊渠道' : '立即购买';
+buyBtn.textContent = '立即购买';
 }, 300);
 }
 
@@ -1086,15 +1323,14 @@ buyBtn.textContent = '处理中...';
 openModal();
 });
 
-selectDevice('neo5');
+// 初始化
+selectDevice('v1');
 setTimeout(function(){
 var d = currentDevice;
 document.getElementById('specFull').innerHTML = d.specs.map(function(s){
 return '<div class="spec-line"><span class="k">' + s.k + '</span><span class="v ' + (s.cls || '') + '">' + s.v + '</span></div>';
 }).join('');
 updateTotal();
-if(d.hasTrust){document.getElementById('trustCard').classList.remove('hidden');}
-else{document.getElementById('trustCard').classList.add('hidden');}
 }, 30);
 
 } catch(err) {
