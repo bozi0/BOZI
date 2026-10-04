@@ -478,7 +478,6 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <div class="badge-stock" id="productBadge7">量产</div>
 </div>
 <div class="spec-full" id="specFull7"></div>
-<!-- 数量控件已删除 -->
 <div class="total-bar"><div class="label">应付总额</div><div class="amount" id="totalPrice7">￥4499</div></div>
 <button class="buy-btn" id="buyBtn7"><span class="btn-shine"></span>立即购买</button>
 <div class="buy-note">支付即表示同意《Bozi 用户协议》<br>量产发售 · 支持二次售卖 · 无身份绑定</div>
@@ -670,7 +669,6 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <div class="badge-stock" id="productBadge6">量产</div>
 </div>
 <div class="spec-full" id="specFull6"></div>
-<!-- 数量控件已删除 -->
 <div class="total-bar"><div class="label">应付总额</div><div class="amount" id="totalPrice6">￥4299</div></div>
 <button class="buy-btn" id="buyBtn6"><span class="btn-shine"></span>立即购买</button>
 <div class="buy-note">支付即表示同意《Bozi 用户协议》<br>量产发售 · 支持二次售卖 · 无身份绑定</div>
@@ -784,7 +782,6 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <div class="row"><span class="k">版本</span><span class="v" id="sumChip">12GB + 256GB</span></div>
 <div class="row"><span class="k">芯片</span><span class="v" id="sumSystem">天玑9600</span></div>
 <div class="row"><span class="k">单价</span><span class="v" id="sumUnit">￥4499</span></div>
-<!-- 数量行已删除 -->
 <div class="row total"><span class="k">应付总额</span><span class="v" id="sumTotal">￥4499</span></div>
 </div>
 </div>
@@ -960,6 +957,11 @@ window.addEventListener('load', function(){setTimeout(triggerReveal,100);});
 setTimeout(triggerReveal,200);
 backToTop.addEventListener('click', function(){window.scrollTo({top:0,behavior:'smooth'});});
 
+// ====== 全局价格格式化（openModal 和 startVerify 会用到）======
+function formatPrice(d){
+return d.currency + ' ' + d.price.toLocaleString('zh-CN');
+}
+
 var devices7 = [
 {id:'n7v1',name:'Bozi Neo7',label:'12+256',tag:'￥4499',price:4499,currency:'￥',stock:9999,chip:'天玑9600',
 specs:[{k:'版本',v:'12GB + 256GB',cls:'gold'},{k:'芯片',v:'联发科 天玑9600',cls:'gold'},{k:'系统',v:'boziOS'},{k:'AI',v:'boziAI'},{k:'屏幕',v:'6.85" 2K LTPO · 165Hz'},{k:'影像',v:'2亿潜望长焦'},{k:'电池',v:'8000mAh 冰川'},{k:'充电',v:'120W + 50W 无线',cls:'gold'},{k:'散热',v:'VC 6000mm²'},{k:'防护',v:'IP69K'},{k:'跑分',v:'480-520万',cls:'gold'}]},
@@ -1010,9 +1012,6 @@ currentDevice.specs.forEach(function(s){
 h += '<div class="spec-line"><span class="k">'+s.k+'</span><span class="v '+(s.cls||'')+'">'+s.v+'</span></div>';
 });
 document.getElementById(cfg.specFullId).innerHTML = h;
-}
-function formatPrice(d){
-return d.currency + ' ' + d.price.toLocaleString('zh-CN');
 }
 function updateTotal(){
 document.getElementById(cfg.totalPriceId).textContent = formatPrice(currentDevice);
