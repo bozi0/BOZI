@@ -22,7 +22,8 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .topbar .back-btn.show{display:flex}
 .topbar .brand{font-size:16px;font-weight:800;letter-spacing:2px;background:linear-gradient(90deg,#fff,#a78bfa);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;cursor:pointer;flex:1}
 .topbar .nav-pill{display:flex;gap:4px;padding:4px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:40px;flex-shrink:0}
-.topbar .nav-pill button{padding:7px 16px;border-radius:40px;font-size:12px;font-weight:700;letter-spacing:1px;color:var(--text-sub);transition:background 0.25s ease,color 0.25s ease;white-space:nowrap;background:transparent;border:none;cursor:pointer;font-family:inherit}
+.topbar .nav-pill button{padding:7px 14px;border-radius:40px;font-size:12px;font-weight:700;letter-spacing:1px;color:var(--text-sub);transition:background 0.25s ease,color 0.25s ease;white-space:nowrap;background:transparent;border:none;cursor:pointer;font-family:inherit}
+.topbar .nav-pill button.active{background:linear-gradient(135deg,var(--primary),#6d28d9);color:#fff}
 .banner{position:fixed;top:calc(64px + env(safe-area-inset-top));left:0;width:100%;padding:8px 20px;z-index:190;background:rgba(20,15,35,0.95);border-bottom:1px solid rgba(167,139,250,0.1);overflow:hidden}
 .banner-track{display:flex;gap:40px;animation:banner-scroll 30s linear infinite;white-space:nowrap;will-change:transform}
 @keyframes banner-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
@@ -42,6 +43,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .home-hero{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:calc(100vh - 260px);text-align:center;padding:20px 0 40px}
 .home-hero .badge{font-size:10px;letter-spacing:5px;color:var(--primary-glow);margin-bottom:24px;padding:6px 16px;border:1px solid rgba(167,139,250,0.3);border-radius:40px;background:rgba(139,92,246,0.08);font-weight:600;animation:pulse-soft 2.5s ease-in-out infinite}
 .home-hero .badge.new-badge{color:var(--gold);border-color:rgba(250,204,21,0.4);background:rgba(250,204,21,0.08)}
+.home-hero .badge.pad-badge{color:var(--secondary);border-color:rgba(45,212,191,0.4);background:rgba(45,212,191,0.08)}
 @keyframes pulse-soft{0%,100%{opacity:1}50%{opacity:0.6}}
 .home-hero h1{font-size:clamp(56px,18vw,96px);font-weight:900;line-height:1;letter-spacing:-4px;margin:0 0 20px 0;background:linear-gradient(135deg,#fff,#a78bfa,#2dd4bf,#fff);background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shine 6s linear infinite}
 @keyframes shine{to{background-position:200% center}}
@@ -71,16 +73,21 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .prev-title::after{right:0}
 .prev-card{background:linear-gradient(135deg,rgba(255,255,255,0.02),rgba(255,255,255,0.04));border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:22px;position:relative;overflow:hidden;cursor:pointer;transition:transform 0.2s ease,border-color 0.2s ease}
 .prev-card:active{transform:scale(0.98);border-color:rgba(167,139,250,0.4)}
+.prev-card.pad-card-cta{border-color:rgba(45,212,191,0.25);background:linear-gradient(135deg,rgba(45,212,191,0.04),rgba(139,92,246,0.04))}
+.prev-card.pad-card-cta:active{border-color:rgba(45,212,191,0.5)}
 .prev-card .prev-tag{font-size:10px;letter-spacing:3px;color:var(--text-sub);font-weight:700;margin-bottom:8px;display:inline-block;padding:3px 10px;background:rgba(255,255,255,0.05);border-radius:40px}
+.prev-card.pad-card-cta .prev-tag{color:var(--secondary);background:rgba(45,212,191,0.1)}
 .prev-card .prev-name{font-size:20px;font-weight:900;color:#fff;margin-bottom:6px;letter-spacing:-0.5px}
 .prev-card .prev-sub{font-size:12px;color:var(--text-sub);margin-bottom:14px;line-height:1.6}
 .prev-card .prev-arrow{position:absolute;right:22px;top:50%;transform:translateY(-50%);font-size:20px;color:var(--primary-glow);opacity:0.6}
+.prev-card.pad-card-cta .prev-arrow{color:var(--secondary);opacity:0.8}
 .prev-card .prev-stats{display:flex;gap:10px;font-size:11px;color:#cbd5e1;flex-wrap:wrap}
 .prev-card .prev-stats span{background:rgba(255,255,255,0.04);padding:4px 10px;border-radius:8px;border:1px solid rgba(255,255,255,0.06)}
 .reveal{opacity:0;transform:translateY(30px);transition:opacity 0.6s ease,transform 0.6s cubic-bezier(0.175,0.885,0.32,1.275);will-change:transform,opacity}
 .reveal.show{opacity:1;transform:translateY(0)}
 .hero{text-align:center;padding-top:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:50vh}
 .hero .badge{font-size:10px;letter-spacing:5px;color:var(--primary-glow);margin-bottom:20px;padding:6px 14px;border:1px solid rgba(167,139,250,0.3);border-radius:40px;background:rgba(139,92,246,0.08);font-weight:600}
+.hero .badge.pad-badge{color:var(--secondary);border-color:rgba(45,212,191,0.4);background:rgba(45,212,191,0.08)}
 .hero h1{font-size:clamp(40px,12vw,68px);font-weight:900;line-height:1.05;letter-spacing:-2px;margin:0 0 20px 0;background:linear-gradient(135deg,#fff,#a78bfa,#2dd4bf,#fff);background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shine 6s linear infinite}
 .hero .sub{font-size:15px;color:var(--text-sub);line-height:1.8;max-width:380px;margin:0 auto}
 .hero .slogans{margin-top:40px;display:flex;flex-direction:column;gap:8px;font-size:12px;color:var(--text-sub);letter-spacing:1px;opacity:0.7}
@@ -99,6 +106,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .highlight{color:var(--primary-glow);font-weight:600}
 .white-highlight{color:#fff;font-weight:700}
 .gold-highlight{color:var(--gold);font-weight:700}
+.teal-highlight{color:var(--secondary);font-weight:700}
 .quote{position:relative;padding:20px 22px 20px 28px;background:rgba(139,92,246,0.05);border-left:3px solid var(--primary);border-radius:0 16px 16px 0;margin:24px 0;font-size:15px;line-height:1.7;color:#e2e8f0;font-style:italic}
 .quote::before{content:'"';position:absolute;top:-8px;left:12px;font-size:48px;color:var(--primary-glow);opacity:0.3;font-family:Georgia,serif;line-height:1}
 .quote .by{display:block;margin-top:12px;font-size:12px;color:var(--text-sub);font-style:normal;letter-spacing:1px}
@@ -118,6 +126,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .spec-item .v{font-size:14px;font-weight:700;color:#fff;line-height:1.3;word-break:break-word}
 .spec-item .v.gradient{background:linear-gradient(180deg,#fff,#a78bfa);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .spec-item .v.gold{background:linear-gradient(180deg,#fff,var(--gold));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.spec-item .v.teal{background:linear-gradient(180deg,#fff,var(--secondary));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .product-card .desc{font-size:14px;color:#cbd5e1;line-height:1.8;margin:18px 0 0 0;position:relative}
 .price-bar{display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:18px;border-top:1px solid rgba(255,255,255,0.06);position:relative}
 .price-bar .left{display:flex;flex-direction:column;gap:3px}
@@ -158,6 +167,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .spec-row .k{color:var(--text-sub);white-space:nowrap;letter-spacing:1px}
 .spec-row .v{color:#fff;font-weight:600;text-align:right;flex:1;word-break:break-word}
 .spec-row .v.gold{color:var(--gold)}
+.spec-row .v.teal{color:var(--secondary)}
 .price-versions{display:flex;flex-direction:column;gap:10px;margin:20px 0;position:relative}
 .price-version{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px;transition:border-color 0.2s ease}
 .price-version.featured{border-color:rgba(250,204,21,0.3);background:rgba(250,204,21,0.04)}
@@ -186,23 +196,29 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .device-panel{transition:opacity 0.18s ease,transform 0.18s ease}
 .device-panel.switching{opacity:0;transform:translateY(6px)}
 .buy-card{background:linear-gradient(135deg,rgba(250,204,21,0.05),rgba(139,92,246,0.05));border:1px solid rgba(250,204,21,0.2);border-radius:var(--radius-lg);padding:24px;position:relative;overflow:hidden}
+.buy-card.teal-card{background:linear-gradient(135deg,rgba(45,212,191,0.05),rgba(139,92,246,0.05));border-color:rgba(45,212,191,0.2)}
 .buy-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;position:relative;gap:12px}
 .buy-header .info{flex:1;min-width:0}
 .buy-header .name{font-size:22px;font-weight:900;color:#fff;margin:0 0 6px 0;line-height:1.2;background:linear-gradient(90deg,#fff,#facc15);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.teal-card .buy-header .name{background:linear-gradient(90deg,#fff,#2dd4bf);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .buy-header .stock{font-size:11px;color:var(--accent);font-weight:700;letter-spacing:1px;display:flex;align-items:center;gap:6px}
 .buy-header .stock::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse-dot 1.8s infinite}
 .buy-header .badge-stock{font-size:10px;padding:4px 10px;background:rgba(244,114,182,0.15);border:1px solid rgba(244,114,182,0.3);border-radius:8px;color:var(--accent);font-weight:700;letter-spacing:1px;white-space:nowrap}
+.teal-card .badge-stock{background:rgba(45,212,191,0.15);border-color:rgba(45,212,191,0.3);color:var(--secondary)}
 .spec-full{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;position:relative}
 .spec-line{display:flex;justify-content:space-between;font-size:12px;padding:9px 12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:10px;gap:12px}
 .spec-line .k{color:var(--text-sub);white-space:nowrap;letter-spacing:1px}
 .spec-line .v{color:#fff;font-weight:600;text-align:right;flex:1;word-break:break-word}
 .spec-line .v.gold{color:var(--gold)}
+.spec-line .v.teal{color:var(--secondary)}
 .total-bar{display:flex;justify-content:space-between;align-items:center;padding:16px 0;margin-bottom:16px;border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);position:relative;gap:12px}
 .total-bar .label{font-size:12px;color:var(--text-sub);letter-spacing:1px;white-space:nowrap}
 .total-bar .amount{font-size:22px;font-weight:900;background:linear-gradient(180deg,#fff,var(--gold));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;word-break:break-all;text-align:right}
+.teal-card .total-bar .amount{background:linear-gradient(180deg,#fff,var(--secondary));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .buy-btn{width:100%;padding:18px;border-radius:16px;background:linear-gradient(135deg,var(--gold),#f59e0b);border:none;color:#1a1a1a;font-size:16px;font-weight:900;letter-spacing:2px;cursor:pointer;position:relative;overflow:hidden;font-family:inherit;transition:transform 0.2s ease}
 .buy-btn:active{transform:scale(0.97)}
 .buy-btn:disabled{opacity:0.7}
+.teal-card .buy-btn{background:linear-gradient(135deg,var(--secondary),#0d9488);color:#0a1a1a}
 .buy-btn .btn-shine{position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.5),transparent);transform:skewX(-20deg);animation:btn-shine 4s infinite}
 @keyframes btn-shine{0%{left:-100%}50%,100%{left:200%}}
 .buy-note{font-size:11px;color:var(--text-sub);text-align:center;margin-top:14px;line-height:1.7;position:relative}
@@ -308,14 +324,18 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <button class="back-btn" id="backBtn">←</button>
 <div class="brand" id="brandBtn">BOZI®</div>
 <div class="nav-pill">
-<button id="navHistory">神级设备史</button>
+<button id="navPhone">手机</button>
+<button id="navPad">平板</button>
+<button id="navHistory">设备史</button>
 </div>
 </div>
 
 <div class="banner">
 <div class="banner-track">
 <span>BOZI NEO7 全新发布</span><span>天玑9600 · 风驰内核 2.0</span><span>2亿潜望长焦 · 120倍变焦</span><span>2K LTPO 165Hz · 6000nit</span><span>120W 有线 + 50W 无线</span>
+<span>BOZI PAD 1 新品上市</span><span>天玑8400 · 11.5" 2.8K 144Hz</span><span>10000mAh · 33W 快充</span><span>四声道杜比全景声</span><span>￥1599 起</span>
 <span>BOZI NEO7 全新发布</span><span>天玑9600 · 风驰内核 2.0</span><span>2亿潜望长焦 · 120倍变焦</span><span>2K LTPO 165Hz · 6000nit</span><span>120W 有线 + 50W 无线</span>
+<span>BOZI PAD 1 新品上市</span><span>天玑8400 · 11.5" 2.8K 144Hz</span><span>10000mAh · 33W 快充</span><span>四声道杜比全景声</span><span>￥1599 起</span>
 </div>
 </div>
 
@@ -323,7 +343,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 
 <div class="app-container">
 
-<!-- ========== 1. Neo7 首页 ========== -->
+<!-- ========== 1. 手机首页（Neo7） ========== -->
 <div class="page active" id="page-home">
 <div class="home-hero reveal">
 <div class="badge new-badge">BOZI® 全新发布</div>
@@ -362,7 +382,72 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 </div>
 </div>
 
-<!-- ========== 2. Neo7 详情页 ========== -->
+<!-- ========== 2. 手机首页（Neo6） ========== -->
+<div class="page" id="page-home-neo6">
+<div class="home-hero reveal">
+<div class="badge">BOZI® NEW</div>
+<h1>Bozi Neo6</h1>
+<p class="sub">Bozi 纪元的终章，也是 Bozi 回归人间的第一台普通手机。</p>
+<div class="home-stats">
+<div class="home-stat"><div class="num">4,784,383</div><div class="lbl">安兔兔跑分</div></div>
+<div class="home-stat"><div class="num">165Hz</div><div class="lbl">原生高刷</div></div>
+<div class="home-stat"><div class="num">8000mAh</div><div class="lbl">冰川电池</div></div>
+</div>
+<div class="home-actions">
+<button class="home-btn primary" id="homeBuyBtn6">立即购买</button>
+<button class="home-btn secondary" id="homeMoreBtn6">了解更多</button>
+</div>
+<div class="scroll-hint2">↓ 向下滑动，查看亮点 ↓</div>
+</div>
+
+<div class="home-highlights">
+<div class="hl-card reveal"><div class="hl-tag">性能</div><div class="hl-title">第5代骁龙8至尊</div><div class="hl-desc">当前主流旗舰级芯片。配合博子风驰游戏内核 1.0，专注日常使用与游戏体验的平衡。</div><div class="hl-big">4,784,383</div><div class="hl-desc">安兔兔跑分。一个可以被正常显示、被排行榜收录的成绩。</div></div>
+<div class="hl-card reveal"><div class="hl-tag">系统 & AI</div><div class="hl-title">全新 boziOS + 全新 boziAI</div><div class="hl-desc">不再是混沌系统，没有自我演化。boziOS 流畅、稳定、干净，该有的都有，不该有的都不碰。boziAI 更懂你，但不会越界。</div></div>
+<div class="hl-card reveal"><div class="hl-tag">影像</div><div class="hl-title">5000万像素潜望长焦</div><div class="hl-desc">3.5 倍潜望长焦 + 自研 LUMO 凝光影像系统 + 全新「大师模式」+ 4K 120帧 杜比视界专业视频。</div></div>
+<div class="hl-card reveal"><div class="hl-tag">续航 & 防护</div><div class="hl-title">8000mAh 冰川电池</div><div class="hl-desc">旗舰级第一梯队续航。5000mm² VC 散热。IP66 / IP68 / IP69 / IP69K 全覆盖防护。3D 超声波指纹。</div></div>
+</div>
+
+<div class="prev-section reveal">
+<div class="prev-title">最新一代</div>
+<div class="prev-card" id="nextNeo7">
+<div class="prev-tag">BOZI NEO7</div>
+<div class="prev-name">Bozi Neo7</div>
+<div class="prev-sub">Bozi 回归人间后的第二台量产旗舰，也是 Neo 系列真正意义上的「新一代」。</div>
+<div class="prev-stats"><span>天玑9600</span><span>2K · 165Hz</span><span>2亿长焦</span></div>
+<div class="prev-arrow">→</div>
+</div>
+</div>
+</div>
+
+<!-- ========== 3. 平板首页（Pad 1） ========== -->
+<div class="page" id="page-home-pad1">
+<div class="home-hero reveal">
+<div class="badge pad-badge">BOZI® 新品 · 平板</div>
+<h1>Bozi Pad 1</h1>
+<p class="sub">轻盈随行，质感出众。11.5英寸 2.8K 144Hz 大屏，天玑8400 旗舰级芯片，10000mAh 长续航。</p>
+<div class="home-stats">
+<div class="home-stat"><div class="num">11.5"</div><div class="lbl">2.8K 144Hz</div></div>
+<div class="home-stat"><div class="num">10000mAh</div><div class="lbl">大容量电池</div></div>
+<div class="home-stat"><div class="num">6.9mm</div><div class="lbl">纤薄机身</div></div>
+</div>
+<div class="home-actions">
+<button class="home-btn primary" id="homeBuyBtnPad1">立即购买</button>
+<button class="home-btn secondary" id="homeMoreBtnPad1">了解更多</button>
+</div>
+<div class="scroll-hint2">↓ 向下滑动，查看亮点 ↓</div>
+</div>
+
+<div class="home-highlights">
+<div class="hl-card reveal"><div class="hl-tag">性能</div><div class="hl-title">联发科 天玑8400</div><div class="hl-desc">旗舰级芯片，配合深度调校的 boziOS，日常应用切换、多任务分屏、主流游戏都流畅稳定。</div></div>
+<div class="hl-card reveal"><div class="hl-tag">屏幕</div><div class="hl-title">11.5英寸 2.8K 144Hz</div><div class="hl-desc">2.8K 超清分辨率，144Hz 高刷新率，支持 DC 调光。清晰、顺滑、护眼。</div></div>
+<div class="hl-card reveal"><div class="hl-tag">音效</div><div class="hl-title">四声道立体声</div><div class="hl-desc">支持杜比全景声。横屏追剧、听讲座、玩游戏，声音饱满清晰，无需外接音箱。</div></div>
+<div class="hl-card reveal"><div class="hl-tag">续航</div><div class="hl-title">10000mAh 大电池</div><div class="hl-desc">满足一整天的使用需求。33W 有线快充，碎片时间快速补电。</div></div>
+<div class="hl-card reveal"><div class="hl-tag">轻办公 & 创作</div><div class="hl-title">手写笔 + 磁吸键盘</div><div class="hl-desc">支持 Bozi 智能手写笔、磁吸键盘保护壳。多端协同，文件互传、跨屏操作顺畅自然。</div></div>
+<div class="hl-card reveal"><div class="hl-tag">设计</div><div class="hl-title">6.9mm · 510g · 三色可选</div><div class="hl-desc">深空灰、冰川银、薄雾蓝。细腻金属质感，轻盈握持，随身携带毫无负担。</div></div>
+</div>
+</div>
+
+<!-- ========== 4. Neo7 详情页 ========== -->
 <div class="page" id="page-neo7">
 <div class="hero reveal">
 <div class="badge">BOZI® NEO7</div>
@@ -463,7 +548,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 </div>
 </div>
 
-<!-- ========== 3. Neo7 独立购买页 ========== -->
+<!-- ========== 5. Neo7 独立购买页 ========== -->
 <div class="page" id="page-buy-neo7">
 <div class="page-title">
 <h1>立即购买</h1>
@@ -487,44 +572,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <div class="slogan-strip"><div>Peak performance runs on Bozi.</div><div>All chips bow to Bozi.</div></div>
 </div>
 
-<!-- ========== 4. Neo6 首页 ========== -->
-<div class="page" id="page-home-neo6">
-<div class="home-hero reveal">
-<div class="badge">BOZI® NEW</div>
-<h1>Bozi Neo6</h1>
-<p class="sub">Bozi 纪元的终章，也是 Bozi 回归人间的第一台普通手机。</p>
-<div class="home-stats">
-<div class="home-stat"><div class="num">4,784,383</div><div class="lbl">安兔兔跑分</div></div>
-<div class="home-stat"><div class="num">165Hz</div><div class="lbl">原生高刷</div></div>
-<div class="home-stat"><div class="num">8000mAh</div><div class="lbl">冰川电池</div></div>
-</div>
-<div class="home-actions">
-<button class="home-btn primary" id="homeBuyBtn6">立即购买</button>
-<button class="home-btn secondary" id="homeMoreBtn6">了解更多</button>
-</div>
-<div class="scroll-hint2">↓ 向下滑动，查看亮点 ↓</div>
-</div>
-
-<div class="home-highlights">
-<div class="hl-card reveal"><div class="hl-tag">性能</div><div class="hl-title">第5代骁龙8至尊</div><div class="hl-desc">当前主流旗舰级芯片。配合博子风驰游戏内核 1.0，专注日常使用与游戏体验的平衡。</div><div class="hl-big">4,784,383</div><div class="hl-desc">安兔兔跑分。一个可以被正常显示、被排行榜收录的成绩。</div></div>
-<div class="hl-card reveal"><div class="hl-tag">系统 & AI</div><div class="hl-title">全新 boziOS + 全新 boziAI</div><div class="hl-desc">不再是混沌系统，没有自我演化。boziOS 流畅、稳定、干净，该有的都有，不该有的都不碰。boziAI 更懂你，但不会越界。</div></div>
-<div class="hl-card reveal"><div class="hl-tag">影像</div><div class="hl-title">5000万像素潜望长焦</div><div class="hl-desc">3.5 倍潜望长焦 + 自研 LUMO 凝光影像系统 + 全新「大师模式」+ 4K 120帧 杜比视界专业视频。</div></div>
-<div class="hl-card reveal"><div class="hl-tag">续航 & 防护</div><div class="hl-title">8000mAh 冰川电池</div><div class="hl-desc">旗舰级第一梯队续航。5000mm² VC 散热。IP66 / IP68 / IP69 / IP69K 全覆盖防护。3D 超声波指纹。</div></div>
-</div>
-
-<div class="prev-section reveal">
-<div class="prev-title">最新一代</div>
-<div class="prev-card" id="nextNeo7">
-<div class="prev-tag">BOZI NEO7</div>
-<div class="prev-name">Bozi Neo7</div>
-<div class="prev-sub">Bozi 回归人间后的第二台量产旗舰，也是 Neo 系列真正意义上的「新一代」。</div>
-<div class="prev-stats"><span>天玑9600</span><span>2K · 165Hz</span><span>2亿长焦</span></div>
-<div class="prev-arrow">→</div>
-</div>
-</div>
-</div>
-
-<!-- ========== 5. Neo6 详情页 ========== -->
+<!-- ========== 6. Neo6 详情页 ========== -->
 <div class="page" id="page-neo6">
 <div class="hero reveal">
 <div class="badge">BOZI® NEO6</div>
@@ -654,7 +702,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 </div>
 </div>
 
-<!-- ========== 6. Neo6 独立购买页 ========== -->
+<!-- ========== 7. Neo6 独立购买页 ========== -->
 <div class="page" id="page-buy-neo6">
 <div class="page-title">
 <h1>立即购买</h1>
@@ -678,7 +726,167 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <div class="slogan-strip"><div>Peak performance runs on Bozi.</div><div>All chips bow to Bozi.</div></div>
 </div>
 
-<!-- ========== 7. 神级设备史 ========== -->
+<!-- ========== 8. Pad 1 详情页 ========== -->
+<div class="page" id="page-pad1">
+<div class="hero reveal">
+<div class="badge pad-badge">BOZI® PAD 1</div>
+<h1>轻盈随行</h1>
+<p class="sub">质感出众，屏幕细腻，性能稳定，续航持久。你的日常影音与轻办公伙伴。</p>
+</div>
+
+<div class="reveal">
+<div class="section-header"><span class="section-index">SPECS</span><h2 class="section-title">核心参数</h2></div>
+<div class="spec-table">
+<div class="spec-row"><span class="k">产品名称</span><span class="v">Bozi Pad 1</span></div>
+<div class="spec-row"><span class="k">芯片</span><span class="v teal">联发科 天玑8400 旗舰级芯片</span></div>
+<div class="spec-row"><span class="k">系统</span><span class="v">boziOS</span></div>
+<div class="spec-row"><span class="k">屏幕</span><span class="v teal">11.5英寸 2.8K · 144Hz</span></div>
+<div class="spec-row"><span class="k">调光</span><span class="v">DC 调光</span></div>
+<div class="spec-row"><span class="k">内存</span><span class="v">8GB / 12GB LPDDR5X</span></div>
+<div class="spec-row"><span class="k">存储</span><span class="v">128GB / 256GB / 512GB UFS 3.1</span></div>
+<div class="spec-row"><span class="k">后置摄像头</span><span class="v">1300万像素</span></div>
+<div class="spec-row"><span class="k">前置摄像头</span><span class="v">800万像素</span></div>
+<div class="spec-row"><span class="k">扬声器</span><span class="v teal">四声道立体声 · 杜比全景声</span></div>
+<div class="spec-row"><span class="k">电池</span><span class="v teal">10000mAh</span></div>
+<div class="spec-row"><span class="k">充电</span><span class="v">33W 有线快充</span></div>
+<div class="spec-row"><span class="k">接口</span><span class="v">USB-C</span></div>
+<div class="spec-row"><span class="k">厚度</span><span class="v">6.9mm</span></div>
+<div class="spec-row"><span class="k">重量</span><span class="v">约 510g</span></div>
+<div class="spec-row"><span class="k">配色</span><span class="v">深空灰 / 冰川银 / 薄雾蓝</span></div>
+<div class="spec-row"><span class="k">配件</span><span class="v">智能手写笔 · 磁吸键盘保护壳</span></div>
+<div class="spec-row"><span class="k">销售方式</span><span class="v">量产 · 支持二次售卖</span></div>
+</div>
+</div>
+
+<div class="reveal">
+<div class="section-header"><span class="section-index">DESIGN</span><h2 class="section-title">轻盈随行，质感出众</h2></div>
+<div class="product-card">
+<div class="card-label">6.9mm · 510g</div>
+<h3 class="product-name">纤薄机身，三色可选</h3>
+<p class="product-tagline">拿在手里轻便自如，放进包里毫无负担</p>
+<p class="desc">Bozi Pad 1 采用 <span class="teal-highlight">6.9mm 纤薄机身</span>设计，重量控制在 <span class="teal-highlight">510g</span>，日常拿在手里轻便自如，放进包里毫无负担。深空灰、冰川银、薄雾蓝三款配色，搭配细腻的金属质感，无论是居家使用还是外出携带，都能自然融入你的生活场景。</p>
+</div>
+</div>
+
+<div class="reveal">
+<div class="section-header"><span class="section-index">PERFORMANCE</span><h2 class="section-title">流畅性能，稳定输出</h2></div>
+<div class="product-card">
+<div class="card-label">天玑 8400</div>
+<h3 class="product-name">旗舰级芯片 + boziOS</h3>
+<p class="product-tagline">日常流畅，能效平衡</p>
+<p class="desc">搭载<span class="highlight">联发科 天玑8400 芯片</span>，配合深度调校的 <span class="highlight">boziOS</span>，无论是日常应用切换、多任务分屏，还是运行主流游戏，都能保持流畅稳定的画面表现。系统调度注重能效平衡，长时间使用依然顺畅自然。</p>
+<div class="spec-grid">
+<div class="spec-item"><div class="k">芯片</div><div class="v teal">天玑8400</div></div>
+<div class="spec-item"><div class="k">系统</div><div class="v">boziOS</div></div>
+</div>
+</div>
+</div>
+
+<div class="reveal">
+<div class="section-header"><span class="section-index">DISPLAY</span><h2 class="section-title">清晰大屏，顺滑体验</h2></div>
+<div class="product-card">
+<div class="card-label">2.8K · 144Hz</div>
+<h3 class="product-name">11.5英寸 2.8K 超清屏</h3>
+<p class="product-tagline">细腻显示，DC 调光更护眼</p>
+<p class="desc">正面是一块 <span class="teal-highlight">11.5英寸 2.8K 超清屏幕</span>，支持 <span class="teal-highlight">144Hz 高刷新率</span>。画面显示细腻，滑动浏览、观看视频、玩游戏时画面过渡更加流畅。同时支持 <span class="teal-highlight">DC 调光</span>，在不同亮度下减少屏幕频闪，长时间使用更舒适。</p>
+<div class="spec-grid">
+<div class="spec-item"><div class="k">尺寸</div><div class="v">11.5"</div></div>
+<div class="spec-item"><div class="k">分辨率</div><div class="v teal">2.8K</div></div>
+<div class="spec-item"><div class="k">刷新率</div><div class="v teal">144Hz</div></div>
+<div class="spec-item"><div class="k">调光</div><div class="v">DC 调光</div></div>
+</div>
+</div>
+</div>
+
+<div class="reveal">
+<div class="section-header"><span class="section-index">AUDIO</span><h2 class="section-title">沉浸音效，身临其境</h2></div>
+<div class="product-card">
+<div class="card-label">DOLBY ATMOS</div>
+<h3 class="product-name">四声道立体声</h3>
+<p class="product-tagline">支持杜比全景声</p>
+<p class="desc">内置 <span class="teal-highlight">四声道立体声扬声器</span>，支持 <span class="teal-highlight">杜比全景声</span>。无论是横屏追剧、观看演唱会，还是上网课听讲座，声音饱满清晰，带来更具包围感的听觉体验，无需外接音箱也能获得不错的影音享受。</p>
+</div>
+</div>
+
+<div class="reveal">
+<div class="section-header"><span class="section-index">BATTERY</span><h2 class="section-title">持久续航，畅玩一整天</h2></div>
+<div class="product-card">
+<div class="card-label">10000mAh</div>
+<h3 class="product-name">大容量电池 + 33W 快充</h3>
+<p class="product-tagline">减少电量焦虑</p>
+<p class="desc">配备 <span class="teal-highlight">10000mAh 大容量电池</span>，满足一整天的使用需求。无论是长时间追剧、阅读、学习，还是外出旅行时使用，都能减少电量焦虑。搭配 <span class="teal-highlight">33W 有线快充</span>，碎片时间即可快速补充电量，随时保持在线。</p>
+<div class="spec-grid">
+<div class="spec-item"><div class="k">电池</div><div class="v teal">10000mAh</div></div>
+<div class="spec-item"><div class="k">充电</div><div class="v teal">33W 有线</div></div>
+</div>
+</div>
+</div>
+
+<div class="reveal">
+<div class="section-header"><span class="section-index">CREATION</span><h2 class="section-title">轻办公与创作</h2></div>
+<div class="product-card">
+<div class="card-label">PEN & KEYBOARD</div>
+<h3 class="product-name">手写笔 + 磁吸键盘保护壳</h3>
+<p class="product-tagline">随手展开，灵感即刻记录</p>
+<p class="desc">支持 <span class="highlight">Bozi 智能手写笔</span>与<span class="highlight">磁吸键盘保护壳</span>，轻松化身轻办公与创作工具。配合 boziOS 的智慧互联功能，可以与手机等设备进行多端协同，文件互传、跨屏操作顺畅自然，记录灵感、批注文档、绘制草图都更加顺手。</p>
+</div>
+</div>
+
+<div class="reveal">
+<div class="section-header"><span class="section-index">CAMERA</span><h2 class="section-title">影像</h2></div>
+<div class="product-card">
+<div class="card-label">CAMERA</div>
+<h3 class="product-name">1300万后置 + 800万前置</h3>
+<p class="product-tagline">扫描文档、视频通话、记录生活</p>
+<p class="desc">后置 <span class="highlight">1300万像素</span>摄像头，前置 <span class="highlight">800万像素</span>摄像头。扫描文档、视频通话、日常记录，都能轻松应对。</p>
+<div class="spec-grid">
+<div class="spec-item"><div class="k">后置</div><div class="v">1300万</div></div>
+<div class="spec-item"><div class="k">前置</div><div class="v">800万</div></div>
+</div>
+</div>
+</div>
+
+<div class="reveal">
+<div class="section-header"><span class="section-index">PRICE</span><h2 class="section-title">价格与版本</h2></div>
+<div class="price-versions">
+<div class="price-version"><span class="ver">8GB + 128GB</span><span class="price">￥1599</span></div>
+<div class="price-version"><span class="ver">8GB + 256GB</span><span class="price">￥1799</span></div>
+<div class="price-version featured"><span class="ver">12GB + 256GB<span class="badge-mini">推荐</span></span><span class="price">￥2099</span></div>
+</div>
+</div>
+
+<div class="reveal">
+<div class="section-header"><span class="section-index">SUMMARY</span><h2 class="section-title">总结</h2></div>
+<div class="text-body"><p>Bozi Pad 1 以轻薄的设计、细腻的屏幕、稳定的性能以及长久的续航，为你带来舒适的日常影音与轻办公体验。</p><p>无论你是看剧、学习、阅读，还是记录灵感，它都能轻松陪伴你度过每一天。</p></div>
+<div class="quote">轻盈随行，质感出众。<span class="by">— Bozi Pad 1</span></div>
+</div>
+</div>
+
+<!-- ========== 9. Pad 1 独立购买页 ========== -->
+<div class="page" id="page-buy-pad1">
+<div class="page-title">
+<h1>立即购买</h1>
+<p class="sub">Bozi Pad 1 · 量产发售 · 不会缺货</p>
+<div class="live-badge">当前 8,063 人正在浏览</div>
+</div>
+<div class="device-picker"><div class="picker-label">选择版本</div><div class="device-scroll" id="deviceScrollPad1"></div></div>
+<div class="device-panel" id="devicePanelPad1">
+<div class="buy-card teal-card">
+<div class="buy-header">
+<div class="info"><div class="name" id="productNamePad1">Bozi Pad 1</div><div class="stock">现货 · 当前 <span id="stockNumPad1">9999</span> 台可购</div></div>
+<div class="badge-stock" id="productBadgePad1">量产</div>
+</div>
+<div class="spec-full" id="specFullPad1"></div>
+<div class="total-bar"><div class="label">应付总额</div><div class="amount" id="totalPricePad1">￥1599</div></div>
+<button class="buy-btn" id="buyBtnPad1"><span class="btn-shine"></span>立即购买</button>
+<div class="buy-note">支付即表示同意《Bozi 用户协议》<br>量产发售 · 支持二次售卖 · 无身份绑定</div>
+</div>
+</div>
+<div class="trust-card"><div class="title">🛡️ 官方保障</div><div class="row"><span class="k">发货方式</span><span class="v">顺丰包邮</span></div><div class="row"><span class="k">售后</span><span class="v">全国联保</span></div><div class="row"><span class="k">退换</span><span class="v">7 天无理由</span></div><div class="row"><span class="k">保修</span><span class="v">首年整机保修</span></div></div>
+<div class="slogan-strip"><div>Peak performance runs on Bozi.</div><div>All chips bow to Bozi.</div></div>
+</div>
+
+<!-- ========== 10. 神级设备史 ========== -->
 <div class="page" id="page-intro">
 <div class="hero reveal">
 <div class="badge">BOZI® OFFICIAL</div>
@@ -742,6 +950,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <div class="table-card"><div class="tc-gen">NEO 03</div><div class="tc-name">Bozi Neo3</div><div class="tc-row"><span class="k">跑分</span><span class="v">虚无</span></div><div class="tc-row"><span class="k">数量</span><span class="v">5</span></div><div class="tc-row"><span class="k">定位</span><span class="v">时代的眼泪</span></div></div>
 <div class="table-card"><div class="tc-gen">NEO 04</div><div class="tc-name">Bozi Neo4</div><div class="tc-row"><span class="k">跑分</span><span class="v">虚无</span></div><div class="tc-row"><span class="k">数量</span><span class="v">15</span></div><div class="tc-row"><span class="k">价格</span><span class="v purple">20亿$</span></div><div class="tc-row"><span class="k">定位</span><span class="v">终极手机</span></div></div>
 <div class="table-card god"><div class="tc-gen">NEO 05</div><div class="tc-name">Bozi Neo5</div><div class="tc-row"><span class="k">芯片</span><span class="v gold">神☢</span></div><div class="tc-row"><span class="k">系统</span><span class="v gold">混沌 8.0</span></div><div class="tc-row"><span class="k">形态</span><span class="v gold">手表</span></div><div class="tc-row"><span class="k">定位</span><span class="v gold">超越手机</span></div></div>
+<div class="table-card god"><div class="tc-gen">PAD 01</div><div class="tc-name">Bozi Pad 1</div><div class="tc-row"><span class="k">芯片</span><span class="v gold">天玑8400</span></div><div class="tc-row"><span class="k">屏幕</span><span class="v gold">11.5" 2.8K 144Hz</span></div><div class="tc-row"><span class="k">电池</span><span class="v gold">10000mAh</span></div><div class="tc-row"><span class="k">定位</span><span class="v gold">平板</span></div></div>
 </div>
 </div>
 
@@ -806,11 +1015,11 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <h4>三、系统与 AI 条款</h4>
 <p>boziOS 与 boziAI 为<span class="em">常规操作系统与 AI 助手</span>，不包含自我演化、意识流预判等特殊能力。</p>
 <h4>四、影像与拍摄条款</h4>
-<p>用户使用「大师模式」及高帧率录制时，请确保<span class="em">不侵犯他人肖像权、不违反当地法律法规</span>。</p>
+<p>用户使用相机及高帧率录制时，请确保<span class="em">不侵犯他人肖像权、不违反当地法律法规</span>。</p>
 <h4>五、防护等级说明</h4>
-<p>防水性能为实验室条件下测得，<span class="warn">不构成永久防护</span>。因人为使用不当造成的进水损坏，不在保修范围内。</p>
+<p>防水防尘性能为实验室条件下测得，<span class="warn">不构成永久防护</span>。因人为使用不当造成的损坏，不在保修范围内。</p>
 <h4>六、电池与充电条款</h4>
-<p>8000mAh 冰川电池为<span class="em">常规锂离子电池</span>，需正常充电、正常散热。电池为消耗品，容量衰减属正常现象。</p>
+<p>Bozi 设备电池为<span class="em">常规锂离子电池</span>，需正常充电、正常散热。电池为消耗品，容量衰减属正常现象。</p>
 <h4>七、退换货政策</h4>
 <p>支持 <span class="em">7 天无理由退换货</span>。退货时请确保商品、包装、配件、赠品完好，不影响二次销售。</p>
 <h4>八、二次售卖说明</h4>
@@ -855,11 +1064,13 @@ try {
 var viewHome = document.getElementById('page-home');
 var viewIntro = document.getElementById('page-intro');
 var backToTop = document.getElementById('backToTop');
+var pageStack = [];
 
-function showView(id){
+function showView(id, noPush){
 var current = document.querySelector('.page.active');
 var target = document.getElementById(id);
 if(!current || current === target) return;
+if(!noPush && current) pageStack.push(current.id);
 current.classList.add('fading-out');
 current.classList.remove('active');
 setTimeout(function(){
@@ -867,6 +1078,7 @@ current.classList.remove('fading-out');
 target.classList.add('active');
 window.scrollTo({top:0, behavior:'auto'});
 updateBackBtn();
+updateNavHighlight(id);
 setTimeout(triggerReveal, 60);
 }, 300);
 }
@@ -879,20 +1091,62 @@ else{backBtn.classList.add('show');backToTop.style.display='flex';}
 }
 updateBackBtn();
 
-document.getElementById('backBtn').addEventListener('click', function(){showView('page-home');});
-document.getElementById('brandBtn').addEventListener('click', function(){showView('page-home');});
+function getCategory(id){
+var phonePages = ['page-home','page-home-neo6','page-neo7','page-neo6','page-buy-neo7','page-buy-neo6'];
+var padPages = ['page-home-pad1','page-pad1','page-buy-pad1'];
+if(phonePages.indexOf(id) > -1) return 'phone';
+if(padPages.indexOf(id) > -1) return 'pad';
+if(id === 'page-intro') return 'history';
+return null;
+}
+function updateNavHighlight(id){
+var cat = getCategory(id);
+document.getElementById('navPhone').classList.toggle('active', cat === 'phone');
+document.getElementById('navPad').classList.toggle('active', cat === 'pad');
+document.getElementById('navHistory').classList.toggle('active', cat === 'history');
+}
+updateNavHighlight('page-home');
+
+// 返回：优先回到上一页（栈），栈空则回首页
+document.getElementById('backBtn').addEventListener('click', function(){
+var prev = pageStack.pop();
+if(prev) showView(prev, true);
+else showView('page-home');
+});
+// 品牌按钮：清空历史，回首页
+document.getElementById('brandBtn').addEventListener('click', function(){
+pageStack = [];
+showView('page-home');
+});
+
+// 顶栏导航：进对应首页，清空历史
+document.getElementById('navPhone').addEventListener('click', function(){
+pageStack = [];
+showView('page-home');
+});
+document.getElementById('navPad').addEventListener('click', function(){
+pageStack = [];
+showView('page-home-pad1');
+});
 document.getElementById('navHistory').addEventListener('click', function(){
+pageStack = [];
 if(viewIntro.classList.contains('active')){showView('page-home');}
 else{showView('page-intro');}
 });
 
+// Neo7 首页
 document.getElementById('homeBuyBtn').addEventListener('click', function(){showView('page-buy-neo7');});
 document.getElementById('homeMoreBtn').addEventListener('click', function(){showView('page-neo7');});
 document.getElementById('prevNeo6').addEventListener('click', function(){showView('page-home-neo6');});
 
+// Neo6 首页
 document.getElementById('homeBuyBtn6').addEventListener('click', function(){showView('page-buy-neo6');});
 document.getElementById('homeMoreBtn6').addEventListener('click', function(){showView('page-neo6');});
 document.getElementById('nextNeo7').addEventListener('click', function(){showView('page-home');});
+
+// Pad 1 首页
+document.getElementById('homeBuyBtnPad1').addEventListener('click', function(){showView('page-buy-pad1');});
+document.getElementById('homeMoreBtnPad1').addEventListener('click', function(){showView('page-pad1');});
 
 var revealEls = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
 function triggerReveal(){
@@ -957,7 +1211,6 @@ window.addEventListener('load', function(){setTimeout(triggerReveal,100);});
 setTimeout(triggerReveal,200);
 backToTop.addEventListener('click', function(){window.scrollTo({top:0,behavior:'smooth'});});
 
-// ====== 全局价格格式化（openModal 和 startVerify 会用到）======
 function formatPrice(d){
 return d.currency + ' ' + d.price.toLocaleString('zh-CN');
 }
@@ -986,6 +1239,15 @@ specs:[{k:'版本',v:'12GB + 512GB',cls:'gold'},{k:'芯片',v:'第5代骁龙8至
 specs:[{k:'版本',v:'16GB + 512GB',cls:'gold'},{k:'芯片',v:'第5代骁龙8至尊',cls:'gold'},{k:'系统',v:'boziOS'},{k:'AI',v:'boziAI'},{k:'屏幕',v:'1.5K · 165Hz'},{k:'影像',v:'5000万潜望长焦'},{k:'电池',v:'8000mAh 冰川'},{k:'散热',v:'VC 5000mm²'},{k:'防护',v:'IP69K'},{k:'跑分',v:'4,784,383',cls:'gold'}]},
 {id:'n6v5',name:'Bozi Neo6',label:'16+1TB',tag:'顶配',price:5999,currency:'￥',stock:9999,chip:'骁龙8至尊',
 specs:[{k:'版本',v:'16GB + 1TB',cls:'gold'},{k:'芯片',v:'第5代骁龙8至尊',cls:'gold'},{k:'系统',v:'boziOS'},{k:'AI',v:'boziAI'},{k:'屏幕',v:'1.5K · 165Hz'},{k:'影像',v:'5000万潜望长焦'},{k:'电池',v:'8000mAh 冰川'},{k:'散热',v:'VC 5000mm²'},{k:'防护',v:'IP69K'},{k:'跑分',v:'4,784,383',cls:'gold'}]}
+];
+
+var devicesPad1 = [
+{id:'p1v1',name:'Bozi Pad 1',label:'8+128',tag:'￥1599',price:1599,currency:'￥',stock:9999,chip:'天玑8400',
+specs:[{k:'版本',v:'8GB + 128GB',cls:'teal'},{k:'芯片',v:'联发科 天玑8400',cls:'teal'},{k:'系统',v:'boziOS'},{k:'屏幕',v:'11.5" 2.8K · 144Hz',cls:'teal'},{k:'调光',v:'DC 调光'},{k:'内存',v:'8GB LPDDR5X'},{k:'存储',v:'128GB UFS 3.1'},{k:'后置',v:'1300万像素'},{k:'前置',v:'800万像素'},{k:'扬声器',v:'四声道 · 杜比全景声',cls:'teal'},{k:'电池',v:'10000mAh',cls:'teal'},{k:'充电',v:'33W 有线快充'},{k:'厚度',v:'6.9mm'},{k:'重量',v:'约 510g'},{k:'配色',v:'深空灰 / 冰川银 / 薄雾蓝'}]},
+{id:'p1v2',name:'Bozi Pad 1',label:'8+256',tag:'￥1799',price:1799,currency:'￥',stock:9999,chip:'天玑8400',
+specs:[{k:'版本',v:'8GB + 256GB',cls:'teal'},{k:'芯片',v:'联发科 天玑8400',cls:'teal'},{k:'系统',v:'boziOS'},{k:'屏幕',v:'11.5" 2.8K · 144Hz',cls:'teal'},{k:'调光',v:'DC 调光'},{k:'内存',v:'8GB LPDDR5X'},{k:'存储',v:'256GB UFS 3.1'},{k:'后置',v:'1300万像素'},{k:'前置',v:'800万像素'},{k:'扬声器',v:'四声道 · 杜比全景声',cls:'teal'},{k:'电池',v:'10000mAh',cls:'teal'},{k:'充电',v:'33W 有线快充'},{k:'厚度',v:'6.9mm'},{k:'重量',v:'约 510g'},{k:'配色',v:'深空灰 / 冰川银 / 薄雾蓝'}]},
+{id:'p1v3',name:'Bozi Pad 1',label:'12+256',tag:'推荐',price:2099,currency:'￥',stock:9999,chip:'天玑8400',
+specs:[{k:'版本',v:'12GB + 256GB',cls:'teal'},{k:'芯片',v:'联发科 天玑8400',cls:'teal'},{k:'系统',v:'boziOS'},{k:'屏幕',v:'11.5" 2.8K · 144Hz',cls:'teal'},{k:'调光',v:'DC 调光'},{k:'内存',v:'12GB LPDDR5X'},{k:'存储',v:'256GB UFS 3.1'},{k:'后置',v:'1300万像素'},{k:'前置',v:'800万像素'},{k:'扬声器',v:'四声道 · 杜比全景声',cls:'teal'},{k:'电池',v:'10000mAh',cls:'teal'},{k:'充电',v:'33W 有线快充'},{k:'厚度',v:'6.9mm'},{k:'重量',v:'约 510g'},{k:'配色',v:'深空灰 / 冰川银 / 薄雾蓝'}]}
 ];
 
 var payMethods = {wechat:'微信支付',alipay:'支付宝',card:'银行卡',balance:'Bozi 余额'};
@@ -1060,10 +1322,16 @@ devices: devices6, scrollId:'deviceScroll6', panelId:'devicePanel6',
 productNameId:'productName6', productBadgeId:'productBadge6', stockNumId:'stockNum6',
 specFullId:'specFull6', totalPriceId:'totalPrice6', buyBtnId:'buyBtn6'
 });
+var padSeller1 = setupBuyPage({
+devices: devicesPad1, scrollId:'deviceScrollPad1', panelId:'devicePanelPad1',
+productNameId:'productNamePad1', productBadgeId:'productBadgePad1', stockNumId:'stockNumPad1',
+specFullId:'specFullPad1', totalPriceId:'totalPricePad1', buyBtnId:'buyBtnPad1'
+});
 
 function getActiveSeller(){
 if(document.getElementById('page-buy-neo7').classList.contains('active')) return neoSeller7;
 if(document.getElementById('page-buy-neo6').classList.contains('active')) return neoSeller6;
+if(document.getElementById('page-buy-pad1').classList.contains('active')) return padSeller1;
 return neoSeller7;
 }
 
@@ -1203,6 +1471,8 @@ document.getElementById('buyBtn7').disabled = false;
 document.getElementById('buyBtn7').innerHTML = '<span class="btn-shine"></span>立即购买';
 document.getElementById('buyBtn6').disabled = false;
 document.getElementById('buyBtn6').innerHTML = '<span class="btn-shine"></span>立即购买';
+document.getElementById('buyBtnPad1').disabled = false;
+document.getElementById('buyBtnPad1').innerHTML = '<span class="btn-shine"></span>立即购买';
 }, 300);
 }
 
