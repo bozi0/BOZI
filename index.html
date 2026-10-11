@@ -16,13 +16,14 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .particle{position:absolute;border-radius:50%;animation:float-up linear infinite;will-change:transform,opacity}
 @keyframes float-up{0%{transform:translate3d(0,100vh,0) scale(0.5);opacity:0}10%{opacity:0.7}90%{opacity:0.7}100%{transform:translate3d(20px,-10vh,0) scale(1);opacity:0}}
 .progress-bar{position:fixed;top:0;left:0;height:3px;width:0%;background:linear-gradient(90deg,var(--primary),var(--secondary),var(--accent));z-index:999;transition:width 0.1s ease}
-.topbar{position:fixed;top:0;left:0;width:100%;padding:calc(10px + env(safe-area-inset-top)) 20px 10px;display:flex;justify-content:flex-start;align-items:center;gap:10px;z-index:200;background:rgba(5,5,7,0.98);border-bottom:1px solid rgba(167,139,250,0.08)}
+.topbar{position:fixed;top:0;left:0;width:100%;padding:calc(10px + env(safe-area-inset-top)) 12px 10px;display:flex;justify-content:flex-start;align-items:center;gap:8px;z-index:200;background:rgba(5,5,7,0.98);border-bottom:1px solid rgba(167,139,250,0.08)}
 .topbar .back-btn{display:none;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);color:#fff;font-size:17px;cursor:pointer;align-items:center;justify-content:center;font-family:inherit;padding:0;flex-shrink:0;transition:background 0.2s ease,transform 0.15s ease;line-height:1}
 .topbar .back-btn:active{transform:scale(0.92);background:rgba(139,92,246,0.25)}
 .topbar .back-btn.show{display:flex}
-.topbar .brand{font-size:16px;font-weight:800;letter-spacing:2px;background:linear-gradient(90deg,#fff,#a78bfa);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;cursor:pointer;flex:1}
-.topbar .nav-pill{display:flex;gap:4px;padding:4px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:40px;flex-shrink:0}
-.topbar .nav-pill button{padding:7px 11px;border-radius:40px;font-size:12px;font-weight:700;letter-spacing:1px;color:var(--text-sub);transition:background 0.25s ease,color 0.25s ease;white-space:nowrap;background:transparent;border:none;cursor:pointer;font-family:inherit}
+.topbar .brand{font-size:14px;font-weight:800;letter-spacing:1.5px;background:linear-gradient(90deg,#fff,#a78bfa);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;cursor:pointer;flex-shrink:0;flex-grow:0}
+.topbar .nav-pill{display:flex;gap:3px;padding:3px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:40px;flex:1;overflow-x:auto;justify-content:flex-end;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.topbar .nav-pill::-webkit-scrollbar{display:none}
+.topbar .nav-pill button{padding:6px 10px;border-radius:40px;font-size:11px;font-weight:700;letter-spacing:0.5px;color:var(--text-sub);transition:background 0.25s ease,color 0.25s ease;white-space:nowrap;background:transparent;border:none;cursor:pointer;font-family:inherit;flex-shrink:0}
 .topbar .nav-pill button.active{background:linear-gradient(135deg,var(--primary),#6d28d9);color:#fff}
 .banner{position:fixed;top:calc(64px + env(safe-area-inset-top));left:0;width:100%;padding:8px 20px;z-index:190;background:rgba(20,15,35,0.95);border-bottom:1px solid rgba(167,139,250,0.1);overflow:hidden}
 .banner-track{display:flex;gap:40px;animation:banner-scroll 30s linear infinite;white-space:nowrap;will-change:transform}
@@ -73,7 +74,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .prev-title::before,.prev-title::after{content:'';position:absolute;top:50%;width:30%;height:1px;background:linear-gradient(90deg,transparent,rgba(167,139,250,0.3),transparent)}
 .prev-title::before{left:0}
 .prev-title::after{right:0}
-.prev-card{background:linear-gradient(135deg,rgba(255,255,255,0.02),rgba(255,255,255,0.04));border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:22px;position:relative;overflow:hidden;cursor:pointer;transition:transform 0.2s ease,border-color 0.2s ease}
+.prev-card{background:linear-gradient(135deg,rgba(255,255,255,0.02),rgba(255,255,255,0.04));border:1px solid rgba(255,255,255,0.08);border-radius:20px;padding:22px 56px 22px 22px;position:relative;overflow:hidden;cursor:pointer;transition:transform 0.2s ease,border-color 0.2s ease}
 .prev-card:active{transform:scale(0.98);border-color:rgba(167,139,250,0.4)}
 .prev-card.pad-card-cta{border-color:rgba(45,212,191,0.25);background:linear-gradient(135deg,rgba(45,212,191,0.04),rgba(139,92,246,0.04))}
 .prev-card.pad-card-cta:active{border-color:rgba(45,212,191,0.5)}
@@ -415,7 +416,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <div class="hl-card reveal"><div class="hl-tag">影像</div><div class="hl-title">5000万三摄 · 潜望长焦</div><div class="hl-desc">5000万主摄（OIS）+ 5000万超广角 + 5000万潜望长焦（3.5倍光学，100倍数码）。LUMO 凝光 3.0，大师模式 3.0。</div></div>
 <div class="hl-card reveal"><div class="hl-tag">续航 & 充电</div><div class="hl-title">8000mAh 冰川电池</div><div class="hl-desc">100W 有线 + 50W 无线。IP68 / IP69 防尘防水。3D 超声波指纹。</div></div>
 <div class="hl-card reveal"><div class="hl-tag">系统 & AI</div><div class="hl-title">BoziOS 2 + BoziAI 2</div><div class="hl-desc">出厂即搭载。丝滑细腻的系统响应，跨设备无缝协同，主动学习使用习惯的智慧搭档。</div></div>
-<div class="hl-card reveal"><div class="hl-tag">设计</div><div class="hl-title">航空级铝合金 + 磨砂玻璃</div><div class="hl-desc">破晓金、雾海蓝、钛空灰。破晓金在光线流转下呈现深海般静谧光泽。</div></div>
+<div class="hl-card reveal"><div class="hl-tag">设计</div><div class="hl-title">航空级铝合金 + 磨砂玻璃</div><div class="hl-desc">破晓金、雾海蓝、钛空灰。破晓金在光线流转下呈现晨曦般温暖光泽。</div></div>
 </div>
 <div class="prev-section reveal">
 <div class="prev-title">系统新版本</div>
@@ -1682,7 +1683,6 @@ function formatPrice(d){
 return d.currency + ' ' + d.price.toLocaleString('zh-CN');
 }
 
-// ====== 颜色列表（名称 + 色值 + 文字色） ======
 var colorsNeo8 = [
 {name:'破晓金',bg:'#e8b84a',fg:'#2a1a00'},
 {name:'雾海蓝',bg:'#5b7b9a',fg:'#ffffff'},
