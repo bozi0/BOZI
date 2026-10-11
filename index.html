@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>Bozi® 官方网站</title>
 <style>
-:root{--bg-dark:#050507;--text-main:#f8fafc;--text-sub:#94a3b8;--primary:#8b5cf6;--primary-glow:#a78bfa;--secondary:#2dd4bf;--accent:#f472b6;--gold:#facc15;--success:#22c55e;--blue:#60a5fa;--radius-lg:28px;--radius-md:18px;--safe-bottom:env(safe-area-inset-bottom,24px)}
+:root{--bg-dark:#050507;--text-main:#f8fafc;--text-sub:#94a3b8;--primary:#8b5cf6;--primary-glow:#a78bfa;--secondary:#2dd4bf;--accent:#f472b6;--gold:#facc15;--success:#22c55e;--blue:#60a5fa;--cyan:#22d3ee;--radius-lg:28px;--radius-md:18px;--safe-bottom:env(safe-area-inset-bottom,24px)}
 *{box-sizing:border-box;font-family:system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',sans-serif;-webkit-tap-highlight-color:transparent;-webkit-font-smoothing:antialiased}
 html{scroll-behavior:smooth}
 body{background-color:var(--bg-dark);margin:0;min-height:100vh;min-height:100dvh;display:flex;justify-content:center;color:var(--text-main);overflow-x:hidden;position:relative;user-select:none}
@@ -22,7 +22,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .topbar .back-btn.show{display:flex}
 .topbar .brand{font-size:16px;font-weight:800;letter-spacing:2px;background:linear-gradient(90deg,#fff,#a78bfa);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;cursor:pointer;flex:1}
 .topbar .nav-pill{display:flex;gap:4px;padding:4px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:40px;flex-shrink:0}
-.topbar .nav-pill button{padding:7px 12px;border-radius:40px;font-size:12px;font-weight:700;letter-spacing:1px;color:var(--text-sub);transition:background 0.25s ease,color 0.25s ease;white-space:nowrap;background:transparent;border:none;cursor:pointer;font-family:inherit}
+.topbar .nav-pill button{padding:7px 11px;border-radius:40px;font-size:12px;font-weight:700;letter-spacing:1px;color:var(--text-sub);transition:background 0.25s ease,color 0.25s ease;white-space:nowrap;background:transparent;border:none;cursor:pointer;font-family:inherit}
 .topbar .nav-pill button.active{background:linear-gradient(135deg,var(--primary),#6d28d9);color:#fff}
 .banner{position:fixed;top:calc(64px + env(safe-area-inset-top));left:0;width:100%;padding:8px 20px;z-index:190;background:rgba(20,15,35,0.95);border-bottom:1px solid rgba(167,139,250,0.1);overflow:hidden}
 .banner-track{display:flex;gap:40px;animation:banner-scroll 30s linear infinite;white-space:nowrap;will-change:transform}
@@ -45,6 +45,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .home-hero .badge.new-badge{color:var(--gold);border-color:rgba(250,204,21,0.4);background:rgba(250,204,21,0.08)}
 .home-hero .badge.pad-badge{color:var(--secondary);border-color:rgba(45,212,191,0.4);background:rgba(45,212,191,0.08)}
 .home-hero .badge.book-badge{color:var(--blue);border-color:rgba(96,165,250,0.4);background:rgba(96,165,250,0.08)}
+.home-hero .badge.sys-badge{color:var(--cyan);border-color:rgba(34,211,238,0.4);background:rgba(34,211,238,0.08)}
 @keyframes pulse-soft{0%,100%{opacity:1}50%{opacity:0.6}}
 .home-hero h1{font-size:clamp(56px,18vw,96px);font-weight:900;line-height:1;letter-spacing:-4px;margin:0 0 20px 0;background:linear-gradient(135deg,#fff,#a78bfa,#2dd4bf,#fff);background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shine 6s linear infinite}
 @keyframes shine{to{background-position:200% center}}
@@ -78,14 +79,18 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .prev-card.pad-card-cta:active{border-color:rgba(45,212,191,0.5)}
 .prev-card.book-card-cta{border-color:rgba(96,165,250,0.25);background:linear-gradient(135deg,rgba(96,165,250,0.04),rgba(139,92,246,0.04))}
 .prev-card.book-card-cta:active{border-color:rgba(96,165,250,0.5)}
+.prev-card.sys-card-cta{border-color:rgba(34,211,238,0.25);background:linear-gradient(135deg,rgba(34,211,238,0.04),rgba(139,92,246,0.04))}
+.prev-card.sys-card-cta:active{border-color:rgba(34,211,238,0.5)}
 .prev-card .prev-tag{font-size:10px;letter-spacing:3px;color:var(--text-sub);font-weight:700;margin-bottom:8px;display:inline-block;padding:3px 10px;background:rgba(255,255,255,0.05);border-radius:40px}
 .prev-card.pad-card-cta .prev-tag{color:var(--secondary);background:rgba(45,212,191,0.1)}
 .prev-card.book-card-cta .prev-tag{color:var(--blue);background:rgba(96,165,250,0.1)}
+.prev-card.sys-card-cta .prev-tag{color:var(--cyan);background:rgba(34,211,238,0.1)}
 .prev-card .prev-name{font-size:20px;font-weight:900;color:#fff;margin-bottom:6px;letter-spacing:-0.5px}
 .prev-card .prev-sub{font-size:12px;color:var(--text-sub);margin-bottom:14px;line-height:1.6}
 .prev-card .prev-arrow{position:absolute;right:22px;top:50%;transform:translateY(-50%);font-size:20px;color:var(--primary-glow);opacity:0.6}
 .prev-card.pad-card-cta .prev-arrow{color:var(--secondary);opacity:0.8}
 .prev-card.book-card-cta .prev-arrow{color:var(--blue);opacity:0.8}
+.prev-card.sys-card-cta .prev-arrow{color:var(--cyan);opacity:0.8}
 .prev-card .prev-stats{display:flex;gap:10px;font-size:11px;color:#cbd5e1;flex-wrap:wrap}
 .prev-card .prev-stats span{background:rgba(255,255,255,0.04);padding:4px 10px;border-radius:8px;border:1px solid rgba(255,255,255,0.06)}
 .reveal{opacity:0;transform:translateY(30px);transition:opacity 0.6s ease,transform 0.6s cubic-bezier(0.175,0.885,0.32,1.275);will-change:transform,opacity}
@@ -94,6 +99,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .hero .badge{font-size:10px;letter-spacing:5px;color:var(--primary-glow);margin-bottom:20px;padding:6px 14px;border:1px solid rgba(167,139,250,0.3);border-radius:40px;background:rgba(139,92,246,0.08);font-weight:600}
 .hero .badge.pad-badge{color:var(--secondary);border-color:rgba(45,212,191,0.4);background:rgba(45,212,191,0.08)}
 .hero .badge.book-badge{color:var(--blue);border-color:rgba(96,165,250,0.4);background:rgba(96,165,250,0.08)}
+.hero .badge.sys-badge{color:var(--cyan);border-color:rgba(34,211,238,0.4);background:rgba(34,211,238,0.08)}
 .hero h1{font-size:clamp(40px,12vw,68px);font-weight:900;line-height:1.05;letter-spacing:-2px;margin:0 0 20px 0;background:linear-gradient(135deg,#fff,#a78bfa,#2dd4bf,#fff);background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shine 6s linear infinite}
 .hero .sub{font-size:15px;color:var(--text-sub);line-height:1.8;max-width:380px;margin:0 auto}
 .hero .slogans{margin-top:40px;display:flex;flex-direction:column;gap:8px;font-size:12px;color:var(--text-sub);letter-spacing:1px;opacity:0.7}
@@ -114,6 +120,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .gold-highlight{color:var(--gold);font-weight:700}
 .teal-highlight{color:var(--secondary);font-weight:700}
 .blue-highlight{color:var(--blue);font-weight:700}
+.cyan-highlight{color:var(--cyan);font-weight:700}
 .quote{position:relative;padding:20px 22px 20px 28px;background:rgba(139,92,246,0.05);border-left:3px solid var(--primary);border-radius:0 16px 16px 0;margin:24px 0;font-size:15px;line-height:1.7;color:#e2e8f0;font-style:italic}
 .quote::before{content:'"';position:absolute;top:-8px;left:12px;font-size:48px;color:var(--primary-glow);opacity:0.3;font-family:Georgia,serif;line-height:1}
 .quote .by{display:block;margin-top:12px;font-size:12px;color:var(--text-sub);font-style:normal;letter-spacing:1px}
@@ -122,10 +129,14 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .product-card::after{content:'';position:absolute;top:20px;bottom:20px;left:0;width:3px;background:linear-gradient(180deg,var(--primary),var(--secondary),transparent);border-radius:0 3px 3px 0;opacity:0.7}
 .product-card.featured::after{background:linear-gradient(180deg,var(--gold),var(--accent),transparent);opacity:1}
 .product-card.featured{border-color:rgba(250,204,21,0.3)}
+.product-card.sys-card::after{background:linear-gradient(180deg,var(--cyan),var(--primary-glow),transparent);opacity:1}
+.product-card.sys-card{border-color:rgba(34,211,238,0.2)}
 .card-label{display:inline-block;font-size:10px;letter-spacing:3px;color:var(--primary-glow);font-weight:700;padding:4px 10px;background:rgba(139,92,246,0.12);border-radius:40px;margin-bottom:14px;position:relative}
 .product-card.featured .card-label{color:var(--gold);background:rgba(250,204,21,0.12)}
+.product-card.sys-card .card-label{color:var(--cyan);background:rgba(34,211,238,0.12)}
 .product-name{font-size:22px;font-weight:900;line-height:1.25;margin:0 0 6px 0;letter-spacing:-0.5px;color:#fff;position:relative;word-break:break-word}
 .product-card.featured .product-name{background:linear-gradient(90deg,#fff,var(--gold));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.product-card.sys-card .product-name{background:linear-gradient(90deg,#fff,var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .product-tagline{font-size:13px;color:var(--text-sub);margin-bottom:18px;position:relative}
 .spec-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:18px 0;position:relative}
 .spec-item{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:12px;padding:12px}
@@ -135,6 +146,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .spec-item .v.gold{background:linear-gradient(180deg,#fff,var(--gold));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .spec-item .v.teal{background:linear-gradient(180deg,#fff,var(--secondary));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .spec-item .v.blue{background:linear-gradient(180deg,#fff,var(--blue));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.spec-item .v.cyan{background:linear-gradient(180deg,#fff,var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .product-card .desc{font-size:14px;color:#cbd5e1;line-height:1.8;margin:18px 0 0 0;position:relative}
 .price-bar{display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:18px;border-top:1px solid rgba(255,255,255,0.06);position:relative}
 .price-bar .left{display:flex;flex-direction:column;gap:3px}
@@ -163,13 +175,15 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .table-card{scroll-snap-align:start;min-width:200px;flex-shrink:0;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:18px;padding:18px;position:relative}
 .table-card.god{border-color:rgba(250,204,21,0.3);background:rgba(250,204,21,0.03)}
 .table-card.god .tc-name{background:linear-gradient(180deg,#fff,var(--gold));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.table-card.sys{border-color:rgba(34,211,238,0.3);background:rgba(34,211,238,0.03)}
+.table-card.sys .tc-name{background:linear-gradient(180deg,#fff,var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .table-card .tc-gen{font-size:10px;color:var(--text-sub);letter-spacing:2px;margin-bottom:6px}
 .table-card .tc-name{font-size:16px;font-weight:800;color:#fff;margin-bottom:12px;line-height:1.2;word-break:break-word}
 .table-card .tc-row{display:flex;justify-content:space-between;font-size:11px;padding:5px 0;border-bottom:1px dashed rgba(255,255,255,0.05)}
 .table-card .tc-row:last-child{border-bottom:none}
 .table-card .tc-row .k{color:var(--text-sub)}
 .table-card .tc-row .v{color:#fff;font-weight:600;text-align:right;max-width:60%;word-break:break-word}
-.table-card .tc-row .v.gold{color:var(--gold)}.table-card .tc-row .v.purple{color:var(--primary-glow)}
+.table-card .tc-row .v.gold{color:var(--gold)}.table-card .tc-row .v.purple{color:var(--primary-glow)}.table-card .tc-row .v.cyan{color:var(--cyan)}
 .spec-table{display:flex;flex-direction:column;gap:8px;margin:20px 0;position:relative}
 .spec-row{display:flex;justify-content:space-between;font-size:12px;padding:10px 14px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:10px;gap:12px}
 .spec-row .k{color:var(--text-sub);white-space:nowrap;letter-spacing:1px}
@@ -177,12 +191,18 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .spec-row .v.gold{color:var(--gold)}
 .spec-row .v.teal{color:var(--secondary)}
 .spec-row .v.blue{color:var(--blue)}
+.spec-row .v.cyan{color:var(--cyan)}
 .price-versions{display:flex;flex-direction:column;gap:10px;margin:20px 0;position:relative}
 .price-version{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px;transition:border-color 0.2s ease}
 .price-version.featured{border-color:rgba(250,204,21,0.3);background:rgba(250,204,21,0.04)}
 .price-version .ver{font-size:14px;font-weight:700;color:#fff;letter-spacing:1px}
 .price-version .price{font-size:20px;font-weight:900;background:linear-gradient(180deg,#fff,var(--gold));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .price-version .badge-mini{font-size:9px;padding:3px 8px;background:rgba(250,204,21,0.15);border:1px solid rgba(250,204,21,0.3);border-radius:6px;color:var(--gold);font-weight:700;letter-spacing:1px;margin-left:8px}
+.feature-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:20px 0;position:relative}
+.feature-item{background:rgba(34,211,238,0.04);border:1px solid rgba(34,211,238,0.15);border-radius:16px;padding:18px 16px}
+.feature-item .fi-icon{font-size:22px;margin-bottom:10px}
+.feature-item .fi-title{font-size:14px;font-weight:800;color:#fff;margin-bottom:6px;line-height:1.3}
+.feature-item .fi-desc{font-size:12px;color:#cbd5e1;line-height:1.7}
 .footer{text-align:center;padding-top:60px;padding-bottom:30px;color:var(--text-sub);font-size:13px;letter-spacing:1px;position:relative}
 .footer .logo{font-size:32px;font-weight:900;margin-bottom:14px;background:linear-gradient(90deg,#a78bfa,#2dd4bf,#f472b6,#a78bfa);background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shine 5s linear infinite}
 .footer .slogan{font-style:italic;color:var(--primary-glow);margin-top:16px;font-size:12px;line-height:1.9}
@@ -204,6 +224,13 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .device-chip .chip-sub{display:block;font-size:9px;opacity:0.7;font-weight:600;margin-top:2px;letter-spacing:0}
 .device-panel{transition:opacity 0.18s ease,transform 0.18s ease}
 .device-panel.switching{opacity:0;transform:translateY(6px)}
+.color-picker{display:flex;flex-direction:column;gap:10px;margin-bottom:20px;position:relative}
+.color-picker .picker-label{font-size:11px;color:var(--text-sub);letter-spacing:3px;font-weight:700}
+.color-scroll{display:flex;gap:8px;overflow-x:auto;padding:4px 0;margin:0 -20px;padding-left:20px;padding-right:20px;scrollbar-width:none}
+.color-scroll::-webkit-scrollbar{display:none}
+.color-chip{flex-shrink:0;padding:9px 18px;border-radius:40px;font-size:12px;font-weight:800;letter-spacing:1px;cursor:pointer;transition:transform 0.2s ease,box-shadow 0.2s ease;font-family:inherit;white-space:nowrap;border:2px solid rgba(255,255,255,0.15);position:relative;text-shadow:0 1px 2px rgba(0,0,0,0.25)}
+.color-chip:active{transform:scale(0.95)}
+.color-chip.active{border-color:var(--gold);box-shadow:0 0 0 3px rgba(250,204,21,0.25),0 4px 14px rgba(0,0,0,0.4);transform:translateY(-1px)}
 .buy-card{background:linear-gradient(135deg,rgba(250,204,21,0.05),rgba(139,92,246,0.05));border:1px solid rgba(250,204,21,0.2);border-radius:var(--radius-lg);padding:24px;position:relative;overflow:hidden}
 .buy-card.teal-card{background:linear-gradient(135deg,rgba(45,212,191,0.05),rgba(139,92,246,0.05));border-color:rgba(45,212,191,0.2)}
 .buy-card.blue-card{background:linear-gradient(135deg,rgba(96,165,250,0.05),rgba(139,92,246,0.05));border-color:rgba(96,165,250,0.2)}
@@ -275,7 +302,8 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .summary-block{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px;padding:16px;margin-bottom:14px}
 .summary-block .row{display:flex;justify-content:space-between;font-size:12px;padding:7px 0;gap:12px}
 .summary-block .row .k{color:var(--text-sub);white-space:nowrap}
-.summary-block .row .v{color:#fff;font-weight:600;text-align:right;flex:1;word-break:break-word}
+.summary-block .row .v{color:#fff;font-weight:600;text-align:right;flex:1;word-break:break-word;display:flex;align-items:center;justify-content:flex-end;gap:6px}
+.summary-block .row .v .color-dot{width:12px;height:12px;border-radius:50%;border:1px solid rgba(255,255,255,0.2);flex-shrink:0}
 .summary-block .row.total{border-top:1px solid rgba(255,255,255,0.08);margin-top:6px;padding-top:12px;font-size:14px}
 .summary-block .row.total .v{font-size:18px;color:var(--gold);font-weight:800}
 .pay-list{display:flex;flex-direction:column;gap:10px}
@@ -342,18 +370,21 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <button id="navPhone">手机</button>
 <button id="navPad">平板</button>
 <button id="navBook">电脑</button>
+<button id="navSystem">系统</button>
 <button id="navHistory">设备史</button>
 </div>
 </div>
 
 <div class="banner">
 <div class="banner-track">
-<span>BOZI NEO7 全新发布</span><span>天玑9600 · 风驰内核 2.0</span><span>2亿潜望长焦 · 120倍变焦</span><span>2K LTPO 165Hz · 6000nit</span><span>120W 有线 + 50W 无线</span>
+<span>BOZI NEO8 全新发布</span><span>天玑9500 · 风驰内核 3.0</span><span>2K LTPO 165Hz · 6000nit</span><span>5000万潜望长焦 · 100倍变焦</span><span>8000mAh · 100W + 50W 无线</span>
 <span>BOZI PAD 2 新品上市</span><span>天玑8500 · 11.8" 2.8K OLED 120Hz</span><span>10500mAh · 44W 快充</span><span>6.5mm · 495g · 四色可选</span><span>￥1899 起</span>
 <span>BOZI BOOK 1 新品上市</span><span>Core Ultra 5 · Intel Arc</span><span>14" 2.5K 120Hz · 100% sRGB</span><span>70Wh · 100W 快充 · 1.35kg</span><span>￥4999 起</span>
-<span>BOZI NEO7 全新发布</span><span>天玑9600 · 风驰内核 2.0</span><span>2亿潜望长焦 · 120倍变焦</span><span>2K LTPO 165Hz · 6000nit</span><span>120W 有线 + 50W 无线</span>
+<span>BOZIOS 2 &amp; BOZIAI 2 正式发布</span><span>全场景智慧跃迁 · 从懂你开始</span><span>跨端协同 · 应用接力 · 剪贴板共享</span><span>主动服务 · 场景感知 · 隐私守护</span>
+<span>BOZI NEO8 全新发布</span><span>天玑9500 · 风驰内核 3.0</span><span>2K LTPO 165Hz · 6000nit</span><span>5000万潜望长焦 · 100倍变焦</span><span>8000mAh · 100W + 50W 无线</span>
 <span>BOZI PAD 2 新品上市</span><span>天玑8500 · 11.8" 2.8K OLED 120Hz</span><span>10500mAh · 44W 快充</span><span>6.5mm · 495g · 四色可选</span><span>￥1899 起</span>
 <span>BOZI BOOK 1 新品上市</span><span>Core Ultra 5 · Intel Arc</span><span>14" 2.5K 120Hz · 100% sRGB</span><span>70Wh · 100W 快充 · 1.35kg</span><span>￥4999 起</span>
+<span>BOZIOS 2 &amp; BOZIAI 2 正式发布</span><span>全场景智慧跃迁 · 从懂你开始</span><span>跨端协同 · 应用接力 · 剪贴板共享</span><span>主动服务 · 场景感知 · 隐私守护</span>
 </div>
 </div>
 
@@ -361,10 +392,57 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 
 <div class="app-container">
 
-<!-- ========== 1. 手机首页（Neo7） ========== -->
+<!-- 1. 手机首页（Neo8） -->
 <div class="page active" id="page-home">
 <div class="home-hero reveal">
 <div class="badge new-badge">BOZI® 全新发布</div>
+<h1>Bozi Neo8</h1>
+<p class="sub">全场景智慧旗舰，重塑日常新标杆。强悍性能与优雅设计的默契共鸣。</p>
+<div class="home-stats">
+<div class="home-stat"><div class="num">天玑9500</div><div class="lbl">旗舰芯片</div></div>
+<div class="home-stat"><div class="num">2K 165Hz</div><div class="lbl">超感屏</div></div>
+<div class="home-stat"><div class="num">100W</div><div class="lbl">有线快充</div></div>
+</div>
+<div class="home-actions">
+<button class="home-btn primary" id="homeBuyBtn">立即购买</button>
+<button class="home-btn secondary" id="homeMoreBtn">了解更多</button>
+</div>
+<div class="scroll-hint2">↓ 向下滑动，查看亮点 ↓</div>
+</div>
+<div class="home-highlights">
+<div class="hl-card reveal"><div class="hl-tag">性能</div><div class="hl-title">天玑9500 + 风驰内核 3.0</div><div class="hl-desc">全新升级的博子风驰游戏内核 3.0，性能释放更加从容。重载游戏、多任务分屏、4K 剪辑持续稳定。</div><div class="hl-big">6000mm²</div><div class="hl-desc">超大 VC 散热面积，长时间高负载依然冷静。</div></div>
+<div class="hl-card reveal"><div class="hl-tag">屏幕</div><div class="hl-title">6.82英寸 2K LTPO 超感屏</div><div class="hl-desc">1-165Hz 自适应刷新率，峰值亮度 6000nit，支持高频 PWM 调光。</div></div>
+<div class="hl-card reveal"><div class="hl-tag">影像</div><div class="hl-title">5000万三摄 · 潜望长焦</div><div class="hl-desc">5000万主摄（OIS）+ 5000万超广角 + 5000万潜望长焦（3.5倍光学，100倍数码）。LUMO 凝光 3.0，大师模式 3.0。</div></div>
+<div class="hl-card reveal"><div class="hl-tag">续航 & 充电</div><div class="hl-title">8000mAh 冰川电池</div><div class="hl-desc">100W 有线 + 50W 无线。IP68 / IP69 防尘防水。3D 超声波指纹。</div></div>
+<div class="hl-card reveal"><div class="hl-tag">系统 & AI</div><div class="hl-title">BoziOS 2 + BoziAI 2</div><div class="hl-desc">出厂即搭载。丝滑细腻的系统响应，跨设备无缝协同，主动学习使用习惯的智慧搭档。</div></div>
+<div class="hl-card reveal"><div class="hl-tag">设计</div><div class="hl-title">航空级铝合金 + 磨砂玻璃</div><div class="hl-desc">破晓金、雾海蓝、钛空灰。破晓金在光线流转下呈现深海般静谧光泽。</div></div>
+</div>
+<div class="prev-section reveal">
+<div class="prev-title">系统新版本</div>
+<div class="prev-card sys-card-cta" id="goSystem">
+<div class="prev-tag">BOZIOS 2 · BOZIAI 2</div>
+<div class="prev-name">全场景智慧跃迁</div>
+<div class="prev-sub">跨端协同、应用接力、主动服务、隐私守护。Neo8 出厂即搭载。</div>
+<div class="prev-stats"><span>跨端协同</span><span>应用接力</span><span>主动服务</span></div>
+<div class="prev-arrow">→</div>
+</div>
+</div>
+<div class="prev-section reveal">
+<div class="prev-title">上一代旗舰</div>
+<div class="prev-card" id="prevNeo7">
+<div class="prev-tag">BOZI NEO7</div>
+<div class="prev-name">Bozi Neo7</div>
+<div class="prev-sub">Bozi 回归人间后的第二台量产旗舰，Neo 系列真正意义上的「新一代」。</div>
+<div class="prev-stats"><span>天玑9600</span><span>2K · 165Hz</span><span>2亿长焦</span></div>
+<div class="prev-arrow">→</div>
+</div>
+</div>
+</div>
+
+<!-- 2. 手机首页（Neo7） -->
+<div class="page" id="page-home-neo7">
+<div class="home-hero reveal">
+<div class="badge">BOZI® NEO7</div>
 <h1>Bozi Neo7</h1>
 <p class="sub">Bozi 回归人间后的第二台量产旗舰，也是 Neo 系列真正意义上的「新一代」。</p>
 <div class="home-stats">
@@ -373,21 +451,37 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <div class="home-stat"><div class="num">120W</div><div class="lbl">有线快充</div></div>
 </div>
 <div class="home-actions">
-<button class="home-btn primary" id="homeBuyBtn">立即购买</button>
-<button class="home-btn secondary" id="homeMoreBtn">了解更多</button>
+<button class="home-btn primary" id="homeBuyBtn7">立即购买</button>
+<button class="home-btn secondary" id="homeMoreBtn7">了解更多</button>
 </div>
 <div class="scroll-hint2">↓ 向下滑动，查看亮点 ↓</div>
 </div>
-
 <div class="home-highlights">
-<div class="hl-card reveal"><div class="hl-tag">性能</div><div class="hl-title">联发科 天玑9600</div><div class="hl-desc">最新旗舰芯片，配合博子风驰游戏内核 2.0，性能调度更流畅、更稳定。</div><div class="hl-big">480-520万</div><div class="hl-desc">安兔兔跑分。旗舰第一梯队的成绩。</div></div>
+<div class="hl-card reveal"><div class="hl-tag">性能</div><div class="hl-title">联发科 天玑9600</div><div class="hl-desc">配合博子风驰游戏内核 2.0，性能调度更流畅、更稳定。安兔兔跑分约 480万-520万。</div></div>
 <div class="hl-card reveal"><div class="hl-tag">屏幕</div><div class="hl-title">6.85英寸 2K LTPO AMOLED</div><div class="hl-desc">1-165Hz 自适应刷新率，峰值亮度 6000nit。清晰、流畅、护眼。</div></div>
-<div class="hl-card reveal"><div class="hl-tag">影像</div><div class="hl-title">2亿像素潜望长焦</div><div class="hl-desc">5000万主摄（OIS）+ 5000万超广角 + 2亿潜望长焦（5倍光学，120倍数码）。LUMO 凝光 2.0，支持 4K 120帧 / 8K 30帧。</div></div>
+<div class="hl-card reveal"><div class="hl-tag">影像</div><div class="hl-title">2亿像素潜望长焦</div><div class="hl-desc">5000万主摄（OIS）+ 5000万超广角 + 2亿潜望长焦（5倍光学，120倍数码）。LUMO 凝光 2.0。</div></div>
 <div class="hl-card reveal"><div class="hl-tag">续航 & 充电</div><div class="hl-title">8000mAh 冰川电池</div><div class="hl-desc">120W 有线 + 50W 无线。6000mm² VC 散热。IP69K 全覆盖防护。3D 超声波指纹。</div></div>
-<div class="hl-card reveal"><div class="hl-tag">系统 & AI</div><div class="hl-title">boziOS + boziAI</div><div class="hl-desc">当前版本已预装，后续将通过 OTA 推送 2.0 更新。干净、稳定、不打扰。</div></div>
-<div class="hl-card reveal"><div class="hl-tag">存储</div><div class="hl-title">LPDDR5X + UFS 4.1</div><div class="hl-desc">最新一代内存与闪存规格。量产发售，不缺货，支持二次售卖。</div></div>
 </div>
-
+<div class="prev-section reveal">
+<div class="prev-title">系统新版本</div>
+<div class="prev-card sys-card-cta" id="goSystem7">
+<div class="prev-tag">BOZIOS 2 · BOZIAI 2</div>
+<div class="prev-name">全场景智慧跃迁</div>
+<div class="prev-sub">跨端协同、应用接力、主动服务、隐私守护。Bozi 生态走向真正的成熟。</div>
+<div class="prev-stats"><span>跨端协同</span><span>应用接力</span><span>主动服务</span></div>
+<div class="prev-arrow">→</div>
+</div>
+</div>
+<div class="prev-section reveal">
+<div class="prev-title">最新一代</div>
+<div class="prev-card" id="nextNeo8">
+<div class="prev-tag">BOZI NEO8</div>
+<div class="prev-name">Bozi Neo8</div>
+<div class="prev-sub">全场景智慧旗舰，重塑日常新标杆。天玑9500 + 风驰内核 3.0。</div>
+<div class="prev-stats"><span>天玑9500</span><span>2K · 165Hz</span><span>5000万潜望</span></div>
+<div class="prev-arrow">→</div>
+</div>
+</div>
 <div class="prev-section reveal">
 <div class="prev-title">上一代旗舰</div>
 <div class="prev-card" id="prevNeo6">
@@ -400,7 +494,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 </div>
 </div>
 
-<!-- ========== 2. 手机首页（Neo6） ========== -->
+<!-- 3. 手机首页（Neo6） -->
 <div class="page" id="page-home-neo6">
 <div class="home-hero reveal">
 <div class="badge">BOZI® NEW</div>
@@ -417,14 +511,12 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 </div>
 <div class="scroll-hint2">↓ 向下滑动，查看亮点 ↓</div>
 </div>
-
 <div class="home-highlights">
 <div class="hl-card reveal"><div class="hl-tag">性能</div><div class="hl-title">第5代骁龙8至尊</div><div class="hl-desc">当前主流旗舰级芯片。配合博子风驰游戏内核 1.0，专注日常使用与游戏体验的平衡。</div><div class="hl-big">4,784,383</div><div class="hl-desc">安兔兔跑分。一个可以被正常显示、被排行榜收录的成绩。</div></div>
-<div class="hl-card reveal"><div class="hl-tag">系统 & AI</div><div class="hl-title">全新 boziOS + 全新 boziAI</div><div class="hl-desc">不再是混沌系统，没有自我演化。boziOS 流畅、稳定、干净，该有的都有，不该有的都不碰。boziAI 更懂你，但不会越界。</div></div>
+<div class="hl-card reveal"><div class="hl-tag">系统 & AI</div><div class="hl-title">boziOS + boziAI</div><div class="hl-desc">不再是混沌系统，没有自我演化。boziOS 流畅、稳定、干净。</div></div>
 <div class="hl-card reveal"><div class="hl-tag">影像</div><div class="hl-title">5000万像素潜望长焦</div><div class="hl-desc">3.5 倍潜望长焦 + 自研 LUMO 凝光影像系统 + 全新「大师模式」+ 4K 120帧 杜比视界专业视频。</div></div>
 <div class="hl-card reveal"><div class="hl-tag">续航 & 防护</div><div class="hl-title">8000mAh 冰川电池</div><div class="hl-desc">旗舰级第一梯队续航。5000mm² VC 散热。IP66 / IP68 / IP69 / IP69K 全覆盖防护。3D 超声波指纹。</div></div>
 </div>
-
 <div class="prev-section reveal">
 <div class="prev-title">最新一代</div>
 <div class="prev-card" id="nextNeo7">
@@ -437,7 +529,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 </div>
 </div>
 
-<!-- ========== 3. 平板首页（Pad 2） ========== -->
+<!-- 4. 平板首页（Pad 2） -->
 <div class="page" id="page-home-pad2">
 <div class="home-hero reveal">
 <div class="badge pad-badge">BOZI® 新品 · 平板</div>
@@ -454,16 +546,14 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 </div>
 <div class="scroll-hint2">↓ 向下滑动，查看亮点 ↓</div>
 </div>
-
 <div class="home-highlights">
-<div class="hl-card reveal"><div class="hl-tag">设计</div><div class="hl-title">更轻更薄，手感进阶</div><div class="hl-desc">6.5mm 厚度，495g 重量。一体成型铝合金中框，磨砂背板。新增晨曦金配色。</div></div>
-<div class="hl-card reveal"><div class="hl-tag">屏幕</div><div class="hl-title">11.8英寸 2.8K OLED</div><div class="hl-desc">120Hz 刷新率，峰值亮度 900nit，支持 DC 调光。更纯净的黑色，更高的对比度。</div></div>
-<div class="hl-card reveal"><div class="hl-tag">性能</div><div class="hl-title">联发科 天玑8500</div><div class="hl-desc">配合 boziOS 深度调校，日常使用、多任务切换、主流游戏都流畅稳定，能效平衡。</div></div>
+<div class="hl-card reveal"><div class="hl-tag">设计</div><div class="hl-title">更轻更薄，手感进阶</div><div class="hl-desc">6.5mm 厚度，495g 重量。一体成型铝合金中框，磨砂背板。新增霞光紫配色。</div></div>
+<div class="hl-card reveal"><div class="hl-tag">屏幕</div><div class="hl-title">11.8英寸 2.8K OLED</div><div class="hl-desc">120Hz 刷新率，峰值亮度 900nit，支持 DC 调光。</div></div>
+<div class="hl-card reveal"><div class="hl-tag">性能</div><div class="hl-title">联发科 天玑8500</div><div class="hl-desc">配合 boziOS 深度调校，日常使用、多任务切换、主流游戏都流畅稳定。</div></div>
 <div class="hl-card reveal"><div class="hl-tag">音效</div><div class="hl-title">四声道立体声</div><div class="hl-desc">支持杜比全景声。横屏观影时，声音层次分明，人声清晰，低频饱满。</div></div>
 <div class="hl-card reveal"><div class="hl-tag">续航</div><div class="hl-title">10500mAh + 44W 快充</div><div class="hl-desc">电池容量提升至 10500mAh，充电功率升级至 44W 有线快充。</div></div>
 <div class="hl-card reveal"><div class="hl-tag">轻办公 & 创作</div><div class="hl-title">手写笔 + 磁吸键盘</div><div class="hl-desc">支持 Bozi 智能手写笔、磁吸键盘保护壳。多端协同，文件互传、跨屏操作顺畅。</div></div>
 </div>
-
 <div class="prev-section reveal">
 <div class="prev-title">上一代平板</div>
 <div class="prev-card pad-card-cta" id="prevPad1">
@@ -476,7 +566,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 </div>
 </div>
 
-<!-- ========== 4. 平板首页（Pad 1） ========== -->
+<!-- 5. 平板首页（Pad 1） -->
 <div class="page" id="page-home-pad1">
 <div class="home-hero reveal">
 <div class="badge pad-badge">BOZI® 平板</div>
@@ -493,16 +583,14 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 </div>
 <div class="scroll-hint2">↓ 向下滑动，查看亮点 ↓</div>
 </div>
-
 <div class="home-highlights">
 <div class="hl-card reveal"><div class="hl-tag">性能</div><div class="hl-title">联发科 天玑8400</div><div class="hl-desc">旗舰级芯片，配合深度调校的 boziOS，日常应用切换、多任务分屏、主流游戏都流畅稳定。</div></div>
-<div class="hl-card reveal"><div class="hl-tag">屏幕</div><div class="hl-title">11.5英寸 2.8K 144Hz</div><div class="hl-desc">2.8K 超清分辨率，144Hz 高刷新率，支持 DC 调光。清晰、顺滑、护眼。</div></div>
-<div class="hl-card reveal"><div class="hl-tag">音效</div><div class="hl-title">四声道立体声</div><div class="hl-desc">支持杜比全景声。横屏追剧、听讲座、玩游戏，声音饱满清晰，无需外接音箱。</div></div>
+<div class="hl-card reveal"><div class="hl-tag">屏幕</div><div class="hl-title">11.5英寸 2.8K 144Hz</div><div class="hl-desc">2.8K 超清分辨率，144Hz 高刷新率，支持 DC 调光。</div></div>
+<div class="hl-card reveal"><div class="hl-tag">音效</div><div class="hl-title">四声道立体声</div><div class="hl-desc">支持杜比全景声。横屏追剧、听讲座、玩游戏，声音饱满清晰。</div></div>
 <div class="hl-card reveal"><div class="hl-tag">续航</div><div class="hl-title">10000mAh 大电池</div><div class="hl-desc">满足一整天的使用需求。33W 有线快充，碎片时间快速补电。</div></div>
 <div class="hl-card reveal"><div class="hl-tag">轻办公 & 创作</div><div class="hl-title">手写笔 + 磁吸键盘</div><div class="hl-desc">支持 Bozi 智能手写笔、磁吸键盘保护壳。多端协同，文件互传、跨屏操作顺畅自然。</div></div>
-<div class="hl-card reveal"><div class="hl-tag">设计</div><div class="hl-title">6.9mm · 510g · 三色可选</div><div class="hl-desc">深空灰、冰川银、薄雾蓝。细腻金属质感，轻盈握持，随身携带毫无负担。</div></div>
+<div class="hl-card reveal"><div class="hl-tag">设计</div><div class="hl-title">6.9mm · 510g · 三色可选</div><div class="hl-desc">午夜灰、皓月白、天青蓝。细腻金属质感，轻盈握持。</div></div>
 </div>
-
 <div class="prev-section reveal">
 <div class="prev-title">最新一代</div>
 <div class="prev-card pad-card-cta" id="nextPad2">
@@ -515,7 +603,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 </div>
 </div>
 
-<!-- ========== 5. 电脑首页（Book 1） ========== -->
+<!-- 6. 电脑首页（Book 1） -->
 <div class="page" id="page-home-book1">
 <div class="home-hero reveal">
 <div class="badge book-badge">BOZI® 新品 · 电脑</div>
@@ -532,97 +620,281 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 </div>
 <div class="scroll-hint2">↓ 向下滑动，查看亮点 ↓</div>
 </div>
-
 <div class="home-highlights">
-<div class="hl-card reveal"><div class="hl-tag">设计</div><div class="hl-title">15.9mm · 1.35kg · 双色可选</div><div class="hl-desc">航空级铝合金一体成型，喷砂处理。深空灰、冰川银两款配色，简约耐看。</div></div>
-<div class="hl-card reveal"><div class="hl-tag">屏幕</div><div class="hl-title">14英寸 2.5K 120Hz</div><div class="hl-desc">100% sRGB 高色域，窄边框设计。色彩还原准确，浏览文档、观看视频都清晰舒适。</div></div>
+<div class="hl-card reveal"><div class="hl-tag">设计</div><div class="hl-title">15.9mm · 1.35kg · 双色可选</div><div class="hl-desc">航空级铝合金一体成型，喷砂处理。玄铁灰、月岩银两款配色，简约耐看。</div></div>
+<div class="hl-card reveal"><div class="hl-tag">屏幕</div><div class="hl-title">14英寸 2.5K 120Hz</div><div class="hl-desc">100% sRGB 高色域，窄边框设计。色彩还原准确。</div></div>
 <div class="hl-card reveal"><div class="hl-tag">性能</div><div class="hl-title">Core Ultra 5 + Intel Arc</div><div class="hl-desc">配合 Windows 11，性能与能效平衡出色。日常办公、多任务处理、轻量视频剪辑都流畅稳定。</div></div>
-<div class="hl-card reveal"><div class="hl-tag">生态</div><div class="hl-title">Windows 11 + Bozi 互联</div><div class="hl-desc">与 Bozi 手机、平板多端协同。文件互传、跨屏操作、剪贴板共享，手机通知直接在电脑处理。</div></div>
-<div class="hl-card reveal"><div class="hl-tag">续航</div><div class="hl-title">70Wh + 100W 快充</div><div class="hl-desc">满足一整天办公与学习需求。100W 有线快充，碎片时间快速补电。</div></div>
-<div class="hl-card reveal"><div class="hl-tag">接口</div><div class="hl-title">全功能 USB-C × 2</div><div class="hl-desc">USB-C × 2、USB-A × 1、HDMI × 1、3.5mm 耳机孔。无需转接器，扩展自如。</div></div>
+<div class="hl-card reveal"><div class="hl-tag">生态</div><div class="hl-title">Windows 11 + Bozi 互联</div><div class="hl-desc">与 Bozi 手机、平板多端协同。文件互传、跨屏操作、剪贴板共享。</div></div>
+<div class="hl-card reveal"><div class="hl-tag">续航</div><div class="hl-title">70Wh + 100W 快充</div><div class="hl-desc">满足一整天办公与学习需求。100W 有线快充。</div></div>
+<div class="hl-card reveal"><div class="hl-tag">接口</div><div class="hl-title">全功能 USB-C × 2</div><div class="hl-desc">USB-C × 2、USB-A × 1、HDMI × 1、3.5mm 耳机孔。无需转接器。</div></div>
 </div>
 </div>
 
-<!-- ========== 6. Neo7 详情页 ========== -->
-<div class="page" id="page-neo7">
+<!-- 7. 系统页 -->
+<div class="page" id="page-system">
 <div class="hero reveal">
-<div class="badge">BOZI® NEO7</div>
-<h1>新一代</h1>
-<p class="sub">Bozi 回归人间后的第二台量产旗舰，也是 Neo 系列真正意义上的「新一代」。</p>
+<div class="badge sys-badge">BOZIOS 2 · BOZIAI 2</div>
+<h1>全场景智慧跃迁</h1>
+<p class="sub">从「懂你」开始。硬件是骨架，系统与 AI 是流淌的灵魂。Bozi 生态，走向真正的成熟。</p>
+<div class="audio-bars"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+<div class="slogans"><div>Peak performance runs on Bozi.</div><div class="en">All chips bow to Bozi.</div></div>
+</div>
+<div class="reveal">
+<div class="section-header"><span class="section-index">PROLOGUE</span><h2 class="section-title">从「懂你」开始</h2></div>
+<div class="text-body"><p>在 Bozi 的全生态版图中，硬件是坚实的骨架，而系统与 AI 则是流淌的灵魂。</p><p>随着 <span class="cyan-highlight">BoziOS 2</span> 与 <span class="cyan-highlight">BoziAI 2</span> 的正式亮相，Bozi 生态迎来了从单一设备到多端协同的深度蜕变。</p></div>
+</div>
+<div class="reveal">
+<div class="section-header"><span class="section-index">BOZIOS 2</span><h2 class="section-title">打破边界，重塑感官</h2></div>
+<div class="product-card sys-card">
+<div class="card-label">VISUAL & TACTILE</div>
+<h3 class="product-name">视觉与触觉的双重质感</h3>
+<p class="desc">BoziOS 2 对底层图形引擎进行了全面重构，带来了极其细腻的视觉反馈。系统动画引入了<span class="cyan-highlight">高精度的阻尼曲线</span>，每一次过渡都如行云流水般优雅自然。</p>
+</div>
+<div class="product-card sys-card">
+<div class="card-label">PERFORMANCE</div>
+<h3 class="product-name">从容稳定的性能调度</h3>
+<p class="desc">在重载场景下，BoziOS 2 展现了强大的调度智慧。它能<span class="cyan-highlight">精准预判用户的操作意图</span>，动态调配系统算力，<span class="cyan-highlight">后台保活率大幅跃升</span>。</p>
+</div>
+<div class="product-card sys-card">
+<div class="card-label">CROSS-DEVICE</div>
+<h3 class="product-name">无缝流转的跨端协同</h3>
+<p class="desc">让手机、平板与电脑不再是信息孤岛，而是真正融为一个高效的整体。</p>
+<div class="feature-grid">
+<div class="feature-item"><div class="fi-icon">📋</div><div class="fi-title">剪贴板共享</div><div class="fi-desc">手机上复制的文字，拿起电脑直接粘贴。</div></div>
+<div class="feature-item"><div class="fi-icon">🔗</div><div class="fi-title">应用接力</div><div class="fi-desc">手机起草的文档，电脑端直接弹窗接力。</div></div>
+<div class="feature-item" style="grid-column:1 / -1;"><div class="fi-icon">⚡</div><div class="fi-title">文件中转</div><div class="fi-desc">无需数据线，多设备间的大文件闪传，瞬间完成。</div></div>
+</div>
+</div>
+</div>
+<div class="reveal">
+<div class="section-header"><span class="section-index">BOZIAI 2</span><h2 class="section-title">默契相伴，更懂你</h2></div>
+<div class="product-card sys-card">
+<div class="card-label">PROACTIVE</div>
+<h3 class="product-name">贴合习惯的主动服务</h3>
+<p class="desc">BoziAI 2 是一位<span class="cyan-highlight">懂你节律的贴心搭档</span>。它会深度学习你的日常习惯，敏锐感知你的需求，<span class="cyan-highlight">主动规划最佳的出门时间</span>。</p>
+</div>
+<div class="product-card sys-card">
+<div class="card-label">CONTEXT AWARE</div>
+<h3 class="product-name">跨越终端的场景感知</h3>
+<p class="desc">BoziAI 2 赋予了生态真正的「智慧流动」。无论切换到哪一块屏幕，都能享受连贯、高效、省心的智慧陪伴。</p>
+</div>
+<div class="product-card sys-card">
+<div class="card-label">SECURITY</div>
+<h3 class="product-name">安全与隐私的坚定守护</h3>
+<p class="desc">BoziAI 2 始终坚持<span class="cyan-highlight">本地算力优先</span>与<span class="cyan-highlight">端云协同</span>的安全策略。你的数据在系统底层得到严格加密与隔离保护。</p>
+</div>
+</div>
+<div class="reveal">
+<div class="section-header"><span class="section-index">ECOSYSTEM</span><h2 class="section-title">全场景生态，由此蜕变</h2></div>
+<div class="summary-card">
+<div class="title">🌌 Bozi 全场景生态</div>
+<div class="item">让 <span class="white-highlight">Neo8 的强悍</span>、<span class="white-highlight">Pad 2 的沉浸</span>、<span class="white-highlight">Book 1 的高效</span>彼此交融。</div>
+<div class="item">它没有高高在上的距离感，只有懂你所需的贴心与从容。</div>
+</div>
+<div class="quote">你的下一台主力设备，不仅要有强悍的性能，更要有懂你的灵魂。<span class="by">— Bozi</span></div>
+</div>
+<div class="reveal">
+<div class="section-header"><span class="section-index">UPDATE</span><h2 class="section-title">即刻更新</h2></div>
+<div class="product-card sys-card">
+<div class="card-label">OTA</div>
+<h3 class="product-name">BoziOS 2 &amp; BoziAI 2</h3>
+<p class="desc">Neo8 出厂即搭载。Neo7、Neo6、Pad 2、Pad 1、Book 1 等设备，将通过 OTA 陆续推送更新。</p>
+<div class="spec-grid">
+<div class="spec-item"><div class="k">更新方式</div><div class="v cyan">OTA 推送</div></div>
+<div class="spec-item"><div class="k">费用</div><div class="v cyan">免费</div></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<div class="logo">BOZI®</div>
+<div>从一颗散装芯片，到手腕上的另一个维度</div>
+<div class="slogan">Peak performance runs on Bozi.<br>All chips bow to Bozi.</div>
+<div class="emoji">🌌 ⌚ 📱 🔥</div>
+<div class="copy">© BOZI® · ALL RIGHTS RESERVED</div>
+</div>
 </div>
 
+<!-- 8. Neo8 详情页 -->
+<div class="page" id="page-neo8">
+<div class="hero reveal">
+<div class="badge new-badge">BOZI® NEO8</div>
+<h1>全场景智慧旗舰</h1>
+<p class="sub">强悍性能与优雅设计的默契共鸣，搭载全新 BoziOS 2 与 BoziAI 2。</p>
+</div>
 <div class="reveal">
 <div class="section-header"><span class="section-index">SPECS</span><h2 class="section-title">核心参数</h2></div>
 <div class="spec-table">
-<div class="spec-row"><span class="k">产品名称</span><span class="v">Bozi Neo7</span></div>
-<div class="spec-row"><span class="k">芯片</span><span class="v gold">联发科 天玑9600</span></div>
-<div class="spec-row"><span class="k">系统</span><span class="v">boziOS</span></div>
-<div class="spec-row"><span class="k">AI</span><span class="v">boziAI</span></div>
-<div class="spec-row"><span class="k">游戏内核</span><span class="v gold">博子风驰游戏内核 2.0</span></div>
-<div class="spec-row"><span class="k">屏幕</span><span class="v">6.85" 2K LTPO · 1-165Hz</span></div>
-<div class="spec-row"><span class="k">峰值亮度</span><span class="v">6000nit</span></div>
+<div class="spec-row"><span class="k">产品名称</span><span class="v">Bozi Neo8</span></div>
+<div class="spec-row"><span class="k">芯片</span><span class="v gold">天玑9500 旗舰芯片</span></div>
+<div class="spec-row"><span class="k">系统</span><span class="v gold">BoziOS 2</span></div>
+<div class="spec-row"><span class="k">AI</span><span class="v gold">BoziAI 2</span></div>
+<div class="spec-row"><span class="k">游戏内核</span><span class="v gold">博子风驰游戏内核 3.0</span></div>
+<div class="spec-row"><span class="k">屏幕</span><span class="v">6.82" 2K LTPO · 1-165Hz</span></div>
+<div class="spec-row"><span class="k">峰值亮度</span><span class="v gold">6000nit</span></div>
 <div class="spec-row"><span class="k">主摄</span><span class="v">5000万 · OIS</span></div>
 <div class="spec-row"><span class="k">超广角</span><span class="v">5000万</span></div>
-<div class="spec-row"><span class="k">潜望长焦</span><span class="v gold">2亿 · 5倍光变 / 120倍数码</span></div>
-<div class="spec-row"><span class="k">影像系统</span><span class="v">自研 LUMO 凝光 2.0</span></div>
-<div class="spec-row"><span class="k">视频</span><span class="v">4K 120帧 / 8K 30帧</span></div>
-<div class="spec-row"><span class="k">防护</span><span class="v">IP66 / 68 / 69 / 69K</span></div>
+<div class="spec-row"><span class="k">潜望长焦</span><span class="v gold">5000万 · 3.5倍光变 / 100倍数码</span></div>
+<div class="spec-row"><span class="k">影像系统</span><span class="v">自研 LUMO 凝光 3.0</span></div>
+<div class="spec-row"><span class="k">视频</span><span class="v">4K 120帧 杜比视界 / 8K 30帧</span></div>
+<div class="spec-row"><span class="k">防护</span><span class="v">IP68 / IP69</span></div>
 <div class="spec-row"><span class="k">指纹</span><span class="v">3D 超声波指纹</span></div>
 <div class="spec-row"><span class="k">电池</span><span class="v gold">8000mAh 冰川电池</span></div>
-<div class="spec-row"><span class="k">充电</span><span class="v gold">120W 有线 + 50W 无线</span></div>
-<div class="spec-row"><span class="k">散热</span><span class="v">VC 6000mm²</span></div>
-<div class="spec-row"><span class="k">内存/存储</span><span class="v">LPDDR5X + UFS 4.1</span></div>
-<div class="spec-row"><span class="k">安兔兔跑分</span><span class="v gold">约 480万 - 520万</span></div>
-<div class="spec-row"><span class="k">销售方式</span><span class="v">量产 · 支持二次售卖</span></div>
+<div class="spec-row"><span class="k">充电</span><span class="v gold">100W 有线 + 50W 无线</span></div>
+<div class="spec-row"><span class="k">内存/存储</span><span class="v">LPDDR5X + UFS 4.0</span></div>
+<div class="spec-row"><span class="k">配色</span><span class="v">破晓金 / 雾海蓝 / 钛空灰</span></div>
 </div>
 </div>
-
 <div class="reveal">
-<div class="section-header"><span class="section-index">PERFORMANCE</span><h2 class="section-title">性能</h2></div>
+<div class="section-header"><span class="section-index">DESIGN</span><h2 class="section-title">优雅设计，质感进阶</h2></div>
 <div class="product-card">
-<div class="card-label">CHIP</div>
-<h3 class="product-name">联发科 天玑9600</h3>
-<p class="product-tagline">最新旗舰芯片</p>
-<p class="desc">配合 <span class="highlight">博子风驰游戏内核 2.0</span>，性能调度更流畅、更稳定。安兔兔跑分约 <span class="gold-highlight">480万-520万</span>，属于旗舰第一梯队。</p>
-<div class="spec-grid">
-<div class="spec-item"><div class="k">安兔兔跑分</div><div class="v gold">480-520万</div></div>
-<div class="spec-item"><div class="k">游戏内核</div><div class="v">风驰 2.0</div></div>
+<div class="card-label">DAWN GOLD</div>
+<h3 class="product-name">航空级铝合金中框 + 磨砂玻璃背板</h3>
+<p class="desc">机身采用<span class="gold-highlight">航空级铝合金中框</span>与<span class="gold-highlight">磨砂玻璃背板</span>。全新的「<span class="gold-highlight">破晓金</span>」配色，在光线流转下呈现出晨曦般的温暖光泽。<span class="gold-highlight">IP68 / IP69</span> 全方位防尘防水。</p>
 </div>
 </div>
-</div>
-
 <div class="reveal">
-<div class="section-header"><span class="section-index">DISPLAY</span><h2 class="section-title">屏幕</h2></div>
+<div class="section-header"><span class="section-index">DISPLAY</span><h2 class="section-title">超感屏幕，视觉盛宴</h2></div>
 <div class="product-card">
-<div class="card-label">2K LTPO</div>
-<h3 class="product-name">6.85英寸 · 1-165Hz 自适应</h3>
-<p class="product-tagline">清晰、流畅、护眼</p>
-<p class="desc">6.85英寸 <span class="highlight">2K LTPO AMOLED</span> 屏幕，支持 <span class="highlight">1-165Hz 自适应刷新率</span>，峰值亮度 <span class="gold-highlight">6000nit</span>。</p>
+<div class="card-label">2K LTPO · 165Hz</div>
+<h3 class="product-name">6.82英寸 2K LTPO 超感屏</h3>
+<p class="desc">支持 <span class="gold-highlight">1-165Hz 自适应刷新率</span>，峰值亮度 <span class="gold-highlight">6000nit</span>。支持高频 PWM 调光，在享受细腻画质的同时，进一步呵护双眼。</p>
 <div class="spec-grid">
-<div class="spec-item"><div class="k">尺寸</div><div class="v">6.85"</div></div>
+<div class="spec-item"><div class="k">尺寸</div><div class="v">6.82"</div></div>
 <div class="spec-item"><div class="k">刷新率</div><div class="v gold">1-165Hz</div></div>
 <div class="spec-item"><div class="k">分辨率</div><div class="v">2K</div></div>
 <div class="spec-item"><div class="k">峰值亮度</div><div class="v gold">6000nit</div></div>
 </div>
 </div>
 </div>
+<div class="reveal">
+<div class="section-header"><span class="section-index">PERFORMANCE</span><h2 class="section-title">强悍性能，从容驾驭</h2></div>
+<div class="product-card">
+<div class="card-label">DIMENSITY 9500</div>
+<h3 class="product-name">天玑9500 + 风驰内核 3.0</h3>
+<p class="desc">搭载<span class="gold-highlight">天玑9500 旗舰芯片</span>，配合<span class="gold-highlight">博子风驰游戏内核 3.0</span>，性能释放更加从容。<span class="gold-highlight">6000mm²</span> 的超大 VC 散热面积。</p>
+</div>
+</div>
+<div class="reveal">
+<div class="section-header"><span class="section-index">OS & AI</span><h2 class="section-title">智慧双核，懂你所需</h2></div>
+<div class="product-card"><div class="card-label">BOZIOS 2</div><h3 class="product-name">BoziOS 2</h3><p class="desc">出厂即搭载。丝滑细腻的系统响应，以及<span class="gold-highlight">跨设备的无缝协同能力</span>。</p></div>
+<div class="product-card"><div class="card-label">BOZIAI 2</div><h3 class="product-name">BoziAI 2</h3><p class="desc">出厂即搭载。化身你的贴心搭档，<span class="gold-highlight">主动学习你的使用习惯</span>。本地算力优先，隐私得到严格保护。</p></div>
+</div>
+<div class="reveal">
+<div class="section-header"><span class="section-index">CAMERA</span><h2 class="section-title">凝光影像，记录非凡</h2></div>
+<div class="product-card">
+<div class="card-label">LUMO 3.0</div>
+<h3 class="product-name">5000万三摄 · 潜望长焦</h3>
+<p class="desc">后置搭载 5000万主摄 + 5000万超广角 + 5000万潜望长焦。配合 <span class="gold-highlight">LUMO 凝光 3.0</span> 以及大师模式 3.0。支持 <span class="gold-highlight">3.5倍光学变焦</span>与 <span class="gold-highlight">100倍数码变焦</span>，<span class="gold-highlight">4K 120帧杜比视界</span>视频录制。</p>
+</div>
+</div>
+<div class="reveal">
+<div class="section-header"><span class="section-index">BATTERY</span><h2 class="section-title">超长续航，告别焦虑</h2></div>
+<div class="product-card">
+<div class="card-label">8000mAh</div>
+<h3 class="product-name">冰川电池 + 100W 快充</h3>
+<p class="desc">配备 <span class="gold-highlight">8000mAh 冰川电池</span>，配合 <span class="gold-highlight">100W 有线快充</span>与 <span class="gold-highlight">50W 无线充电</span>。</p>
+<div class="spec-grid">
+<div class="spec-item"><div class="k">电池</div><div class="v gold">8000mAh</div></div>
+<div class="spec-item"><div class="k">有线</div><div class="v gold">100W</div></div>
+<div class="spec-item"><div class="k">无线</div><div class="v gold">50W</div></div>
+<div class="spec-item"><div class="k">散热</div><div class="v">VC 6000mm²</div></div>
+</div>
+</div>
+</div>
+<div class="reveal">
+<div class="section-header"><span class="section-index">PRICE</span><h2 class="section-title">价格与版本</h2></div>
+<div class="price-versions">
+<div class="price-version"><span class="ver">12GB + 256GB</span><span class="price">￥4699</span></div>
+<div class="price-version"><span class="ver">16GB + 256GB</span><span class="price">￥4999</span></div>
+<div class="price-version"><span class="ver">16GB + 512GB</span><span class="price">￥5499</span></div>
+<div class="price-version featured"><span class="ver">16GB + 1TB<span class="badge-mini">顶配</span></span><span class="price">￥6199</span></div>
+</div>
+</div>
+</div>
 
+<!-- 9. Neo8 购买页 -->
+<div class="page" id="page-buy-neo8">
+<div class="page-title">
+<h1>立即购买</h1>
+<p class="sub">Bozi Neo8 · 量产发售 · 不会缺货</p>
+<div class="live-badge">当前 14,326 人正在浏览</div>
+</div>
+<div class="device-picker"><div class="picker-label">选择版本</div><div class="device-scroll" id="deviceScroll8"></div></div>
+<div class="device-panel" id="devicePanel8">
+<div class="buy-card">
+<div class="buy-header">
+<div class="info"><div class="name" id="productName8">Bozi Neo8</div><div class="stock">现货 · 当前 <span id="stockNum8">9999</span> 台可购</div></div>
+<div class="badge-stock" id="productBadge8">量产</div>
+</div>
+<div class="spec-full" id="specFull8"></div>
+<div class="color-picker"><div class="picker-label">选择颜色</div><div class="color-scroll" id="colorScroll8"></div></div>
+<div class="total-bar"><div class="label">应付总额</div><div class="amount" id="totalPrice8">￥4699</div></div>
+<button class="buy-btn" id="buyBtn8"><span class="btn-shine"></span>立即购买</button>
+<div class="buy-note">支付即表示同意《Bozi 用户协议》<br>量产发售 · 支持二次售卖 · 无身份绑定</div>
+</div>
+</div>
+<div class="trust-card"><div class="title">🛡️ 官方保障</div><div class="row"><span class="k">发货方式</span><span class="v">顺丰包邮</span></div><div class="row"><span class="k">售后</span><span class="v">全国联保</span></div><div class="row"><span class="k">退换</span><span class="v">7 天无理由</span></div><div class="row"><span class="k">保修</span><span class="v">首年整机保修</span></div></div>
+<div class="slogan-strip"><div>Peak performance runs on Bozi.</div><div>All chips bow to Bozi.</div></div>
+</div>
+
+<!-- 10. Neo7 详情页 -->
+<div class="page" id="page-neo7">
+<div class="hero reveal">
+<div class="badge">BOZI® NEO7</div>
+<h1>新一代</h1>
+<p class="sub">Bozi 回归人间后的第二台量产旗舰，也是 Neo 系列真正意义上的「新一代」。</p>
+</div>
+<div class="reveal">
+<div class="section-header"><span class="section-index">SPECS</span><h2 class="section-title">核心参数</h2></div>
+<div class="spec-table">
+<div class="spec-row"><span class="k">产品名称</span><span class="v">Bozi Neo7</span></div>
+<div class="spec-row"><span class="k">芯片</span><span class="v gold">联发科 天玑9600</span></div>
+<div class="spec-row"><span class="k">系统</span><span class="v">BoziOS 2</span></div>
+<div class="spec-row"><span class="k">AI</span><span class="v">BoziAI 2</span></div>
+<div class="spec-row"><span class="k">游戏内核</span><span class="v gold">博子风驰游戏内核 2.0</span></div>
+<div class="spec-row"><span class="k">屏幕</span><span class="v">6.85" 2K LTPO · 1-165Hz</span></div>
+<div class="spec-row"><span class="k">峰值亮度</span><span class="v">6000nit</span></div>
+<div class="spec-row"><span class="k">主摄</span><span class="v">5000万 · OIS</span></div>
+<div class="spec-row"><span class="k">潜望长焦</span><span class="v gold">2亿 · 5倍光变 / 120倍数码</span></div>
+<div class="spec-row"><span class="k">影像系统</span><span class="v">自研 LUMO 凝光 2.0</span></div>
+<div class="spec-row"><span class="k">防护</span><span class="v">IP66 / 68 / 69 / 69K</span></div>
+<div class="spec-row"><span class="k">指纹</span><span class="v">3D 超声波指纹</span></div>
+<div class="spec-row"><span class="k">电池</span><span class="v gold">8000mAh 冰川电池</span></div>
+<div class="spec-row"><span class="k">充电</span><span class="v gold">120W 有线 + 50W 无线</span></div>
+<div class="spec-row"><span class="k">内存/存储</span><span class="v">LPDDR5X + UFS 4.1</span></div>
+<div class="spec-row"><span class="k">安兔兔跑分</span><span class="v gold">约 480万 - 520万</span></div>
+<div class="spec-row"><span class="k">配色</span><span class="v">墨玉黑 / 星云灰 / 苍岭绿</span></div>
+</div>
+</div>
+<div class="reveal">
+<div class="section-header"><span class="section-index">PERFORMANCE</span><h2 class="section-title">性能</h2></div>
+<div class="product-card">
+<div class="card-label">CHIP</div>
+<h3 class="product-name">联发科 天玑9600</h3>
+<p class="desc">配合 <span class="highlight">博子风驰游戏内核 2.0</span>，性能调度更流畅、更稳定。安兔兔跑分约 <span class="gold-highlight">480万-520万</span>。</p>
+</div>
+</div>
+<div class="reveal">
+<div class="section-header"><span class="section-index">DISPLAY</span><h2 class="section-title">屏幕</h2></div>
+<div class="product-card">
+<div class="card-label">2K LTPO</div>
+<h3 class="product-name">6.85英寸 · 1-165Hz 自适应</h3>
+<p class="desc">6.85英寸 <span class="highlight">2K LTPO AMOLED</span> 屏幕，支持 <span class="highlight">1-165Hz 自适应刷新率</span>，峰值亮度 <span class="gold-highlight">6000nit</span>。</p>
+</div>
+</div>
 <div class="reveal">
 <div class="section-header"><span class="section-index">CAMERA</span><h2 class="section-title">影像</h2></div>
 <div class="product-card">
 <div class="card-label">LUMO 2.0</div>
 <h3 class="product-name">2亿像素潜望长焦</h3>
-<p class="product-tagline">自研 LUMO 凝光影像系统 2.0</p>
-<p class="desc">· 5000万主摄（OIS）<br>· 5000万超广角<br>· 2亿潜望长焦（5倍光学，120倍数码）<br>· 自研 LUMO 凝光影像系统 2.0<br>· 大师模式 2.0<br>· 4K 120帧 杜比视界 / 8K 30帧</p>
+<p class="desc">· 5000万主摄（OIS）<br>· 5000万超广角<br>· 2亿潜望长焦（5倍光学，120倍数码）<br>· 自研 LUMO 凝光 2.0<br>· 大师模式 2.0</p>
 </div>
 </div>
-
 <div class="reveal">
 <div class="section-header"><span class="section-index">BATTERY</span><h2 class="section-title">续航与充电</h2></div>
 <div class="product-card">
 <div class="card-label">8000mAh</div>
 <h3 class="product-name">冰川电池 + 120W 快充</h3>
-<p class="product-tagline">旗舰第一梯队续航</p>
 <div class="spec-grid">
 <div class="spec-item"><div class="k">电池</div><div class="v gold">8000mAh</div></div>
 <div class="spec-item"><div class="k">有线</div><div class="v gold">120W</div></div>
@@ -631,7 +903,6 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 </div>
 </div>
 </div>
-
 <div class="reveal">
 <div class="section-header"><span class="section-index">PRICE</span><h2 class="section-title">价格与版本</h2></div>
 <div class="price-versions">
@@ -644,7 +915,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 </div>
 </div>
 
-<!-- ========== 7. Neo7 独立购买页 ========== -->
+<!-- 11. Neo7 购买页 -->
 <div class="page" id="page-buy-neo7">
 <div class="page-title">
 <h1>立即购买</h1>
@@ -659,6 +930,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <div class="badge-stock" id="productBadge7">量产</div>
 </div>
 <div class="spec-full" id="specFull7"></div>
+<div class="color-picker"><div class="picker-label">选择颜色</div><div class="color-scroll" id="colorScroll7"></div></div>
 <div class="total-bar"><div class="label">应付总额</div><div class="amount" id="totalPrice7">￥4499</div></div>
 <button class="buy-btn" id="buyBtn7"><span class="btn-shine"></span>立即购买</button>
 <div class="buy-note">支付即表示同意《Bozi 用户协议》<br>量产发售 · 支持二次售卖 · 无身份绑定</div>
@@ -668,119 +940,73 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <div class="slogan-strip"><div>Peak performance runs on Bozi.</div><div>All chips bow to Bozi.</div></div>
 </div>
 
-<!-- ========== 8. Neo6 详情页 ========== -->
+<!-- 12. Neo6 详情页 -->
 <div class="page" id="page-neo6">
 <div class="hero reveal">
 <div class="badge">BOZI® NEO6</div>
 <h1>回归人间</h1>
 <p class="sub">它不再是一部神机。它是一台属于这个时代的，好用的手机。</p>
 </div>
-
-<div class="reveal">
-<div class="section-header"><span class="section-index">POSITIONING</span><h2 class="section-title">Bozi 纪元的终章</h2></div>
-<div class="text-body"><p>Neo6 是 Neo 系列的最后一款产品。</p><p>在此之前的 Bozi 神级设备——Neo2、Neo3、Neo4、Neo5——因为"不属于这个时代"，收到了匿名警告。为了给时代一个自然的演变过程，Bozi 决定关闭旧系统、物理销毁部分芯片，并让 Neo6 成为一台真正属于这个时代的手机。</p><p>它不再追求"凡人无法触及神明"，不再让安兔兔显示 ∞，不再让游戏帧率溢出。</p><p><span class="white-highlight">它是一台可以量产、可以二次售卖、可以像普通手机一样被使用的设备。</span></p></div>
-</div>
-
 <div class="reveal">
 <div class="section-header"><span class="section-index">SPECS</span><h2 class="section-title">核心参数总表</h2></div>
 <div class="spec-table">
 <div class="spec-row"><span class="k">产品名称</span><span class="v">Bozi Neo6</span></div>
-<div class="spec-row"><span class="k">产品定位</span><span class="v">Neo 系列上一代旗舰</span></div>
 <div class="spec-row"><span class="k">芯片</span><span class="v gold">第5代骁龙8至尊</span></div>
-<div class="spec-row"><span class="k">系统</span><span class="v gold">全新 boziOS</span></div>
-<div class="spec-row"><span class="k">AI</span><span class="v">全新 boziAI</span></div>
+<div class="spec-row"><span class="k">系统</span><span class="v gold">BoziOS 2</span></div>
+<div class="spec-row"><span class="k">AI</span><span class="v">BoziAI 2</span></div>
 <div class="spec-row"><span class="k">游戏内核</span><span class="v">博子风驰游戏内核 1.0</span></div>
 <div class="spec-row"><span class="k">屏幕</span><span class="v">1.5K · 原生 165Hz</span></div>
 <div class="spec-row"><span class="k">影像</span><span class="v">5000万潜望长焦</span></div>
 <div class="spec-row"><span class="k">影像系统</span><span class="v">自研 LUMO 凝光</span></div>
-<div class="spec-row"><span class="k">特色模式</span><span class="v">全新「大师模式」</span></div>
 <div class="spec-row"><span class="k">视频</span><span class="v">4K 120帧 杜比视界</span></div>
 <div class="spec-row"><span class="k">防护</span><span class="v">IP66 / 68 / 69 / 69K</span></div>
 <div class="spec-row"><span class="k">指纹</span><span class="v">3D 超声波指纹</span></div>
 <div class="spec-row"><span class="k">电池</span><span class="v gold">8000mAh 冰川电池</span></div>
 <div class="spec-row"><span class="k">散热</span><span class="v">VC 5000mm²</span></div>
 <div class="spec-row"><span class="k">安兔兔跑分</span><span class="v gold">4,784,383</span></div>
-<div class="spec-row"><span class="k">销售方式</span><span class="v">量产 · 支持二次售卖</span></div>
+<div class="spec-row"><span class="k">配色</span><span class="v">曜夜黑 / 流光银 / 晴空蓝</span></div>
 </div>
 </div>
-
 <div class="reveal">
 <div class="section-header"><span class="section-index">PERFORMANCE</span><h2 class="section-title">性能</h2></div>
 <div class="product-card">
 <div class="card-label">CHIP</div>
 <h3 class="product-name">第5代骁龙8至尊</h3>
-<p class="product-tagline">当前主流旗舰级芯片</p>
 <p class="desc">配合<span class="highlight">博子风驰游戏内核 1.0</span>，性能调度依然流畅稳定，但强度已经削减。</p>
-<div class="spec-grid">
-<div class="spec-item"><div class="k">安兔兔跑分</div><div class="v gold">4,784,383</div></div>
-<div class="spec-item"><div class="k">游戏内核</div><div class="v">风驰 1.0</div></div>
 </div>
 </div>
-</div>
-
 <div class="reveal">
 <div class="section-header"><span class="section-index">OS & AI</span><h2 class="section-title">系统与 AI</h2></div>
-<div class="product-card">
-<div class="card-label">boziOS</div>
-<h3 class="product-name">全新 boziOS</h3>
-<p class="product-tagline">流畅、稳定、干净</p>
-<p class="desc">boziOS 不再是混沌系统。没有自我演化，没有意识流预判。它是一个流畅、稳定、干净的操作系统——<span class="white-highlight">该有的都有，不该有的都不碰。</span></p>
+<div class="product-card"><div class="card-label">boziOS</div><h3 class="product-name">boziOS</h3><p class="desc">不再是混沌系统。没有自我演化，没有意识流预判。已可升级至 BoziOS 2。</p></div>
+<div class="product-card"><div class="card-label">boziAI</div><h3 class="product-name">boziAI</h3><p class="desc">它会在你需要时出现，在你不需要时安静。已可升级至 BoziAI 2。</p></div>
 </div>
-<div class="product-card">
-<div class="card-label">boziAI</div>
-<h3 class="product-name">全新 boziAI</h3>
-<p class="product-tagline">更懂你，但不会越界</p>
-<p class="desc">它会在你需要时出现，在你不需要时安静。它是一个好用的 AI 助手，而不是试图成为你另一个自己的存在。</p>
-</div>
-</div>
-
 <div class="reveal">
 <div class="section-header"><span class="section-index">DISPLAY</span><h2 class="section-title">屏幕</h2></div>
 <div class="product-card">
 <div class="card-label">1.5K · 165Hz</div>
 <h3 class="product-name">属于这个时代的好屏幕</h3>
-<p class="product-tagline">清晰、流畅、跟手</p>
 <p class="desc">Neo6 采用 <span class="highlight">1.5K 分辨率</span> 屏幕，支持 <span class="highlight">原生 165Hz 高刷新率</span>。</p>
-<div class="spec-grid">
-<div class="spec-item"><div class="k">分辨率</div><div class="v">1.5K</div></div>
-<div class="spec-item"><div class="k">刷新率</div><div class="v gold">165Hz</div></div>
 </div>
 </div>
-</div>
-
 <div class="reveal">
 <div class="section-header"><span class="section-index">CAMERA</span><h2 class="section-title">影像</h2></div>
 <div class="product-card">
 <div class="card-label">LUMO</div>
 <h3 class="product-name">5000万像素 3.5倍潜望长焦</h3>
-<p class="product-tagline">自研 LUMO 凝光影像系统</p>
 <p class="desc">· 5000万像素 3.5倍潜望长焦<br>· 自研 LUMO 凝光影像系统<br>· 全新「大师模式」<br>· 4K 120帧 杜比视界专业视频</p>
 </div>
 </div>
-
 <div class="reveal">
 <div class="section-header"><span class="section-index">BATTERY</span><h2 class="section-title">续航与散热</h2></div>
 <div class="product-card">
 <div class="card-label">8000mAh</div>
 <h3 class="product-name">冰川电池</h3>
-<p class="product-tagline">旗舰级第一梯队续航</p>
 <div class="spec-grid">
 <div class="spec-item"><div class="k">电池</div><div class="v gold">8000mAh</div></div>
 <div class="spec-item"><div class="k">散热</div><div class="v">VC 5000mm²</div></div>
 </div>
 </div>
 </div>
-
-<div class="reveal">
-<div class="section-header"><span class="section-index">PROTECTION</span><h2 class="section-title">防护与解锁</h2></div>
-<div class="product-card">
-<div class="card-label">IP69K</div>
-<h3 class="product-name">全覆盖防护</h3>
-<p class="product-tagline">IP66 / IP68 / IP69 / IP69K</p>
-<p class="desc">防护等级覆盖日常与极端场景。解锁方式为 <span class="highlight">3D 超声波指纹</span>，快速、安全、无感。</p>
-</div>
-</div>
-
 <div class="reveal">
 <div class="section-header"><span class="section-index">PRICE</span><h2 class="section-title">价格与版本</h2></div>
 <div class="price-versions">
@@ -791,14 +1017,9 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <div class="price-version featured"><span class="ver">16GB + 1TB<span class="badge-mini">顶配</span></span><span class="price">￥5999</span></div>
 </div>
 </div>
-
-<div class="reveal">
-<div class="section-header"><span class="section-index">EPILOGUE</span><h2 class="section-title">结语</h2></div>
-<div class="text-body"><p>Bozi 发布史中，那些神级设备会安静地躺在角落里。</p><p>从 X1 到 S5Void-X，从 Neo2 到 Neo5，它们值得被铭记。</p><p>而 Neo6，是 Bozi 纪元的终点，也是新一页的开始。</p><p><span class="white-highlight">它不再是一部神机。它是一台属于这个时代的，好用的手机。</span></p></div>
-</div>
 </div>
 
-<!-- ========== 9. Neo6 独立购买页 ========== -->
+<!-- 13. Neo6 购买页 -->
 <div class="page" id="page-buy-neo6">
 <div class="page-title">
 <h1>立即购买</h1>
@@ -813,6 +1034,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <div class="badge-stock" id="productBadge6">量产</div>
 </div>
 <div class="spec-full" id="specFull6"></div>
+<div class="color-picker"><div class="picker-label">选择颜色</div><div class="color-scroll" id="colorScroll6"></div></div>
 <div class="total-bar"><div class="label">应付总额</div><div class="amount" id="totalPrice6">￥4299</div></div>
 <button class="buy-btn" id="buyBtn6"><span class="btn-shine"></span>立即购买</button>
 <div class="buy-note">支付即表示同意《Bozi 用户协议》<br>量产发售 · 支持二次售卖 · 无身份绑定</div>
@@ -822,23 +1044,21 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <div class="slogan-strip"><div>Peak performance runs on Bozi.</div><div>All chips bow to Bozi.</div></div>
 </div>
 
-<!-- ========== 10. Pad 2 详情页 ========== -->
+<!-- 14. Pad 2 详情页 -->
 <div class="page" id="page-pad2">
 <div class="hero reveal">
 <div class="badge pad-badge">BOZI® PAD 2</div>
 <h1>更轻更薄</h1>
-<p class="sub">OLED 观感升级，性能稳步提升，快充续航加强。影音娱乐与轻办公，均衡再进阶。</p>
+<p class="sub">OLED 观感升级，性能稳步提升，快充续航加强。</p>
 </div>
-
 <div class="reveal">
 <div class="section-header"><span class="section-index">SPECS</span><h2 class="section-title">核心参数</h2></div>
 <div class="spec-table">
 <div class="spec-row"><span class="k">产品名称</span><span class="v">Bozi Pad 2</span></div>
 <div class="spec-row"><span class="k">芯片</span><span class="v teal">联发科 天玑8500</span></div>
-<div class="spec-row"><span class="k">系统</span><span class="v">boziOS</span></div>
+<div class="spec-row"><span class="k">系统</span><span class="v">BoziOS 2</span></div>
 <div class="spec-row"><span class="k">屏幕</span><span class="v teal">11.8英寸 2.8K OLED · 120Hz</span></div>
 <div class="spec-row"><span class="k">峰值亮度</span><span class="v teal">900nit</span></div>
-<div class="spec-row"><span class="k">调光</span><span class="v">DC 调光</span></div>
 <div class="spec-row"><span class="k">内存</span><span class="v">8GB / 12GB LPDDR5X</span></div>
 <div class="spec-row"><span class="k">存储</span><span class="v">128GB / 256GB / 512GB UFS 3.1</span></div>
 <div class="spec-row"><span class="k">后置摄像头</span><span class="v">1300万主摄 + 200万景深</span></div>
@@ -846,109 +1066,43 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <div class="spec-row"><span class="k">扬声器</span><span class="v teal">四声道立体声 · 杜比全景声</span></div>
 <div class="spec-row"><span class="k">电池</span><span class="v teal">10500mAh</span></div>
 <div class="spec-row"><span class="k">充电</span><span class="v teal">44W 有线快充</span></div>
-<div class="spec-row"><span class="k">接口</span><span class="v">USB-C</span></div>
 <div class="spec-row"><span class="k">厚度</span><span class="v">6.5mm</span></div>
 <div class="spec-row"><span class="k">重量</span><span class="v">约 495g</span></div>
-<div class="spec-row"><span class="k">配色</span><span class="v">深空灰 / 冰川银 / 薄雾蓝 / 晨曦金</span></div>
-<div class="spec-row"><span class="k">配件</span><span class="v">智能手写笔 · 磁吸键盘保护壳</span></div>
-<div class="spec-row"><span class="k">销售方式</span><span class="v">量产 · 支持二次售卖</span></div>
+<div class="spec-row"><span class="k">配色</span><span class="v">陨石灰 / 薄荷绿 / 霞光紫 / 星辰白</span></div>
 </div>
 </div>
-
 <div class="reveal">
 <div class="section-header"><span class="section-index">DESIGN</span><h2 class="section-title">更轻更薄，手感进阶</h2></div>
 <div class="product-card">
 <div class="card-label">6.5mm · 495g</div>
 <h3 class="product-name">一体成型铝合金中框</h3>
-<p class="product-tagline">新增晨曦金配色，温润不沾指纹</p>
-<p class="desc">Bozi Pad 2 在上一代的基础上进一步优化了机身结构，厚度降至 <span class="teal-highlight">6.5mm</span>，重量控制在 <span class="teal-highlight">495g</span>。中框采用<span class="teal-highlight">一体成型铝合金材质</span>，背板经过细腻的磨砂处理，握持时手感温润，不易沾染指纹。新增<span class="teal-highlight">晨曦金</span>配色，在光线下呈现出温暖的金属光泽。</p>
-<div class="spec-grid">
-<div class="spec-item"><div class="k">厚度</div><div class="v teal">6.5mm</div></div>
-<div class="spec-item"><div class="k">重量</div><div class="v teal">约 495g</div></div>
-<div class="spec-item"><div class="k">中框</div><div class="v">一体成型铝合金</div></div>
-<div class="spec-item"><div class="k">配色</div><div class="v teal">新增晨曦金</div></div>
+<p class="desc">厚度降至 <span class="teal-highlight">6.5mm</span>，重量控制在 <span class="teal-highlight">495g</span>。新增<span class="teal-highlight">霞光紫</span>与<span class="teal-highlight">薄荷绿</span>配色。</p>
 </div>
 </div>
-</div>
-
 <div class="reveal">
 <div class="section-header"><span class="section-index">DISPLAY</span><h2 class="section-title">OLED 屏幕，观感升级</h2></div>
 <div class="product-card">
 <div class="card-label">11.8" · OLED</div>
 <h3 class="product-name">2.8K OLED · 120Hz</h3>
-<p class="product-tagline">更纯净的黑，更高的对比度</p>
-<p class="desc">正面升级为 <span class="teal-highlight">11.8英寸 2.8K OLED 屏幕</span>，支持 <span class="teal-highlight">120Hz 刷新率</span>。OLED 面板带来更纯净的黑色与更高的对比度，色彩过渡自然，暗部细节清晰。无论是观看 HDR 影片、浏览图片，还是玩游戏，画面都更加通透。同时支持 <span class="teal-highlight">DC 调光</span>，长时间使用更舒适。</p>
-<div class="spec-grid">
-<div class="spec-item"><div class="k">尺寸</div><div class="v">11.8"</div></div>
-<div class="spec-item"><div class="k">分辨率</div><div class="v teal">2.8K</div></div>
-<div class="spec-item"><div class="k">刷新率</div><div class="v teal">120Hz</div></div>
-<div class="spec-item"><div class="k">峰值亮度</div><div class="v teal">900nit</div></div>
+<p class="desc">正面升级为 <span class="teal-highlight">11.8英寸 2.8K OLED 屏幕</span>，支持 <span class="teal-highlight">120Hz 刷新率</span>。支持 <span class="teal-highlight">DC 调光</span>。</p>
 </div>
 </div>
-</div>
-
 <div class="reveal">
 <div class="section-header"><span class="section-index">PERFORMANCE</span><h2 class="section-title">性能稳步提升</h2></div>
 <div class="product-card">
 <div class="card-label">天玑 8500</div>
 <h3 class="product-name">联发科 天玑8500 + boziOS</h3>
-<p class="product-tagline">能效平衡，发热控制良好</p>
-<p class="desc">搭载<span class="highlight">联发科 天玑8500 芯片</span>，配合 <span class="highlight">boziOS</span> 的深度调校，日常使用、多任务切换、主流游戏都能保持流畅稳定的表现。系统调度注重能效平衡，发热控制良好，长时间使用依然顺畅。</p>
-<div class="spec-grid">
-<div class="spec-item"><div class="k">芯片</div><div class="v teal">天玑8500</div></div>
-<div class="spec-item"><div class="k">系统</div><div class="v">boziOS</div></div>
+<p class="desc">搭载<span class="highlight">联发科 天玑8500 芯片</span>，配合 <span class="highlight">boziOS</span> 的深度调校，能效平衡，发热控制良好。</p>
 </div>
 </div>
-</div>
-
-<div class="reveal">
-<div class="section-header"><span class="section-index">AUDIO</span><h2 class="section-title">四扬声器，影音体验</h2></div>
-<div class="product-card">
-<div class="card-label">DOLBY ATMOS</div>
-<h3 class="product-name">四声道立体声</h3>
-<p class="product-tagline">人声清晰，低频饱满</p>
-<p class="desc">延续 <span class="teal-highlight">四声道立体声扬声器</span>配置，支持 <span class="teal-highlight">杜比全景声</span>。横屏观影时，声音层次分明，人声清晰，低频饱满，带来更具包围感的听觉体验。无论是追剧、听歌还是上网课，都能获得不错的音效表现。</p>
-</div>
-</div>
-
 <div class="reveal">
 <div class="section-header"><span class="section-index">BATTERY</span><h2 class="section-title">持久续航，快充升级</h2></div>
 <div class="product-card">
 <div class="card-label">10500mAh</div>
 <h3 class="product-name">大容量电池 + 44W 快充</h3>
-<p class="product-tagline">碎片时间快速补电，减少等待</p>
-<p class="desc">电池容量提升至 <span class="teal-highlight">10500mAh</span>，满足一整天的影音娱乐与学习办公需求。充电功率升级至 <span class="teal-highlight">44W 有线快充</span>，碎片时间即可快速补充电量，减少等待时间。</p>
-<div class="spec-grid">
-<div class="spec-item"><div class="k">电池</div><div class="v teal">10500mAh</div></div>
-<div class="spec-item"><div class="k">充电</div><div class="v teal">44W 有线</div></div>
+<p class="desc">电池容量提升至 <span class="teal-highlight">10500mAh</span>，充电功率升级至 <span class="teal-highlight">44W 有线快充</span>。</p>
 </div>
 </div>
-</div>
-
-<div class="reveal">
-<div class="section-header"><span class="section-index">CREATION</span><h2 class="section-title">轻办公与创作</h2></div>
-<div class="product-card">
-<div class="card-label">PEN & KEYBOARD</div>
-<h3 class="product-name">手写笔 + 磁吸键盘保护壳</h3>
-<p class="product-tagline">多端协同，灵感随手记录</p>
-<p class="desc">支持 <span class="highlight">Bozi 智能手写笔</span>与<span class="highlight">磁吸键盘保护壳</span>，配合 boziOS 的智慧互联功能，可以与手机等设备进行多端协同。文件互传、跨屏操作、会议批注、绘画创作，都更加顺手。</p>
-</div>
-</div>
-
-<div class="reveal">
-<div class="section-header"><span class="section-index">CAMERA</span><h2 class="section-title">影像</h2></div>
-<div class="product-card">
-<div class="card-label">CAMERA</div>
-<h3 class="product-name">1300万主摄 + 200万景深</h3>
-<p class="product-tagline">扫描文档、视频通话、记录生活</p>
-<p class="desc">后置 <span class="highlight">1300万像素主摄 + 200万像素景深</span>双摄，前置 <span class="highlight">800万像素</span>摄像头。扫描文档、视频通话、日常记录，都能轻松应对。</p>
-<div class="spec-grid">
-<div class="spec-item"><div class="k">后置</div><div class="v">1300万 + 200万景深</div></div>
-<div class="spec-item"><div class="k">前置</div><div class="v">800万</div></div>
-</div>
-</div>
-</div>
-
 <div class="reveal">
 <div class="section-header"><span class="section-index">PRICE</span><h2 class="section-title">价格与版本</h2></div>
 <div class="price-versions">
@@ -958,15 +1112,9 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <div class="price-version"><span class="ver">12GB + 512GB</span><span class="price">￥2699</span></div>
 </div>
 </div>
-
-<div class="reveal">
-<div class="section-header"><span class="section-index">SUMMARY</span><h2 class="section-title">总结</h2></div>
-<div class="text-body"><p>Bozi Pad 2 在屏幕材质、机身轻薄度、快充速度以及配色选择上进行了稳步升级，延续了 Bozi Pad 系列在影音娱乐与轻办公场景中的均衡表现。</p></div>
-<div class="quote">更轻更薄，观感升级。<span class="by">— Bozi Pad 2</span></div>
-</div>
 </div>
 
-<!-- ========== 11. Pad 2 独立购买页 ========== -->
+<!-- 15. Pad 2 购买页 -->
 <div class="page" id="page-buy-pad2">
 <div class="page-title">
 <h1>立即购买</h1>
@@ -981,6 +1129,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <div class="badge-stock" id="productBadgePad2">量产</div>
 </div>
 <div class="spec-full" id="specFullPad2"></div>
+<div class="color-picker"><div class="picker-label">选择颜色</div><div class="color-scroll" id="colorScrollPad2"></div></div>
 <div class="total-bar"><div class="label">应付总额</div><div class="amount" id="totalPricePad2">￥1899</div></div>
 <button class="buy-btn" id="buyBtnPad2"><span class="btn-shine"></span>立即购买</button>
 <div class="buy-note">支付即表示同意《Bozi 用户协议》<br>量产发售 · 支持二次售卖 · 无身份绑定</div>
@@ -990,126 +1139,63 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <div class="slogan-strip"><div>Peak performance runs on Bozi.</div><div>All chips bow to Bozi.</div></div>
 </div>
 
-<!-- ========== 12. Pad 1 详情页 ========== -->
+<!-- 16. Pad 1 详情页 -->
 <div class="page" id="page-pad1">
 <div class="hero reveal">
 <div class="badge pad-badge">BOZI® PAD 1</div>
 <h1>轻盈随行</h1>
-<p class="sub">质感出众，屏幕细腻，性能稳定，续航持久。你的日常影音与轻办公伙伴。</p>
+<p class="sub">质感出众，屏幕细腻，性能稳定，续航持久。</p>
 </div>
-
 <div class="reveal">
 <div class="section-header"><span class="section-index">SPECS</span><h2 class="section-title">核心参数</h2></div>
 <div class="spec-table">
 <div class="spec-row"><span class="k">产品名称</span><span class="v">Bozi Pad 1</span></div>
-<div class="spec-row"><span class="k">芯片</span><span class="v teal">联发科 天玑8400 旗舰级芯片</span></div>
-<div class="spec-row"><span class="k">系统</span><span class="v">boziOS</span></div>
+<div class="spec-row"><span class="k">芯片</span><span class="v teal">联发科 天玑8400</span></div>
+<div class="spec-row"><span class="k">系统</span><span class="v">BoziOS 2</span></div>
 <div class="spec-row"><span class="k">屏幕</span><span class="v teal">11.5英寸 2.8K · 144Hz</span></div>
-<div class="spec-row"><span class="k">调光</span><span class="v">DC 调光</span></div>
 <div class="spec-row"><span class="k">内存</span><span class="v">8GB / 12GB LPDDR5X</span></div>
 <div class="spec-row"><span class="k">存储</span><span class="v">128GB / 256GB / 512GB UFS 3.1</span></div>
 <div class="spec-row"><span class="k">后置摄像头</span><span class="v">1300万像素</span></div>
-<div class="spec-row"><span class="k">前置摄像头</span><span class="v">800万像素</span></div>
 <div class="spec-row"><span class="k">扬声器</span><span class="v teal">四声道立体声 · 杜比全景声</span></div>
 <div class="spec-row"><span class="k">电池</span><span class="v teal">10000mAh</span></div>
 <div class="spec-row"><span class="k">充电</span><span class="v">33W 有线快充</span></div>
-<div class="spec-row"><span class="k">接口</span><span class="v">USB-C</span></div>
 <div class="spec-row"><span class="k">厚度</span><span class="v">6.9mm</span></div>
 <div class="spec-row"><span class="k">重量</span><span class="v">约 510g</span></div>
-<div class="spec-row"><span class="k">配色</span><span class="v">深空灰 / 冰川银 / 薄雾蓝</span></div>
-<div class="spec-row"><span class="k">配件</span><span class="v">智能手写笔 · 磁吸键盘保护壳</span></div>
-<div class="spec-row"><span class="k">销售方式</span><span class="v">量产 · 支持二次售卖</span></div>
+<div class="spec-row"><span class="k">配色</span><span class="v">午夜灰 / 皓月白 / 天青蓝</span></div>
 </div>
 </div>
-
 <div class="reveal">
 <div class="section-header"><span class="section-index">DESIGN</span><h2 class="section-title">轻盈随行，质感出众</h2></div>
 <div class="product-card">
 <div class="card-label">6.9mm · 510g</div>
 <h3 class="product-name">纤薄机身，三色可选</h3>
-<p class="product-tagline">拿在手里轻便自如，放进包里毫无负担</p>
-<p class="desc">Bozi Pad 1 采用 <span class="teal-highlight">6.9mm 纤薄机身</span>设计，重量控制在 <span class="teal-highlight">510g</span>，日常拿在手里轻便自如，放进包里毫无负担。深空灰、冰川银、薄雾蓝三款配色，搭配细腻的金属质感，无论是居家使用还是外出携带，都能自然融入你的生活场景。</p>
+<p class="desc">采用 <span class="teal-highlight">6.9mm 纤薄机身</span>设计，重量控制在 <span class="teal-highlight">510g</span>。</p>
 </div>
 </div>
-
 <div class="reveal">
 <div class="section-header"><span class="section-index">PERFORMANCE</span><h2 class="section-title">流畅性能，稳定输出</h2></div>
 <div class="product-card">
 <div class="card-label">天玑 8400</div>
 <h3 class="product-name">旗舰级芯片 + boziOS</h3>
-<p class="product-tagline">日常流畅，能效平衡</p>
-<p class="desc">搭载<span class="highlight">联发科 天玑8400 芯片</span>，配合深度调校的 <span class="highlight">boziOS</span>，无论是日常应用切换、多任务分屏，还是运行主流游戏，都能保持流畅稳定的画面表现。系统调度注重能效平衡，长时间使用依然顺畅自然。</p>
-<div class="spec-grid">
-<div class="spec-item"><div class="k">芯片</div><div class="v teal">天玑8400</div></div>
-<div class="spec-item"><div class="k">系统</div><div class="v">boziOS</div></div>
+<p class="desc">搭载<span class="highlight">联发科 天玑8400 芯片</span>，配合深度调校的 <span class="highlight">boziOS</span>。</p>
 </div>
 </div>
-</div>
-
 <div class="reveal">
 <div class="section-header"><span class="section-index">DISPLAY</span><h2 class="section-title">清晰大屏，顺滑体验</h2></div>
 <div class="product-card">
 <div class="card-label">2.8K · 144Hz</div>
 <h3 class="product-name">11.5英寸 2.8K 超清屏</h3>
-<p class="product-tagline">细腻显示，DC 调光更护眼</p>
-<p class="desc">正面是一块 <span class="teal-highlight">11.5英寸 2.8K 超清屏幕</span>，支持 <span class="teal-highlight">144Hz 高刷新率</span>。画面显示细腻，滑动浏览、观看视频、玩游戏时画面过渡更加流畅。同时支持 <span class="teal-highlight">DC 调光</span>，在不同亮度下减少屏幕频闪，长时间使用更舒适。</p>
-<div class="spec-grid">
-<div class="spec-item"><div class="k">尺寸</div><div class="v">11.5"</div></div>
-<div class="spec-item"><div class="k">分辨率</div><div class="v teal">2.8K</div></div>
-<div class="spec-item"><div class="k">刷新率</div><div class="v teal">144Hz</div></div>
-<div class="spec-item"><div class="k">调光</div><div class="v">DC 调光</div></div>
+<p class="desc">支持 <span class="teal-highlight">144Hz 高刷新率</span>，同时支持 <span class="teal-highlight">DC 调光</span>。</p>
 </div>
 </div>
-</div>
-
-<div class="reveal">
-<div class="section-header"><span class="section-index">AUDIO</span><h2 class="section-title">沉浸音效，身临其境</h2></div>
-<div class="product-card">
-<div class="card-label">DOLBY ATMOS</div>
-<h3 class="product-name">四声道立体声</h3>
-<p class="product-tagline">支持杜比全景声</p>
-<p class="desc">内置 <span class="teal-highlight">四声道立体声扬声器</span>，支持 <span class="teal-highlight">杜比全景声</span>。无论是横屏追剧、观看演唱会，还是上网课听讲座，声音饱满清晰，带来更具包围感的听觉体验，无需外接音箱也能获得不错的影音享受。</p>
-</div>
-</div>
-
 <div class="reveal">
 <div class="section-header"><span class="section-index">BATTERY</span><h2 class="section-title">持久续航，畅玩一整天</h2></div>
 <div class="product-card">
 <div class="card-label">10000mAh</div>
 <h3 class="product-name">大容量电池 + 33W 快充</h3>
-<p class="product-tagline">减少电量焦虑</p>
-<p class="desc">配备 <span class="teal-highlight">10000mAh 大容量电池</span>，满足一整天的使用需求。无论是长时间追剧、阅读、学习，还是外出旅行时使用，都能减少电量焦虑。搭配 <span class="teal-highlight">33W 有线快充</span>，碎片时间即可快速补充电量，随时保持在线。</p>
-<div class="spec-grid">
-<div class="spec-item"><div class="k">电池</div><div class="v teal">10000mAh</div></div>
-<div class="spec-item"><div class="k">充电</div><div class="v teal">33W 有线</div></div>
+<p class="desc">配备 <span class="teal-highlight">10000mAh 大容量电池</span>，搭配 <span class="teal-highlight">33W 有线快充</span>。</p>
 </div>
 </div>
-</div>
-
-<div class="reveal">
-<div class="section-header"><span class="section-index">CREATION</span><h2 class="section-title">轻办公与创作</h2></div>
-<div class="product-card">
-<div class="card-label">PEN & KEYBOARD</div>
-<h3 class="product-name">手写笔 + 磁吸键盘保护壳</h3>
-<p class="product-tagline">随手展开，灵感即刻记录</p>
-<p class="desc">支持 <span class="highlight">Bozi 智能手写笔</span>与<span class="highlight">磁吸键盘保护壳</span>，轻松化身轻办公与创作工具。配合 boziOS 的智慧互联功能，可以与手机等设备进行多端协同，文件互传、跨屏操作顺畅自然，记录灵感、批注文档、绘制草图都更加顺手。</p>
-</div>
-</div>
-
-<div class="reveal">
-<div class="section-header"><span class="section-index">CAMERA</span><h2 class="section-title">影像</h2></div>
-<div class="product-card">
-<div class="card-label">CAMERA</div>
-<h3 class="product-name">1300万后置 + 800万前置</h3>
-<p class="product-tagline">扫描文档、视频通话、记录生活</p>
-<p class="desc">后置 <span class="highlight">1300万像素</span>摄像头，前置 <span class="highlight">800万像素</span>摄像头。扫描文档、视频通话、日常记录，都能轻松应对。</p>
-<div class="spec-grid">
-<div class="spec-item"><div class="k">后置</div><div class="v">1300万</div></div>
-<div class="spec-item"><div class="k">前置</div><div class="v">800万</div></div>
-</div>
-</div>
-</div>
-
 <div class="reveal">
 <div class="section-header"><span class="section-index">PRICE</span><h2 class="section-title">价格与版本</h2></div>
 <div class="price-versions">
@@ -1118,15 +1204,9 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <div class="price-version featured"><span class="ver">12GB + 256GB<span class="badge-mini">推荐</span></span><span class="price">￥2099</span></div>
 </div>
 </div>
-
-<div class="reveal">
-<div class="section-header"><span class="section-index">SUMMARY</span><h2 class="section-title">总结</h2></div>
-<div class="text-body"><p>Bozi Pad 1 以轻薄的设计、细腻的屏幕、稳定的性能以及长久的续航，为你带来舒适的日常影音与轻办公体验。</p><p>无论你是看剧、学习、阅读，还是记录灵感，它都能轻松陪伴你度过每一天。</p></div>
-<div class="quote">轻盈随行，质感出众。<span class="by">— Bozi Pad 1</span></div>
-</div>
 </div>
 
-<!-- ========== 13. Pad 1 独立购买页 ========== -->
+<!-- 17. Pad 1 购买页 -->
 <div class="page" id="page-buy-pad1">
 <div class="page-title">
 <h1>立即购买</h1>
@@ -1141,6 +1221,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <div class="badge-stock" id="productBadgePad1">量产</div>
 </div>
 <div class="spec-full" id="specFullPad1"></div>
+<div class="color-picker"><div class="picker-label">选择颜色</div><div class="color-scroll" id="colorScrollPad1"></div></div>
 <div class="total-bar"><div class="label">应付总额</div><div class="amount" id="totalPricePad1">￥1599</div></div>
 <button class="buy-btn" id="buyBtnPad1"><span class="btn-shine"></span>立即购买</button>
 <div class="buy-note">支付即表示同意《Bozi 用户协议》<br>量产发售 · 支持二次售卖 · 无身份绑定</div>
@@ -1150,14 +1231,13 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <div class="slogan-strip"><div>Peak performance runs on Bozi.</div><div>All chips bow to Bozi.</div></div>
 </div>
 
-<!-- ========== 14. Book 1 详情页 ========== -->
+<!-- 18. Book 1 详情页 -->
 <div class="page" id="page-book1">
 <div class="hero reveal">
 <div class="badge book-badge">BOZI® BOOK 1</div>
 <h1>轻薄随行</h1>
-<p class="sub">清晰屏幕，均衡性能，丰富接口。Windows 11 加持，Bozi 生态自然延伸的一环。</p>
+<p class="sub">清晰屏幕，均衡性能，丰富接口。Windows 11 加持。</p>
 </div>
-
 <div class="reveal">
 <div class="section-header"><span class="section-index">SPECS</span><h2 class="section-title">核心参数</h2></div>
 <div class="spec-table">
@@ -1174,97 +1254,49 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <div class="spec-row"><span class="k">充电</span><span class="v blue">100W 有线快充</span></div>
 <div class="spec-row"><span class="k">厚度</span><span class="v">15.9mm</span></div>
 <div class="spec-row"><span class="k">重量</span><span class="v">约 1.35kg</span></div>
-<div class="spec-row"><span class="k">配色</span><span class="v">深空灰 / 冰川银</span></div>
-<div class="spec-row"><span class="k">销售方式</span><span class="v">量产 · 支持二次售卖</span></div>
+<div class="spec-row"><span class="k">配色</span><span class="v">玄铁灰 / 月岩银</span></div>
 </div>
 </div>
-
 <div class="reveal">
 <div class="section-header"><span class="section-index">DESIGN</span><h2 class="section-title">轻薄随行，质感出众</h2></div>
 <div class="product-card">
 <div class="card-label">15.9mm · 1.35kg</div>
 <h3 class="product-name">航空级铝合金一体成型</h3>
-<p class="product-tagline">深空灰 · 冰川银，简约耐看</p>
-<p class="desc">Bozi Book 1 采用 <span class="blue-highlight">15.9mm 纤薄机身</span>设计，重量控制在 <span class="blue-highlight">1.35kg</span>，日常通勤、出差或校园使用都能轻松携带。机身由<span class="blue-highlight">航空级铝合金一体成型</span>，表面经过细腻喷砂处理，手感温润且不易沾染指纹。深空灰与冰川银两款经典配色，简约耐看，适合多种场合。</p>
-<div class="spec-grid">
-<div class="spec-item"><div class="k">厚度</div><div class="v blue">15.9mm</div></div>
-<div class="spec-item"><div class="k">重量</div><div class="v blue">约 1.35kg</div></div>
-<div class="spec-item"><div class="k">材质</div><div class="v">航空级铝合金</div></div>
-<div class="spec-item"><div class="k">配色</div><div class="v blue">深空灰 / 冰川银</div></div>
+<p class="desc">采用 <span class="blue-highlight">15.9mm 纤薄机身</span>设计，重量控制在 <span class="blue-highlight">1.35kg</span>。</p>
 </div>
 </div>
-</div>
-
 <div class="reveal">
 <div class="section-header"><span class="section-index">DISPLAY</span><h2 class="section-title">清晰视野，流畅观感</h2></div>
 <div class="product-card">
 <div class="card-label">14" · 2.5K · 120Hz</div>
 <h3 class="product-name">100% sRGB 高色域</h3>
-<p class="product-tagline">窄边框，更高屏占比</p>
-<p class="desc">正面是一块 <span class="blue-highlight">14英寸 2.5K 超清屏幕</span>，支持 <span class="blue-highlight">120Hz 刷新率</span>。画面显示细腻，色彩还原准确，覆盖 <span class="blue-highlight">100% sRGB 高色域</span>。无论是浏览文档、观看视频，还是进行图片处理，都能获得清晰舒适的视觉体验。窄边框设计带来更高的屏占比，视觉沉浸感更强。</p>
-<div class="spec-grid">
-<div class="spec-item"><div class="k">尺寸</div><div class="v">14"</div></div>
-<div class="spec-item"><div class="k">分辨率</div><div class="v blue">2.5K</div></div>
-<div class="spec-item"><div class="k">刷新率</div><div class="v blue">120Hz</div></div>
-<div class="spec-item"><div class="k">色域</div><div class="v blue">100% sRGB</div></div>
+<p class="desc">支持 <span class="blue-highlight">120Hz 刷新率</span>，覆盖 <span class="blue-highlight">100% sRGB 高色域</span>。</p>
 </div>
 </div>
-</div>
-
 <div class="reveal">
 <div class="section-header"><span class="section-index">PERFORMANCE</span><h2 class="section-title">性能均衡，稳定输出</h2></div>
 <div class="product-card">
 <div class="card-label">Core Ultra 5</div>
 <h3 class="product-name">Intel Core Ultra 5 + Intel Arc</h3>
-<p class="product-tagline">性能与能效平衡出色</p>
-<p class="desc">搭载 <span class="blue-highlight">Intel Core Ultra 5 处理器</span> 与 <span class="blue-highlight">Intel Arc 核显</span>，配合 <span class="blue-highlight">Windows 11</span> 操作系统，性能与能效平衡出色。无论是日常办公、多任务处理、网页浏览，还是轻量级视频剪辑与图片处理，都能保持流畅稳定的表现。系统调度注重功耗控制，长时间使用依然安静凉爽。</p>
-<div class="spec-grid">
-<div class="spec-item"><div class="k">处理器</div><div class="v blue">Core Ultra 5</div></div>
-<div class="spec-item"><div class="k">显卡</div><div class="v blue">Intel Arc</div></div>
+<p class="desc">配合 <span class="blue-highlight">Windows 11</span>，性能与能效平衡出色。</p>
 </div>
 </div>
-</div>
-
 <div class="reveal">
 <div class="section-header"><span class="section-index">ECOSYSTEM</span><h2 class="section-title">Windows 11 加持，生态无缝互联</h2></div>
 <div class="product-card">
 <div class="card-label">BOZI CONNECT</div>
 <h3 class="product-name">多端协同，自然高效</h3>
-<p class="product-tagline">与 Bozi 手机、平板无缝连接</p>
-<p class="desc">预装全新 <span class="blue-highlight">Windows 11</span> 操作系统，界面清爽，多任务布局高效。搭配 Bozi 专属互联软件，可以与 Bozi 手机、平板等设备进行多端协同。<span class="white-highlight">文件互传、跨屏操作、剪贴板共享</span>更加顺手。手机上的通知、通话可以直接在电脑上处理，平板可以扩展为副屏，设备之间的协作更加自然高效。</p>
+<p class="desc">搭配 Bozi 专属互联软件，可以与 Bozi 手机、平板等设备进行多端协同。<span class="white-highlight">文件互传、跨屏操作、剪贴板共享</span>更加顺手。</p>
 </div>
 </div>
-
 <div class="reveal">
 <div class="section-header"><span class="section-index">BATTERY</span><h2 class="section-title">持久续航，快充无忧</h2></div>
 <div class="product-card">
 <div class="card-label">70Wh</div>
 <h3 class="product-name">大容量电池 + 100W 快充</h3>
-<p class="product-tagline">告别续航焦虑</p>
-<p class="desc">配备 <span class="blue-highlight">70Wh 大容量电池</span>，满足一整天的办公与学习需求。支持 <span class="blue-highlight">100W 有线快充</span>，碎片时间即可快速补充电量，告别续航焦虑。出门在外，无需频繁寻找插座，安心使用一整天。</p>
-<div class="spec-grid">
-<div class="spec-item"><div class="k">电池</div><div class="v blue">70Wh</div></div>
-<div class="spec-item"><div class="k">充电</div><div class="v blue">100W 有线</div></div>
+<p class="desc">配备 <span class="blue-highlight">70Wh 大容量电池</span>，支持 <span class="blue-highlight">100W 有线快充</span>。</p>
 </div>
 </div>
-</div>
-
-<div class="reveal">
-<div class="section-header"><span class="section-index">I/O</span><h2 class="section-title">接口丰富，扩展自如</h2></div>
-<div class="product-card">
-<div class="card-label">FULL I/O</div>
-<h3 class="product-name">无需转接器，一线连接</h3>
-<p class="product-tagline">USB-C × 2 · USB-A · HDMI · 3.5mm</p>
-<p class="desc">配备 <span class="blue-highlight">全功能 USB-C × 2</span>、<span class="blue-highlight">USB-A × 1</span>、<span class="blue-highlight">HDMI × 1</span> 以及 <span class="blue-highlight">3.5mm 耳机孔</span>，无需转接器即可连接显示器、U 盘、鼠标等多种外设。USB-C 接口支持充电、数据传输与视频输出，一线连接更加便捷。</p>
-<div class="spec-grid">
-<div class="spec-item"><div class="k">USB-C</div><div class="v">× 2（全功能）</div></div>
-<div class="spec-item"><div class="k">USB-A</div><div class="v">× 1</div></div>
-<div class="spec-item"><div class="k">HDMI</div><div class="v">× 1</div></div>
-<div class="spec-item"><div class="k">耳机孔</div><div class="v">3.5mm</div></div>
-</div>
-</div>
-</div>
-
 <div class="reveal">
 <div class="section-header"><span class="section-index">PRICE</span><h2 class="section-title">价格与版本</h2></div>
 <div class="price-versions">
@@ -1273,15 +1305,9 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <div class="price-version featured"><span class="ver">32GB + 1TB<span class="badge-mini">推荐</span></span><span class="price">￥5999</span></div>
 </div>
 </div>
-
-<div class="reveal">
-<div class="section-header"><span class="section-index">SUMMARY</span><h2 class="section-title">总结</h2></div>
-<div class="text-body"><p>Bozi Book 1 以轻薄的设计、清晰的屏幕、均衡的性能以及丰富的接口，为日常办公、学习与娱乐带来舒适的使用体验。</p><p>搭载 Windows 11 与 Bozi 互联软件，与 Bozi 手机、平板等设备协同更加高效，是 Bozi 生态中自然延伸的一环。</p></div>
-<div class="quote">轻薄随行，Bozi 生态的自然延伸。<span class="by">— Bozi Book 1</span></div>
-</div>
 </div>
 
-<!-- ========== 15. Book 1 独立购买页 ========== -->
+<!-- 19. Book 1 购买页 -->
 <div class="page" id="page-buy-book1">
 <div class="page-title">
 <h1>立即购买</h1>
@@ -1296,6 +1322,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <div class="badge-stock" id="productBadgeBook1">量产</div>
 </div>
 <div class="spec-full" id="specFullBook1"></div>
+<div class="color-picker"><div class="picker-label">选择颜色</div><div class="color-scroll" id="colorScrollBook1"></div></div>
 <div class="total-bar"><div class="label">应付总额</div><div class="amount" id="totalPriceBook1">￥4999</div></div>
 <button class="buy-btn" id="buyBtnBook1"><span class="btn-shine"></span>立即购买</button>
 <div class="buy-note">支付即表示同意《Bozi 用户协议》<br>量产发售 · 支持二次售卖 · 无身份绑定</div>
@@ -1305,7 +1332,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <div class="slogan-strip"><div>Peak performance runs on Bozi.</div><div>All chips bow to Bozi.</div></div>
 </div>
 
-<!-- ========== 16. 神级设备史 ========== -->
+<!-- 20. 神级设备史 -->
 <div class="page" id="page-intro">
 <div class="hero reveal">
 <div class="badge">BOZI® OFFICIAL</div>
@@ -1314,14 +1341,12 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <div class="audio-bars"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
 <div class="slogans"><div>Peak performance runs on Bozi.</div><div class="en">All chips bow to Bozi.</div></div>
 </div>
-
 <div class="reveal">
 <div class="section-header"><span class="section-index">PROLOGUE</span><h2 class="section-title">那间没有散热器的实验室</h2></div>
 <div class="text-body"><p>一切始于一颗<span class="highlight">骁龙 865</span>。</p><p>它被焊在一块裸露的主板上，屏幕、芯片、电源各自分离，飞线如神经般连接着它们。没有手机壳，没有电池，没有任何散热装置。芯片表面温度高到"手摸一下直接烫伤，跟摸热油一样"。</p><p>但就是在这样一套散装平台上，一个系统诞生了。它的创造者说：</p></div>
 <div class="quote">我只是做系统的，我只看最终成绩，不考虑外界原因，但我会尽力优化外界因素。<span class="by">— Bozi 创始人</span></div>
 <div class="text-body"><p>这句话，成了整个 Bozi 宇宙的第一块基石。</p><p>后来，他装上了分体式水冷。再后来，他有了一个朋友——一个研究外围配置和他研究系统一样厉害的人。再后来，他们一起，<span class="white-highlight">把整个半导体行业的认知，碾成了粉末。</span></p></div>
 </div>
-
 <div class="reveal">
 <div class="section-header"><span class="section-index">CHAPTER 01</span><h2 class="section-title">普通机纪元</h2><p class="section-subtitle">从 X1 到 S5Void-X，共 5 代芯片。</p></div>
 <div class="product-card"><div class="card-label">GEN 01 · 起点</div><h3 class="product-name">Bozi X1</h3><p class="product-tagline">Bozi 品牌的第一款正式芯片</p><div class="spec-grid"><div class="spec-item"><div class="k">裸跑</div><div class="v gradient">3498万</div></div><div class="spec-item"><div class="k">优化后</div><div class="v gradient">7618万</div></div></div><p class="desc">诞生于那个散装平台，芯片表面温度曾经高到"跟热油一样"，但它从未降频。纯靠软件优化，就把骁龙 865 抬到了未优化骁龙 8E5 的水平。</p><div class="price-bar"><div class="left"><div class="label">PRICE</div><div class="value">$50,000</div></div><div class="right"><div class="label">QUANTITY</div><div class="qty">500 台</div></div></div></div>
@@ -1331,12 +1356,10 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <div class="product-card"><div class="card-label">GEN 05 · VOID</div><h3 class="product-name">Bozi S5Void-X VantaΩ UltraPromax</h3><p class="product-tagline">All chips bow to Bozi.</p><div class="spec-grid"><div class="spec-item"><div class="k">裸跑</div><div class="v gradient">9437亿</div></div><div class="spec-item"><div class="k">优化后</div><div class="v gradient">75484亿</div></div></div><p class="desc">安兔兔上显示 <span class="white-highlight">∞</span>。自研测分软件与安兔兔均显示：<span class="white-highlight">∞⁹</span>。口号诞生："All chips bow to Bozi."</p><div class="price-bar"><div class="left"><div class="label">PRICE</div><div class="value">$250,000</div></div><div class="right"><div class="label">QUANTITY</div><div class="qty">500 台</div></div></div></div>
 <div class="summary-card"><div class="title">📊 普通机纪元 · 总结</div><div class="item">从 X1 到 S5Void-X，共 5 代芯片，每代 500 台，共 <span class="white-highlight">2500 台</span>。</div><div class="item">全部搭载<span class="gold-highlight">阉割版风驰内核</span>，系统比 Neo 系列低 3 代。</div><div class="item">创造者原话：<span class="highlight">"爱买不买。"</span></div></div>
 </div>
-
 <div class="reveal">
 <div class="section-header"><span class="section-index">CHAPTER 02</span><h2 class="section-title">神㉿ 降临</h2></div>
 <div class="product-card featured"><div class="card-label">GOD CHIP</div><h3 class="product-name">Bozi® 神㉿</h3><p class="product-tagline">移动端算力的终极符号</p><div class="spec-grid"><div class="spec-item"><div class="k">芯片</div><div class="v gold">Bozi® 神㉿</div></div><div class="spec-item"><div class="k">跑分</div><div class="v gold">∞⁹</div></div></div><p class="desc">这是 Bozi 宇宙的第一颗"神级"芯片。它的跑分已经无法用数字衡量。<span class="white-highlight">"神㉿"这三个字，从此成为移动端算力的终极符号。</span></p></div>
 </div>
-
 <div class="reveal">
 <div class="section-header"><span class="section-index">CHAPTER 03</span><h2 class="section-title">Neo 纪元</h2></div>
 <div class="product-card"><div class="card-label">NEO 02 · 传说</div><h3 class="product-name">Bozi Neo2</h3><p class="product-tagline">火种</p><div class="spec-grid"><div class="spec-item"><div class="k">芯片</div><div class="v">Bozi® 神㉿</div></div><div class="spec-item"><div class="k">系统</div><div class="v">混沌 6.0</div></div><div class="spec-item"><div class="k">内核</div><div class="v">风驰 6.0☄</div></div><div class="spec-item"><div class="k">安全</div><div class="v">深渊保护</div></div></div><p class="desc"><span class="highlight">混沌系统 6.0</span>——活的，会随着用户的使用习惯自行演化。<br><br><span class="highlight">风驰内核 6.0☄</span>——最后一代带有"版本号"的内核。<br><br><span class="highlight">深渊保护</span>——主动猎食型防御系统，十六层硬件级加密。</p><div class="price-bar"><div class="left"><div class="label">PRICE</div><div class="value">$50,000,000</div></div><div class="right"><div class="label">QUANTITY</div><div class="qty">50 台</div></div></div></div>
@@ -1349,13 +1372,11 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <div class="product-card"><div class="card-label">NEO 04 · 终极手机</div><h3 class="product-name">Bozi Neo4</h3><p class="product-tagline">钥匙</p><div class="spec-grid"><div class="spec-item"><div class="k">芯片</div><div class="v">Bozi® 神☢</div></div><div class="spec-item"><div class="k">系统</div><div class="v">混沌 7.0</div></div><div class="spec-item"><div class="k">内核</div><div class="v">风驰 7.0❆</div></div><div class="spec-item"><div class="k">安全</div><div class="v">深渊保护 2.0</div></div></div><p class="desc"><span class="highlight">核心服务</span> · 专属电话号码，拨通后把你的需求告诉对方。私人保镖、包场豪华餐厅、全球资源与人力调度。<br><br><span class="highlight">验证方式</span> · 所有生物数据配对成功电话才会被接通，否则提示空号。</p><div class="price-bar"><div class="left"><div class="label">PRICE</div><div class="value">$2,000,000,000</div></div><div class="right"><div class="label">QUANTITY</div><div class="qty">15 台</div></div></div></div>
 <div class="quotes-wall"><div class="quote-card">这台手机，只发售 15 台，售价的话，20 亿，爱买不买，买不起就滚。</div></div>
 </div>
-
 <div class="reveal">
 <div class="section-header"><span class="section-index">CHAPTER 04</span><h2 class="section-title">超越手机</h2></div>
 <div class="product-card featured"><div class="card-label">NEO 05 · 呼吸</div><h3 class="product-name">Bozi Neo5</h3><p class="product-tagline">手腕上的另一个维度</p><div class="spec-grid"><div class="spec-item"><div class="k">芯片</div><div class="v gold">Bozi® 神☢</div></div><div class="spec-item"><div class="k">系统</div><div class="v gold">混沌 8.0</div></div><div class="spec-item"><div class="k">内核</div><div class="v gold">风驰 8.0❆</div></div><div class="spec-item"><div class="k">安全</div><div class="v gold">深渊保护 3.0</div></div></div><p class="desc"><span class="white-highlight">全息光场屏</span> · 在空气中直接构建出可触摸的、有深度的立体画面。分辨率 128K 恒定，刷新率原生 2560Hz。<br><br><span class="white-highlight">深渊保护 3.0</span> · 1.0 是猎杀，2.0 是净化，3.0 是消失。</p><div class="spec-grid"><div class="spec-item"><div class="k">防水</div><div class="v gold">1000m</div></div><div class="spec-item"><div class="k">耐温</div><div class="v gold">-50~150℃</div></div><div class="spec-item"><div class="k">续航</div><div class="v gold">1 年</div></div><div class="spec-item"><div class="k">佩戴</div><div class="v gold">无感</div></div></div></div>
 <div class="timeline"><div class="timeline-item"><span class="era">NEO 02</span><span class="phrase">是火种</span></div><div class="timeline-item"><span class="era">NEO 03</span><span class="phrase">是利刃</span></div><div class="timeline-item"><span class="era">NEO 04</span><span class="phrase">是钥匙</span></div><div class="timeline-item"><span class="era">NEO 05</span><span class="phrase">是呼吸</span></div></div>
 </div>
-
 <div class="reveal">
 <div class="section-header"><span class="section-index">CHRONOLOGY</span><h2 class="section-title">全系编年史</h2><p class="section-subtitle">横向滑动查看每一代 →</p></div>
 <div class="table-scroll">
@@ -1369,18 +1390,20 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <div class="table-card"><div class="tc-gen">NEO 03</div><div class="tc-name">Bozi Neo3</div><div class="tc-row"><span class="k">跑分</span><span class="v">虚无</span></div><div class="tc-row"><span class="k">数量</span><span class="v">5</span></div><div class="tc-row"><span class="k">定位</span><span class="v">时代的眼泪</span></div></div>
 <div class="table-card"><div class="tc-gen">NEO 04</div><div class="tc-name">Bozi Neo4</div><div class="tc-row"><span class="k">跑分</span><span class="v">虚无</span></div><div class="tc-row"><span class="k">数量</span><span class="v">15</span></div><div class="tc-row"><span class="k">价格</span><span class="v purple">20亿$</span></div><div class="tc-row"><span class="k">定位</span><span class="v">终极手机</span></div></div>
 <div class="table-card god"><div class="tc-gen">NEO 05</div><div class="tc-name">Bozi Neo5</div><div class="tc-row"><span class="k">芯片</span><span class="v gold">神☢</span></div><div class="tc-row"><span class="k">系统</span><span class="v gold">混沌 8.0</span></div><div class="tc-row"><span class="k">形态</span><span class="v gold">手表</span></div><div class="tc-row"><span class="k">定位</span><span class="v gold">超越手机</span></div></div>
+<div class="table-card"><div class="tc-gen">NEO 06</div><div class="tc-name">Bozi Neo6</div><div class="tc-row"><span class="k">芯片</span><span class="v">骁龙8至尊</span></div><div class="tc-row"><span class="k">系统</span><span class="v">boziOS</span></div><div class="tc-row"><span class="k">定位</span><span class="v">回归人间</span></div></div>
+<div class="table-card god"><div class="tc-gen">NEO 07</div><div class="tc-name">Bozi Neo7</div><div class="tc-row"><span class="k">芯片</span><span class="v gold">天玑9600</span></div><div class="tc-row"><span class="k">系统</span><span class="v gold">BoziOS 2</span></div><div class="tc-row"><span class="k">定位</span><span class="v gold">新一代</span></div></div>
+<div class="table-card god"><div class="tc-gen">NEO 08</div><div class="tc-name">Bozi Neo8</div><div class="tc-row"><span class="k">芯片</span><span class="v gold">天玑9500</span></div><div class="tc-row"><span class="k">系统</span><span class="v gold">BoziOS 2</span></div><div class="tc-row"><span class="k">定位</span><span class="v gold">全场景智慧旗舰</span></div></div>
 <div class="table-card god"><div class="tc-gen">PAD 01</div><div class="tc-name">Bozi Pad 1</div><div class="tc-row"><span class="k">芯片</span><span class="v gold">天玑8400</span></div><div class="tc-row"><span class="k">屏幕</span><span class="v gold">11.5" 2.8K 144Hz</span></div><div class="tc-row"><span class="k">电池</span><span class="v gold">10000mAh</span></div><div class="tc-row"><span class="k">定位</span><span class="v gold">平板</span></div></div>
 <div class="table-card god"><div class="tc-gen">PAD 02</div><div class="tc-name">Bozi Pad 2</div><div class="tc-row"><span class="k">芯片</span><span class="v gold">天玑8500</span></div><div class="tc-row"><span class="k">屏幕</span><span class="v gold">11.8" 2.8K OLED 120Hz</span></div><div class="tc-row"><span class="k">电池</span><span class="v gold">10500mAh</span></div><div class="tc-row"><span class="k">定位</span><span class="v gold">平板</span></div></div>
 <div class="table-card god"><div class="tc-gen">BOOK 01</div><div class="tc-name">Bozi Book 1</div><div class="tc-row"><span class="k">芯片</span><span class="v gold">Core Ultra 5</span></div><div class="tc-row"><span class="k">屏幕</span><span class="v gold">14" 2.5K 120Hz</span></div><div class="tc-row"><span class="k">电池</span><span class="v gold">70Wh</span></div><div class="tc-row"><span class="k">定位</span><span class="v gold">笔记本</span></div></div>
+<div class="table-card sys"><div class="tc-gen">SYSTEM</div><div class="tc-name">BoziOS 2 · BoziAI 2</div><div class="tc-row"><span class="k">跨端</span><span class="v cyan">协同</span></div><div class="tc-row"><span class="k">AI</span><span class="v cyan">主动服务</span></div><div class="tc-row"><span class="k">定位</span><span class="v cyan">全场景生态</span></div></div>
 </div>
 </div>
-
 <div class="reveal">
 <div class="section-header"><span class="section-index">EPILOGUE</span><h2 class="section-title">Bozi 宇宙的哲学</h2></div>
 <div class="text-body"><p>从一颗散装骁龙 865，到一块戴在手腕上的全息手表。</p><p>从"我只是做系统的"，到 <span class="highlight">"All chips bow to Bozi."</span></p><p>从"爱买不买"，到<span class="white-highlight">"买不起就滚"</span>。</p><p>从"低端机"，到<span class="white-highlight">"时代的眼泪"</span>。</p></div>
 <div class="quote">我只看最终成绩。<span class="by">— Bozi 创始人</span></div>
 </div>
-
 <div class="footer">
 <div class="logo">BOZI®</div>
 <div>从一颗散装芯片，到手腕上的另一个维度</div>
@@ -1392,7 +1415,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 
 </div>
 
-<!-- ========== 购买弹窗 ========== -->
+<!-- 购买弹窗 -->
 <div class="modal-overlay" id="modalOverlay"></div>
 <div class="modal-wrapper" id="modalWrapper">
 <div class="buy-modal">
@@ -1408,11 +1431,12 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <h3 class="panel-title">确认订单</h3>
 <p class="panel-sub">请核对以下订单信息，确认无误后继续。</p>
 <div class="summary-block">
-<div class="row"><span class="k">设备</span><span class="v" id="sumDevice">Bozi Neo7</span></div>
+<div class="row"><span class="k">设备</span><span class="v" id="sumDevice">Bozi Neo8</span></div>
 <div class="row"><span class="k">版本</span><span class="v" id="sumChip">12GB + 256GB</span></div>
-<div class="row"><span class="k">芯片</span><span class="v" id="sumSystem">天玑9600</span></div>
-<div class="row"><span class="k">单价</span><span class="v" id="sumUnit">￥4499</span></div>
-<div class="row total"><span class="k">应付总额</span><span class="v" id="sumTotal">￥4499</span></div>
+<div class="row"><span class="k">颜色</span><span class="v" id="sumColor"><span class="color-dot"></span><span id="sumColorName">破晓金</span></span></div>
+<div class="row"><span class="k">芯片</span><span class="v" id="sumSystem">天玑9500</span></div>
+<div class="row"><span class="k">单价</span><span class="v" id="sumUnit">￥4699</span></div>
+<div class="row total"><span class="k">应付总额</span><span class="v" id="sumTotal">￥4699</span></div>
 </div>
 </div>
 <div class="step-panel" id="panel2">
@@ -1434,7 +1458,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <h4>二、性能与跑分说明</h4>
 <p>跑分为实验室环境实测值，实际使用中可能因环境温度、系统负载等因素产生波动，属正常现象。</p>
 <h4>三、系统与 AI 条款</h4>
-<p>boziOS 与 boziAI 为<span class="em">常规操作系统与 AI 助手</span>，不包含自我演化、意识流预判等特殊能力。</p>
+<p>BoziOS 与 BoziAI 为<span class="em">常规操作系统与 AI 助手</span>，不包含自我演化、意识流预判等特殊能力。</p>
 <h4>四、影像与拍摄条款</h4>
 <p>用户使用相机及高帧率录制时，请确保<span class="em">不侵犯他人肖像权、不违反当地法律法规</span>。</p>
 <h4>五、防护等级说明</h4>
@@ -1513,12 +1537,13 @@ else{backBtn.classList.add('show');backToTop.style.display='flex';}
 updateBackBtn();
 
 function getCategory(id){
-var phonePages = ['page-home','page-home-neo6','page-neo7','page-neo6','page-buy-neo7','page-buy-neo6'];
+var phonePages = ['page-home','page-home-neo7','page-home-neo6','page-neo8','page-neo7','page-neo6','page-buy-neo8','page-buy-neo7','page-buy-neo6'];
 var padPages = ['page-home-pad2','page-home-pad1','page-pad2','page-pad1','page-buy-pad2','page-buy-pad1'];
 var bookPages = ['page-home-book1','page-book1','page-buy-book1'];
 if(phonePages.indexOf(id) > -1) return 'phone';
 if(padPages.indexOf(id) > -1) return 'pad';
 if(bookPages.indexOf(id) > -1) return 'book';
+if(id === 'page-system') return 'system';
 if(id === 'page-intro') return 'history';
 return null;
 }
@@ -1527,6 +1552,7 @@ var cat = getCategory(id);
 document.getElementById('navPhone').classList.toggle('active', cat === 'phone');
 document.getElementById('navPad').classList.toggle('active', cat === 'pad');
 document.getElementById('navBook').classList.toggle('active', cat === 'book');
+document.getElementById('navSystem').classList.toggle('active', cat === 'system');
 document.getElementById('navHistory').classList.toggle('active', cat === 'history');
 }
 updateNavHighlight('page-home');
@@ -1553,33 +1579,39 @@ document.getElementById('navBook').addEventListener('click', function(){
 pageStack = [];
 showView('page-home-book1');
 });
+document.getElementById('navSystem').addEventListener('click', function(){
+pageStack = [];
+showView('page-system');
+});
 document.getElementById('navHistory').addEventListener('click', function(){
 pageStack = [];
 if(viewIntro.classList.contains('active')){showView('page-home');}
 else{showView('page-intro');}
 });
 
-// Neo7 首页
-document.getElementById('homeBuyBtn').addEventListener('click', function(){showView('page-buy-neo7');});
-document.getElementById('homeMoreBtn').addEventListener('click', function(){showView('page-neo7');});
+document.getElementById('homeBuyBtn').addEventListener('click', function(){showView('page-buy-neo8');});
+document.getElementById('homeMoreBtn').addEventListener('click', function(){showView('page-neo8');});
+document.getElementById('prevNeo7').addEventListener('click', function(){showView('page-home-neo7');});
+document.getElementById('goSystem').addEventListener('click', function(){showView('page-system');});
+
+document.getElementById('homeBuyBtn7').addEventListener('click', function(){showView('page-buy-neo7');});
+document.getElementById('homeMoreBtn7').addEventListener('click', function(){showView('page-neo7');});
+document.getElementById('goSystem7').addEventListener('click', function(){showView('page-system');});
+document.getElementById('nextNeo8').addEventListener('click', function(){showView('page-home');});
 document.getElementById('prevNeo6').addEventListener('click', function(){showView('page-home-neo6');});
 
-// Neo6 首页
 document.getElementById('homeBuyBtn6').addEventListener('click', function(){showView('page-buy-neo6');});
 document.getElementById('homeMoreBtn6').addEventListener('click', function(){showView('page-neo6');});
-document.getElementById('nextNeo7').addEventListener('click', function(){showView('page-home');});
+document.getElementById('nextNeo7').addEventListener('click', function(){showView('page-home-neo7');});
 
-// Pad 2 首页
 document.getElementById('homeBuyBtnPad2').addEventListener('click', function(){showView('page-buy-pad2');});
 document.getElementById('homeMoreBtnPad2').addEventListener('click', function(){showView('page-pad2');});
 document.getElementById('prevPad1').addEventListener('click', function(){showView('page-home-pad1');});
 
-// Pad 1 首页
 document.getElementById('homeBuyBtnPad1').addEventListener('click', function(){showView('page-buy-pad1');});
 document.getElementById('homeMoreBtnPad1').addEventListener('click', function(){showView('page-pad1');});
 document.getElementById('nextPad2').addEventListener('click', function(){showView('page-home-pad2');});
 
-// Book 1 首页
 document.getElementById('homeBuyBtnBook1').addEventListener('click', function(){showView('page-buy-book1');});
 document.getElementById('homeMoreBtnBook1').addEventListener('click', function(){showView('page-book1');});
 
@@ -1611,7 +1643,7 @@ pc.appendChild(p);
 }
 
 function spawnRipple(e){
-var t = e.target.closest('button, .device-chip, .pay-item, .buy-btn, .modal-btn, .back-to-top, .brand, .prev-card');
+var t = e.target.closest('button, .device-chip, .color-chip, .pay-item, .buy-btn, .modal-btn, .back-to-top, .brand, .prev-card');
 if(!t)return;
 var x = e.clientX || (e.touches&&e.touches[0]?e.touches[0].clientX:0);
 var y = e.clientY || (e.touches&&e.touches[0]?e.touches[0].clientY:0);
@@ -1650,59 +1682,102 @@ function formatPrice(d){
 return d.currency + ' ' + d.price.toLocaleString('zh-CN');
 }
 
+// ====== 颜色列表（名称 + 色值 + 文字色） ======
+var colorsNeo8 = [
+{name:'破晓金',bg:'#e8b84a',fg:'#2a1a00'},
+{name:'雾海蓝',bg:'#5b7b9a',fg:'#ffffff'},
+{name:'钛空灰',bg:'#5a5a5a',fg:'#ffffff'}
+];
+var colorsNeo7 = [
+{name:'墨玉黑',bg:'#1c1c1c',fg:'#ffffff'},
+{name:'星云灰',bg:'#6b7280',fg:'#ffffff'},
+{name:'苍岭绿',bg:'#4a7c59',fg:'#ffffff'}
+];
+var colorsNeo6 = [
+{name:'曜夜黑',bg:'#1a1a1a',fg:'#ffffff'},
+{name:'流光银',bg:'#c0c0c0',fg:'#1a1a1a'},
+{name:'晴空蓝',bg:'#87ceeb',fg:'#0a1a2a'}
+];
+var colorsPad2 = [
+{name:'陨石灰',bg:'#4a4a4a',fg:'#ffffff'},
+{name:'薄荷绿',bg:'#98e0b8',fg:'#0a2a1a'},
+{name:'霞光紫',bg:'#b794d4',fg:'#1a0a2a'},
+{name:'星辰白',bg:'#f5f5f5',fg:'#1a1a1a'}
+];
+var colorsPad1 = [
+{name:'午夜灰',bg:'#2d2d3a',fg:'#ffffff'},
+{name:'皓月白',bg:'#f0f0f0',fg:'#1a1a1a'},
+{name:'天青蓝',bg:'#7ec8e3',fg:'#0a1a2a'}
+];
+var colorsBook1 = [
+{name:'玄铁灰',bg:'#3d3d3d',fg:'#ffffff'},
+{name:'月岩银',bg:'#b8b8b8',fg:'#1a1a1a'}
+];
+
+var devices8 = [
+{id:'n8v1',name:'Bozi Neo8',label:'12+256',tag:'￥4699',price:4699,currency:'￥',stock:9999,chip:'天玑9500',
+specs:[{k:'版本',v:'12GB + 256GB',cls:'gold'},{k:'芯片',v:'天玑9500 旗舰芯片',cls:'gold'},{k:'系统',v:'BoziOS 2'},{k:'AI',v:'BoziAI 2'},{k:'游戏内核',v:'风驰 3.0',cls:'gold'},{k:'屏幕',v:'6.82" 2K LTPO · 165Hz'},{k:'影像',v:'5000万潜望长焦'},{k:'电池',v:'8000mAh 冰川'},{k:'充电',v:'100W + 50W 无线',cls:'gold'},{k:'散热',v:'VC 6000mm²'},{k:'防护',v:'IP68 / IP69'},{k:'配色',v:'破晓金 / 雾海蓝 / 钛空灰'}]},
+{id:'n8v2',name:'Bozi Neo8',label:'16+256',tag:'￥4999',price:4999,currency:'￥',stock:9999,chip:'天玑9500',
+specs:[{k:'版本',v:'16GB + 256GB',cls:'gold'},{k:'芯片',v:'天玑9500 旗舰芯片',cls:'gold'},{k:'系统',v:'BoziOS 2'},{k:'AI',v:'BoziAI 2'},{k:'游戏内核',v:'风驰 3.0',cls:'gold'},{k:'屏幕',v:'6.82" 2K LTPO · 165Hz'},{k:'影像',v:'5000万潜望长焦'},{k:'电池',v:'8000mAh 冰川'},{k:'充电',v:'100W + 50W 无线',cls:'gold'},{k:'散热',v:'VC 6000mm²'},{k:'防护',v:'IP68 / IP69'},{k:'配色',v:'破晓金 / 雾海蓝 / 钛空灰'}]},
+{id:'n8v3',name:'Bozi Neo8',label:'16+512',tag:'￥5499',price:5499,currency:'￥',stock:9999,chip:'天玑9500',
+specs:[{k:'版本',v:'16GB + 512GB',cls:'gold'},{k:'芯片',v:'天玑9500 旗舰芯片',cls:'gold'},{k:'系统',v:'BoziOS 2'},{k:'AI',v:'BoziAI 2'},{k:'游戏内核',v:'风驰 3.0',cls:'gold'},{k:'屏幕',v:'6.82" 2K LTPO · 165Hz'},{k:'影像',v:'5000万潜望长焦'},{k:'电池',v:'8000mAh 冰川'},{k:'充电',v:'100W + 50W 无线',cls:'gold'},{k:'散热',v:'VC 6000mm²'},{k:'防护',v:'IP68 / IP69'},{k:'配色',v:'破晓金 / 雾海蓝 / 钛空灰'}]},
+{id:'n8v4',name:'Bozi Neo8',label:'16+1TB',tag:'￥6199',price:6199,currency:'￥',stock:9999,chip:'天玑9500',
+specs:[{k:'版本',v:'16GB + 1TB',cls:'gold'},{k:'芯片',v:'天玑9500 旗舰芯片',cls:'gold'},{k:'系统',v:'BoziOS 2'},{k:'AI',v:'BoziAI 2'},{k:'游戏内核',v:'风驰 3.0',cls:'gold'},{k:'屏幕',v:'6.82" 2K LTPO · 165Hz'},{k:'影像',v:'5000万潜望长焦'},{k:'电池',v:'8000mAh 冰川'},{k:'充电',v:'100W + 50W 无线',cls:'gold'},{k:'散热',v:'VC 6000mm²'},{k:'防护',v:'IP68 / IP69'},{k:'配色',v:'破晓金 / 雾海蓝 / 钛空灰'}]}
+];
+
 var devices7 = [
 {id:'n7v1',name:'Bozi Neo7',label:'12+256',tag:'￥4499',price:4499,currency:'￥',stock:9999,chip:'天玑9600',
-specs:[{k:'版本',v:'12GB + 256GB',cls:'gold'},{k:'芯片',v:'联发科 天玑9600',cls:'gold'},{k:'系统',v:'boziOS'},{k:'AI',v:'boziAI'},{k:'屏幕',v:'6.85" 2K LTPO · 165Hz'},{k:'影像',v:'2亿潜望长焦'},{k:'电池',v:'8000mAh 冰川'},{k:'充电',v:'120W + 50W 无线',cls:'gold'},{k:'散热',v:'VC 6000mm²'},{k:'防护',v:'IP69K'},{k:'跑分',v:'480-520万',cls:'gold'}]},
+specs:[{k:'版本',v:'12GB + 256GB',cls:'gold'},{k:'芯片',v:'联发科 天玑9600',cls:'gold'},{k:'系统',v:'BoziOS 2'},{k:'AI',v:'BoziAI 2'},{k:'屏幕',v:'6.85" 2K LTPO · 165Hz'},{k:'影像',v:'2亿潜望长焦'},{k:'电池',v:'8000mAh 冰川'},{k:'充电',v:'120W + 50W 无线',cls:'gold'},{k:'散热',v:'VC 6000mm²'},{k:'防护',v:'IP69K'},{k:'跑分',v:'480-520万',cls:'gold'},{k:'配色',v:'墨玉黑 / 星云灰 / 苍岭绿'}]},
 {id:'n7v2',name:'Bozi Neo7',label:'16+256',tag:'￥4799',price:4799,currency:'￥',stock:9999,chip:'天玑9600',
-specs:[{k:'版本',v:'16GB + 256GB',cls:'gold'},{k:'芯片',v:'联发科 天玑9600',cls:'gold'},{k:'系统',v:'boziOS'},{k:'AI',v:'boziAI'},{k:'屏幕',v:'6.85" 2K LTPO · 165Hz'},{k:'影像',v:'2亿潜望长焦'},{k:'电池',v:'8000mAh 冰川'},{k:'充电',v:'120W + 50W 无线',cls:'gold'},{k:'散热',v:'VC 6000mm²'},{k:'防护',v:'IP69K'},{k:'跑分',v:'480-520万',cls:'gold'}]},
+specs:[{k:'版本',v:'16GB + 256GB',cls:'gold'},{k:'芯片',v:'联发科 天玑9600',cls:'gold'},{k:'系统',v:'BoziOS 2'},{k:'AI',v:'BoziAI 2'},{k:'屏幕',v:'6.85" 2K LTPO · 165Hz'},{k:'影像',v:'2亿潜望长焦'},{k:'电池',v:'8000mAh 冰川'},{k:'充电',v:'120W + 50W 无线',cls:'gold'},{k:'散热',v:'VC 6000mm²'},{k:'防护',v:'IP69K'},{k:'跑分',v:'480-520万',cls:'gold'},{k:'配色',v:'墨玉黑 / 星云灰 / 苍岭绿'}]},
 {id:'n7v3',name:'Bozi Neo7',label:'12+512',tag:'￥5299',price:5299,currency:'￥',stock:9999,chip:'天玑9600',
-specs:[{k:'版本',v:'12GB + 512GB',cls:'gold'},{k:'芯片',v:'联发科 天玑9600',cls:'gold'},{k:'系统',v:'boziOS'},{k:'AI',v:'boziAI'},{k:'屏幕',v:'6.85" 2K LTPO · 165Hz'},{k:'影像',v:'2亿潜望长焦'},{k:'电池',v:'8000mAh 冰川'},{k:'充电',v:'120W + 50W 无线',cls:'gold'},{k:'散热',v:'VC 6000mm²'},{k:'防护',v:'IP69K'},{k:'跑分',v:'480-520万',cls:'gold'}]},
+specs:[{k:'版本',v:'12GB + 512GB',cls:'gold'},{k:'芯片',v:'联发科 天玑9600',cls:'gold'},{k:'系统',v:'BoziOS 2'},{k:'AI',v:'BoziAI 2'},{k:'屏幕',v:'6.85" 2K LTPO · 165Hz'},{k:'影像',v:'2亿潜望长焦'},{k:'电池',v:'8000mAh 冰川'},{k:'充电',v:'120W + 50W 无线',cls:'gold'},{k:'散热',v:'VC 6000mm²'},{k:'防护',v:'IP69K'},{k:'跑分',v:'480-520万',cls:'gold'},{k:'配色',v:'墨玉黑 / 星云灰 / 苍岭绿'}]},
 {id:'n7v4',name:'Bozi Neo7',label:'16+512',tag:'￥5499',price:5499,currency:'￥',stock:9999,chip:'天玑9600',
-specs:[{k:'版本',v:'16GB + 512GB',cls:'gold'},{k:'芯片',v:'联发科 天玑9600',cls:'gold'},{k:'系统',v:'boziOS'},{k:'AI',v:'boziAI'},{k:'屏幕',v:'6.85" 2K LTPO · 165Hz'},{k:'影像',v:'2亿潜望长焦'},{k:'电池',v:'8000mAh 冰川'},{k:'充电',v:'120W + 50W 无线',cls:'gold'},{k:'散热',v:'VC 6000mm²'},{k:'防护',v:'IP69K'},{k:'跑分',v:'480-520万',cls:'gold'}]},
-{id:'n7v5',name:'Bozi Neo7',label:'16+1TB',tag:'顶配',price:6299,currency:'￥',stock:9999,chip:'天玑9600',
-specs:[{k:'版本',v:'16GB + 1TB',cls:'gold'},{k:'芯片',v:'联发科 天玑9600',cls:'gold'},{k:'系统',v:'boziOS'},{k:'AI',v:'boziAI'},{k:'屏幕',v:'6.85" 2K LTPO · 165Hz'},{k:'影像',v:'2亿潜望长焦'},{k:'电池',v:'8000mAh 冰川'},{k:'充电',v:'120W + 50W 无线',cls:'gold'},{k:'散热',v:'VC 6000mm²'},{k:'防护',v:'IP69K'},{k:'跑分',v:'480-520万',cls:'gold'}]}
+specs:[{k:'版本',v:'16GB + 512GB',cls:'gold'},{k:'芯片',v:'联发科 天玑9600',cls:'gold'},{k:'系统',v:'BoziOS 2'},{k:'AI',v:'BoziAI 2'},{k:'屏幕',v:'6.85" 2K LTPO · 165Hz'},{k:'影像',v:'2亿潜望长焦'},{k:'电池',v:'8000mAh 冰川'},{k:'充电',v:'120W + 50W 无线',cls:'gold'},{k:'散热',v:'VC 6000mm²'},{k:'防护',v:'IP69K'},{k:'跑分',v:'480-520万',cls:'gold'},{k:'配色',v:'墨玉黑 / 星云灰 / 苍岭绿'}]},
+{id:'n7v5',name:'Bozi Neo7',label:'16+1TB',tag:'￥6299',price:6299,currency:'￥',stock:9999,chip:'天玑9600',
+specs:[{k:'版本',v:'16GB + 1TB',cls:'gold'},{k:'芯片',v:'联发科 天玑9600',cls:'gold'},{k:'系统',v:'BoziOS 2'},{k:'AI',v:'BoziAI 2'},{k:'屏幕',v:'6.85" 2K LTPO · 165Hz'},{k:'影像',v:'2亿潜望长焦'},{k:'电池',v:'8000mAh 冰川'},{k:'充电',v:'120W + 50W 无线',cls:'gold'},{k:'散热',v:'VC 6000mm²'},{k:'防护',v:'IP69K'},{k:'跑分',v:'480-520万',cls:'gold'},{k:'配色',v:'墨玉黑 / 星云灰 / 苍岭绿'}]}
 ];
 
 var devices6 = [
 {id:'n6v1',name:'Bozi Neo6',label:'12+256',tag:'￥4299',price:4299,currency:'￥',stock:9999,chip:'骁龙8至尊',
-specs:[{k:'版本',v:'12GB + 256GB',cls:'gold'},{k:'芯片',v:'第5代骁龙8至尊',cls:'gold'},{k:'系统',v:'boziOS'},{k:'AI',v:'boziAI'},{k:'屏幕',v:'1.5K · 165Hz'},{k:'影像',v:'5000万潜望长焦'},{k:'电池',v:'8000mAh 冰川'},{k:'散热',v:'VC 5000mm²'},{k:'防护',v:'IP69K'},{k:'跑分',v:'4,784,383',cls:'gold'}]},
+specs:[{k:'版本',v:'12GB + 256GB',cls:'gold'},{k:'芯片',v:'第5代骁龙8至尊',cls:'gold'},{k:'系统',v:'BoziOS 2'},{k:'AI',v:'BoziAI 2'},{k:'屏幕',v:'1.5K · 165Hz'},{k:'影像',v:'5000万潜望长焦'},{k:'电池',v:'8000mAh 冰川'},{k:'散热',v:'VC 5000mm²'},{k:'防护',v:'IP69K'},{k:'跑分',v:'4,784,383',cls:'gold'},{k:'配色',v:'曜夜黑 / 流光银 / 晴空蓝'}]},
 {id:'n6v2',name:'Bozi Neo6',label:'16+256',tag:'￥4599',price:4599,currency:'￥',stock:9999,chip:'骁龙8至尊',
-specs:[{k:'版本',v:'16GB + 256GB',cls:'gold'},{k:'芯片',v:'第5代骁龙8至尊',cls:'gold'},{k:'系统',v:'boziOS'},{k:'AI',v:'boziAI'},{k:'屏幕',v:'1.5K · 165Hz'},{k:'影像',v:'5000万潜望长焦'},{k:'电池',v:'8000mAh 冰川'},{k:'散热',v:'VC 5000mm²'},{k:'防护',v:'IP69K'},{k:'跑分',v:'4,784,383',cls:'gold'}]},
+specs:[{k:'版本',v:'16GB + 256GB',cls:'gold'},{k:'芯片',v:'第5代骁龙8至尊',cls:'gold'},{k:'系统',v:'BoziOS 2'},{k:'AI',v:'BoziAI 2'},{k:'屏幕',v:'1.5K · 165Hz'},{k:'影像',v:'5000万潜望长焦'},{k:'电池',v:'8000mAh 冰川'},{k:'散热',v:'VC 5000mm²'},{k:'防护',v:'IP69K'},{k:'跑分',v:'4,784,383',cls:'gold'},{k:'配色',v:'曜夜黑 / 流光银 / 晴空蓝'}]},
 {id:'n6v3',name:'Bozi Neo6',label:'12+512',tag:'￥5079',price:5079,currency:'￥',stock:9999,chip:'骁龙8至尊',
-specs:[{k:'版本',v:'12GB + 512GB',cls:'gold'},{k:'芯片',v:'第5代骁龙8至尊',cls:'gold'},{k:'系统',v:'boziOS'},{k:'AI',v:'boziAI'},{k:'屏幕',v:'1.5K · 165Hz'},{k:'影像',v:'5000万潜望长焦'},{k:'电池',v:'8000mAh 冰川'},{k:'散热',v:'VC 5000mm²'},{k:'防护',v:'IP69K'},{k:'跑分',v:'4,784,383',cls:'gold'}]},
+specs:[{k:'版本',v:'12GB + 512GB',cls:'gold'},{k:'芯片',v:'第5代骁龙8至尊',cls:'gold'},{k:'系统',v:'BoziOS 2'},{k:'AI',v:'BoziAI 2'},{k:'屏幕',v:'1.5K · 165Hz'},{k:'影像',v:'5000万潜望长焦'},{k:'电池',v:'8000mAh 冰川'},{k:'散热',v:'VC 5000mm²'},{k:'防护',v:'IP69K'},{k:'跑分',v:'4,784,383',cls:'gold'},{k:'配色',v:'曜夜黑 / 流光银 / 晴空蓝'}]},
 {id:'n6v4',name:'Bozi Neo6',label:'16+512',tag:'￥5100',price:5100,currency:'￥',stock:9999,chip:'骁龙8至尊',
-specs:[{k:'版本',v:'16GB + 512GB',cls:'gold'},{k:'芯片',v:'第5代骁龙8至尊',cls:'gold'},{k:'系统',v:'boziOS'},{k:'AI',v:'boziAI'},{k:'屏幕',v:'1.5K · 165Hz'},{k:'影像',v:'5000万潜望长焦'},{k:'电池',v:'8000mAh 冰川'},{k:'散热',v:'VC 5000mm²'},{k:'防护',v:'IP69K'},{k:'跑分',v:'4,784,383',cls:'gold'}]},
-{id:'n6v5',name:'Bozi Neo6',label:'16+1TB',tag:'顶配',price:5999,currency:'￥',stock:9999,chip:'骁龙8至尊',
-specs:[{k:'版本',v:'16GB + 1TB',cls:'gold'},{k:'芯片',v:'第5代骁龙8至尊',cls:'gold'},{k:'系统',v:'boziOS'},{k:'AI',v:'boziAI'},{k:'屏幕',v:'1.5K · 165Hz'},{k:'影像',v:'5000万潜望长焦'},{k:'电池',v:'8000mAh 冰川'},{k:'散热',v:'VC 5000mm²'},{k:'防护',v:'IP69K'},{k:'跑分',v:'4,784,383',cls:'gold'}]}
+specs:[{k:'版本',v:'16GB + 512GB',cls:'gold'},{k:'芯片',v:'第5代骁龙8至尊',cls:'gold'},{k:'系统',v:'BoziOS 2'},{k:'AI',v:'BoziAI 2'},{k:'屏幕',v:'1.5K · 165Hz'},{k:'影像',v:'5000万潜望长焦'},{k:'电池',v:'8000mAh 冰川'},{k:'散热',v:'VC 5000mm²'},{k:'防护',v:'IP69K'},{k:'跑分',v:'4,784,383',cls:'gold'},{k:'配色',v:'曜夜黑 / 流光银 / 晴空蓝'}]},
+{id:'n6v5',name:'Bozi Neo6',label:'16+1TB',tag:'￥5999',price:5999,currency:'￥',stock:9999,chip:'骁龙8至尊',
+specs:[{k:'版本',v:'16GB + 1TB',cls:'gold'},{k:'芯片',v:'第5代骁龙8至尊',cls:'gold'},{k:'系统',v:'BoziOS 2'},{k:'AI',v:'BoziAI 2'},{k:'屏幕',v:'1.5K · 165Hz'},{k:'影像',v:'5000万潜望长焦'},{k:'电池',v:'8000mAh 冰川'},{k:'散热',v:'VC 5000mm²'},{k:'防护',v:'IP69K'},{k:'跑分',v:'4,784,383',cls:'gold'},{k:'配色',v:'曜夜黑 / 流光银 / 晴空蓝'}]}
 ];
 
 var devicesPad2 = [
 {id:'p2v1',name:'Bozi Pad 2',label:'8+128',tag:'￥1899',price:1899,currency:'￥',stock:9999,chip:'天玑8500',
-specs:[{k:'版本',v:'8GB + 128GB',cls:'teal'},{k:'芯片',v:'联发科 天玑8500',cls:'teal'},{k:'系统',v:'boziOS'},{k:'屏幕',v:'11.8" 2.8K OLED · 120Hz',cls:'teal'},{k:'峰值亮度',v:'900nit'},{k:'调光',v:'DC 调光'},{k:'内存',v:'8GB LPDDR5X'},{k:'存储',v:'128GB UFS 3.1'},{k:'后置',v:'1300万 + 200万景深'},{k:'前置',v:'800万像素'},{k:'扬声器',v:'四声道 · 杜比全景声',cls:'teal'},{k:'电池',v:'10500mAh',cls:'teal'},{k:'充电',v:'44W 有线快充',cls:'teal'},{k:'厚度',v:'6.5mm'},{k:'重量',v:'约 495g'},{k:'配色',v:'深空灰 / 冰川银 / 薄雾蓝 / 晨曦金'}]},
+specs:[{k:'版本',v:'8GB + 128GB',cls:'teal'},{k:'芯片',v:'联发科 天玑8500',cls:'teal'},{k:'系统',v:'BoziOS 2'},{k:'屏幕',v:'11.8" 2.8K OLED · 120Hz',cls:'teal'},{k:'峰值亮度',v:'900nit'},{k:'调光',v:'DC 调光'},{k:'内存',v:'8GB LPDDR5X'},{k:'存储',v:'128GB UFS 3.1'},{k:'后置',v:'1300万 + 200万景深'},{k:'前置',v:'800万像素'},{k:'扬声器',v:'四声道 · 杜比全景声',cls:'teal'},{k:'电池',v:'10500mAh',cls:'teal'},{k:'充电',v:'44W 有线快充',cls:'teal'},{k:'厚度',v:'6.5mm'},{k:'重量',v:'约 495g'},{k:'配色',v:'陨石灰 / 薄荷绿 / 霞光紫 / 星辰白'}]},
 {id:'p2v2',name:'Bozi Pad 2',label:'8+256',tag:'￥2099',price:2099,currency:'￥',stock:9999,chip:'天玑8500',
-specs:[{k:'版本',v:'8GB + 256GB',cls:'teal'},{k:'芯片',v:'联发科 天玑8500',cls:'teal'},{k:'系统',v:'boziOS'},{k:'屏幕',v:'11.8" 2.8K OLED · 120Hz',cls:'teal'},{k:'峰值亮度',v:'900nit'},{k:'调光',v:'DC 调光'},{k:'内存',v:'8GB LPDDR5X'},{k:'存储',v:'256GB UFS 3.1'},{k:'后置',v:'1300万 + 200万景深'},{k:'前置',v:'800万像素'},{k:'扬声器',v:'四声道 · 杜比全景声',cls:'teal'},{k:'电池',v:'10500mAh',cls:'teal'},{k:'充电',v:'44W 有线快充',cls:'teal'},{k:'厚度',v:'6.5mm'},{k:'重量',v:'约 495g'},{k:'配色',v:'深空灰 / 冰川银 / 薄雾蓝 / 晨曦金'}]},
+specs:[{k:'版本',v:'8GB + 256GB',cls:'teal'},{k:'芯片',v:'联发科 天玑8500',cls:'teal'},{k:'系统',v:'BoziOS 2'},{k:'屏幕',v:'11.8" 2.8K OLED · 120Hz',cls:'teal'},{k:'峰值亮度',v:'900nit'},{k:'调光',v:'DC 调光'},{k:'内存',v:'8GB LPDDR5X'},{k:'存储',v:'256GB UFS 3.1'},{k:'后置',v:'1300万 + 200万景深'},{k:'前置',v:'800万像素'},{k:'扬声器',v:'四声道 · 杜比全景声',cls:'teal'},{k:'电池',v:'10500mAh',cls:'teal'},{k:'充电',v:'44W 有线快充',cls:'teal'},{k:'厚度',v:'6.5mm'},{k:'重量',v:'约 495g'},{k:'配色',v:'陨石灰 / 薄荷绿 / 霞光紫 / 星辰白'}]},
 {id:'p2v3',name:'Bozi Pad 2',label:'12+256',tag:'￥2399',price:2399,currency:'￥',stock:9999,chip:'天玑8500',
-specs:[{k:'版本',v:'12GB + 256GB',cls:'teal'},{k:'芯片',v:'联发科 天玑8500',cls:'teal'},{k:'系统',v:'boziOS'},{k:'屏幕',v:'11.8" 2.8K OLED · 120Hz',cls:'teal'},{k:'峰值亮度',v:'900nit'},{k:'调光',v:'DC 调光'},{k:'内存',v:'12GB LPDDR5X'},{k:'存储',v:'256GB UFS 3.1'},{k:'后置',v:'1300万 + 200万景深'},{k:'前置',v:'800万像素'},{k:'扬声器',v:'四声道 · 杜比全景声',cls:'teal'},{k:'电池',v:'10500mAh',cls:'teal'},{k:'充电',v:'44W 有线快充',cls:'teal'},{k:'厚度',v:'6.5mm'},{k:'重量',v:'约 495g'},{k:'配色',v:'深空灰 / 冰川银 / 薄雾蓝 / 晨曦金'}]},
+specs:[{k:'版本',v:'12GB + 256GB',cls:'teal'},{k:'芯片',v:'联发科 天玑8500',cls:'teal'},{k:'系统',v:'BoziOS 2'},{k:'屏幕',v:'11.8" 2.8K OLED · 120Hz',cls:'teal'},{k:'峰值亮度',v:'900nit'},{k:'调光',v:'DC 调光'},{k:'内存',v:'12GB LPDDR5X'},{k:'存储',v:'256GB UFS 3.1'},{k:'后置',v:'1300万 + 200万景深'},{k:'前置',v:'800万像素'},{k:'扬声器',v:'四声道 · 杜比全景声',cls:'teal'},{k:'电池',v:'10500mAh',cls:'teal'},{k:'充电',v:'44W 有线快充',cls:'teal'},{k:'厚度',v:'6.5mm'},{k:'重量',v:'约 495g'},{k:'配色',v:'陨石灰 / 薄荷绿 / 霞光紫 / 星辰白'}]},
 {id:'p2v4',name:'Bozi Pad 2',label:'12+512',tag:'￥2699',price:2699,currency:'￥',stock:9999,chip:'天玑8500',
-specs:[{k:'版本',v:'12GB + 512GB',cls:'teal'},{k:'芯片',v:'联发科 天玑8500',cls:'teal'},{k:'系统',v:'boziOS'},{k:'屏幕',v:'11.8" 2.8K OLED · 120Hz',cls:'teal'},{k:'峰值亮度',v:'900nit'},{k:'调光',v:'DC 调光'},{k:'内存',v:'12GB LPDDR5X'},{k:'存储',v:'512GB UFS 3.1'},{k:'后置',v:'1300万 + 200万景深'},{k:'前置',v:'800万像素'},{k:'扬声器',v:'四声道 · 杜比全景声',cls:'teal'},{k:'电池',v:'10500mAh',cls:'teal'},{k:'充电',v:'44W 有线快充',cls:'teal'},{k:'厚度',v:'6.5mm'},{k:'重量',v:'约 495g'},{k:'配色',v:'深空灰 / 冰川银 / 薄雾蓝 / 晨曦金'}]}
+specs:[{k:'版本',v:'12GB + 512GB',cls:'teal'},{k:'芯片',v:'联发科 天玑8500',cls:'teal'},{k:'系统',v:'BoziOS 2'},{k:'屏幕',v:'11.8" 2.8K OLED · 120Hz',cls:'teal'},{k:'峰值亮度',v:'900nit'},{k:'调光',v:'DC 调光'},{k:'内存',v:'12GB LPDDR5X'},{k:'存储',v:'512GB UFS 3.1'},{k:'后置',v:'1300万 + 200万景深'},{k:'前置',v:'800万像素'},{k:'扬声器',v:'四声道 · 杜比全景声',cls:'teal'},{k:'电池',v:'10500mAh',cls:'teal'},{k:'充电',v:'44W 有线快充',cls:'teal'},{k:'厚度',v:'6.5mm'},{k:'重量',v:'约 495g'},{k:'配色',v:'陨石灰 / 薄荷绿 / 霞光紫 / 星辰白'}]}
 ];
 
 var devicesPad1 = [
 {id:'p1v1',name:'Bozi Pad 1',label:'8+128',tag:'￥1599',price:1599,currency:'￥',stock:9999,chip:'天玑8400',
-specs:[{k:'版本',v:'8GB + 128GB',cls:'teal'},{k:'芯片',v:'联发科 天玑8400',cls:'teal'},{k:'系统',v:'boziOS'},{k:'屏幕',v:'11.5" 2.8K · 144Hz',cls:'teal'},{k:'调光',v:'DC 调光'},{k:'内存',v:'8GB LPDDR5X'},{k:'存储',v:'128GB UFS 3.1'},{k:'后置',v:'1300万像素'},{k:'前置',v:'800万像素'},{k:'扬声器',v:'四声道 · 杜比全景声',cls:'teal'},{k:'电池',v:'10000mAh',cls:'teal'},{k:'充电',v:'33W 有线快充'},{k:'厚度',v:'6.9mm'},{k:'重量',v:'约 510g'},{k:'配色',v:'深空灰 / 冰川银 / 薄雾蓝'}]},
+specs:[{k:'版本',v:'8GB + 128GB',cls:'teal'},{k:'芯片',v:'联发科 天玑8400',cls:'teal'},{k:'系统',v:'BoziOS 2'},{k:'屏幕',v:'11.5" 2.8K · 144Hz',cls:'teal'},{k:'调光',v:'DC 调光'},{k:'内存',v:'8GB LPDDR5X'},{k:'存储',v:'128GB UFS 3.1'},{k:'后置',v:'1300万像素'},{k:'前置',v:'800万像素'},{k:'扬声器',v:'四声道 · 杜比全景声',cls:'teal'},{k:'电池',v:'10000mAh',cls:'teal'},{k:'充电',v:'33W 有线快充'},{k:'厚度',v:'6.9mm'},{k:'重量',v:'约 510g'},{k:'配色',v:'午夜灰 / 皓月白 / 天青蓝'}]},
 {id:'p1v2',name:'Bozi Pad 1',label:'8+256',tag:'￥1799',price:1799,currency:'￥',stock:9999,chip:'天玑8400',
-specs:[{k:'版本',v:'8GB + 256GB',cls:'teal'},{k:'芯片',v:'联发科 天玑8400',cls:'teal'},{k:'系统',v:'boziOS'},{k:'屏幕',v:'11.5" 2.8K · 144Hz',cls:'teal'},{k:'调光',v:'DC 调光'},{k:'内存',v:'8GB LPDDR5X'},{k:'存储',v:'256GB UFS 3.1'},{k:'后置',v:'1300万像素'},{k:'前置',v:'800万像素'},{k:'扬声器',v:'四声道 · 杜比全景声',cls:'teal'},{k:'电池',v:'10000mAh',cls:'teal'},{k:'充电',v:'33W 有线快充'},{k:'厚度',v:'6.9mm'},{k:'重量',v:'约 510g'},{k:'配色',v:'深空灰 / 冰川银 / 薄雾蓝'}]},
+specs:[{k:'版本',v:'8GB + 256GB',cls:'teal'},{k:'芯片',v:'联发科 天玑8400',cls:'teal'},{k:'系统',v:'BoziOS 2'},{k:'屏幕',v:'11.5" 2.8K · 144Hz',cls:'teal'},{k:'调光',v:'DC 调光'},{k:'内存',v:'8GB LPDDR5X'},{k:'存储',v:'256GB UFS 3.1'},{k:'后置',v:'1300万像素'},{k:'前置',v:'800万像素'},{k:'扬声器',v:'四声道 · 杜比全景声',cls:'teal'},{k:'电池',v:'10000mAh',cls:'teal'},{k:'充电',v:'33W 有线快充'},{k:'厚度',v:'6.9mm'},{k:'重量',v:'约 510g'},{k:'配色',v:'午夜灰 / 皓月白 / 天青蓝'}]},
 {id:'p1v3',name:'Bozi Pad 1',label:'12+256',tag:'￥2099',price:2099,currency:'￥',stock:9999,chip:'天玑8400',
-specs:[{k:'版本',v:'12GB + 256GB',cls:'teal'},{k:'芯片',v:'联发科 天玑8400',cls:'teal'},{k:'系统',v:'boziOS'},{k:'屏幕',v:'11.5" 2.8K · 144Hz',cls:'teal'},{k:'调光',v:'DC 调光'},{k:'内存',v:'12GB LPDDR5X'},{k:'存储',v:'256GB UFS 3.1'},{k:'后置',v:'1300万像素'},{k:'前置',v:'800万像素'},{k:'扬声器',v:'四声道 · 杜比全景声',cls:'teal'},{k:'电池',v:'10000mAh',cls:'teal'},{k:'充电',v:'33W 有线快充'},{k:'厚度',v:'6.9mm'},{k:'重量',v:'约 510g'},{k:'配色',v:'深空灰 / 冰川银 / 薄雾蓝'}]}
+specs:[{k:'版本',v:'12GB + 256GB',cls:'teal'},{k:'芯片',v:'联发科 天玑8400',cls:'teal'},{k:'系统',v:'BoziOS 2'},{k:'屏幕',v:'11.5" 2.8K · 144Hz',cls:'teal'},{k:'调光',v:'DC 调光'},{k:'内存',v:'12GB LPDDR5X'},{k:'存储',v:'256GB UFS 3.1'},{k:'后置',v:'1300万像素'},{k:'前置',v:'800万像素'},{k:'扬声器',v:'四声道 · 杜比全景声',cls:'teal'},{k:'电池',v:'10000mAh',cls:'teal'},{k:'充电',v:'33W 有线快充'},{k:'厚度',v:'6.9mm'},{k:'重量',v:'约 510g'},{k:'配色',v:'午夜灰 / 皓月白 / 天青蓝'}]}
 ];
 
 var devicesBook1 = [
 {id:'b1v1',name:'Bozi Book 1',label:'16+512',tag:'￥4999',price:4999,currency:'￥',stock:9999,chip:'Core Ultra 5',
-specs:[{k:'版本',v:'16GB + 512GB',cls:'blue'},{k:'芯片',v:'Intel Core Ultra 5',cls:'blue'},{k:'显卡',v:'Intel Arc 核显',cls:'blue'},{k:'系统',v:'Windows 11'},{k:'屏幕',v:'14" 2.5K · 120Hz',cls:'blue'},{k:'色域',v:'100% sRGB',cls:'blue'},{k:'内存',v:'16GB LPDDR5X'},{k:'存储',v:'512GB SSD'},{k:'接口',v:'USB-C × 2 · USB-A · HDMI · 3.5mm'},{k:'电池',v:'70Wh',cls:'blue'},{k:'充电',v:'100W 有线快充',cls:'blue'},{k:'厚度',v:'15.9mm'},{k:'重量',v:'约 1.35kg'},{k:'配色',v:'深空灰 / 冰川银'}]},
+specs:[{k:'版本',v:'16GB + 512GB',cls:'blue'},{k:'芯片',v:'Intel Core Ultra 5',cls:'blue'},{k:'显卡',v:'Intel Arc 核显',cls:'blue'},{k:'系统',v:'Windows 11 + Bozi 互联',cls:'blue'},{k:'屏幕',v:'14" 2.5K · 120Hz',cls:'blue'},{k:'色域',v:'100% sRGB',cls:'blue'},{k:'内存',v:'16GB LPDDR5X'},{k:'存储',v:'512GB SSD'},{k:'接口',v:'USB-C × 2 · USB-A · HDMI · 3.5mm'},{k:'电池',v:'70Wh',cls:'blue'},{k:'充电',v:'100W 有线快充',cls:'blue'},{k:'厚度',v:'15.9mm'},{k:'重量',v:'约 1.35kg'},{k:'配色',v:'玄铁灰 / 月岩银'}]},
 {id:'b1v2',name:'Bozi Book 1',label:'16+1TB',tag:'￥5499',price:5499,currency:'￥',stock:9999,chip:'Core Ultra 5',
-specs:[{k:'版本',v:'16GB + 1TB',cls:'blue'},{k:'芯片',v:'Intel Core Ultra 5',cls:'blue'},{k:'显卡',v:'Intel Arc 核显',cls:'blue'},{k:'系统',v:'Windows 11'},{k:'屏幕',v:'14" 2.5K · 120Hz',cls:'blue'},{k:'色域',v:'100% sRGB',cls:'blue'},{k:'内存',v:'16GB LPDDR5X'},{k:'存储',v:'1TB SSD'},{k:'接口',v:'USB-C × 2 · USB-A · HDMI · 3.5mm'},{k:'电池',v:'70Wh',cls:'blue'},{k:'充电',v:'100W 有线快充',cls:'blue'},{k:'厚度',v:'15.9mm'},{k:'重量',v:'约 1.35kg'},{k:'配色',v:'深空灰 / 冰川银'}]},
+specs:[{k:'版本',v:'16GB + 1TB',cls:'blue'},{k:'芯片',v:'Intel Core Ultra 5',cls:'blue'},{k:'显卡',v:'Intel Arc 核显',cls:'blue'},{k:'系统',v:'Windows 11 + Bozi 互联',cls:'blue'},{k:'屏幕',v:'14" 2.5K · 120Hz',cls:'blue'},{k:'色域',v:'100% sRGB',cls:'blue'},{k:'内存',v:'16GB LPDDR5X'},{k:'存储',v:'1TB SSD'},{k:'接口',v:'USB-C × 2 · USB-A · HDMI · 3.5mm'},{k:'电池',v:'70Wh',cls:'blue'},{k:'充电',v:'100W 有线快充',cls:'blue'},{k:'厚度',v:'15.9mm'},{k:'重量',v:'约 1.35kg'},{k:'配色',v:'玄铁灰 / 月岩银'}]},
 {id:'b1v3',name:'Bozi Book 1',label:'32+1TB',tag:'￥5999',price:5999,currency:'￥',stock:9999,chip:'Core Ultra 5',
-specs:[{k:'版本',v:'32GB + 1TB',cls:'blue'},{k:'芯片',v:'Intel Core Ultra 5',cls:'blue'},{k:'显卡',v:'Intel Arc 核显',cls:'blue'},{k:'系统',v:'Windows 11'},{k:'屏幕',v:'14" 2.5K · 120Hz',cls:'blue'},{k:'色域',v:'100% sRGB',cls:'blue'},{k:'内存',v:'32GB LPDDR5X'},{k:'存储',v:'1TB SSD'},{k:'接口',v:'USB-C × 2 · USB-A · HDMI · 3.5mm'},{k:'电池',v:'70Wh',cls:'blue'},{k:'充电',v:'100W 有线快充',cls:'blue'},{k:'厚度',v:'15.9mm'},{k:'重量',v:'约 1.35kg'},{k:'配色',v:'深空灰 / 冰川银'}]}
+specs:[{k:'版本',v:'32GB + 1TB',cls:'blue'},{k:'芯片',v:'Intel Core Ultra 5',cls:'blue'},{k:'显卡',v:'Intel Arc 核显',cls:'blue'},{k:'系统',v:'Windows 11 + Bozi 互联',cls:'blue'},{k:'屏幕',v:'14" 2.5K · 120Hz',cls:'blue'},{k:'色域',v:'100% sRGB',cls:'blue'},{k:'内存',v:'32GB LPDDR5X'},{k:'存储',v:'1TB SSD'},{k:'接口',v:'USB-C × 2 · USB-A · HDMI · 3.5mm'},{k:'电池',v:'70Wh',cls:'blue'},{k:'充电',v:'100W 有线快充',cls:'blue'},{k:'厚度',v:'15.9mm'},{k:'重量',v:'约 1.35kg'},{k:'配色',v:'玄铁灰 / 月岩银'}]}
 ];
 
 var payMethods = {wechat:'微信支付',alipay:'支付宝',card:'银行卡',balance:'Bozi 余额'};
@@ -1711,8 +1786,11 @@ var agreementRead = false;
 
 function setupBuyPage(cfg){
 var devices = cfg.devices;
+var colorList = cfg.colors;
 var currentDevice = devices[0];
+var currentColor = colorList[0];
 var scroll = document.getElementById(cfg.scrollId);
+var colorScroll = document.getElementById(cfg.colorScrollId);
 
 devices.forEach(function(d, i){
 var b = document.createElement('button');
@@ -1721,6 +1799,17 @@ b.setAttribute('data-id', d.id);
 b.innerHTML = d.label + '<span class="chip-sub">' + d.tag + '</span>';
 b.addEventListener('click', function(){ selectDevice(d.id); });
 scroll.appendChild(b);
+});
+
+colorList.forEach(function(c, i){
+var cb = document.createElement('button');
+cb.className = 'color-chip' + (i===0?' active':'');
+cb.setAttribute('data-color', c.name);
+cb.textContent = c.name;
+cb.style.background = c.bg;
+cb.style.color = c.fg;
+cb.addEventListener('click', function(){ selectColor(c); });
+colorScroll.appendChild(cb);
 });
 
 function renderSpecs(){
@@ -1752,6 +1841,13 @@ updateTotal();
 panel.classList.remove('switching');
 }, 180);
 }
+function selectColor(c){
+currentColor = c;
+var chips = colorScroll.querySelectorAll('.color-chip');
+for(var i=0;i<chips.length;i++){
+chips[i].classList.toggle('active', chips[i].getAttribute('data-color')===c.name);
+}
+}
 
 document.getElementById(cfg.buyBtnId).addEventListener('click', function(){
 this.disabled = true;
@@ -1763,43 +1859,50 @@ renderSpecs();
 updateTotal();
 
 return {
-getCurrentDevice: function(){return currentDevice;}
+getCurrentDevice: function(){return currentDevice;},
+getCurrentColor: function(){return currentColor;}
 };
 }
 
+var neoSeller8 = setupBuyPage({
+devices: devices8, colors: colorsNeo8, scrollId:'deviceScroll8', colorScrollId:'colorScroll8', panelId:'devicePanel8',
+productNameId:'productName8', productBadgeId:'productBadge8', stockNumId:'stockNum8',
+specFullId:'specFull8', totalPriceId:'totalPrice8', buyBtnId:'buyBtn8'
+});
 var neoSeller7 = setupBuyPage({
-devices: devices7, scrollId:'deviceScroll7', panelId:'devicePanel7',
+devices: devices7, colors: colorsNeo7, scrollId:'deviceScroll7', colorScrollId:'colorScroll7', panelId:'devicePanel7',
 productNameId:'productName7', productBadgeId:'productBadge7', stockNumId:'stockNum7',
 specFullId:'specFull7', totalPriceId:'totalPrice7', buyBtnId:'buyBtn7'
 });
 var neoSeller6 = setupBuyPage({
-devices: devices6, scrollId:'deviceScroll6', panelId:'devicePanel6',
+devices: devices6, colors: colorsNeo6, scrollId:'deviceScroll6', colorScrollId:'colorScroll6', panelId:'devicePanel6',
 productNameId:'productName6', productBadgeId:'productBadge6', stockNumId:'stockNum6',
 specFullId:'specFull6', totalPriceId:'totalPrice6', buyBtnId:'buyBtn6'
 });
 var padSeller2 = setupBuyPage({
-devices: devicesPad2, scrollId:'deviceScrollPad2', panelId:'devicePanelPad2',
+devices: devicesPad2, colors: colorsPad2, scrollId:'deviceScrollPad2', colorScrollId:'colorScrollPad2', panelId:'devicePanelPad2',
 productNameId:'productNamePad2', productBadgeId:'productBadgePad2', stockNumId:'stockNumPad2',
 specFullId:'specFullPad2', totalPriceId:'totalPricePad2', buyBtnId:'buyBtnPad2'
 });
 var padSeller1 = setupBuyPage({
-devices: devicesPad1, scrollId:'deviceScrollPad1', panelId:'devicePanelPad1',
+devices: devicesPad1, colors: colorsPad1, scrollId:'deviceScrollPad1', colorScrollId:'colorScrollPad1', panelId:'devicePanelPad1',
 productNameId:'productNamePad1', productBadgeId:'productBadgePad1', stockNumId:'stockNumPad1',
 specFullId:'specFullPad1', totalPriceId:'totalPricePad1', buyBtnId:'buyBtnPad1'
 });
 var bookSeller1 = setupBuyPage({
-devices: devicesBook1, scrollId:'deviceScrollBook1', panelId:'devicePanelBook1',
+devices: devicesBook1, colors: colorsBook1, scrollId:'deviceScrollBook1', colorScrollId:'colorScrollBook1', panelId:'devicePanelBook1',
 productNameId:'productNameBook1', productBadgeId:'productBadgeBook1', stockNumId:'stockNumBook1',
 specFullId:'specFullBook1', totalPriceId:'totalPriceBook1', buyBtnId:'buyBtnBook1'
 });
 
 function getActiveSeller(){
+if(document.getElementById('page-buy-neo8').classList.contains('active')) return neoSeller8;
 if(document.getElementById('page-buy-neo7').classList.contains('active')) return neoSeller7;
 if(document.getElementById('page-buy-neo6').classList.contains('active')) return neoSeller6;
 if(document.getElementById('page-buy-pad2').classList.contains('active')) return padSeller2;
 if(document.getElementById('page-buy-pad1').classList.contains('active')) return padSeller1;
 if(document.getElementById('page-buy-book1').classList.contains('active')) return bookSeller1;
-return neoSeller7;
+return neoSeller8;
 }
 
 var mo = document.getElementById('modalOverlay');
@@ -1877,6 +1980,7 @@ currentPay = item.getAttribute('data-pay');
 function startVerify(){
 var seller = getActiveSeller();
 var d = seller.getCurrentDevice();
+var c = seller.getCurrentColor();
 var vt = document.getElementById('verifyText');
 var vs = document.getElementById('verifySub');
 var vb = document.getElementById('verifyBar');
@@ -1899,7 +2003,7 @@ vb.style.width=s.prog+'%';
 });
 setTimeout(function(){
 var orderNo='BOZI-'+new Date().getFullYear()+'-'+String(Math.floor(Math.random()*99999999)).padStart(8,'0');
-document.getElementById('resultDesc').innerHTML='你的订单已提交成功<br><span style="font-size:13px;margin-top:8px;display:block;color:var(--success);font-weight:700;">'+d.name+' · '+d.specs[0].v+' · '+formatPrice(d)+'</span><span style="font-size:12px;margin-top:8px;display:block;color:var(--text-sub);">我们将在 24 小时内为你发货</span>';
+document.getElementById('resultDesc').innerHTML='你的订单已提交成功<br><span style="font-size:13px;margin-top:8px;display:block;color:var(--success);font-weight:700;">'+d.name+' · '+d.specs[0].v+' · '+c.name+' · '+formatPrice(d)+'</span><span style="font-size:12px;margin-top:8px;display:block;color:var(--text-sub);">我们将在 24 小时内为你发货</span>';
 document.getElementById('resultCode').textContent='ORDER NO: '+orderNo;
 goToStep(5);
 }, 4500);
@@ -1918,8 +2022,12 @@ mo.addEventListener('click', closeModal);
 function openModal(){
 var seller = getActiveSeller();
 var d = seller.getCurrentDevice();
+var c = seller.getCurrentColor();
 document.getElementById('sumDevice').textContent = d.name;
 document.getElementById('sumChip').textContent = d.specs[0].v;
+document.getElementById('sumColorName').textContent = c.name;
+var dot = document.querySelector('#sumColor .color-dot');
+if(dot){dot.style.background = c.bg;dot.style.borderColor = c.bg;}
 document.getElementById('sumSystem').textContent = d.chip;
 document.getElementById('sumUnit').textContent = formatPrice(d);
 document.getElementById('sumTotal').textContent = formatPrice(d);
@@ -1934,7 +2042,7 @@ function closeModal(){
 mo.classList.remove('show');
 mw.classList.remove('show');
 setTimeout(function(){
-['buyBtn7','buyBtn6','buyBtnPad2','buyBtnPad1','buyBtnBook1'].forEach(function(id){
+['buyBtn8','buyBtn7','buyBtn6','buyBtnPad2','buyBtnPad1','buyBtnBook1'].forEach(function(id){
 var btn = document.getElementById(id);
 if(btn){btn.disabled = false;btn.innerHTML = '<span class="btn-shine"></span>立即购买';}
 });
