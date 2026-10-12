@@ -2542,10 +2542,22 @@ vb.style.width=s.prog+'%';
 setTimeout(function(){
 var orderNo = generateOrderNo(d, c);
 document.getElementById('resultDesc').innerHTML='你的订单已提交成功<br><span style="font-size:13px;margin-top:8px;display:block;color:var(--success);font-weight:700;">'+d.name+' · '+d.specs[0].v+' · '+c.name+' · '+formatPrice(d)+'</span><span style="font-size:12px;margin-top:8px;display:block;color:var(--text-sub);">我们将在 24 小时内为你发货</span>';
-document.getElementById('resultCode').textContent='ORDER NO: '+orderNo;
-goToStep(5);
-}, 4500);
-}
+var rc = document.getElementById('resultCode');
+rc.textContent = orderNo;
+rc.style.cursor = 'pointer';
+rc.onclick = function(){
+  try {
+    navigator.clipboard.writeText(orderNo);
+    rc.textContent = '✓ 已复制：' + orderNo;
+    setTimeout(function(){ rc.textContent = orderNo; }, 1200);
+  } catch(e) {
+    rc.textContent = '长按复制：' + orderNo;
+  }
+};
+goToStep(5);                                                             
+}, 4500);                                                                 
+}                                                                         
+
 
 mnb.addEventListener('click', function(){
 if(currentStep===1){goToStep(2);}
