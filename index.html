@@ -48,6 +48,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .home-hero .badge.book-badge{color:var(--blue);border-color:rgba(96,165,250,0.4);background:rgba(96,165,250,0.08)}
 .home-hero .badge.sys-badge{color:var(--cyan);border-color:rgba(34,211,238,0.4);background:rgba(34,211,238,0.08)}
 .home-hero .badge.buds-badge{color:var(--accent);border-color:rgba(244,114,182,0.4);background:rgba(244,114,182,0.08)}
+.home-hero .badge.watch-badge{color:var(--success);border-color:rgba(34,197,94,0.4);background:rgba(34,197,94,0.08)}
 @keyframes pulse-soft{0%,100%{opacity:1}50%{opacity:0.6}}
 .home-hero h1{font-size:clamp(56px,18vw,96px);font-weight:900;line-height:1;letter-spacing:-4px;margin:0 0 20px 0;background:linear-gradient(135deg,#fff,#a78bfa,#2dd4bf,#fff);background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shine 6s linear infinite}
 @keyframes shine{to{background-position:200% center}}
@@ -107,6 +108,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .hero .badge.book-badge{color:var(--blue);border-color:rgba(96,165,250,0.4);background:rgba(96,165,250,0.08)}
 .hero .badge.sys-badge{color:var(--cyan);border-color:rgba(34,211,238,0.4);background:rgba(34,211,238,0.08)}
 .hero .badge.buds-badge{color:var(--accent);border-color:rgba(244,114,182,0.4);background:rgba(244,114,182,0.08)}
+.hero .badge.watch-badge{color:var(--success);border-color:rgba(34,197,94,0.4);background:rgba(34,197,94,0.08)}
 .hero h1{font-size:clamp(40px,12vw,68px);font-weight:900;line-height:1.05;letter-spacing:-2px;margin:0 0 20px 0;background:linear-gradient(135deg,#fff,#a78bfa,#2dd4bf,#fff);background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shine 6s linear infinite}
 .hero .sub{font-size:15px;color:var(--text-sub);line-height:1.8;max-width:380px;margin:0 auto}
 .hero .slogans{margin-top:40px;display:flex;flex-direction:column;gap:8px;font-size:12px;color:var(--text-sub);letter-spacing:1px;opacity:0.7}
@@ -129,6 +131,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .blue-highlight{color:var(--blue);font-weight:700}
 .cyan-highlight{color:var(--cyan);font-weight:700}
 .accent-highlight{color:var(--accent);font-weight:700}
+.green-highlight{color:var(--success);font-weight:700}
 .quote{position:relative;padding:20px 22px 20px 28px;background:rgba(139,92,246,0.05);border-left:3px solid var(--primary);border-radius:0 16px 16px 0;margin:24px 0;font-size:15px;line-height:1.7;color:#e2e8f0;font-style:italic}
 .quote::before{content:'"';position:absolute;top:-8px;left:12px;font-size:48px;color:var(--primary-glow);opacity:0.3;font-family:Georgia,serif;line-height:1}
 .quote .by{display:block;margin-top:12px;font-size:12px;color:var(--text-sub);font-style:normal;letter-spacing:1px}
@@ -160,6 +163,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .spec-item .v.blue{background:linear-gradient(180deg,#fff,var(--blue));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .spec-item .v.cyan{background:linear-gradient(180deg,#fff,var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .spec-item .v.accent{background:linear-gradient(180deg,#fff,var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.spec-item .v.green{background:linear-gradient(180deg,#fff,var(--success));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .product-card .desc{font-size:14px;color:#cbd5e1;line-height:1.8;margin:18px 0 0 0;position:relative}
 .price-bar{display:flex;justify-content:space-between;align-items:center;margin-top:20px;padding-top:18px;border-top:1px solid rgba(255,255,255,0.06);position:relative}
 .price-bar .left{display:flex;flex-direction:column;gap:3px}
@@ -192,13 +196,15 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .table-card.sys .tc-name{background:linear-gradient(180deg,#fff,var(--cyan));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .table-card.buds{border-color:rgba(244,114,182,0.3);background:rgba(244,114,182,0.03)}
 .table-card.buds .tc-name{background:linear-gradient(180deg,#fff,var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.table-card.watch{border-color:rgba(34,197,94,0.3);background:rgba(34,197,94,0.03)}
+.table-card.watch .tc-name{background:linear-gradient(180deg,#fff,var(--success));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .table-card .tc-gen{font-size:10px;color:var(--text-sub);letter-spacing:2px;margin-bottom:6px}
 .table-card .tc-name{font-size:16px;font-weight:800;color:#fff;margin-bottom:12px;line-height:1.2;word-break:break-word}
 .table-card .tc-row{display:flex;justify-content:space-between;font-size:11px;padding:5px 0;border-bottom:1px dashed rgba(255,255,255,0.05)}
 .table-card .tc-row:last-child{border-bottom:none}
 .table-card .tc-row .k{color:var(--text-sub)}
 .table-card .tc-row .v{color:#fff;font-weight:600;text-align:right;max-width:60%;word-break:break-word}
-.table-card .tc-row .v.gold{color:var(--gold)}.table-card .tc-row .v.purple{color:var(--primary-glow)}.table-card .tc-row .v.cyan{color:var(--cyan)}.table-card .tc-row .v.accent{color:var(--accent)}
+.table-card .tc-row .v.gold{color:var(--gold)}.table-card .tc-row .v.purple{color:var(--primary-glow)}.table-card .tc-row .v.cyan{color:var(--cyan)}.table-card .tc-row .v.accent{color:var(--accent)}.table-card .tc-row .v.green{color:var(--success)}
 .spec-table{display:flex;flex-direction:column;gap:8px;margin:20px 0;position:relative}
 .spec-row{display:flex;justify-content:space-between;font-size:12px;padding:10px 14px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:10px;gap:12px}
 .spec-row .k{color:var(--text-sub);white-space:nowrap;letter-spacing:1px}
@@ -208,6 +214,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .spec-row .v.blue{color:var(--blue)}
 .spec-row .v.cyan{color:var(--cyan)}
 .spec-row .v.accent{color:var(--accent)}
+.spec-row .v.green{color:var(--success)}
 .price-versions{display:flex;flex-direction:column;gap:10px;margin:20px 0;position:relative}
 .price-version{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:14px;transition:border-color 0.2s ease}
 .price-version.featured{border-color:rgba(250,204,21,0.3);background:rgba(250,204,21,0.04)}
@@ -251,18 +258,21 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .buy-card.teal-card{background:linear-gradient(135deg,rgba(45,212,191,0.05),rgba(139,92,246,0.05));border-color:rgba(45,212,191,0.2)}
 .buy-card.blue-card{background:linear-gradient(135deg,rgba(96,165,250,0.05),rgba(139,92,246,0.05));border-color:rgba(96,165,250,0.2)}
 .buy-card.buds-card{background:linear-gradient(135deg,rgba(244,114,182,0.05),rgba(139,92,246,0.05));border-color:rgba(244,114,182,0.2)}
+.buy-card.watch-card{background:linear-gradient(135deg,rgba(34,197,94,0.05),rgba(139,92,246,0.05));border-color:rgba(34,197,94,0.2)}
 .buy-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;position:relative;gap:12px}
 .buy-header .info{flex:1;min-width:0}
 .buy-header .name{font-size:22px;font-weight:900;color:#fff;margin:0 0 6px 0;line-height:1.2;background:linear-gradient(90deg,#fff,#facc15);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .teal-card .buy-header .name{background:linear-gradient(90deg,#fff,#2dd4bf);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .blue-card .buy-header .name{background:linear-gradient(90deg,#fff,#60a5fa);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .buds-card .buy-header .name{background:linear-gradient(90deg,#fff,#f472b6);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.watch-card .buy-header .name{background:linear-gradient(90deg,#fff,#22c55e);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .buy-header .stock{font-size:11px;color:var(--accent);font-weight:700;letter-spacing:1px;display:flex;align-items:center;gap:6px}
 .buy-header .stock::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pulse-dot 1.8s infinite}
 .buy-header .badge-stock{font-size:10px;padding:4px 10px;background:rgba(244,114,182,0.15);border:1px solid rgba(244,114,182,0.3);border-radius:8px;color:var(--accent);font-weight:700;letter-spacing:1px;white-space:nowrap}
 .teal-card .badge-stock{background:rgba(45,212,191,0.15);border-color:rgba(45,212,191,0.3);color:var(--secondary)}
 .blue-card .badge-stock{background:rgba(96,165,250,0.15);border-color:rgba(96,165,250,0.3);color:var(--blue)}
 .buds-card .badge-stock{background:rgba(244,114,182,0.15);border-color:rgba(244,114,182,0.3);color:var(--accent)}
+.watch-card .badge-stock{background:rgba(34,197,94,0.15);border-color:rgba(34,197,94,0.3);color:var(--success)}
 .spec-full{display:flex;flex-direction:column;gap:8px;margin-bottom:20px;position:relative}
 .spec-line{display:flex;justify-content:space-between;font-size:12px;padding:9px 12px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.05);border-radius:10px;gap:12px}
 .spec-line .k{color:var(--text-sub);white-space:nowrap;letter-spacing:1px}
@@ -271,18 +281,21 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .spec-line .v.teal{color:var(--secondary)}
 .spec-line .v.blue{color:var(--blue)}
 .spec-line .v.accent{color:var(--accent)}
+.spec-line .v.green{color:var(--success)}
 .total-bar{display:flex;justify-content:space-between;align-items:center;padding:16px 0;margin-bottom:16px;border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06);position:relative;gap:12px}
 .total-bar .label{font-size:12px;color:var(--text-sub);letter-spacing:1px;white-space:nowrap}
 .total-bar .amount{font-size:22px;font-weight:900;background:linear-gradient(180deg,#fff,var(--gold));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;word-break:break-all;text-align:right}
 .teal-card .total-bar .amount{background:linear-gradient(180deg,#fff,var(--secondary));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .blue-card .total-bar .amount{background:linear-gradient(180deg,#fff,var(--blue));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .buds-card .total-bar .amount{background:linear-gradient(180deg,#fff,var(--accent));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.watch-card .total-bar .amount{background:linear-gradient(180deg,#fff,var(--success));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
 .buy-btn{width:100%;padding:18px;border-radius:16px;background:linear-gradient(135deg,var(--gold),#f59e0b);border:none;color:#1a1a1a;font-size:16px;font-weight:900;letter-spacing:2px;cursor:pointer;position:relative;overflow:hidden;font-family:inherit;transition:transform 0.2s ease}
 .buy-btn:active{transform:scale(0.97)}
 .buy-btn:disabled{opacity:0.7}
 .teal-card .buy-btn{background:linear-gradient(135deg,var(--secondary),#0d9488);color:#0a1a1a}
 .blue-card .buy-btn{background:linear-gradient(135deg,var(--blue),#2563eb);color:#0a1a2a}
 .buds-card .buy-btn{background:linear-gradient(135deg,var(--accent),#be185d);color:#fff}
+.watch-card .buy-btn{background:linear-gradient(135deg,var(--success),#15803d);color:#fff}
 .buy-btn .btn-shine{position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.5),transparent);transform:skewX(-20deg);animation:btn-shine 4s infinite}
 @keyframes btn-shine{0%{left:-100%}50%,100%{left:200%}}
 .buy-note{font-size:11px;color:var(--text-sub);text-align:center;margin-top:14px;line-height:1.7;position:relative}
@@ -393,6 +406,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <button id="navPad">平板</button>
 <button id="navBook">电脑</button>
 <button id="navBuds">耳机</button>
+<button id="navWatch">手表</button>
 <button id="navSystem">系统</button>
 <button id="navHistory">设备史</button>
 </div>
@@ -404,11 +418,13 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <span>BOZI BUDS 1 新品上市</span><span>45dB 主动降噪 · 11mm 动圈单元</span><span>LDAC / LHDC · 空间音频</span><span>8+36 小时续航</span><span>￥699</span>
 <span>BOZI PAD 2 新品上市</span><span>天玑8500 · 11.8" 2.8K OLED 120Hz</span><span>10500mAh · 44W 快充</span><span>6.5mm · 495g · 四色可选</span><span>￥1899 起</span>
 <span>BOZI BOOK 1 新品上市</span><span>Core Ultra 5 · Intel Arc</span><span>14" 2.5K 120Hz · 100% sRGB</span><span>70Wh · 100W 快充 · 1.35kg</span><span>￥4999 起</span>
+<span>BOZI WATCH 1 现已预售</span><span>1.43" AMOLED · 466×466 · 60Hz</span><span>峰值 1000nit · 航空级铝合金</span><span>心率 / 血氧 / 睡眠 / 压力 / 体温</span><span>120+ 运动模式 · 5ATM 防水</span><span>双频五星定位 · 蓝牙 5.3</span><span>典型 14 天续航 · 磁吸无线快充</span><span>￥899</span>
 <span>BOZIOS 2 &amp; BOZIAI 2 正式发布</span><span>全场景智慧跃迁 · 从懂你开始</span><span>跨端协同 · 应用接力 · 剪贴板共享</span><span>主动服务 · 场景感知 · 隐私守护</span>
 <span>BOZI NEO8 全新发布</span><span>天玑9500 · 风驰内核 3.0</span><span>2K LTPO 165Hz · 6000nit</span><span>5000万潜望长焦 · 100倍变焦</span><span>8000mAh · 100W + 50W 无线</span>
 <span>BOZI BUDS 1 新品上市</span><span>45dB 主动降噪 · 11mm 动圈单元</span><span>LDAC / LHDC · 空间音频</span><span>8+36 小时续航</span><span>￥699</span>
 <span>BOZI PAD 2 新品上市</span><span>天玑8500 · 11.8" 2.8K OLED 120Hz</span><span>10500mAh · 44W 快充</span><span>6.5mm · 495g · 四色可选</span><span>￥1899 起</span>
 <span>BOZI BOOK 1 新品上市</span><span>Core Ultra 5 · Intel Arc</span><span>14" 2.5K 120Hz · 100% sRGB</span><span>70Wh · 100W 快充 · 1.35kg</span><span>￥4999 起</span>
+<span>BOZI WATCH 1 现已预售</span><span>1.43" AMOLED · 466×466 · 60Hz</span><span>峰值 1000nit · 航空级铝合金</span><span>心率 / 血氧 / 睡眠 / 压力 / 体温</span><span>120+ 运动模式 · 5ATM 防水</span><span>双频五星定位 · 蓝牙 5.3</span><span>典型 14 天续航 · 磁吸无线快充</span><span>￥899</span>
 <span>BOZIOS 2 &amp; BOZIAI 2 正式发布</span><span>全场景智慧跃迁 · 从懂你开始</span><span>跨端协同 · 应用接力 · 剪贴板共享</span><span>主动服务 · 场景感知 · 隐私守护</span>
 </div>
 </div>
@@ -682,6 +698,33 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 </div>
 </div>
 
+<!-- 手表首页（Watch 1） -->
+<div class="page" id="page-home-watch1">
+<div class="home-hero reveal">
+<div class="badge watch-badge">BOZI® 新品 · 手表</div>
+<h1>Bozi Watch 1</h1>
+<p class="sub">腕上智慧中枢，全场景健康与效率伴侣。</p>
+<div class="home-stats">
+<div class="home-stat"><div class="num">1.43"</div><div class="lbl">AMOLED 高清屏</div></div>
+<div class="home-stat"><div class="num">14天</div><div class="lbl">典型续航</div></div>
+<div class="home-stat"><div class="num">5ATM</div><div class="lbl">防水等级</div></div>
+</div>
+<div class="home-actions">
+<button class="home-btn primary" id="homeBuyBtnWatch1">立即购买</button>
+<button class="home-btn secondary" id="homeMoreBtnWatch1">了解更多</button>
+</div>
+<div class="scroll-hint2">↓ 向下滑动，查看亮点 ↓</div>
+</div>
+<div class="home-highlights">
+<div class="hl-card reveal"><div class="hl-tag">屏幕</div><div class="hl-title">1.43英寸 AMOLED 高清屏</div><div class="hl-desc">466×466 分辨率，60Hz 刷新率，峰值亮度 1000nit。户外强光下依然清晰可见。</div><div class="hl-big">1000nit</div><div class="hl-desc">峰值亮度，阳光下也能看清每一帧。</div></div>
+<div class="hl-card reveal"><div class="hl-tag">健康监测</div><div class="hl-title">全天候健康守护</div><div class="hl-desc">多通道生物传感器，支持心率、血氧、睡眠、压力、体温全天候监测。睡眠分析可识别深浅睡眠与快速眼动阶段。</div></div>
+<div class="hl-card reveal"><div class="hl-tag">运动</div><div class="hl-title">120+ 运动模式 · 5ATM</div><div class="hl-desc">覆盖跑步、骑行、游泳、健身等主流场景。5ATM 防水等级，游泳、冲浪均可佩戴。双频五星定位，轨迹记录精准可靠。</div></div>
+<div class="hl-card reveal"><div class="hl-tag">智慧互联</div><div class="hl-title">boziOS 腕上中枢</div><div class="hl-desc">与手机、平板、电脑无缝协同。来电、消息、日程直接在腕上查看与处理。支持双设备连接，自动切换。</div></div>
+<div class="hl-card reveal"><div class="hl-tag">设计</div><div class="hl-title">航空级铝合金 + 玻璃表背</div><div class="hl-desc">机身轻巧坚固，佩戴贴合舒适。曜夜黑、月光银、晨雾金三款配色，搭配氟橡胶、真皮、金属编织多种表带。</div></div>
+<div class="hl-card reveal"><div class="hl-tag">续航 & 充电</div><div class="hl-title">14 天续航 · 磁吸无线快充</div><div class="hl-desc">典型使用场景续航 14 天，重度使用 7 天。磁吸无线快充，碎片时间快速回血。</div></div>
+</div>
+</div>
+
 <!-- 8. 系统页 -->
 <div class="page" id="page-system">
 <div class="hero reveal">
@@ -740,7 +783,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <div class="section-header"><span class="section-index">ECOSYSTEM</span><h2 class="section-title">全场景生态，由此蜕变</h2></div>
 <div class="summary-card">
 <div class="title">🌌 Bozi 全场景生态</div>
-<div class="item">让 <span class="white-highlight">Neo8 的强悍</span>、<span class="white-highlight">Pad 2 的沉浸</span>、<span class="white-highlight">Book 1 的高效</span>、<span class="white-highlight">Buds 1 的降噪</span>彼此交融。</div>
+<div class="item">让 <span class="white-highlight">Neo8 的强悍</span>、<span class="white-highlight">Pad 2 的沉浸</span>、<span class="white-highlight">Book 1 的高效</span>、<span class="white-highlight">Buds 1 的降噪</span>、<span class="white-highlight">Watch 1 的健康守护</span>彼此交融。</div>
 <div class="item">它没有高高在上的距离感，只有懂你所需的贴心与从容。</div>
 </div>
 <div class="quote">你的下一台主力设备，不仅要有强悍的性能，更要有懂你的灵魂。<span class="by">— Bozi</span></div>
@@ -750,7 +793,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <div class="product-card sys-card">
 <div class="card-label">OTA</div>
 <h3 class="product-name">BoziOS 2 &amp; BoziAI 2</h3>
-<p class="desc">Neo8 出厂即搭载。Neo7、Neo6、Pad 2、Pad 1、Book 1、Buds 1 等设备，将通过 OTA 陆续推送更新。</p>
+<p class="desc">Neo8 出厂即搭载。Neo7、Neo6、Pad 2、Pad 1、Book 1、Buds 1、Watch 1 等设备，将通过 OTA 陆续推送更新。</p>
 <div class="spec-grid">
 <div class="spec-item"><div class="k">更新方式</div><div class="v cyan">OTA 推送</div></div>
 <div class="spec-item"><div class="k">费用</div><div class="v cyan">免费</div></div>
@@ -1511,7 +1554,138 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <div class="slogan-strip"><div>Peak performance runs on Bozi.</div><div>All chips bow to Bozi.</div></div>
 </div>
 
-<!-- 23. 神级设备史 -->
+<!-- 23. Watch 1 详情页 -->
+<div class="page" id="page-watch1">
+<div class="hero reveal">
+<div class="badge watch-badge">BOZI® WATCH 1</div>
+<h1>腕上智慧中枢</h1>
+<p class="sub">全场景健康与效率伴侣。Bozi W1 低功耗芯片 + boziOS，从手腕开始连接整个生态。</p>
+<div class="audio-bars"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+</div>
+<div class="reveal">
+<div class="section-header"><span class="section-index">SPECS</span><h2 class="section-title">核心参数</h2></div>
+<div class="spec-table">
+<div class="spec-row"><span class="k">产品名称</span><span class="v">Bozi Watch 1</span></div>
+<div class="spec-row"><span class="k">芯片</span><span class="v green">Bozi W1 低功耗芯片</span></div>
+<div class="spec-row"><span class="k">系统</span><span class="v green">boziOS</span></div>
+<div class="spec-row"><span class="k">屏幕</span><span class="v green">1.43" AMOLED · 466×466 · 60Hz</span></div>
+<div class="spec-row"><span class="k">峰值亮度</span><span class="v green">1000nit</span></div>
+<div class="spec-row"><span class="k">表壳材质</span><span class="v">航空级铝合金中框 + 玻璃表背</span></div>
+<div class="spec-row"><span class="k">表带</span><span class="v">氟橡胶 / 真皮 / 金属编织（可选）</span></div>
+<div class="spec-row"><span class="k">健康监测</span><span class="v green">心率 / 血氧 / 睡眠 / 压力 / 体温</span></div>
+<div class="spec-row"><span class="k">运动模式</span><span class="v green">120+ 种</span></div>
+<div class="spec-row"><span class="k">防水</span><span class="v green">5ATM</span></div>
+<div class="spec-row"><span class="k">定位</span><span class="v green">双频五星定位</span></div>
+<div class="spec-row"><span class="k">连接</span><span class="v">蓝牙 5.3 · 支持双设备连接</span></div>
+<div class="spec-row"><span class="k">通话</span><span class="v">蓝牙通话 · 支持 AI 降噪</span></div>
+<div class="spec-row"><span class="k">续航</span><span class="v green">典型 14 天 / 重度 7 天</span></div>
+<div class="spec-row"><span class="k">充电</span><span class="v green">磁吸无线快充</span></div>
+<div class="spec-row"><span class="k">配色</span><span class="v">曜夜黑 / 月光银 / 晨雾金</span></div>
+</div>
+</div>
+<div class="reveal">
+<div class="section-header"><span class="section-index">DESIGN</span><h2 class="section-title">轻盈腕上，质感出众</h2></div>
+<div class="product-card buds-card">
+<div class="card-label">AVIATION ALUMINUM</div>
+<h3 class="product-name">航空级铝合金中框 + 玻璃表背</h3>
+<p class="desc">机身轻巧坚固，佩戴贴合舒适。1.43英寸 AMOLED 高清屏，466×466 分辨率，峰值亮度 <span class="green-highlight">1000nit</span>，户外强光下依然清晰可见。曜夜黑、月光银、晨雾金三款配色，搭配氟橡胶、真皮、金属编织多种表带，满足不同场景的佩戴需求。</p>
+</div>
+</div>
+<div class="reveal">
+<div class="section-header"><span class="section-index">HEALTH</span><h2 class="section-title">健康守护，全天陪伴</h2></div>
+<div class="product-card buds-card">
+<div class="card-label">BIOSENSOR</div>
+<h3 class="product-name">多通道生物传感器</h3>
+<p class="desc">支持 <span class="green-highlight">心率、血氧、睡眠、压力、体温</span> 全天候监测。睡眠分析可识别深浅睡眠与快速眼动阶段，压力监测结合呼吸训练，帮助你随时了解身体状态，养成更健康的生活节律。</p>
+<div class="spec-grid">
+<div class="spec-item"><div class="k">心率</div><div class="v green">全天候</div></div>
+<div class="spec-item"><div class="k">血氧</div><div class="v green">全天候</div></div>
+<div class="spec-item"><div class="k">睡眠</div><div class="v green">分期识别</div></div>
+<div class="spec-item"><div class="k">压力</div><div class="v green">呼吸训练</div></div>
+</div>
+</div>
+</div>
+<div class="reveal">
+<div class="section-header"><span class="section-index">SPORT</span><h2 class="section-title">运动随行，精准记录</h2></div>
+<div class="product-card buds-card">
+<div class="card-label">120+ MODES</div>
+<h3 class="product-name">120+ 种运动模式 · 5ATM 防水</h3>
+<p class="desc">覆盖跑步、骑行、游泳、健身等主流场景。<span class="green-highlight">5ATM</span> 防水等级，游泳、冲浪均可佩戴。<span class="green-highlight">双频五星定位</span>系统，轨迹记录精准可靠，户外运动更有保障。</p>
+<div class="spec-grid">
+<div class="spec-item"><div class="k">运动模式</div><div class="v green">120+ 种</div></div>
+<div class="spec-item"><div class="k">防水</div><div class="v green">5ATM</div></div>
+<div class="spec-item"><div class="k">定位</div><div class="v green">双频五星</div></div>
+<div class="spec-item"><div class="k">连接</div><div class="v">蓝牙 5.3</div></div>
+</div>
+</div>
+</div>
+<div class="reveal">
+<div class="section-header"><span class="section-index">ECOSYSTEM</span><h2 class="section-title">智慧互联，腕上中枢</h2></div>
+<div class="product-card buds-card">
+<div class="card-label">BOZIOS</div>
+<h3 class="product-name">腕上中枢，全场景协同</h3>
+<p class="desc">依托 boziOS 的底层连接能力，Bozi Watch 1 与手机、平板、电脑之间无缝协同。来电、消息、日程直接在腕上查看与处理。支持<span class="green-highlight">双设备连接</span>，手机与电脑之间自动切换，不会错过任何重要信息。配合 boziAI，还能根据你的日程与习惯，主动推送天气、出行与健康提醒。</p>
+<div class="spec-grid">
+<div class="spec-item"><div class="k">双设备</div><div class="v green">支持</div></div>
+<div class="spec-item"><div class="k">通话</div><div class="v green">AI 降噪</div></div>
+<div class="spec-item"><div class="k">消息/日程</div><div class="v green">腕上处理</div></div>
+<div class="spec-item"><div class="k">boziAI</div><div class="v green">主动提醒</div></div>
+</div>
+</div>
+</div>
+<div class="reveal">
+<div class="section-header"><span class="section-index">BATTERY</span><h2 class="section-title">持久续航，快充回血</h2></div>
+<div class="product-card buds-card">
+<div class="card-label">14 DAYS</div>
+<h3 class="product-name">典型 14 天续航 + 磁吸无线快充</h3>
+<p class="desc">典型使用场景下续航可达 <span class="green-highlight">14 天</span>，重度使用也能维持 <span class="green-highlight">7 天</span>。磁吸无线快充，碎片时间即可快速补充电量，告别频繁充电的困扰。</p>
+<div class="spec-grid">
+<div class="spec-item"><div class="k">典型续航</div><div class="v green">14 天</div></div>
+<div class="spec-item"><div class="k">重度续航</div><div class="v green">7 天</div></div>
+<div class="spec-item"><div class="k">充电</div><div class="v green">磁吸无线</div></div>
+<div class="spec-item"><div class="k">芯片</div><div class="v">Bozi W1</div></div>
+</div>
+</div>
+</div>
+<div class="reveal">
+<div class="section-header"><span class="section-index">PRICE</span><h2 class="section-title">价格</h2></div>
+<div class="price-versions">
+<div class="price-version featured"><span class="ver">Bozi Watch 1<span class="badge-mini">单品</span></span><span class="price">￥899</span></div>
+</div>
+</div>
+<div class="reveal">
+<div class="section-header"><span class="section-index">SUMMARY</span><h2 class="section-title">结语</h2></div>
+<div class="text-body"><p>Bozi Watch 1，现已开启预售。</p><p>腕上智慧中枢，与你一起，感受全场景生态的默契陪伴。</p></div>
+<div class="quote">腕上智慧中枢，全场景健康与效率伴侣。<span class="by">— Bozi Watch 1</span></div>
+</div>
+</div>
+
+<!-- 24. Watch 1 购买页 -->
+<div class="page" id="page-buy-watch1">
+<div class="page-title">
+<h1>立即购买</h1>
+<p class="sub">Bozi Watch 1 · 量产发售 · 不会缺货</p>
+<div class="live-badge">当前 7,438 人正在浏览</div>
+</div>
+<div class="device-picker"><div class="picker-label">选择版本</div><div class="device-scroll" id="deviceScrollWatch1"></div></div>
+<div class="device-panel" id="devicePanelWatch1">
+<div class="buy-card watch-card">
+<div class="buy-header">
+<div class="info"><div class="name" id="productNameWatch1">Bozi Watch 1</div><div class="stock">现货 · 当前 <span id="stockNumWatch1">9999</span> 只可购</div></div>
+<div class="badge-stock" id="productBadgeWatch1">￥899</div>
+</div>
+<div class="spec-full" id="specFullWatch1"></div>
+<div class="color-picker"><div class="picker-label">选择颜色</div><div class="color-scroll" id="colorScrollWatch1"></div></div>
+<div class="total-bar"><div class="label">应付总额</div><div class="amount" id="totalPriceWatch1">￥899</div></div>
+<button class="buy-btn" id="buyBtnWatch1"><span class="btn-shine"></span>立即购买</button>
+<div class="buy-note">支付即表示同意《Bozi 用户协议》<br>量产发售 · 支持二次售卖 · 无身份绑定</div>
+</div>
+</div>
+<div class="trust-card"><div class="title">🛡️ 官方保障</div><div class="row"><span class="k">发货方式</span><span class="v">顺丰包邮</span></div><div class="row"><span class="k">售后</span><span class="v">全国联保</span></div><div class="row"><span class="k">退换</span><span class="v">7 天无理由</span></div><div class="row"><span class="k">保修</span><span class="v">首年整机保修</span></div></div>
+<div class="slogan-strip"><div>Peak performance runs on Bozi.</div><div>All chips bow to Bozi.</div></div>
+</div>
+
+<!-- 25. 神级设备史 -->
 <div class="page" id="page-intro">
 <div class="hero reveal">
 <div class="badge">BOZI® OFFICIAL</div>
@@ -1576,6 +1750,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <div class="table-card god"><div class="tc-gen">PAD 02</div><div class="tc-name">Bozi Pad 2</div><div class="tc-row"><span class="k">芯片</span><span class="v gold">天玑8500</span></div><div class="tc-row"><span class="k">屏幕</span><span class="v gold">11.8" 2.8K OLED 120Hz</span></div><div class="tc-row"><span class="k">电池</span><span class="v gold">10500mAh</span></div><div class="tc-row"><span class="k">定位</span><span class="v gold">平板</span></div></div>
 <div class="table-card god"><div class="tc-gen">BOOK 01</div><div class="tc-name">Bozi Book 1</div><div class="tc-row"><span class="k">芯片</span><span class="v gold">Core Ultra 5</span></div><div class="tc-row"><span class="k">屏幕</span><span class="v gold">14" 2.5K 120Hz</span></div><div class="tc-row"><span class="k">电池</span><span class="v gold">70Wh</span></div><div class="tc-row"><span class="k">定位</span><span class="v gold">笔记本</span></div></div>
 <div class="table-card buds"><div class="tc-gen">BUDS 01</div><div class="tc-name">Bozi Buds 1</div><div class="tc-row"><span class="k">芯片</span><span class="v accent">Bozi A1</span></div><div class="tc-row"><span class="k">降噪</span><span class="v accent">45dB</span></div><div class="tc-row"><span class="k">续航</span><span class="v accent">8+36h</span></div><div class="tc-row"><span class="k">定位</span><span class="v accent">耳机</span></div></div>
+<div class="table-card watch"><div class="tc-gen">WATCH 01</div><div class="tc-name">Bozi Watch 1</div><div class="tc-row"><span class="k">芯片</span><span class="v green">Bozi W1</span></div><div class="tc-row"><span class="k">屏幕</span><span class="v green">1.43" AMOLED</span></div><div class="tc-row"><span class="k">续航</span><span class="v green">14 天</span></div><div class="tc-row"><span class="k">定位</span><span class="v green">手表</span></div></div>
 <div class="table-card sys"><div class="tc-gen">SYSTEM</div><div class="tc-name">BoziOS 2 · BoziAI 2</div><div class="tc-row"><span class="k">跨端</span><span class="v cyan">协同</span></div><div class="tc-row"><span class="k">AI</span><span class="v cyan">主动服务</span></div><div class="tc-row"><span class="k">定位</span><span class="v cyan">全场景生态</span></div></div>
 </div>
 </div>
@@ -1721,10 +1896,12 @@ var phonePages = ['page-home','page-home-neo7','page-home-neo6','page-neo8','pag
 var padPages = ['page-home-pad2','page-home-pad1','page-pad2','page-pad1','page-buy-pad2','page-buy-pad1'];
 var bookPages = ['page-home-book1','page-book1','page-buy-book1'];
 var budsPages = ['page-home-buds1','page-buds1','page-buy-buds1'];
+var watchPages = ['page-home-watch1','page-watch1','page-buy-watch1'];
 if(phonePages.indexOf(id) > -1) return 'phone';
 if(padPages.indexOf(id) > -1) return 'pad';
 if(bookPages.indexOf(id) > -1) return 'book';
 if(budsPages.indexOf(id) > -1) return 'buds';
+if(watchPages.indexOf(id) > -1) return 'watch';
 if(id === 'page-system') return 'system';
 if(id === 'page-intro') return 'history';
 return null;
@@ -1735,6 +1912,7 @@ document.getElementById('navPhone').classList.toggle('active', cat === 'phone');
 document.getElementById('navPad').classList.toggle('active', cat === 'pad');
 document.getElementById('navBook').classList.toggle('active', cat === 'book');
 document.getElementById('navBuds').classList.toggle('active', cat === 'buds');
+document.getElementById('navWatch').classList.toggle('active', cat === 'watch');
 document.getElementById('navSystem').classList.toggle('active', cat === 'system');
 document.getElementById('navHistory').classList.toggle('active', cat === 'history');
 }
@@ -1765,6 +1943,10 @@ showView('page-home-book1');
 document.getElementById('navBuds').addEventListener('click', function(){
 pageStack = [];
 showView('page-home-buds1');
+});
+document.getElementById('navWatch').addEventListener('click', function(){
+pageStack = [];
+showView('page-home-watch1');
 });
 document.getElementById('navSystem').addEventListener('click', function(){
 pageStack = [];
@@ -1804,6 +1986,9 @@ document.getElementById('homeMoreBtnBook1').addEventListener('click', function()
 
 document.getElementById('homeBuyBtnBuds1').addEventListener('click', function(){showView('page-buy-buds1');});
 document.getElementById('homeMoreBtnBuds1').addEventListener('click', function(){showView('page-buds1');});
+
+document.getElementById('homeBuyBtnWatch1').addEventListener('click', function(){showView('page-buy-watch1');});
+document.getElementById('homeMoreBtnWatch1').addEventListener('click', function(){showView('page-watch1');});
 
 var revealEls = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
 function triggerReveal(){
@@ -1908,6 +2093,11 @@ var colorsBuds1 = [
 {name:'极光紫',bg:'#9d7fc9',fg:'#ffffff'},
 {name:'松霜绿',bg:'#7fa78c',fg:'#0a1a12'}
 ];
+var colorsWatch1 = [
+{name:'曜夜黑',bg:'#15151a',fg:'#ffffff'},
+{name:'月光银',bg:'#c8c8cc',fg:'#1a1a1a'},
+{name:'晨雾金',bg:'#d4b896',fg:'#2a1a00'}
+];
 
 var devices8 = [
 {id:'n8v1',name:'Bozi Neo8',label:'12+256',tag:'￥4699',price:4699,currency:'￥',stock:9999,chip:'天玑9500',
@@ -1978,6 +2168,11 @@ specs:[{k:'版本',v:'32GB + 1TB',cls:'blue'},{k:'芯片',v:'Intel Core Ultra 5'
 var devicesBuds1 = [
 {id:'bd1v1',name:'Bozi Buds 1',label:'标准版',tag:'￥699',price:699,currency:'￥',stock:9999,chip:'Bozi A1',
 specs:[{k:'版本',v:'标准版',cls:'accent'},{k:'音频芯片',v:'Bozi A1 高能音频芯片',cls:'accent'},{k:'系统生态',v:'boziOS'},{k:'发声单元',v:'11mm 复合振膜动圈',cls:'accent'},{k:'降噪深度',v:'45dB 主动降噪',cls:'accent'},{k:'音频解码',v:'LDAC / LHDC'},{k:'连接',v:'蓝牙 5.4 · 双设备连接'},{k:'空间音频',v:'支持',cls:'accent'},{k:'通话降噪',v:'三麦克风 AI'},{k:'续航',v:'8h + 36h',cls:'accent'},{k:'充电',v:'Type-C + 无线充电'},{k:'防护',v:'IP54'},{k:'单耳重量',v:'约 4.8g',cls:'accent'},{k:'配色',v:'幻夜黑 / 云水白 / 极光紫 / 松霜绿'}]}
+];
+
+var devicesWatch1 = [
+{id:'w1v1',name:'Bozi Watch 1',label:'标准版',tag:'￥899',price:899,currency:'￥',stock:9999,chip:'Bozi W1',
+specs:[{k:'版本',v:'标准版',cls:'green'},{k:'芯片',v:'Bozi W1 低功耗芯片',cls:'green'},{k:'系统',v:'boziOS'},{k:'屏幕',v:'1.43" AMOLED · 466×466 · 60Hz',cls:'green'},{k:'峰值亮度',v:'1000nit'},{k:'表壳',v:'航空级铝合金 + 玻璃表背'},{k:'表带',v:'氟橡胶 / 真皮 / 金属编织'},{k:'健康监测',v:'心率 / 血氧 / 睡眠 / 压力 / 体温',cls:'green'},{k:'运动模式',v:'120+ 种',cls:'green'},{k:'防水',v:'5ATM',cls:'green'},{k:'定位',v:'双频五星定位'},{k:'连接',v:'蓝牙 5.3 · 双设备'},{k:'通话',v:'蓝牙通话 · AI 降噪'},{k:'续航',v:'典型 14 天 / 重度 7 天',cls:'green'},{k:'充电',v:'磁吸无线快充',cls:'green'},{k:'配色',v:'曜夜黑 / 月光银 / 晨雾金'}]}
 ];
 
 var payMethods = {wechat:'微信支付',alipay:'支付宝',card:'银行卡',balance:'Bozi 余额'};
@@ -2099,6 +2294,11 @@ devices: devicesBuds1, colors: colorsBuds1, scrollId:'deviceScrollBuds1', colorS
 productNameId:'productNameBuds1', productBadgeId:'productBadgeBuds1', stockNumId:'stockNumBuds1',
 specFullId:'specFullBuds1', totalPriceId:'totalPriceBuds1', buyBtnId:'buyBtnBuds1'
 });
+var watchSeller1 = setupBuyPage({
+devices: devicesWatch1, colors: colorsWatch1, scrollId:'deviceScrollWatch1', colorScrollId:'colorScrollWatch1', panelId:'devicePanelWatch1',
+productNameId:'productNameWatch1', productBadgeId:'productBadgeWatch1', stockNumId:'stockNumWatch1',
+specFullId:'specFullWatch1', totalPriceId:'totalPriceWatch1', buyBtnId:'buyBtnWatch1'
+});
 
 function getActiveSeller(){
 if(document.getElementById('page-buy-neo8').classList.contains('active')) return neoSeller8;
@@ -2108,6 +2308,7 @@ if(document.getElementById('page-buy-pad2').classList.contains('active')) return
 if(document.getElementById('page-buy-pad1').classList.contains('active')) return padSeller1;
 if(document.getElementById('page-buy-book1').classList.contains('active')) return bookSeller1;
 if(document.getElementById('page-buy-buds1').classList.contains('active')) return budsSeller1;
+if(document.getElementById('page-buy-watch1').classList.contains('active')) return watchSeller1;
 return neoSeller8;
 }
 
@@ -2248,7 +2449,7 @@ function closeModal(){
 mo.classList.remove('show');
 mw.classList.remove('show');
 setTimeout(function(){
-['buyBtn8','buyBtn7','buyBtn6','buyBtnPad2','buyBtnPad1','buyBtnBook1','buyBtnBuds1'].forEach(function(id){
+['buyBtn8','buyBtn7','buyBtn6','buyBtnPad2','buyBtnPad1','buyBtnBook1','buyBtnBuds1','buyBtnWatch1'].forEach(function(id){
 var btn = document.getElementById(id);
 if(btn){btn.disabled = false;btn.innerHTML = '<span class="btn-shine"></span>立即购买';}
 });
