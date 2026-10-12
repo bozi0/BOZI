@@ -21,9 +21,9 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .topbar .back-btn:active{transform:scale(0.92);background:rgba(139,92,246,0.25)}
 .topbar .back-btn.show{display:flex}
 .topbar .brand{font-size:14px;font-weight:800;letter-spacing:1.5px;background:linear-gradient(90deg,#fff,#a78bfa);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;cursor:pointer;flex-shrink:0;flex-grow:0}
-.topbar .nav-pill{display:flex;gap:3px;padding:3px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:40px;flex:1;overflow-x:auto;justify-content:flex-end;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.topbar .nav-pill{display:flex;gap:3px;padding:3px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:40px;flex:1;min-width:0;overflow-x:auto;overflow-y:hidden;justify-content:flex-start;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-behavior:smooth;scroll-padding:0 6px}
 .topbar .nav-pill::-webkit-scrollbar{display:none}
-.topbar .nav-pill button{padding:6px 10px;border-radius:40px;font-size:11px;font-weight:700;letter-spacing:0.5px;color:var(--text-sub);transition:background 0.25s ease,color 0.25s ease;white-space:nowrap;background:transparent;border:none;cursor:pointer;font-family:inherit;flex-shrink:0}
+.topbar .nav-pill button{padding:6px 9px;border-radius:40px;font-size:10.5px;font-weight:700;letter-spacing:0.3px;color:var(--text-sub);transition:background 0.25s ease,color 0.25s ease;white-space:nowrap;background:transparent;border:none;cursor:pointer;font-family:inherit;flex-shrink:0;scroll-snap-align:center}
 .topbar .nav-pill button.active{background:linear-gradient(135deg,var(--primary),#6d28d9);color:#fff}
 .banner{position:fixed;top:calc(64px + env(safe-area-inset-top));left:0;width:100%;padding:8px 20px;z-index:190;background:rgba(20,15,35,0.95);border-bottom:1px solid rgba(167,139,250,0.1);overflow:hidden}
 .banner-track{display:flex;gap:40px;animation:banner-scroll 30s linear infinite;white-space:nowrap;will-change:transform}
@@ -401,7 +401,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <div class="topbar">
 <button class="back-btn" id="backBtn">←</button>
 <div class="brand" id="brandBtn">BOZI®</div>
-<div class="nav-pill">
+<div class="nav-pill" id="navPill">
 <button id="navPhone">手机</button>
 <button id="navPad">平板</button>
 <button id="navBook">电脑</button>
@@ -1908,13 +1908,24 @@ return null;
 }
 function updateNavHighlight(id){
 var cat = getCategory(id);
-document.getElementById('navPhone').classList.toggle('active', cat === 'phone');
-document.getElementById('navPad').classList.toggle('active', cat === 'pad');
-document.getElementById('navBook').classList.toggle('active', cat === 'book');
-document.getElementById('navBuds').classList.toggle('active', cat === 'buds');
-document.getElementById('navWatch').classList.toggle('active', cat === 'watch');
-document.getElementById('navSystem').classList.toggle('active', cat === 'system');
-document.getElementById('navHistory').classList.toggle('active', cat === 'history');
+var navMap = {phone:'navPhone',pad:'navPad',book:'navBook',buds:'navBuds',watch:'navWatch',system:'navSystem',history:'navHistory'};
+var activeBtn = null;
+Object.keys(navMap).forEach(function(k){
+var btn = document.getElementById(navMap[k]);
+var on = cat === k;
+btn.classList.toggle('active', on);
+if(on) activeBtn = btn;
+});
+if(activeBtn){
+var nav = activeBtn.parentNode;
+var nr = nav.getBoundingClientRect();
+var br = activeBtn.getBoundingClientRect();
+if(br.left < nr.left){
+nav.scrollLeft += br.left - nr.left - 6;
+}else if(br.right > nr.right){
+nav.scrollLeft += br.right - nr.right + 6;
+}
+}
 }
 updateNavHighlight('page-home');
 
