@@ -2067,7 +2067,87 @@ backToTop.addEventListener('click', function(){window.scrollTo({top:0,behavior:'
 function formatPrice(d){
 return d.currency + ' ' + d.price.toLocaleString('zh-CN');
 }
+/* ========== 订单号生成系统 V2 ========== */
+var MIX_CHARS = 'XZQWMKPRYHNTVS';
+function mixOne(){
+return MIX_CHARS[Math.floor(Math.random()*MIX_CHARS.length)];
+}
 
+var DEVICE_CODES = {
+'Bozi Neo8':'N08',
+'Bozi Neo7':'N07',
+'Bozi Neo6':'N06',
+'Bozi Pad 2':'P02',
+'Bozi Pad 1':'P01',
+'Bozi Book 1':'B01',
+'Bozi Buds 1':'D01',
+'Bozi Watch 1':'W01'
+};
+
+var VERSION_CODES = {
+'8GB + 128GB':'0812',
+'8GB + 256GB':'0825',
+'12GB + 256GB':'1225',
+'12GB + 512GB':'1251',
+'16GB + 256GB':'1625',
+'16GB + 512GB':'1651',
+'16GB + 1TB':'161T',
+'32GB + 1TB':'321T',
+'标准版':'0000'
+};
+
+var COLOR_CODES = {
+'破晓金':'GLD','雾海蓝':'BLU','钛空灰':'GRY',
+'墨玉黑':'BLK','星云灰':'NEB','苍岭绿':'GRN',
+'曜夜黑':'BLK','流光银':'SLV','晴空蓝':'SKY',
+'陨石灰':'MET','薄荷绿':'MNT','霞光紫':'PUR','星辰白':'WHT',
+'午夜灰':'MID','皓月白':'MWH','天青蓝':'AZR',
+'玄铁灰':'IRN','月岩银':'MSV',
+'幻夜黑':'NBL','云水白':'CWD','极光紫':'AUR','松霜绿':'PGR',
+'月光银':'MSV','晨雾金':'MGD'
+};
+
+function getDeviceCode(name){
+return DEVICE_CODES[name] || 'X00';
+}
+function getVersionCode(v){
+if(!v) return '0000';
+v = v.replace(/\s/g,'');
+if(VERSION_CODES[v]) return VERSION_CODES[v];
+var m = v.match(/^(\d+)GB\+(\d+)(GB|TB)$/);
+if(m){
+var mem = String(m[1]).padStart(2,'0');
+var sto = m[3]==='TB' ? 'T' + m[2] : String(m[2]).slice(0,2);
+return mem + sto;
+}
+return '0000';
+}
+function getColorCode(name){
+return COLOR_CODES[name] || 'CLR';
+}
+function calcChecksum(str){
+var s = 0;
+for(var i=0;i<str.length;i++){
+s = (s * 31 + str.charCodeAt(i)) % 1296;
+}
+var c1 = String.fromCharCode(65 + (s % 26));
+var c2 = String.fromCharCode(65 + Math.floor(s / 26) % 26);
+return c1 + c2;
+}
+function generateOrderNo(device, color){
+var pad = function(n){return String(n).padStart(2,'0');};
+var now = new Date();
+var dCode = getDeviceCode(device.name);
+var vCode = getVersionCode(device.specs[0].v);
+var cCode = getColorCode(color.name);
+var dateStr = String(now.getFullYear()).slice(-2) + pad(now.getMonth()+1) + pad(now.getDate());
+var timeStr = pad(now.getHours()) + pad(now.getMinutes()) + pad(now.getSeconds());
+var rand4 = String(Math.floor(Math.random()*10000)).padStart(4,'0');
+var core = dCode + vCode + cCode + dateStr + timeStr + rand4;
+var checksum = calcChecksum(core);
+return 'BOZI' + mixOne() + dCode + mixOne() + vCode + mixOne() + cCode + mixOne() + dateStr + mixOne() + timeStr + mixOne() + rand4 + checksum + mixOne();
+}
+/* ========== 订单号生成系统 V2 结束 ========== */
 var colorsNeo8 = [
 {name:'破晓金',bg:'#e8b84a',fg:'#2a1a00'},
 {name:'雾海蓝',bg:'#5b7b9a',fg:'#ffffff'},
@@ -2420,7 +2500,7 @@ vb.style.width=s.prog+'%';
 }, s.delay);
 });
 setTimeout(function(){
-var orderNo='BOZI-'+new Date().getFullYear()+'-'+String(Math.floor(Math.random()*99999999)).padStart(8,'0');
+var orderNo = generateOrderNo(d, c);
 document.getElementById('resultDesc').innerHTML='你的订单已提交成功<br><span style="font-size:13px;margin-top:8px;display:block;color:var(--success);font-weight:700;">'+d.name+' · '+d.specs[0].v+' · '+c.name+' · '+formatPrice(d)+'</span><span style="font-size:12px;margin-top:8px;display:block;color:var(--text-sub);">我们将在 24 小时内为你发货</span>';
 document.getElementById('resultCode').textContent='ORDER NO: '+orderNo;
 goToStep(5);
