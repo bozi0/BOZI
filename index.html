@@ -3187,6 +3187,7 @@ if(dot){dot.style.background = c.bg;dot.style.borderColor = c.bg;}
 document.getElementById('sumSystem').textContent = d.chip;
 document.getElementById('sumUnit').textContent = formatPrice(d);
 document.getElementById('sumTotal').textContent = formatPrice(d);
+  __boziPushLayer('buy');
 document.querySelectorAll('.step-item').forEach(function(item){item.classList.remove('active','done');});
 document.querySelector('.step-item[data-step="1"]').classList.add('active');
 goToStep(1);
@@ -3197,6 +3198,7 @@ mw.classList.add('show');
 function closeModal(){
 mo.classList.remove('show');
 mw.classList.remove('show');
+  __boziCloseLayerClean('buy');
 setTimeout(function(){
 ['buyBtn8','buyBtn7','buyBtn6','buyBtnPad2','buyBtnPad1','buyBtnBook1','buyBtnBuds1','buyBtnWatch1'].forEach(function(id){
 var btn = document.getElementById(id);
@@ -3325,6 +3327,7 @@ function bindHotTags(){
 function openSearch(){
   searchPanel.classList.add('show');
   searchBtn.classList.add('active');
+    __boziPushLayer('search');
   setTimeout(function(){ searchInput.focus(); }, 200);
   if(!searchInput.value.trim()){
     searchResults.innerHTML = searchHotHTML;
@@ -3335,6 +3338,7 @@ function openSearch(){
 function closeSearch(){
   searchPanel.classList.remove('show');
   searchBtn.classList.remove('active');
+    __boziCloseLayerClean('search');
 }
 
 if(searchBtn){
@@ -3660,12 +3664,14 @@ function openShareModal(){
   document.getElementById('shareModalOverlay').classList.add('show');
   document.getElementById('shareModalWrapper').classList.add('show');
   document.body.style.overflowY = 'hidden';
+  __boziPushLayer('share');
 }
 
 function closeShareModal(){
   document.getElementById('shareModalOverlay').classList.remove('show');
   document.getElementById('shareModalWrapper').classList.remove('show');
   document.body.style.overflowY = '';
+    __boziCloseLayerClean('share');
 }
 
 function _fallbackDownload(blob, fname){
@@ -3770,16 +3776,41 @@ window.addEventListener('appinstalled', function(){
   console.log('🎉 Bozi PWA 已安装');
 });
 /* ========== PWA 结束 ========== */
-  /* ========== 系统返回手势支持 ========== */
+ /* ========== 系统返回手势支持（完整版） ========== */
+var __boziIgnorePop = 0;
+
+function __boziPushLayer(name){
+  try { history.pushState({ boziLayer: name }, ''); } catch(e){}
+}
+function __boziCloseLayerClean(name){
+  if(history.state && history.state.boziLayer === name){
+    __boziIgnorePop++;
+    try { history.back(); } catch(e){}
+  }
+}
+
 window.addEventListener('popstate', function(e){
+  if(__boziIgnorePop > 0){ __boziIgnorePop--; return; }
+
+  var mw = document.getElementById('modalWrapper');
+  if(mw && mw.classList.contains('show')){
+    if(typeof closeModal === 'function') closeModal();
+    return;
+  }
+  var sw = document.getElementById('shareModalWrapper');
+  if(sw && sw.classList.contains('show')){
+    if(typeof closeShareModal === 'function') closeShareModal();
+    return;
+  }
+  var sp = document.getElementById('searchPanel');
+  if(sp && sp.classList.contains('show')){
+    if(typeof closeSearch === 'function') closeSearch();
+    return;
+  }
+
   var prev = pageStack.pop();
   if(prev){
     showView(prev, true);
-  } else {
-    var current = document.querySelector('.page.active');
-    if(current && current.id !== 'page-home'){
-      showView('page-home', true);
-    }
   }
 });
 /* ========== 系统返回手势支持结束 ========== */
