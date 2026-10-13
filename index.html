@@ -3610,80 +3610,96 @@ function showShareToast(msg){
 }
 
 var currentShareCfg = null;
+var currentShareBlob = null;
+var currentShareImgUrl = null;
+
 function openShareModal(){
   var cur = document.querySelector('.page.active');
   if(!cur) return;
   var cfg = SHARE_CONFIG[cur.id];
   if(!cfg) return;
   currentShareCfg = cfg;
+
   drawShareCard(cfg);
 
-  // 转成 img 显示，方便移动端长按保存
   var canvas = document.getElementById('shareCanvas');
   var img = document.getElementById('shareImg');
-  try {
-    img.src = canvas.toDataURL('image/png');
+  canvas.toBlob(function(blob){
+    if(!blob){
+      try {
+        img.src = canvas.toDataURL('image/png');
+        img.style.display = 'block';
+        canvas.style.display = 'none';
+      } catch(e){}
+      return;
+    }
+    currentShareBlob = blob;
+    if(currentShareImgUrl){ try{ URL.revokeObjectURL(currentShareImgUrl); }catch(e){} }
+    currentShareImgUrl = URL.createObjectURL(blob);
+    img.src = currentShareImgUrl;
     img.style.display = 'block';
     canvas.style.display = 'none';
-  } catch(e){
-    img.style.display = 'none';
-    canvas.style.display = 'block';
-  }
+  }, 'image/png');
 
   document.getElementById('shareModalOverlay').classList.add('show');
   document.getElementById('shareModalWrapper').classList.add('show');
   document.body.style.overflowY = 'hidden';
 }
+
 function closeShareModal(){
   document.getElementById('shareModalOverlay').classList.remove('show');
   document.getElementById('shareModalWrapper').classList.remove('show');
   document.body.style.overflowY = '';
-}
-function saveShareCard(){
-  var canvas = document.getElementById('shareCanvas');
-  if(!canvas) return;
-  var fname = 'Bozi-' + (currentShareCfg ? currentShareCfg.name.replace(/\s/g,'') : 'Card') + '-' + Date.now() + '.png';
-
-  canvas.toBlob(function(blob){
-    if(!blob){ showShareToast('生成失败，请长按图片'); return; }
-    var file = null;
-    try { file = new File([blob], fname, {type:'image/png'}); } catch(e){}
-
-    // 首选：调起系统分享面板（移动端可选"存储到照片"）
-    if(file && navigator.canShare && navigator.canShare({files:[file]})){
-      navigator.share({
-        files:[file],
-        title: currentShareCfg ? currentShareCfg.name : 'Bozi',
-        text: currentShareCfg ? (currentShareCfg.name + ' · ' + currentShareCfg.tagline) : 'Bozi'
-      }).then(function(){
-        showShareToast('✓ 已发送');
-      }).catch(function(err){
-        if(err && err.name === 'AbortError') return;
-        _fallbackDownload(blob, fname);
-      });
-      return;
-    }
-
-    // 桌面端：直接下载
-    _fallbackDownload(blob, fname);
-  }, 'image/png');
 }
 
 function _fallbackDownload(blob, fname){
   try {
     var url = URL.createObjectURL(blob);
     var a = document.createElement('a');
-    a.href = url; a.download = fname;
+    a.href = url; a.download = fname; a.rel = 'noopener';
     document.body.appendChild(a); a.click();
     document.body.removeChild(a);
-    setTimeout(function(){ URL.revokeObjectURL(url); }, 1200);
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1500);
     showShareToast('✓ 卡片已保存');
   } catch(e){
     showShareToast('保存失败，请长按图片');
   }
 }
 
-(function bindShareSystem(){
+function saveShareCard(){
+  if(!currentShareBlob){
+    showShareToast('图片生成中，请稍候…');
+    return;
+  }
+  var fname = 'Bozi-' + (currentShareCfg ? currentShareCfg.name.replace(/\s/g,'') : 'Card') + '-' + Date.now() + '.png';
+
+  var file = null;
+  try { file = new File([currentShareBlob], fname, {type:'image/png'}); } catch(e){}
+
+  // 优先调起系统分享面板（移动端可选"存储到照片/相册"）
+  if(file && typeof navigator.canShare === 'function' && typeof navigator.share === 'function'){
+    var canShare = false;
+    try { canShare = navigator.canShare({files:[file]}); } catch(e){ canShare = false; }
+    if(canShare){
+      try {
+        navigator.share({
+          files: [file],
+          title: currentShareCfg ? currentShareCfg.name : 'Bozi'
+        }).catch(function(err){
+          if(err && (err.name === 'AbortError' || err.name === 'NotAllowedError')) return;
+          _fallbackDownload(currentShareBlob, fname);
+        });
+        return;
+      } catch(e){
+        // 继续走 fallback
+      }
+    }
+  }
+
+  // 桌面/不支持 share 的浏览器：直接下载
+  _fallbackDownload(currentShareBlob, fname);
+}
+  (function bindShareSystem(){
   var fb = document.getElementById('shareFloatBtn');
   if(!fb) return;
   fb.addEventListener('click', openShareModal);
