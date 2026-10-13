@@ -25,6 +25,42 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .topbar .nav-pill::-webkit-scrollbar{display:none}
 .topbar .nav-pill button{padding:6px 9px;border-radius:40px;font-size:10.5px;font-weight:700;letter-spacing:0.3px;color:var(--text-sub);transition:background 0.25s ease,color 0.25s ease;white-space:nowrap;background:transparent;border:none;cursor:pointer;font-family:inherit;flex-shrink:0;scroll-snap-align:center}
 .topbar .nav-pill button.active{background:linear-gradient(135deg,var(--primary),#6d28d9);color:#fff}
+  .topbar .search-btn{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:var(--text-sub);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s ease;font-family:inherit;padding:0;line-height:1;margin-left:2px}
+.topbar .search-btn:active{transform:scale(0.9);background:rgba(139,92,246,0.25)}
+.topbar .search-btn.active{background:linear-gradient(135deg,var(--primary),#6d28d9);color:#fff;border-color:transparent}
+.search-panel{position:fixed;top:calc(58px + env(safe-area-inset-top));left:0;width:100%;background:rgba(8,8,12,0.98);border-bottom:1px solid rgba(167,139,250,0.15);z-index:195;padding:14px 16px 18px;transform:translateY(-110%);transition:transform 0.35s cubic-bezier(0.175,0.885,0.32,1.275);max-height:70vh;display:flex;flex-direction:column}
+.search-panel.show{transform:translateY(0)}
+.search-input-wrap{display:flex;gap:8px;align-items:center;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:14px;padding:0 14px;margin-bottom:12px}
+.search-input-wrap .icon{font-size:15px;opacity:0.6;flex-shrink:0}
+.search-input-wrap input{flex:1;background:transparent;border:none;outline:none;color:#fff;font-size:14px;padding:14px 0;font-family:inherit;letter-spacing:0.5px}
+.search-input-wrap input::placeholder{color:var(--text-sub)}
+.search-input-wrap .clear-x{width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,0.08);border:none;color:var(--text-sub);font-size:12px;cursor:pointer;display:none;align-items:center;justify-content:center;font-family:inherit;padding:0;flex-shrink:0}
+.search-input-wrap .clear-x.show{display:flex}
+.search-input-wrap .clear-x:active{background:rgba(244,114,182,0.3);color:var(--accent)}
+.search-results{overflow-y:auto;flex:1;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;gap:8px}
+.search-results::-webkit-scrollbar{width:4px}
+.search-results::-webkit-scrollbar-thumb{background:rgba(167,139,250,0.4);border-radius:2px}
+.search-item{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:12px 14px;cursor:pointer;transition:background 0.2s ease,border-color 0.2s ease}
+.search-item:active{background:rgba(139,92,246,0.12);border-color:rgba(167,139,250,0.4)}
+.search-item .si-title{font-size:14px;font-weight:800;color:#fff;margin-bottom:4px;line-height:1.3}
+.search-item .si-sub{font-size:11px;color:var(--text-sub);line-height:1.5}
+.search-item mark{background:rgba(250,204,21,0.25);color:var(--gold);padding:0 2px;border-radius:3px;font-weight:800}
+.search-empty{text-align:center;padding:30px 20px;color:var(--text-sub);font-size:12px;line-height:1.8}
+.search-empty .se-icon{font-size:32px;margin-bottom:10px;opacity:0.4}
+.search-hot{padding:4px 0}
+.search-hot .sh-label{font-size:10px;color:var(--text-sub);letter-spacing:3px;font-weight:700;margin-bottom:10px;opacity:0.7}
+.search-hot .sh-tags{display:flex;flex-wrap:wrap;gap:8px}
+.search-hot .sh-tag{font-size:11px;padding:7px 14px;background:rgba(139,92,246,0.08);border:1px solid rgba(167,139,250,0.2);color:var(--primary-glow);border-radius:40px;cursor:pointer;font-weight:600;letter-spacing:0.5px;font-family:inherit;transition:background 0.2s ease}
+.search-hot .sh-tag:active{background:rgba(139,92,246,0.25)}
+:root[data-theme="light"] .search-panel{background:rgba(250,250,252,0.98);border-bottom:1px solid rgba(139,92,246,0.15)}
+:root[data-theme="light"] .search-btn{background:rgba(0,0,0,0.04);border:1px solid rgba(0,0,0,0.1);color:var(--text-sub)}
+:root[data-theme="light"] .search-input-wrap{background:rgba(0,0,0,0.04);border:1px solid rgba(0,0,0,0.08)}
+:root[data-theme="light"] .search-input-wrap input{color:#0a0a0f}
+:root[data-theme="light"] .search-input-wrap .clear-x{background:rgba(0,0,0,0.08);color:#4a4a55}
+:root[data-theme="light"] .search-item{background:rgba(255,255,255,0.7);border:1px solid rgba(0,0,0,0.06)}
+:root[data-theme="light"] .search-item .si-title{color:#0a0a0f}
+:root[data-theme="light"] .search-item mark{background:rgba(217,119,6,0.15);color:#b45309}
+:root[data-theme="light"] .search-hot .sh-tag{background:rgba(124,58,237,0.06);border-color:rgba(124,58,237,0.2);color:#7c3aed}
   .topbar .theme-btn{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:var(--text-sub);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s ease;font-family:inherit;padding:0;line-height:1;margin-left:2px}
 .topbar .theme-btn:active{transform:scale(0.9);background:rgba(139,92,246,0.25)}
 .topbar .theme-btn.active{background:linear-gradient(135deg,var(--gold),#f59e0b);color:#1a1a1a;border-color:transparent;box-shadow:0 4px 12px rgba(250,204,21,0.35)}
@@ -596,10 +632,30 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <button id="navSystem">系统</button>
 <button id="navHistory">设备史</button>
 </div>
+<button class="search-btn" id="searchBtn">🔍</button>
 <button class="theme-btn" id="themeBtn">🌙</button>
 <button class="orders-btn" id="navOrders">📦</button>
 </div>
-
+<div class="search-panel" id="searchPanel">
+<div class="search-input-wrap">
+<span class="icon">🔍</span>
+<input type="text" id="searchInput" placeholder="搜索设备、参数、功能…" spellcheck="false" autocomplete="off">
+<button class="clear-x" id="searchClearX">×</button>
+</div>
+<div class="search-results" id="searchResults">
+<div class="search-hot">
+<div class="sh-label">热门搜索</div>
+<div class="sh-tags">
+<button class="sh-tag" data-kw="天玑">天玑</button>
+<button class="sh-tag" data-kw="潜望">潜望</button>
+<button class="sh-tag" data-kw="降噪">降噪</button>
+<button class="sh-tag" data-kw="8000mAh">8000mAh</button>
+<button class="sh-tag" data-kw="OLED">OLED</button>
+<button class="sh-tag" data-kw="5ATM">5ATM</button>
+</div>
+</div>
+</div>
+</div>
 <div class="banner">
 <div class="banner-track">
 <span>BOZI NEO8 全新发布</span><span>天玑9500 · 风驰内核 3.0</span><span>2K LTPO 165Hz · 6000nit</span><span>5000万潜望长焦 · 100倍变焦</span><span>8000mAh · 100W + 50W 无线</span>
@@ -3131,7 +3187,140 @@ function initTheme(){
 }
 initTheme();
 /* ========== 主题切换结束 ========== */
+  /* ========== 搜索系统 ========== */
+var SEARCH_INDEX = [
+  { title:'Bozi Neo8', sub:'全场景智慧旗舰 · 天玑9500 · ￥4699 起', tags:'neo8 neo 8 手机 旗舰 天玑9500 2k ltpo 165hz 潜望 长焦 8000mah 100w 无线 充电 ip68 ip69', page:'page-home' },
+  { title:'Bozi Neo7', sub:'新一代 · 天玑9600 · ￥4499 起', tags:'neo7 neo 7 手机 旗舰 天玑9600 2k 165hz 2亿 潜望 长焦 8000mah 120w ip69k', page:'page-home-neo7' },
+  { title:'Bozi Neo6', sub:'回归人间 · 骁龙8至尊 · ￥4299 起', tags:'neo6 neo 6 手机 骁龙 8 至尊 1.5k 165hz 潜望 长焦 8000mah ip69k', page:'page-home-neo6' },
+  { title:'Bozi Pad 2', sub:'更轻更薄 · 天玑8500 · ￥1899 起', tags:'pad2 pad 2 平板 天玑8500 11.8 2.8k oled 120hz 10500mah 44w', page:'page-home-pad2' },
+  { title:'Bozi Pad 1', sub:'轻盈随行 · 天玑8400 · ￥1599 起', tags:'pad1 pad 1 平板 天玑8400 11.5 2.8k 144hz 10000mah 33w', page:'page-home-pad1' },
+  { title:'Bozi Book 1', sub:'轻薄随行 · Core Ultra 5 · ￥4999 起', tags:'book1 book 1 电脑 笔记本 core ultra 5 intel arc 14 2.5k 120hz 70wh 100w', page:'page-home-book1' },
+  { title:'Bozi Buds 1', sub:'声临其境 · 45dB 降噪 · ￥699', tags:'buds1 buds 1 耳机 降噪 45db 11mm ldac lhdc 36h 蓝牙5.4 ip54', page:'page-home-buds1' },
+  { title:'Bozi Watch 1', sub:'腕上智慧中枢 · 14 天续航 · ￥899', tags:'watch1 watch 1 手表 健康 心率 血氧 睡眠 压力 体温 5atm 14天 磁吸 运动', page:'page-home-watch1' },
+  { title:'BoziOS 2 · BoziAI 2', sub:'全场景智慧跃迁 · 跨端协同', tags:'系统 bozios 2 boziai 2 跨端 协同 ai 智能 主动服务', page:'page-system' },
+  { title:'设备史', sub:'从一颗散装芯片，到手腕上的另一个维度', tags:'设备史 编年史 历史 神㉿ neo 纪元 芯片', page:'page-intro' }
+];
+
+var searchPanel = document.getElementById('searchPanel');
+var searchBtn = document.getElementById('searchBtn');
+var searchInput = document.getElementById('searchInput');
+var searchResults = document.getElementById('searchResults');
+var searchClearX = document.getElementById('searchClearX');
+var searchHotHTML = searchResults ? searchResults.innerHTML : '';
+
+function escapeHTML(s){
+  return String(s).replace(/[&<>"']/g, function(c){
+    return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
+  });
+}
+
+function highlight(text, words){
+  var out = escapeHTML(text);
+  words.forEach(function(w){
+    if(!w) return;
+    var re = new RegExp('(' + w.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + ')', 'gi');
+    out = out.replace(re, '<mark>$1</mark>');
+  });
+  return out;
+}
+
+function doSearch(kw){
+  var q = String(kw || '').trim().toLowerCase();
+  if(!q){
+    searchResults.innerHTML = searchHotHTML;
+    bindHotTags();
+    return;
+  }
+  var words = q.split(/\s+/).filter(function(w){ return w.length > 0; });
+  var matches = SEARCH_INDEX.filter(function(item){
+    var blob = (item.title + ' ' + item.sub + ' ' + item.tags).toLowerCase();
+    return words.every(function(w){ return blob.indexOf(w) > -1; });
+  });
+
+  if(matches.length === 0){
+    searchResults.innerHTML = '<div class="search-empty"><div class="se-icon">🔍</div>没找到「' + escapeHTML(kw) + '」<br>换个词试试</div>';
+    return;
+  }
+
+  var h = '';
+  matches.forEach(function(item){
+    h += '<div class="search-item" data-page="' + item.page + '">';
+    h += '<div class="si-title">' + highlight(item.title, words) + '</div>';
+    h += '<div class="si-sub">' + highlight(item.sub, words) + '</div>';
+    h += '</div>';
+  });
+  searchResults.innerHTML = h;
+
+  searchResults.querySelectorAll('.search-item').forEach(function(el){
+    el.addEventListener('click', function(){
+      var pid = el.getAttribute('data-page');
+      closeSearch();
+      showView(pid);
+    });
+  });
+}
+
+function bindHotTags(){
+  searchResults.querySelectorAll('.sh-tag').forEach(function(el){
+    el.addEventListener('click', function(){
+      var kw = el.getAttribute('data-kw');
+      searchInput.value = kw;
+      searchClearX.classList.add('show');
+      doSearch(kw);
+    });
+  });
+}
+
+function openSearch(){
+  searchPanel.classList.add('show');
+  searchBtn.classList.add('active');
+  setTimeout(function(){ searchInput.focus(); }, 200);
+  if(!searchInput.value.trim()){
+    searchResults.innerHTML = searchHotHTML;
+    bindHotTags();
+  }
+}
+
+function closeSearch(){
+  searchPanel.classList.remove('show');
+  searchBtn.classList.remove('active');
+}
+
+if(searchBtn){
+  searchBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    if(searchPanel.classList.contains('show')) closeSearch();
+    else openSearch();
+  });
+}
+
+if(searchInput){
+  searchInput.addEventListener('input', function(){
+    var v = searchInput.value;
+    if(v.trim()) searchClearX.classList.add('show');
+    else searchClearX.classList.remove('show');
+    doSearch(v);
+  });
+}
+
+if(searchClearX){
+  searchClearX.addEventListener('click', function(){
+    searchInput.value = '';
+    searchClearX.classList.remove('show');
+    doSearch('');
+    searchInput.focus();
+  });
+}
+
+document.addEventListener('click', function(e){
+  if(!searchPanel.classList.contains('show')) return;
+  if(searchPanel.contains(e.target)) return;
+  if(searchBtn.contains(e.target)) return;
+  closeSearch();
+});
+/* ========== 搜索系统结束 ========== */
   bindQueryUI();
+  bindHotTags();
 } catch(err) {
   console.error('Bozi JS error:', err);
 }
