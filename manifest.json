@@ -1,0 +1,20 @@
+{
+  "name": "Bozi® 官方网站",
+  "short_name": "Bozi",
+  "description": "从一颗散装芯片，到手腕上的另一个维度。Bozi 全场景生态官方平台。",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#050507",
+  "theme_color": "#8b5cf6",
+  "lang": "zh-CN",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
