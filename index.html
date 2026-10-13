@@ -3673,10 +3673,36 @@ function saveShareCard(){
   }
   var fname = 'Bozi-' + (currentShareCfg ? currentShareCfg.name.replace(/\s/g,'') : 'Card') + '-' + Date.now() + '.png';
 
+  // 检测夸克 / iOS 第三方浏览器
+  var ua = navigator.userAgent;
+  var isQuark = /Quark/i.test(ua);
+  var isIOSThirdParty = /iPad|iPhone|iPod/.test(ua) && /CriOS|FxiOS|OPiOS|Quark|QQBrowser|UCBrowser|MicroMessenger|Weibo|DingTalk|Alipay/i.test(ua);
+
+  if (isQuark || isIOSThirdParty) {
+    // 用新窗口打开图片，提示用户长按保存
+    var imgUrl = currentShareImgUrl || URL.createObjectURL(currentShareBlob);
+    var w = window.open(imgUrl, '_blank', 'noopener,noreferrer');
+    if (w) {
+      showShareToast('已打开新页面，请长按图片保存');
+    } else {
+      // 如果新窗口被拦截，降级用 dataURL
+      var canvas = document.getElementById('shareCanvas');
+      var w2 = window.open();
+      if (w2) {
+        w2.document.write('<html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>保存图片</title></head><body style="margin:0;background:#111;display:flex;align-items:center;justify-content:center;min-height:100vh;"><img src="' + canvas.toDataURL('image/png') + '" style="max-width:100%;height:auto;" /></body></html>');
+        w2.document.close();
+        showShareToast('已打开新页面，请长按图片保存');
+      } else {
+        showShareToast('请长按上方图片手动保存');
+      }
+    }
+    return;
+  }
+
+  // 其他浏览器：走系统分享或直接下载
   var file = null;
   try { file = new File([currentShareBlob], fname, {type:'image/png'}); } catch(e){}
 
-  // 优先调起系统分享面板（移动端可选"存储到照片/相册"）
   if(file && typeof navigator.canShare === 'function' && typeof navigator.share === 'function'){
     var canShare = false;
     try { canShare = navigator.canShare({files:[file]}); } catch(e){ canShare = false; }
@@ -3690,13 +3716,10 @@ function saveShareCard(){
           _fallbackDownload(currentShareBlob, fname);
         });
         return;
-      } catch(e){
-        // 继续走 fallback
-      }
+      } catch(e){}
     }
   }
 
-  // 桌面/不支持 share 的浏览器：直接下载
   _fallbackDownload(currentShareBlob, fname);
 }
   (function bindShareSystem(){
