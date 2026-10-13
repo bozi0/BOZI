@@ -25,6 +25,9 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .topbar .nav-pill::-webkit-scrollbar{display:none}
 .topbar .nav-pill button{padding:6px 9px;border-radius:40px;font-size:10.5px;font-weight:700;letter-spacing:0.3px;color:var(--text-sub);transition:background 0.25s ease,color 0.25s ease;white-space:nowrap;background:transparent;border:none;cursor:pointer;font-family:inherit;flex-shrink:0;scroll-snap-align:center}
 .topbar .nav-pill button.active{background:linear-gradient(135deg,var(--primary),#6d28d9);color:#fff}
+  .topbar .orders-btn{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:var(--text-sub);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s ease;font-family:inherit;padding:0;line-height:1;margin-left:2px}
+.topbar .orders-btn:active{transform:scale(0.9);background:rgba(139,92,246,0.25)}
+.topbar .orders-btn.active{background:linear-gradient(135deg,var(--primary),#6d28d9);color:#fff;border-color:transparent;box-shadow:0 4px 12px rgba(139,92,246,0.35)}
 .banner{position:fixed;top:calc(64px + env(safe-area-inset-top));left:0;width:100%;padding:8px 20px;z-index:190;background:rgba(20,15,35,0.95);border-bottom:1px solid rgba(167,139,250,0.1);overflow:hidden}
 .banner-track{display:flex;gap:40px;animation:banner-scroll 30s linear infinite;white-space:nowrap;will-change:transform}
 @keyframes banner-scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
@@ -414,6 +417,33 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .orders-head .oh-count b{color:var(--primary-glow);font-size:16px}
 .orders-head .oh-clear{font-size:11px;color:var(--accent);background:transparent;border:1px solid rgba(244,114,182,0.3);padding:6px 12px;border-radius:20px;cursor:pointer;font-family:inherit;letter-spacing:0.5px;transition:background 0.2s ease}
 .orders-head .oh-clear:active{background:rgba(244,114,182,0.15)}
+  /* 订单查询 */
+.query-box{background:rgba(255,255,255,0.02);border:1px solid rgba(167,139,250,0.2);border-radius:18px;padding:18px;margin-bottom:20px}
+.query-box .qb-label{font-size:11px;color:var(--text-sub);letter-spacing:3px;font-weight:700;margin-bottom:12px}
+.query-box textarea{width:100%;background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:12px;color:#fff;font-family:monospace;font-size:11px;letter-spacing:0.5px;resize:none;outline:none;line-height:1.5;min-height:60px;word-break:break-all}
+.query-box textarea:focus{border-color:rgba(167,139,250,0.5)}
+.query-box .qb-actions{display:flex;gap:8px;margin-top:12px}
+.query-box .qb-btn{flex:1;padding:12px;border-radius:12px;font-size:12px;font-weight:800;letter-spacing:1px;cursor:pointer;font-family:inherit;border:none;transition:transform 0.15s ease}
+.query-box .qb-btn:active{transform:scale(0.97)}
+.query-box .qb-btn.go{background:linear-gradient(135deg,var(--gold),#f59e0b);color:#1a1a1a}
+.query-box .qb-btn.clear{background:rgba(255,255,255,0.05);color:var(--text-sub);border:1px solid rgba(255,255,255,0.1)}
+.query-result{margin-top:14px;display:none}
+.query-result.show{display:block;animation:panelIn 0.3s ease}
+.qr-status{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:900;letter-spacing:1px;padding:8px 16px;border-radius:40px;margin-bottom:14px}
+.qr-status.ok{background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.4);color:var(--success)}
+.qr-status.warn{background:rgba(250,204,21,0.12);border:1px solid rgba(250,204,21,0.4);color:var(--gold)}
+.qr-status.bad{background:rgba(244,114,182,0.12);border:1px solid rgba(244,114,182,0.4);color:var(--accent)}
+.qr-rows{display:flex;flex-direction:column;gap:6px;background:rgba(0,0,0,0.2);border-radius:12px;padding:14px}
+.qr-row{display:flex;justify-content:space-between;font-size:12px;gap:12px;padding:4px 0}
+.qr-row .k{color:var(--text-sub);white-space:nowrap;letter-spacing:1px}
+.qr-row .v{color:#fff;font-weight:600;text-align:right;flex:1;word-break:break-all}
+.qr-row .v.ok{color:var(--success)}
+.qr-row .v.bad{color:var(--accent)}
+.qr-row .v.mono{font-family:monospace;font-size:11px;letter-spacing:0.5px}
+.qr-hint{font-size:11px;line-height:1.6;padding:10px 14px;border-radius:10px;margin-top:10px}
+.qr-hint.warn{background:rgba(250,204,21,0.06);border:1px solid rgba(250,204,21,0.2);color:var(--gold)}
+.qr-hint.bad{background:rgba(244,114,182,0.06);border:1px solid rgba(244,114,182,0.2);color:var(--accent)}
+.qr-own{display:inline-block;font-size:10px;padding:3px 10px;background:rgba(96,165,250,0.15);border:1px solid rgba(96,165,250,0.4);border-radius:8px;color:var(--blue);font-weight:700;letter-spacing:1px;margin-left:8px}
 @media (prefers-reduced-motion: reduce){*{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important}.grid-bg{animation:none}}
 </style>
 </head>
@@ -432,10 +462,10 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <button id="navBook">电脑</button>
 <button id="navBuds">耳机</button>
 <button id="navWatch">手表</button>
-<button id="navOrders">订单</button>
 <button id="navSystem">系统</button>
 <button id="navHistory">设备史</button>
 </div>
+<button class="orders-btn" id="navOrders">📦</button>
 </div>
 
 <div class="banner">
@@ -1718,6 +1748,15 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <p class="sub">你所有下单记录，本地保存，随时可查。</p>
 </div>
 <div class="reveal">
+  <div class="query-box">
+<div class="qb-label">🔍 查询订单号</div>
+<textarea id="queryInput" placeholder="粘贴订单号到这里，支持前缀混杂，会自动提取 43 位字符" spellcheck="false"></textarea>
+<div class="qb-actions">
+<button class="qb-btn go" id="queryGoBtn">解析</button>
+<button class="qb-btn clear" id="queryClearBtn">清空</button>
+</div>
+<div class="query-result" id="queryResult"></div>
+</div>
 <div class="orders-head">
 <div class="oh-count">共 <b id="ordersCount">0</b> 单</div>
 <button class="oh-clear" id="ordersClearBtn">清空全部</button>
@@ -1978,7 +2017,8 @@ nav.scrollLeft += br.left - nr.left - 6;
 nav.scrollLeft += br.right - nr.right + 6;
 }
 }
-}
+var ordersBtn = document.getElementById('navOrders');
+if(ordersBtn) ordersBtn.classList.toggle('active', id === 'page-orders');}
 updateNavHighlight('page-home');
 
 document.getElementById('backBtn').addEventListener('click', function(){
@@ -2352,6 +2392,161 @@ document.addEventListener('click', function(e){
   }
 });
 /* ========== 订单历史存储结束 ========== */
+  /* ========== 订单号本地解析器 ========== */
+var _REV_DEVICE = {};
+var _REV_VERSION = {};
+var _REV_COLOR = {};
+Object.keys(DEVICE_CODES).forEach(function(k){ _REV_DEVICE[DEVICE_CODES[k]] = k; });
+Object.keys(VERSION_CODES).forEach(function(k){ _REV_VERSION[VERSION_CODES[k]] = k; });
+Object.keys(COLOR_CODES).forEach(function(k){ _REV_COLOR[COLOR_CODES[k]] = k; });
+_REV_VERSION['16T1'] = '16GB + 1TB';
+_REV_VERSION['32T1'] = '32GB + 1TB';
+
+function _extractField(no, pos, perm){
+  var field = new Array(pos.length);
+  for (var j = 0; j < pos.length; j++){
+    field[perm[j]] = no[pos[j]];
+  }
+  return field.join('');
+}
+
+function parseOrderNo(rawInput){
+  var no = String(rawInput || '').replace(/\s/g, '').replace(/^ORDER\s*NO:?/i, '').trim();
+  if (!no) return { status: 'empty' };
+
+  if (no.length !== 43){
+    return {
+      status: 'bad',
+      reason: '长度不是 43 位（实际 ' + no.length + ' 位）',
+      checksum: no.length >= 22 ? (no[4] + no[22]) : '无法读取'
+    };
+  }
+  if (no[0] !== 'B'){
+    return { status: 'bad', reason: '首位不是 B', checksum: no[4] + no[22] };
+  }
+
+  var dCode = _extractField(no, [3,12,24], [2,1,0]);
+  var vCode = _extractField(no, [5,14,26,35], [1,3,0,2]);
+  var cCode = _extractField(no, [7,16,28], [1,2,0]);
+  var dateStr = _extractField(no, [9,18,30,37,39,41], [3,0,5,1,4,2]);
+  var timeStr = _extractField(no, [10,19,31,38,40,42], [5,2,0,4,1,3]);
+  var rand4 = _extractField(no, [11,20,32,36], [2,0,3,1]);
+  var checksumIn = no[4] + no[22];
+
+  var deviceName = _REV_DEVICE[dCode] || null;
+  var versionName = _REV_VERSION[vCode] || null;
+  var colorName = _REV_COLOR[cCode] || null;
+
+  var isTrap = (vCode === '161T' || vCode === '321T');
+
+  if (!deviceName || !versionName || !colorName){
+    return {
+      status: 'bad',
+      reason: '字段代号无法识别',
+      checksum: checksumIn,
+      raw: { dCode: dCode, vCode: vCode, cCode: cCode }
+    };
+  }
+
+  var core = dCode + vCode + cCode + dateStr + timeStr + rand4;
+  var checksumCalc = calcChecksum(core);
+  var pass = (checksumCalc === checksumIn);
+
+  var dateFmt = '20' + dateStr.slice(0,2) + '-' + dateStr.slice(2,4) + '-' + dateStr.slice(4,6);
+  var timeFmt = timeStr.slice(0,2) + ':' + timeStr.slice(2,4) + ':' + timeStr.slice(4,6);
+
+  var status = 'ok';
+  if (!pass || isTrap) status = 'warn';
+
+  return {
+    status: status,
+    device: deviceName,
+    version: versionName,
+    color: colorName,
+    date: dateFmt,
+    time: timeFmt,
+    rand: rand4,
+    checksum: checksumIn,
+    checksumCalc: checksumCalc,
+    pass: pass,
+    isTrap: isTrap,
+    no: no
+  };
+}
+
+function renderQueryResult(res){
+  var box = document.getElementById('queryResult');
+  if (!box) return;
+
+  if (res.status === 'empty'){
+    box.classList.remove('show');
+    box.innerHTML = '';
+    return;
+  }
+
+  box.classList.add('show');
+
+  if (res.status === 'bad'){
+    box.innerHTML =
+      '<div class="qr-status bad">❌ 伪造订单号</div>' +
+      '<div class="qr-rows">' +
+        '<div class="qr-row"><span class="k">订单号</span><span class="v mono">' + esc(res.no || '—') + '</span></div>' +
+        '<div class="qr-row"><span class="k">校验位</span><span class="v bad">' + esc(res.checksum) + '</span></div>' +
+      '</div>' +
+      '<div class="qr-hint bad">❌ ' + esc(res.reason || '不符合 Bozi 内部生成规则，判定为伪造。') + '</div>';
+    return;
+  }
+
+  var isOk = res.status === 'ok';
+  var statusClass = isOk ? 'ok' : 'warn';
+  var statusText = isOk ? '✅ 真单' : '⚠️ 被篡改';
+  var passText = res.pass ? '✅ 通过' : '❌ 失败';
+  var passClass = res.pass ? 'ok' : 'bad';
+
+  var hint = '';
+  if (!res.pass){
+    hint = '<div class="qr-hint warn">⚠️ 校验位不匹配，此订单号可能被手动改过或抄错。</div>';
+  } else if (res.isTrap){
+    hint = '<div class="qr-hint warn">⚠️ 版本代号异常，判定为被篡改。</div>';
+  }
+
+  var ownArr = loadOrders();
+  var isOwn = ownArr.some(function(o){ return o.no === res.no; });
+  var ownBadge = isOwn ? '<span class="qr-own">来自本机订单</span>' : '';
+
+  box.innerHTML =
+    '<div class="qr-status ' + statusClass + '">' + statusText + ownBadge + '</div>' +
+    '<div class="qr-rows">' +
+      '<div class="qr-row"><span class="k">设备</span><span class="v">' + esc(res.device) + '</span></div>' +
+      '<div class="qr-row"><span class="k">版本</span><span class="v">' + esc(res.version) + '</span></div>' +
+      '<div class="qr-row"><span class="k">颜色</span><span class="v">' + esc(res.color) + '</span></div>' +
+      '<div class="qr-row"><span class="k">下单日期</span><span class="v">' + esc(res.date) + '</span></div>' +
+      '<div class="qr-row"><span class="k">下单时间</span><span class="v">' + esc(res.time) + '</span></div>' +
+      '<div class="qr-row"><span class="k">随机防撞号</span><span class="v">' + esc(res.rand) + '</span></div>' +
+      '<div class="qr-row"><span class="k">校验位</span><span class="v ' + passClass + '">' + esc(res.checksum) + ' ' + passText + '</span></div>' +
+    '</div>' +
+    hint;
+}
+
+function bindQueryUI(){
+  var input = document.getElementById('queryInput');
+  var goBtn = document.getElementById('queryGoBtn');
+  var clearBtn = document.getElementById('queryClearBtn');
+  if (!input || !goBtn || !clearBtn) return;
+
+  goBtn.addEventListener('click', function(){
+    var res = parseOrderNo(input.value);
+    renderQueryResult(res);
+  });
+
+  clearBtn.addEventListener('click', function(){
+    input.value = '';
+    var box = document.getElementById('queryResult');
+    box.classList.remove('show');
+    box.innerHTML = '';
+  });
+}
+/* ========== 订单号本地解析器结束 ========== */
 var colorsNeo8 = [
 {name:'破晓金',bg:'#e8b84a',fg:'#2a1a00'},
 {name:'雾海蓝',bg:'#5b7b9a',fg:'#ffffff'},
@@ -2773,6 +2968,7 @@ if(btn){btn.disabled = false;btn.innerHTML = '<span class="btn-shine"></span>立
 
 renderOrders();
 document.getElementById('ordersClearBtn').addEventListener('click', clearOrders);
+  bindQueryUI();
 } catch(err) {
   console.error('Bozi JS error:', err);
 }
