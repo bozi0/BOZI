@@ -2196,7 +2196,10 @@ function showView(id, noPush){
 var current = document.querySelector('.page.active');
 var target = document.getElementById(id);
 if(!current || current === target) return;
-if(!noPush && current) pageStack.push(current.id);
+if(!noPush && current){
+  pageStack.push(current.id);
+  try { history.pushState({ boziPage: current.id }, ''); } catch(e){}
+}
 current.classList.add('fading-out');
 current.classList.remove('active');
 setTimeout(function(){
@@ -3767,96 +3770,20 @@ window.addEventListener('appinstalled', function(){
   console.log('🎉 Bozi PWA 已安装');
 });
 /* ========== PWA 结束 ========== */
-  /* ========== 左滑返回 ========== */
-(function bindSwipeBack(){
-  var startX = 0, startY = 0, currentX = 0;
-  var tracking = false;
-  var EDGE = 40;      // 左边缘触发区（px）
-  var TRIGGER = 90;   // 触发返回的滑动距离（px）
-
-  function getMoveEls(){
-    return [
-      document.querySelector('.app-container'),
-      document.querySelector('.topbar'),
-      document.querySelector('.banner')
-    ].filter(Boolean);
-  }
-
-  function setTransform(dx){
-    getMoveEls().forEach(function(el){
-      el.style.transform = dx === 0 ? '' : 'translateX(' + dx + 'px)';
-    });
-    var appEl = document.querySelector('.app-container');
-    if(appEl) appEl.style.opacity = dx === 0 ? '' : String(1 - Math.min(dx / 600, 0.3));
-  }
-
-  function setTransition(on){
-    getMoveEls().forEach(function(el){
-      el.style.transition = on ? 'transform 0.25s ease, opacity 0.25s ease' : 'none';
-    });
-  }
-
-  function isOnHome(){
-    var h = document.getElementById('page-home');
-    return h && h.classList.contains('active');
-  }
-  function isModalOpen(){
-    var mw = document.getElementById('modalWrapper');
-    var sw = document.getElementById('shareModalWrapper');
-    return (mw && mw.classList.contains('show')) || (sw && sw.classList.contains('show'));
-  }
-
-  document.addEventListener('touchstart', function(e){
-    if(!e.touches || e.touches.length !== 1) return;
-    if(isOnHome() || isModalOpen()) return;
-    var t = e.touches[0];
-    if(t.clientX > EDGE) return;
-    // 跳过横向滚动容器
-    if(e.target.closest('.device-scroll,.color-scroll,.table-scroll')) return;
-    startX = t.clientX;
-    startY = t.clientY;
-    currentX = 0;
-    tracking = true;
-  }, {passive:true});
-
-  document.addEventListener('touchmove', function(e){
-    if(!tracking) return;
-    if(!e.touches || e.touches.length !== 1) return;
-    var t = e.touches[0];
-    var dx = t.clientX - startX;
-    var dy = t.clientY - startY;
-    if(Math.abs(dy) > Math.abs(dx) && Math.abs(dy) > 20){ tracking = false; setTransform(0); return; }
-    if(dx < 0) dx = 0;
-    var MAX = window.innerWidth * 0.85;
-    if(dx > MAX) dx = MAX;
-    currentX = dx;
-    setTransition(false);
-    setTransform(dx);
-  }, {passive:true});
-
-  document.addEventListener('touchend', function(){
-    if(!tracking) return;
-    tracking = false;
-    setTransition(true);
-    if(currentX > TRIGGER){
-      setTransform(window.innerWidth);
-      var appEl = document.querySelector('.app-container');
-      if(appEl) appEl.style.opacity = '0';
-      setTimeout(function(){
-        setTransition(false);
-        setTransform(0);
-        if(appEl) appEl.style.opacity = '';
-        var backBtn = document.getElementById('backBtn');
-        if(backBtn && backBtn.classList.contains('show')) backBtn.click();
-        setTimeout(function(){ setTransition(true); setTimeout(function(){ setTransition(false); }, 300); }, 30);
-      }, 220);
-    } else {
-      setTransform(0);
-      setTimeout(function(){ setTransition(false); }, 280);
+  /* ========== 系统返回手势支持 ========== */
+window.addEventListener('popstate', function(e){
+  var prev = pageStack.pop();
+  if(prev){
+    showView(prev, true);
+  } else {
+    var current = document.querySelector('.page.active');
+    if(current && current.id !== 'page-home'){
+      showView('page-home', true);
     }
-  }, {passive:true});
-})();
-/* ========== 左滑返回结束 ========== */
+  }
+});
+/* ========== 系统返回手势支持结束 ========== */
+  
   bindQueryUI();
   bindHotTags();
 } catch(err) {
