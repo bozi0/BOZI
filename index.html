@@ -674,6 +674,21 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 </div>
 
 <div class="back-to-top" id="backToTop">↑</div>
+  <button class="share-float" id="shareFloat">📤</button>
+<div class="share-overlay" id="shareOverlay">
+<div class="share-modal">
+<div class="sm-header">
+<div class="sm-title">分享卡片</div>
+<button class="sm-close" id="shareClose">×</button>
+</div>
+<canvas id="shareCanvas" width="750" height="1000"></canvas>
+<div class="sm-actions">
+<button class="sm-btn save" id="shareSave">保存图片</button>
+<button class="sm-btn close" id="shareCloseBtn">关闭</button>
+</div>
+<div class="sm-tip">手机端可长按图片保存到相册</div>
+</div>
+</div>
 
 <div class="app-container">
 
@@ -2158,6 +2173,7 @@ target.classList.add('active');
 window.scrollTo({top:0, behavior:'auto'});
 updateBackBtn();
 updateNavHighlight(id);
+  if(typeof updateShareBtn === 'function') updateShareBtn();
 setTimeout(triggerReveal, 60);
 }, 300);
 }
@@ -3187,6 +3203,25 @@ function initTheme(){
 }
 initTheme();
 /* ========== 主题切换结束 ========== */
+  /* 分享卡片 */
+.share-float{position:fixed;bottom:calc(84px + var(--safe-bottom));right:24px;width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--primary),#6d28d9);border:none;color:#fff;font-size:20px;cursor:pointer;z-index:100;box-shadow:0 8px 24px rgba(139,92,246,0.4);display:none;align-items:center;justify-content:center;font-family:inherit;padding:0;transition:transform 0.15s ease}
+.share-float:active{transform:scale(0.9)}
+.share-float.show{display:flex}
+.share-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:1100;display:none;align-items:center;justify-content:center;padding:20px;overflow-y:auto}
+.share-overlay.show{display:flex;animation:shareIn 0.3s ease}
+@keyframes shareIn{from{opacity:0}to{opacity:1}}
+.share-modal{width:100%;max-width:380px;display:flex;flex-direction:column;gap:16px}
+.share-modal .sm-header{display:flex;justify-content:space-between;align-items:center;color:#fff}
+.share-modal .sm-title{font-size:14px;font-weight:800;letter-spacing:2px}
+.share-modal .sm-close{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.1);border:none;color:#fff;font-size:16px;cursor:pointer;font-family:inherit;padding:0;display:flex;align-items:center;justify-content:center}
+.share-modal .sm-close:active{background:rgba(244,114,182,0.3)}
+.share-modal canvas,.share-modal img.share-preview{width:100%;border-radius:16px;display:block;box-shadow:0 20px 60px rgba(0,0,0,0.6)}
+.share-modal .sm-actions{display:flex;gap:10px}
+.share-modal .sm-btn{flex:1;padding:14px;border-radius:14px;font-size:13px;font-weight:800;letter-spacing:1px;cursor:pointer;font-family:inherit;border:none;transition:transform 0.15s ease}
+.share-modal .sm-btn:active{transform:scale(0.97)}
+.share-modal .sm-btn.save{background:linear-gradient(135deg,var(--gold),#f59e0b);color:#1a1a1a}
+.share-modal .sm-btn.close{background:rgba(255,255,255,0.08);color:#fff;border:1px solid rgba(255,255,255,0.15)}
+.share-modal .sm-tip{font-size:11px;color:rgba(255,255,255,0.5);text-align:center;letter-spacing:1px;line-height:1.6}
   /* ========== 搜索系统 ========== */
 var SEARCH_INDEX = [
   { title:'Bozi Neo8', sub:'全场景智慧旗舰 · 天玑9500 · ￥4699 起', tags:'neo8 neo 8 手机 旗舰 天玑9500 2k ltpo 165hz 潜望 长焦 8000mah 100w 无线 充电 ip68 ip69', page:'page-home' },
@@ -3229,6 +3264,7 @@ function doSearch(kw){
   if(!q){
     searchResults.innerHTML = searchHotHTML;
     bindHotTags();
+    updateShareBtn();
     return;
   }
   var words = q.split(/\s+/).filter(function(w){ return w.length > 0; });
@@ -3319,6 +3355,197 @@ document.addEventListener('click', function(e){
   closeSearch();
 });
 /* ========== 搜索系统结束 ========== */
+  /* ========== 分享卡片 ========== */
+var SHARE_CONFIG = {
+  'page-neo8':   { title:'Bozi Neo8',  tagline:'全场景智慧旗舰', specs:['天玑9500','2K 165Hz','100W 快充'], price:'￥4699 起', theme:'#facc15' },
+  'page-neo7':   { title:'Bozi Neo7',  tagline:'Neo 系列真正意义上的新一代', specs:['天玑9600','2亿长焦','120W 快充'], price:'￥4499 起', theme:'#a78bfa' },
+  'page-neo6':   { title:'Bozi Neo6',  tagline:'Bozi 回归人间的第一台普通手机', specs:['骁龙8至尊','1.5K 165Hz','8000mAh'], price:'￥4299 起', theme:'#f472b6' },
+  'page-pad2':   { title:'Bozi Pad 2', tagline:'更轻更薄，观感升级', specs:['天玑8500','11.8" OLED','10500mAh'], price:'￥1899 起', theme:'#2dd4bf' },
+  'page-pad1':   { title:'Bozi Pad 1', tagline:'轻盈随行，质感出众', specs:['天玑8400','11.5" 144Hz','10000mAh'], price:'￥1599 起', theme:'#2dd4bf' },
+  'page-book1':  { title:'Bozi Book 1',tagline:'轻薄随行，性能均衡', specs:['Core Ultra 5','14" 120Hz','70Wh'], price:'￥4999 起', theme:'#60a5fa' },
+  'page-buds1':  { title:'Bozi Buds 1',tagline:'全场景智慧降噪', specs:['45dB 降噪','11mm 动圈','36h 续航'], price:'￥699', theme:'#f472b6' },
+  'page-watch1': { title:'Bozi Watch 1',tagline:'腕上智慧中枢', specs:['1.43" AMOLED','14 天续航','5ATM'], price:'￥899', theme:'#22c55e' }
+};
+
+function drawRoundRect(ctx, x, y, w, h, r){
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.arcTo(x + w, y, x + w, y + h, r);
+  ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r);
+  ctx.arcTo(x, y, x + w, y, r);
+  ctx.closePath();
+}
+
+function hexToRgba(hex, alpha){
+  var h = hex.replace('#','');
+  if(h.length === 3) h = h.split('').map(function(c){return c+c;}).join('');
+  var r = parseInt(h.slice(0,2),16);
+  var g = parseInt(h.slice(2,4),16);
+  var b = parseInt(h.slice(4,6),16);
+  return 'rgba(' + r + ',' + g + ',' + b + ',' + alpha + ')';
+}
+
+function drawShareCard(cfg){
+  var canvas = document.getElementById('shareCanvas');
+  var ctx = canvas.getContext('2d');
+  var W = 750, H = 1000;
+  ctx.clearRect(0, 0, W, H);
+
+  var bgGrad = ctx.createLinearGradient(0, 0, 0, H);
+  bgGrad.addColorStop(0, '#0a0a12');
+  bgGrad.addColorStop(1, '#050507');
+  ctx.fillStyle = bgGrad;
+  ctx.fillRect(0, 0, W, H);
+
+  var glow = ctx.createRadialGradient(120, 180, 0, 120, 180, 500);
+  glow.addColorStop(0, hexToRgba(cfg.theme, 0.18));
+  glow.addColorStop(1, 'rgba(0,0,0,0)');
+  ctx.fillStyle = glow;
+  ctx.fillRect(0, 0, W, H);
+
+  var glow2 = ctx.createRadialGradient(650, 850, 0, 650, 850, 450);
+  glow2.addColorStop(0, hexToRgba(cfg.theme, 0.12));
+  glow2.addColorStop(1, 'rgba(0,0,0,0)');
+  ctx.fillStyle = glow2;
+  ctx.fillRect(0, 0, W, H);
+
+  ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+  ctx.lineWidth = 1;
+  for(var x = 0; x < W; x += 50){
+    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
+  }
+  for(var y = 0; y < H; y += 50){
+    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+  }
+
+  ctx.strokeStyle = hexToRgba(cfg.theme, 0.5);
+  ctx.lineWidth = 2;
+  drawRoundRect(ctx, 40, 40, W - 80, H - 80, 32);
+  ctx.stroke();
+
+  ctx.fillStyle = '#fff';
+  ctx.font = '900 42px system-ui, sans-serif';
+  ctx.textAlign = 'left';
+  ctx.textBaseline = 'top';
+  ctx.fillText('BOZI®', 80, 90);
+
+  ctx.fillStyle = cfg.theme;
+  ctx.font = '700 16px system-ui, sans-serif';
+  ctx.fillText('OFFICIAL', 80, 148);
+
+  var titleGrad = ctx.createLinearGradient(80, 0, 670, 0);
+  titleGrad.addColorStop(0, '#fff');
+  titleGrad.addColorStop(1, cfg.theme);
+  ctx.fillStyle = titleGrad;
+  ctx.font = '900 84px system-ui, sans-serif';
+  ctx.fillText(cfg.title, 80, 240);
+
+  ctx.fillStyle = 'rgba(255,255,255,0.6)';
+  ctx.font = '500 22px system-ui, sans-serif';
+  ctx.fillText(cfg.tagline, 80, 360);
+
+  var specY = 460;
+  var specGap = 90;
+  cfg.specs.forEach(function(s, i){
+    var y = specY + i * specGap;
+    ctx.fillStyle = hexToRgba(cfg.theme, 0.12);
+    drawRoundRect(ctx, 80, y, 580, 70, 16);
+    ctx.fill();
+    ctx.strokeStyle = hexToRgba(cfg.theme, 0.3);
+    ctx.lineWidth = 1;
+    drawRoundRect(ctx, 80, y, 580, 70, 16);
+    ctx.stroke();
+
+    ctx.fillStyle = cfg.theme;
+    ctx.font = '900 32px system-ui, sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText(s, 110, y + 22);
+  });
+
+  var priceY = 800;
+  ctx.fillStyle = 'rgba(255,255,255,0.4)';
+  ctx.font = '700 14px system-ui, sans-serif';
+  ctx.textAlign = 'left';
+  ctx.fillText('PRICE', 80, priceY);
+
+  var priceGrad = ctx.createLinearGradient(80, 0, 400, 0);
+  priceGrad.addColorStop(0, '#fff');
+  priceGrad.addColorStop(1, cfg.theme);
+  ctx.fillStyle = priceGrad;
+  ctx.font = '900 56px system-ui, sans-serif';
+  ctx.fillText(cfg.price, 80, priceY + 26);
+
+  ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(80, 920);
+  ctx.lineTo(670, 920);
+  ctx.stroke();
+
+  ctx.fillStyle = 'rgba(255,255,255,0.45)';
+  ctx.font = 'italic 500 16px system-ui, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.fillText('Peak performance runs on Bozi.', 375, 940);
+  ctx.fillStyle = hexToRgba(cfg.theme, 0.7);
+  ctx.font = '700 14px system-ui, sans-serif';
+  ctx.fillText('All chips bow to Bozi.', 375, 966);
+
+  ctx.fillStyle = 'rgba(255,255,255,0.25)';
+  ctx.font = '500 11px system-ui, sans-serif';
+  ctx.textAlign = 'right';
+  ctx.fillText('BOZI® OFFICIAL', 670, 90);
+}
+
+function getCurrentSharePage(){
+  var pages = Object.keys(SHARE_CONFIG);
+  for(var i = 0; i < pages.length; i++){
+    var el = document.getElementById(pages[i]);
+    if(el && el.classList.contains('active')) return pages[i];
+  }
+  return null;
+}
+
+function updateShareBtn(){
+  var btn = document.getElementById('shareFloat');
+  if(!btn) return;
+  if(getCurrentSharePage()) btn.classList.add('show');
+  else btn.classList.remove('show');
+}
+
+function openShare(){
+  var pid = getCurrentSharePage();
+  if(!pid) return;
+  var cfg = SHARE_CONFIG[pid];
+  drawShareCard(cfg);
+  document.getElementById('shareOverlay').classList.add('show');
+}
+
+function closeShare(){
+  document.getElementById('shareOverlay').classList.remove('show');
+}
+
+function saveShare(){
+  var canvas = document.getElementById('shareCanvas');
+  try {
+    var url = canvas.toDataURL('image/png');
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'Bozi-share-' + Date.now() + '.png';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  } catch(e){}
+}
+
+document.getElementById('shareFloat').addEventListener('click', openShare);
+document.getElementById('shareClose').addEventListener('click', closeShare);
+document.getElementById('shareCloseBtn').addEventListener('click', closeShare);
+document.getElementById('shareSave').addEventListener('click', saveShare);
+document.getElementById('shareOverlay').addEventListener('click', function(e){
+  if(e.target === this) closeShare();
+});
+/* ========== 分享卡片结束 ========== */
   bindQueryUI();
   bindHotTags();
 } catch(err) {
