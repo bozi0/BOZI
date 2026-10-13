@@ -25,6 +25,9 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .topbar .nav-pill::-webkit-scrollbar{display:none}
 .topbar .nav-pill button{padding:6px 9px;border-radius:40px;font-size:10.5px;font-weight:700;letter-spacing:0.3px;color:var(--text-sub);transition:background 0.25s ease,color 0.25s ease;white-space:nowrap;background:transparent;border:none;cursor:pointer;font-family:inherit;flex-shrink:0;scroll-snap-align:center}
 .topbar .nav-pill button.active{background:linear-gradient(135deg,var(--primary),#6d28d9);color:#fff}
+  .topbar .theme-btn{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:var(--text-sub);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s ease;font-family:inherit;padding:0;line-height:1;margin-left:2px}
+.topbar .theme-btn:active{transform:scale(0.9);background:rgba(139,92,246,0.25)}
+.topbar .theme-btn.active{background:linear-gradient(135deg,var(--gold),#f59e0b);color:#1a1a1a;border-color:transparent;box-shadow:0 4px 12px rgba(250,204,21,0.35)}
   .topbar .orders-btn{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);color:var(--text-sub);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all 0.2s ease;font-family:inherit;padding:0;line-height:1;margin-left:2px}
 .topbar .orders-btn:active{transform:scale(0.9);background:rgba(139,92,246,0.25)}
 .topbar .orders-btn.active{background:linear-gradient(135deg,var(--primary),#6d28d9);color:#fff;border-color:transparent;box-shadow:0 4px 12px rgba(139,92,246,0.35)}
@@ -444,6 +447,71 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .qr-hint.warn{background:rgba(250,204,21,0.06);border:1px solid rgba(250,204,21,0.2);color:var(--gold)}
 .qr-hint.bad{background:rgba(244,114,182,0.06);border:1px solid rgba(244,114,182,0.2);color:var(--accent)}
 .qr-own{display:inline-block;font-size:10px;padding:3px 10px;background:rgba(96,165,250,0.15);border:1px solid rgba(96,165,250,0.4);border-radius:8px;color:var(--blue);font-weight:700;letter-spacing:1px;margin-left:8px}
+/* 浅色主题 */
+:root[data-theme="light"]{
+--bg-dark:#f5f5f7;
+--text-main:#0a0a0f;
+--text-sub:#4a4a55;
+--primary:#7c3aed;
+--primary-glow:#8b5cf6;
+--secondary:#0d9488;
+--accent:#db2777;
+--gold:#d97706;
+--success:#15803d;
+--blue:#2563eb;
+--cyan:#0891b2;
+}
+:root[data-theme="light"] body{background:#f5f5f7;color:#0a0a0f}
+:root[data-theme="light"] body::before{background:radial-gradient(circle at 20% 20%,rgba(139,92,246,0.1) 0%,transparent 45%),radial-gradient(circle at 80% 80%,rgba(45,212,191,0.08) 0%,transparent 45%),radial-gradient(circle at 50% 50%,rgba(244,114,182,0.05) 0%,transparent 55%)}
+:root[data-theme="light"] .grid-bg{background-image:linear-gradient(rgba(139,92,246,0.07) 1px,transparent 1px),linear-gradient(90deg,rgba(139,92,246,0.07) 1px,transparent 1px)}
+:root[data-theme="light"] .topbar{background:rgba(245,245,247,0.98);border-bottom:1px solid rgba(139,92,246,0.12)}
+:root[data-theme="light"] .banner{background:rgba(235,235,240,0.95);border-bottom:1px solid rgba(139,92,246,0.15)}
+:root[data-theme="light"] .brand{background:linear-gradient(90deg,#0a0a0f,#7c3aed);-webkit-background-clip:text;background-clip:text}
+:root[data-theme="light"] .nav-pill{background:rgba(0,0,0,0.04);border:1px solid rgba(0,0,0,0.08)}
+:root[data-theme="light"] .nav-pill button{color:var(--text-sub)}
+:root[data-theme="light"] .nav-pill button.active{color:#fff}
+:root[data-theme="light"] .orders-btn{background:rgba(0,0,0,0.04);border:1px solid rgba(0,0,0,0.1);color:var(--text-sub)}
+:root[data-theme="light"] .theme-btn{background:rgba(0,0,0,0.04);border:1px solid rgba(0,0,0,0.1);color:var(--text-sub)}
+:root[data-theme="light"] .theme-btn.active{background:linear-gradient(135deg,var(--gold),#f59e0b);color:#1a1a1a;border-color:transparent}
+:root[data-theme="light"] .home-stat{background:rgba(255,255,255,0.7);border:1px solid rgba(0,0,0,0.08)}
+:root[data-theme="light"] .home-btn.secondary{background:rgba(0,0,0,0.04);color:#0a0a0f;border:1px solid rgba(0,0,0,0.12)}
+:root[data-theme="light"] .hl-card{background:rgba(255,255,255,0.7);border:1px solid rgba(0,0,0,0.08)}
+:root[data-theme="light"] .hl-card::before{opacity:0.15}
+:root[data-theme="light"] .prev-card{background:linear-gradient(135deg,rgba(255,255,255,0.85),rgba(255,255,255,0.65));border:1px solid rgba(0,0,0,0.08)}
+:root[data-theme="light"] .product-card{background:rgba(255,255,255,0.75);border:1px solid rgba(0,0,0,0.08)}
+:root[data-theme="light"] .product-card::before{opacity:0.15}
+:root[data-theme="light"] .spec-item{background:rgba(0,0,0,0.02);border:1px solid rgba(0,0,0,0.05)}
+:root[data-theme="light"] .spec-line{background:rgba(0,0,0,0.02);border:1px solid rgba(0,0,0,0.05)}
+:root[data-theme="light"] .spec-row{background:rgba(0,0,0,0.02);border:1px solid rgba(0,0,0,0.05)}
+:root[data-theme="light"] .summary-card{background:linear-gradient(135deg,rgba(139,92,246,0.06),rgba(45,212,191,0.03))}
+:root[data-theme="light"] .summary-block{background:rgba(0,0,0,0.02);border:1px solid rgba(0,0,0,0.06)}
+:root[data-theme="light"] .quote{background:rgba(139,92,246,0.05);color:#1a1a1f}
+:root[data-theme="light"] .quote-card{background:rgba(255,255,255,0.6);border:1px solid rgba(0,0,0,0.05);color:#1a1a1f}
+:root[data-theme="light"] .table-card{background:rgba(255,255,255,0.7);border:1px solid rgba(0,0,0,0.08)}
+:root[data-theme="light"] .buy-card{background:linear-gradient(135deg,rgba(250,204,21,0.08),rgba(139,92,246,0.05))}
+:root[data-theme="light"] .buy-card.teal-card{background:linear-gradient(135deg,rgba(45,212,191,0.08),rgba(139,92,246,0.05))}
+:root[data-theme="light"] .buy-card.blue-card{background:linear-gradient(135deg,rgba(96,165,250,0.08),rgba(139,92,246,0.05))}
+:root[data-theme="light"] .buy-card.buds-card{background:linear-gradient(135deg,rgba(244,114,182,0.08),rgba(139,92,246,0.05))}
+:root[data-theme="light"] .buy-card.watch-card{background:linear-gradient(135deg,rgba(34,197,94,0.08),rgba(139,92,246,0.05))}
+:root[data-theme="light"] .device-chip{background:rgba(0,0,0,0.03);border:1px solid rgba(0,0,0,0.08);color:var(--text-sub)}
+:root[data-theme="light"] .color-chip{text-shadow:none;border-color:rgba(0,0,0,0.12)}
+:root[data-theme="light"] .trust-card{background:rgba(255,255,255,0.6);border:1px solid rgba(0,0,0,0.06)}
+:root[data-theme="light"] .order-card{background:linear-gradient(135deg,rgba(139,92,246,0.06),rgba(45,212,191,0.03))}
+:root[data-theme="light"] .oc-code{background:rgba(0,0,0,0.05);color:var(--primary)}
+:root[data-theme="light"] .query-box{background:rgba(255,255,255,0.6);border:1px solid rgba(139,92,246,0.2)}
+:root[data-theme="light"] .query-box textarea{background:rgba(0,0,0,0.04);border:1px solid rgba(0,0,0,0.08);color:#0a0a0f}
+:root[data-theme="light"] .qr-rows{background:rgba(0,0,0,0.03)}
+:root[data-theme="light"] .buy-modal{background:#fff;border:1px solid rgba(0,0,0,0.1)}
+:root[data-theme="light"] .modal-overlay{background:rgba(0,0,0,0.5)}
+:root[data-theme="light"] .modal-wrapper{background:rgba(0,0,0,0.15)}
+:root[data-theme="light"] .summary-block .row .v{color:#0a0a0f}
+:root[data-theme="light"] .panel-title{color:#0a0a0f}
+:root[data-theme="light"] .pay-item{background:rgba(0,0,0,0.02);border:1px solid rgba(0,0,0,0.06)}
+:root[data-theme="light"] .pay-item .pay-info .name{color:#0a0a0f}
+:root[data-theme="light"] .agreement-box{background:rgba(0,0,0,0.02);border:1px solid rgba(0,0,0,0.06);color:#4a4a55}
+:root[data-theme="light"] .agreement-box h4{color:#0a0a0f}
+:root[data-theme="light"] .footer{color:var(--text-sub)}
+:root[data-theme="light"] .back-to-top{background:rgba(255,255,255,0.95);border:1px solid rgba(139,92,246,0.3);color:#0a0a0f}
 @media (prefers-reduced-motion: reduce){*{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important}.grid-bg{animation:none}}
 </style>
 </head>
@@ -465,6 +533,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <button id="navSystem">系统</button>
 <button id="navHistory">设备史</button>
 </div>
+<button class="theme-btn" id="themeBtn">🌙</button>
 <button class="orders-btn" id="navOrders">📦</button>
 </div>
 
@@ -2968,6 +3037,37 @@ if(btn){btn.disabled = false;btn.innerHTML = '<span class="btn-shine"></span>立
 
 renderOrders();
 document.getElementById('ordersClearBtn').addEventListener('click', clearOrders);
+  /* ========== 主题切换 ========== */
+var THEME_KEY = 'bozi_theme';
+function applyTheme(t){
+  var root = document.documentElement;
+  var btn = document.getElementById('themeBtn');
+  if(t === 'light'){
+    root.setAttribute('data-theme', 'light');
+    if(btn) btn.textContent = '☀️';
+    if(btn) btn.classList.add('active');
+  } else {
+    root.removeAttribute('data-theme');
+    if(btn) btn.textContent = '🌙';
+    if(btn) btn.classList.remove('active');
+  }
+}
+function initTheme(){
+  var saved = 'dark';
+  try { saved = localStorage.getItem(THEME_KEY) || 'dark'; } catch(e){}
+  applyTheme(saved);
+  var btn = document.getElementById('themeBtn');
+  if(btn){
+    btn.addEventListener('click', function(){
+      var cur = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+      var next = cur === 'light' ? 'dark' : 'light';
+      applyTheme(next);
+      try { localStorage.setItem(THEME_KEY, next); } catch(e){}
+    });
+  }
+}
+initTheme();
+/* ========== 主题切换结束 ========== */
   bindQueryUI();
 } catch(err) {
   console.error('Bozi JS error:', err);
