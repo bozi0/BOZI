@@ -389,6 +389,31 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .modal-btn:active{transform:scale(0.97)}
 .modal-btn:disabled{opacity:0.35;cursor:not-allowed;background:linear-gradient(135deg,#3a3a42,#2a2a32);color:#64748b}
 .modal-btn.secondary{background:rgba(255,255,255,0.06);color:#fff;border:1px solid rgba(255,255,255,0.1)}
+  /* 订单历史 */
+.orders-list{display:flex;flex-direction:column;gap:14px}
+.order-card{background:linear-gradient(135deg,rgba(139,92,246,0.06),rgba(45,212,191,0.03));border:1px solid rgba(167,139,250,0.2);border-radius:18px;padding:18px;position:relative;overflow:hidden}
+.order-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(180deg,var(--primary),var(--secondary),transparent)}
+.order-card .oc-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;gap:10px}
+.order-card .oc-name{font-size:16px;font-weight:900;color:#fff;margin:0 0 4px 0;line-height:1.2}
+.order-card .oc-ver{font-size:11px;color:var(--text-sub);letter-spacing:0.5px}
+.order-card .oc-time{font-size:10px;color:var(--text-sub);letter-spacing:1px;white-space:nowrap;flex-shrink:0}
+.order-card .oc-code{font-size:10px;color:var(--primary-glow);font-family:monospace;padding:10px 12px;background:rgba(0,0,0,0.3);border-radius:10px;word-break:break-all;line-height:1.5;cursor:pointer;transition:background 0.2s ease;letter-spacing:0.5px}
+.order-card .oc-code:active{background:rgba(139,92,246,0.15)}
+.order-card .oc-actions{display:flex;gap:8px;margin-top:12px}
+.order-card .oc-btn{flex:1;padding:9px 12px;border-radius:10px;font-size:11px;font-weight:700;letter-spacing:0.5px;cursor:pointer;font-family:inherit;border:none;transition:transform 0.15s ease}
+.order-card .oc-btn:active{transform:scale(0.96)}
+.order-card .oc-btn.copy{background:linear-gradient(135deg,var(--gold),#f59e0b);color:#1a1a1a}
+.order-card .oc-btn.del{background:rgba(244,114,182,0.1);color:var(--accent);border:1px solid rgba(244,114,182,0.3)}
+.order-card .oc-btn.del:active{background:rgba(244,114,182,0.25)}
+.orders-empty{text-align:center;padding:60px 20px;color:var(--text-sub)}
+.orders-empty .oe-icon{font-size:52px;margin-bottom:18px;opacity:0.5}
+.orders-empty .oe-title{font-size:16px;font-weight:700;color:#fff;margin-bottom:8px}
+.orders-empty .oe-desc{font-size:12px;line-height:1.7;opacity:0.7}
+.orders-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.orders-head .oh-count{font-size:12px;color:var(--text-sub);letter-spacing:1px}
+.orders-head .oh-count b{color:var(--primary-glow);font-size:16px}
+.orders-head .oh-clear{font-size:11px;color:var(--accent);background:transparent;border:1px solid rgba(244,114,182,0.3);padding:6px 12px;border-radius:20px;cursor:pointer;font-family:inherit;letter-spacing:0.5px;transition:background 0.2s ease}
+.orders-head .oh-clear:active{background:rgba(244,114,182,0.15)}
 @media (prefers-reduced-motion: reduce){*{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important}.grid-bg{animation:none}}
 </style>
 </head>
@@ -407,6 +432,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <button id="navBook">电脑</button>
 <button id="navBuds">耳机</button>
 <button id="navWatch">手表</button>
+<button id="navOrders">订单</button>
 <button id="navSystem">系统</button>
 <button id="navHistory">设备史</button>
 </div>
@@ -1684,7 +1710,33 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <div class="trust-card"><div class="title">🛡️ 官方保障</div><div class="row"><span class="k">发货方式</span><span class="v">顺丰包邮</span></div><div class="row"><span class="k">售后</span><span class="v">全国联保</span></div><div class="row"><span class="k">退换</span><span class="v">7 天无理由</span></div><div class="row"><span class="k">保修</span><span class="v">首年整机保修</span></div></div>
 <div class="slogan-strip"><div>Peak performance runs on Bozi.</div><div>All chips bow to Bozi.</div></div>
 </div>
-
+<!-- 订单历史页 -->
+<div class="page" id="page-orders">
+<div class="hero reveal" style="min-height:auto;padding-top:0">
+<div class="badge sys-badge">我的订单</div>
+<h1 style="font-size:clamp(32px,10vw,48px)">订单历史</h1>
+<p class="sub">你所有下单记录，本地保存，随时可查。</p>
+</div>
+<div class="reveal">
+<div class="orders-head">
+<div class="oh-count">共 <b id="ordersCount">0</b> 单</div>
+<button class="oh-clear" id="ordersClearBtn">清空全部</button>
+</div>
+<div class="orders-list" id="ordersList"></div>
+<div class="orders-empty" id="ordersEmpty">
+<div class="oe-icon">📦</div>
+<div class="oe-title">还没有订单</div>
+<div class="oe-desc">去首页挑一台设备<br>下单后订单号会自动出现在这里</div>
+</div>
+</div>
+<div class="footer">
+<div class="logo">BOZI®</div>
+<div>从一颗散装芯片，到手腕上的另一个维度</div>
+<div class="slogan">Peak performance runs on Bozi.<br>All chips bow to Bozi.</div>
+<div class="emoji">🌌 ⌚ 📱 🔥</div>
+<div class="copy">© BOZI® · ALL RIGHTS RESERVED</div>
+</div>
+</div>
 <!-- 25. 神级设备史 -->
 <div class="page" id="page-intro">
 <div class="hero reveal">
@@ -1959,6 +2011,10 @@ document.getElementById('navWatch').addEventListener('click', function(){
 pageStack = [];
 showView('page-home-watch1');
 });
+  document.getElementById('navOrders').addEventListener('click', function(){
+pageStack = [];
+showView('page-orders');
+});
 document.getElementById('navSystem').addEventListener('click', function(){
 pageStack = [];
 showView('page-system');
@@ -2188,6 +2244,114 @@ if(!arr[k]) arr[k] = mixOne();
 return arr.join('');
 }
 /* ========== 订单号生成系统 V2 结束 ========== */
+  /* ========== 订单历史存储 ========== */
+var ORDERS_KEY = 'bozi_orders_v1';
+var ORDERS_MAX = 100;
+
+function loadOrders(){
+  try {
+    var raw = localStorage.getItem(ORDERS_KEY);
+    if(!raw) return [];
+    var arr = JSON.parse(raw);
+    return Array.isArray(arr) ? arr : [];
+  } catch(e){ return []; }
+}
+
+function saveOrders(arr){
+  try {
+    if(arr.length > ORDERS_MAX) arr = arr.slice(0, ORDERS_MAX);
+    localStorage.setItem(ORDERS_KEY, JSON.stringify(arr));
+  } catch(e){}
+}
+
+function addOrder(record){
+  var arr = loadOrders();
+  arr.unshift(record);
+  saveOrders(arr);
+  renderOrders();
+}
+
+function deleteOrder(no){
+  var arr = loadOrders().filter(function(o){ return o.no !== no; });
+  saveOrders(arr);
+  renderOrders();
+}
+
+function clearOrders(){
+  if(!confirm('确定清空全部订单记录吗？')) return;
+  saveOrders([]);
+  renderOrders();
+}
+
+function fmtTime(ts){
+  var d = new Date(ts);
+  var pad = function(n){ return String(n).padStart(2,'0'); };
+  return d.getFullYear() + '-' + pad(d.getMonth()+1) + '-' + pad(d.getDate())
+    + ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes());
+}
+
+function esc(s){
+  return String(s).replace(/[&<>"']/g, function(c){
+    return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
+  });
+}
+
+function renderOrders(){
+  var list = document.getElementById('ordersList');
+  var empty = document.getElementById('ordersEmpty');
+  var countEl = document.getElementById('ordersCount');
+  var clearBtn = document.getElementById('ordersClearBtn');
+  if(!list || !empty || !countEl) return;
+
+  var arr = loadOrders();
+  countEl.textContent = arr.length;
+
+  if(arr.length === 0){
+    list.innerHTML = '';
+    empty.style.display = 'block';
+    clearBtn.style.display = 'none';
+    return;
+  }
+  empty.style.display = 'none';
+  clearBtn.style.display = 'inline-block';
+
+  var h = '';
+  arr.forEach(function(o){
+    h += '<div class="order-card">';
+    h += '<div class="oc-head">';
+    h += '<div><div class="oc-name">' + esc(o.device || '未知设备') + '</div>';
+    h += '<div class="oc-ver">' + esc(o.version || '') + ' · ' + esc(o.color || '') + '</div></div>';
+    h += '<div class="oc-time">' + fmtTime(o.ts) + '</div>';
+    h += '</div>';
+    h += '<div class="oc-code" data-no="' + esc(o.no) + '">' + esc(o.no) + '</div>';
+    h += '<div class="oc-actions">';
+    h += '<button class="oc-btn copy" data-copy="' + esc(o.no) + '">复制订单号</button>';
+    h += '<button class="oc-btn del" data-del="' + esc(o.no) + '">删除</button>';
+    h += '</div></div>';
+  });
+  list.innerHTML = h;
+}
+
+document.addEventListener('click', function(e){
+  var t = e.target.closest('[data-copy]');
+  if(t){
+    var no = t.getAttribute('data-copy');
+    try {
+      navigator.clipboard.writeText(no);
+      t.textContent = '✓ 已复制';
+      setTimeout(function(){ t.textContent = '复制订单号'; }, 1200);
+    } catch(err) {
+      alert('长按订单号手动复制：' + no);
+    }
+    return;
+  }
+  var d = e.target.closest('[data-del]');
+  if(d){
+    deleteOrder(d.getAttribute('data-del'));
+    return;
+  }
+});
+/* ========== 订单历史存储结束 ========== */
 var colorsNeo8 = [
 {name:'破晓金',bg:'#e8b84a',fg:'#2a1a00'},
 {name:'雾海蓝',bg:'#5b7b9a',fg:'#ffffff'},
@@ -2541,6 +2705,14 @@ vb.style.width=s.prog+'%';
 });
 setTimeout(function(){
 var orderNo = generateOrderNo(d, c);
+  addOrder({
+  no: orderNo,
+  device: d.name,
+  version: d.specs[0].v,
+  color: c.name,
+  price: formatPrice(d),
+  ts: Date.now()
+});
 document.getElementById('resultDesc').innerHTML='你的订单已提交成功<br><span style="font-size:13px;margin-top:8px;display:block;color:var(--success);font-weight:700;">'+d.name+' · '+d.specs[0].v+' · '+c.name+' · '+formatPrice(d)+'</span><span style="font-size:12px;margin-top:8px;display:block;color:var(--text-sub);">我们将在 24 小时内为你发货</span>';
 var rc = document.getElementById('resultCode');
 rc.textContent = orderNo;
@@ -2599,8 +2771,10 @@ if(btn){btn.disabled = false;btn.innerHTML = '<span class="btn-shine"></span>立
 }, 300);
 }
 
+renderOrders();
+document.getElementById('ordersClearBtn').addEventListener('click', clearOrders);
 } catch(err) {
-console.error('Bozi JS error:', err);
+  console.error('Bozi JS error:', err);
 }
 })();
 </script>
