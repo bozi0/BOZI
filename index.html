@@ -626,6 +626,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .share-preview{padding:16px 16px 0;overflow-y:auto;flex:1;-webkit-overflow-scrolling:touch}
 .share-preview canvas,.share-preview img{width:100%;height:auto;display:block;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,0.6)}
 .share-tip{font-size:11px;color:var(--text-sub);text-align:center;padding:10px 16px 0;letter-spacing:1px;line-height:1.6}
+  .share-quark-tip{font-size:11px;color:var(--gold);text-align:center;padding:8px 16px 0;line-height:1.6;letter-spacing:0.5px}
 .share-actions{display:flex;gap:10px;padding:14px 16px 16px;flex-shrink:0}
 .share-actions button{flex:1;padding:14px;border-radius:14px;font-size:14px;font-weight:800;letter-spacing:1px;cursor:pointer;font-family:inherit;border:none;transition:transform 0.15s ease}
 .share-actions button:active{transform:scale(0.96)}
@@ -707,6 +708,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
     <button class="modal-close" id="shareModalClose"></button>
    <div class="share-preview"><canvas id="shareCanvas" width="750" height="1000" style="display:none"></canvas><img id="shareImg" alt="Bozi 分享卡片"></div>
     <div class="share-tip">💡 长按图片可保存 · 点击下方按钮下载 PNG</div>
+    <div class="share-quark-tip" id="shareQuarkTip" style="display:none">⚠️ 夸克浏览器限制保存，建议用系统浏览器打开，或长按图片手动保存</div>
     <div class="share-actions">
       <button class="share-btn-save" id="shareSaveBtn">💾 保存卡片</button>
       <button class="share-btn-close" id="shareCloseBtn">关闭</button>
@@ -3619,6 +3621,20 @@ function openShareModal(){
   var cfg = SHARE_CONFIG[cur.id];
   if(!cfg) return;
   currentShareCfg = cfg;
+  function openShareModal(){
+  var cur = document.querySelector('.page.active');
+  if(!cur) return;
+  var cfg = SHARE_CONFIG[cur.id];
+  if(!cfg) return;
+  currentShareCfg = cfg;
+
+  var ua = navigator.userAgent;
+  var isQuark = /Quark/i.test(ua);
+  var qTip = document.getElementById('shareQuarkTip');
+  if(qTip) qTip.style.display = isQuark ? 'block' : 'none';
+
+  drawShareCard(cfg);
+  ...
 
   drawShareCard(cfg);
 
