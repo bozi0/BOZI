@@ -3373,6 +3373,7 @@ var SHARE_CONFIG = {
 var SHARE_PAGES = Object.keys(SHARE_CONFIG);
 
 function updateShareBtn(){
+  if(typeof SHARE_PAGES === 'undefined') return;
   var btn = document.getElementById('shareFloatBtn');
   if(!btn) return;
   var cur = document.querySelector('.page.active');
