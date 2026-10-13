@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>Bozi® 官方网站</title>
+  <link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#8b5cf6">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Bozi">
+<link rel="apple-touch-icon" href="icon.svg">
 <style>
 :root{--bg-dark:#050507;--text-main:#f8fafc;--text-sub:#94a3b8;--primary:#8b5cf6;--primary-glow:#a78bfa;--secondary:#2dd4bf;--accent:#f472b6;--gold:#facc15;--success:#22c55e;--blue:#60a5fa;--cyan:#22d3ee;--radius-lg:28px;--radius-md:18px;--safe-bottom:env(safe-area-inset-bottom,24px)}
 *{box-sizing:border-box;font-family:system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',sans-serif;-webkit-tap-highlight-color:transparent;-webkit-font-smoothing:antialiased}
@@ -3740,6 +3746,27 @@ function saveShareCard(){
   setTimeout(updateShareBtn, 100);
 })();
 /* ========== 分享卡片系统结束 ========== */
+  /* ========== PWA Service Worker 注册 ========== */
+if('serviceWorker' in navigator){
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('sw.js', { scope: './' }).then(function(reg){
+      console.log('✓ Bozi SW registered:', reg.scope);
+    }).catch(function(err){
+      console.warn('✗ Bozi SW 注册失败:', err);
+    });
+  });
+}
+
+window.addEventListener('beforeinstallprompt', function(e){
+  e.preventDefault();
+  window.__boziInstallPrompt = e;
+  console.log('💡 Bozi PWA 可安装');
+});
+
+window.addEventListener('appinstalled', function(){
+  console.log('🎉 Bozi PWA 已安装');
+});
+/* ========== PWA 结束 ========== */
   bindQueryUI();
   bindHotTags();
 } catch(err) {
