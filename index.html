@@ -3621,20 +3621,11 @@ function openShareModal(){
   var cfg = SHARE_CONFIG[cur.id];
   if(!cfg) return;
   currentShareCfg = cfg;
-  function openShareModal(){
-  var cur = document.querySelector('.page.active');
-  if(!cur) return;
-  var cfg = SHARE_CONFIG[cur.id];
-  if(!cfg) return;
-  currentShareCfg = cfg;
 
   var ua = navigator.userAgent;
   var isQuark = /Quark/i.test(ua);
   var qTip = document.getElementById('shareQuarkTip');
   if(qTip) qTip.style.display = isQuark ? 'block' : 'none';
-
-  drawShareCard(cfg);
-  ...
 
   drawShareCard(cfg);
 
