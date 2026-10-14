@@ -702,6 +702,9 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .admin-btn:active{transform:scale(0.97)}
 .admin-input{width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:12px 14px;color:#fff;font-size:13px;font-family:inherit;outline:none;margin-bottom:10px;box-sizing:border-box}
 .admin-input:focus{border-color:rgba(167,139,250,0.5)}
+  select.admin-input{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23a78bfa' d='M6 9L1 4h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:40px;cursor:pointer}
+select.admin-input option{background:#121218;color:#fff}
+:root[data-theme="light"] select.admin-input option{background:#fff;color:#0a0a0f}
 .admin-orders{max-height:400px;overflow-y:auto;background:rgba(0,0,0,0.2);border-radius:12px;padding:8px}
 .admin-order-item{display:flex;justify-content:space-between;font-size:11px;padding:8px 10px;border-bottom:1px dashed rgba(255,255,255,0.05);gap:8px}
 .admin-order-item:last-child{border-bottom:none}
@@ -2331,7 +2334,21 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <div class="as-title">📢 发布公告</div>
 <input class="admin-input" id="amTitleInput" placeholder="公告标题（必填）">
 <input class="admin-input" id="amDescInput" placeholder="公告内容">
-<input class="admin-input" id="amLinkInput" placeholder="点击跳转页面（可选，如 page-home-tv1）">
+<select class="admin-input" id="amLinkInput">
+<option value="">不跳转（仅展示公告）</option>
+<option value="page-home">🏠 首页</option>
+<option value="page-home-neo8">📱 手机 · Bozi Neo8</option>
+<option value="page-home-neo7">📱 手机 · Bozi Neo7</option>
+<option value="page-home-neo6">📱 手机 · Bozi Neo6</option>
+<option value="page-home-pad2">📱 平板 · Bozi Pad 2</option>
+<option value="page-home-pad1">📱 平板 · Bozi Pad 1</option>
+<option value="page-home-book1">💻 电脑 · Bozi Book 1</option>
+<option value="page-home-buds1">🎧 耳机 · Bozi Buds 1</option>
+<option value="page-home-watch1">⌚ 手表 · Bozi Watch 1</option>
+<option value="page-home-tv1">📺 电视 · Bozi TV 1</option>
+<option value="page-system">🌌 系统 · BoziOS 2</option>
+<option value="page-intro">📜 设备编年史</option>
+</select>
 <button class="admin-btn primary" id="amPublishBtn">发布公告（所有用户可见）</button>
 <button class="admin-btn danger" id="amCloseAnnounceBtn">关闭当前公告</button>
 </div>
@@ -4469,6 +4486,11 @@ function adminPublish(){
       document.getElementById('amTitleInput').value = '';
       document.getElementById('amDescInput').value = '';
       document.getElementById('amLinkInput').value = '';
+      // 重新拉取数据刷新状态
+      fetch(BOZI_API + '/admin/stats?pwd=' + encodeURIComponent(ADMIN_PWD))
+        .then(function(r){ return r.json(); })
+        .then(function(stats){ if(stats && stats.ok) renderAdminStats(stats); })
+        .catch(function(){});
     } else {
       showShareToast('发布失败');
     }
@@ -4481,7 +4503,14 @@ function adminCloseAnnounce(){
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ pwd: ADMIN_PWD })
   }).then(function(r){ return r.json(); }).then(function(j){
-    if(j && j.ok) showShareToast('✓ 公告已关闭');
+    if(j && j.ok){
+      showShareToast('✓ 公告已关闭');
+      // 重新拉取数据刷新状态
+      fetch(BOZI_API + '/admin/stats?pwd=' + encodeURIComponent(ADMIN_PWD))
+        .then(function(r){ return r.json(); })
+        .then(function(stats){ if(stats && stats.ok) renderAdminStats(stats); })
+        .catch(function(){});
+    }
   }).catch(function(){});
 }
 
