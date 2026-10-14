@@ -857,6 +857,51 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
     </div>
   </div>
 </div>
+  <!-- 1.5 手机首页（Neo8） -->
+<div class="page" id="page-home-neo8">
+<div class="home-hero reveal">
+<div class="badge new-badge">BOZI® 全新发布</div>
+<h1>Bozi Neo8</h1>
+<p class="sub">全场景智慧旗舰，重塑日常新标杆。强悍性能与优雅设计的默契共鸣。</p>
+<div class="home-stats">
+<div class="home-stat"><div class="num">天玑9500</div><div class="lbl">旗舰芯片</div></div>
+<div class="home-stat"><div class="num">2K 165Hz</div><div class="lbl">超感屏</div></div>
+<div class="home-stat"><div class="num">100W</div><div class="lbl">有线快充</div></div>
+</div>
+<div class="home-actions">
+<button class="home-btn primary" id="homeBuyBtn8h">立即购买</button>
+<button class="home-btn secondary" id="homeMoreBtn8h">了解更多</button>
+</div>
+<div class="scroll-hint2">↓ 向下滑动，查看亮点 ↓</div>
+</div>
+<div class="home-highlights">
+<div class="hl-card reveal"><div class="hl-tag">性能</div><div class="hl-title">天玑9500 + 风驰内核 3.0</div><div class="hl-desc">全新升级的博子风驰游戏内核 3.0，性能释放更加从容。6000mm² 超大 VC 散热面积。</div></div>
+<div class="hl-card reveal"><div class="hl-tag">屏幕</div><div class="hl-title">6.82英寸 2K LTPO 超感屏</div><div class="hl-desc">1-165Hz 自适应刷新率，峰值亮度 6000nit，支持高频 PWM 调光。</div></div>
+<div class="hl-card reveal"><div class="hl-tag">影像</div><div class="hl-title">5000万三摄 · 潜望长焦</div><div class="hl-desc">5000万主摄（OIS）+ 5000万超广角 + 5000万潜望长焦。LUMO 凝光 3.0，大师模式 3.0。</div></div>
+<div class="hl-card reveal"><div class="hl-tag">续航 &amp; 充电</div><div class="hl-title">8000mAh 冰川电池</div><div class="hl-desc">100W 有线 + 50W 无线。IP68 / IP69 防尘防水。3D 超声波指纹。</div></div>
+<div class="hl-card reveal"><div class="hl-tag">系统 &amp; AI</div><div class="hl-title">BoziOS 2 + BoziAI 2</div><div class="hl-desc">出厂即搭载。丝滑细腻的系统响应，跨设备无缝协同。</div></div>
+</div>
+<div class="prev-section reveal">
+<div class="prev-title">系统新版本</div>
+<div class="prev-card sys-card-cta" id="goSystem8h">
+<div class="prev-tag">BOZIOS 2 · BOZIAI 2</div>
+<div class="prev-name">全场景智慧跃迁</div>
+<div class="prev-sub">跨端协同、应用接力、主动服务、隐私守护。Neo8 出厂即搭载。</div>
+<div class="prev-stats"><span>跨端协同</span><span>应用接力</span><span>主动服务</span></div>
+<div class="prev-arrow">→</div>
+</div>
+</div>
+<div class="prev-section reveal">
+<div class="prev-title">上一代旗舰</div>
+<div class="prev-card" id="prevNeo7FromNeo8h">
+<div class="prev-tag">BOZI NEO7</div>
+<div class="prev-name">Bozi Neo7</div>
+<div class="prev-sub">Bozi 回归人间后的第二台量产旗舰。</div>
+<div class="prev-stats"><span>天玑9600</span><span>2K · 165Hz</span><span>2亿长焦</span></div>
+<div class="prev-arrow">→</div>
+</div>
+</div>
+</div>
 <div class="page" id="page-home-neo7">
 <div class="home-hero reveal">
 <div class="badge">BOZI® NEO7</div>
@@ -2307,7 +2352,7 @@ updateShareBtn();
 updateBackBtn();
 
 function getCategory(id){
-var phonePages = ['page-home-neo7','page-home-neo6','page-neo8','page-neo7','page-neo6','page-buy-neo8','page-buy-neo7','page-buy-neo6'];
+var phonePages = ['page-home-neo8','page-home-neo7','page-home-neo6','page-neo8','page-neo7','page-neo6','page-buy-neo8','page-buy-neo7','page-buy-neo6'];
 var padPages = ['page-home-pad2','page-home-pad1','page-pad2','page-pad1','page-buy-pad2','page-buy-pad1'];
 var bookPages = ['page-home-book1','page-book1','page-buy-book1'];
 var budsPages = ['page-home-buds1','page-buds1','page-buy-buds1'];
@@ -2362,7 +2407,7 @@ showView('page-home');
 });
 document.getElementById('navPhone').addEventListener('click', function(){
 pageStack = [];
-showView('page-neo8');
+showView('page-home-neo8');
 });
 document.getElementById('navPad').addEventListener('click', function(){
 pageStack = [];
@@ -2396,6 +2441,14 @@ else{showView('page-intro');}
 
 document.getElementById('homeBuyBtn').addEventListener('click', function(){showView('page-buy-neo8');});
 document.getElementById('homeMoreBtn').addEventListener('click', function(){showView('page-neo8');});
+  var hBuy8hEl = document.getElementById('homeBuyBtn8h');
+if(hBuy8hEl) hBuy8hEl.addEventListener('click', function(){showView('page-buy-neo8');});
+var hMore8hEl = document.getElementById('homeMoreBtn8h');
+if(hMore8hEl) hMore8hEl.addEventListener('click', function(){showView('page-neo8');});
+var gSys8hEl = document.getElementById('goSystem8h');
+if(gSys8hEl) gSys8hEl.addEventListener('click', function(){showView('page-system');});
+var pNeo7El = document.getElementById('prevNeo7FromNeo8h');
+if(pNeo7El) pNeo7El.addEventListener('click', function(){showView('page-home-neo7');});
 var prevNeo7El = document.getElementById('prevNeo7');
 if(prevNeo7El) prevNeo7El.addEventListener('click', function(){showView('page-home-neo7');});
 var goSystemEl = document.getElementById('goSystem');
@@ -3908,7 +3961,7 @@ function saveShareCard(){
 /* ========== 分享卡片系统结束 ========== */
   /* ========== 首页产品矩阵 ========== */
 var HOME_MATRIX = [
-  {icon:'📱',cat:'phone',name:'Bozi Neo8',tag:'全场景智慧旗舰',price:'￥4699 起',page:'page-home',catName:'手机'},
+  {icon:'📱',cat:'phone',name:'Bozi Neo8',tag:'全场景智慧旗舰',price:'￥4699 起',page:'page-home-neo8',catName:'手机'},
   {icon:'📱',cat:'phone',name:'Bozi Neo7',tag:'新一代旗舰',price:'￥4499 起',page:'page-home-neo7',catName:'手机'},
   {icon:'📱',cat:'phone',name:'Bozi Neo6',tag:'回归人间',price:'￥4299 起',page:'page-home-neo6',catName:'手机'},
   {icon:'📱',cat:'pad',name:'Bozi Pad 2',tag:'更轻更薄 观感升级',price:'￥1899 起',page:'page-home-pad2',catName:'平板'},
