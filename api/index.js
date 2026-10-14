@@ -129,7 +129,10 @@ Deno.serve(async (req) => {
         const iter = kv.list({ prefix: ['orders'] });
         for await (const _ of iter) orderCount++;
 
-        return json({ ok: true, visitsToday, visitsTotal, orderCount, sold });
+                const annEntry = await kv.get(['announcement', 'current']);
+        const announcement = (annEntry.value && annEntry.value.active) ? annEntry.value : null;
+
+        return json({ ok: true, visitsToday, visitsTotal, orderCount, sold, announcement });
       } catch (e) {
         return json({ ok: false, error: 'server' }, 500);
       }
