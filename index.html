@@ -2934,10 +2934,11 @@ function renderQueryResult(res){
     return;
   }
 
-    var isOk = res.status === 'ok';
+  var isOk = res.status === 'ok';
   var statusClass = isOk ? 'loading' : 'warn';
   var statusText = isOk ? '⏳ 云端验证中...' : '⚠️ 被篡改';
   var passText = res.pass ? '✅ 通过' : '❌ 失败';
+  var passClass = res.pass ? 'ok' : 'bad';
 
   var hint = '';
   if (!res.pass){
@@ -2946,7 +2947,7 @@ function renderQueryResult(res){
     hint = '<div class="qr-hint warn">⚠️ 版本代号异常，判定为被篡改。</div>';
   }
 
-    box.innerHTML =
+  box.innerHTML =
     '<div class="qr-status ' + statusClass + '" id="qrStatusBadge">' + statusText + '</div>' +
     '<div class="qr-rows">' +
       '<div class="qr-row"><span class="k">设备</span><span class="v">' + esc(res.device) + '</span></div>' +
@@ -2966,15 +2967,18 @@ function bindQueryUI(){
   var clearBtn = document.getElementById('queryClearBtn');
   if (!input || !goBtn || !clearBtn) return;
 
-    goBtn.addEventListener('click', function(){
+  goBtn.addEventListener('click', function(){
     var res = parseOrderNo(input.value);
     renderQueryResult(res);
+
     if(res && res.no && res.status !== 'bad' && res.status !== 'empty'){
       fetch(BOZI_API + '/verify', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ orderNo: res.no })
-           }).then(function(r){ return r.json(); }).then(function(j){
+      }).then(function(r){
+        return r.json();
+      }).then(function(j){
         var badge = document.getElementById('qrStatusBadge');
         if(!badge) return;
         if(j && j.ok && j.registered === true){
@@ -2997,6 +3001,8 @@ function bindQueryUI(){
           badge.innerHTML = '⚠️ 云端连接失败';
         }
       });
+    }
+  });
 
   clearBtn.addEventListener('click', function(){
     input.value = '';
