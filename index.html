@@ -489,6 +489,19 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .qr-hint.warn{background:rgba(250,204,21,0.06);border:1px solid rgba(250,204,21,0.2);color:var(--gold)}
 .qr-hint.bad{background:rgba(244,114,182,0.06);border:1px solid rgba(244,114,182,0.2);color:var(--accent)}
 .qr-own{display:inline-block;font-size:10px;padding:3px 10px;background:rgba(96,165,250,0.15);border:1px solid rgba(96,165,250,0.4);border-radius:8px;color:var(--blue);font-weight:700;letter-spacing:1px;margin-left:8px}
+  /* Bozi 验证系统说明 */
+.verify-system{background:linear-gradient(135deg,rgba(139,92,246,0.08),rgba(34,211,238,0.04));border:1px solid rgba(167,139,250,0.25);border-radius:18px;padding:20px;margin-bottom:20px;position:relative;overflow:hidden}
+.verify-system::before{content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;background:radial-gradient(circle,rgba(139,92,246,0.28),transparent 70%);pointer-events:none}
+.verify-system .vs-tag{font-size:9px;letter-spacing:4px;color:var(--primary-glow);font-weight:700;margin-bottom:10px;display:inline-block;padding:4px 12px;background:rgba(139,92,246,0.12);border:1px solid rgba(167,139,250,0.3);border-radius:40px;position:relative}
+.verify-system .vs-title{font-size:16px;font-weight:900;color:#fff;margin:0 0 10px 0;letter-spacing:-0.3px;position:relative;background:linear-gradient(90deg,#fff,#a78bfa);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.verify-system .vs-desc{font-size:12px;color:#cbd5e1;line-height:1.8;margin:0 0 14px 0;position:relative}
+.verify-system .vs-steps{display:flex;flex-direction:column;gap:8px;position:relative}
+.verify-system .vs-step{display:flex;align-items:flex-start;gap:10px;font-size:12px;color:#cbd5e1;line-height:1.6}
+.verify-system .vs-step .vs-num{width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,var(--primary),#6d28d9);color:#fff;font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.verify-system .vs-step .vs-text b{color:#fff;font-weight:700}
+:root[data-theme="light"] .verify-system{background:linear-gradient(135deg,rgba(139,92,246,0.1),rgba(34,211,238,0.06))}
+:root[data-theme="light"] .verify-system .vs-desc,
+:root[data-theme="light"] .verify-system .vs-step{color:#4a4a55}
 /* 浅色主题 */
 :root[data-theme="light"]{
 --bg-dark:#f5f5f7;
@@ -2113,6 +2126,16 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <p class="sub">你所有下单记录，本地保存，随时可查。</p>
 </div>
 <div class="reveal">
+  <div class="verify-system">
+<div class="vs-tag">BOZI® VERIFICATION</div>
+<h3 class="vs-title">Bozi 中央订单数据库</h3>
+<p class="vs-desc">每一张订单号由 43 位加密签名生成，并在下单瞬间同步写入云端数据库。查询时进行三重验证，让伪造无所遁形。</p>
+<div class="vs-steps">
+<div class="vs-step"><div class="vs-num">1</div><div class="vs-text"><b>本地格式校验</b> · 校验订单号结构是否合法</div></div>
+<div class="vs-step"><div class="vs-num">2</div><div class="vs-text"><b>加密签名比对</b> · 校验签名位是否匹配</div></div>
+<div class="vs-step"><div class="vs-num">3</div><div class="vs-text"><b>云端数据库查询</b> · 在 Bozi 中央数据库中检索真实记录</div></div>
+</div>
+</div>
   <div class="query-box">
 <div class="qb-label">🔍 查询订单号</div>
 <textarea id="queryInput" placeholder="粘贴订单号到这里，支持前缀混杂，会自动提取 43 位字符" spellcheck="false"></textarea>
