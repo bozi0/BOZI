@@ -2782,6 +2782,34 @@ function parseOrderNo(rawInput){
   var core = dCode + vCode + cCode + dateStr + timeStr + rand4;
   var checksumCalc = calcChecksum(core);
   var pass = (checksumCalc === checksumIn);
+    // ===== 合理性校验：挡住乱敲的伪造订单 =====
+  var _now = new Date();
+  var _year = parseInt(dateStr.slice(0,2), 10) + 2000;
+  var _month = parseInt(dateStr.slice(2,4), 10);
+  var _day = parseInt(dateStr.slice(4,6), 10);
+  var _hh = parseInt(timeStr.slice(0,2), 10);
+  var _mi = parseInt(timeStr.slice(2,4), 10);
+  var _ss = parseInt(timeStr.slice(4,6), 10);
+
+  var _dateBad = (
+    !/^\d{6}$/.test(dateStr) || !/^\d{6}$/.test(timeStr) ||
+    _year < 2024 || _year > _now.getFullYear() + 1 ||
+    _month < 1 || _month > 12 ||
+    _day < 1 || _day > 31 ||
+    _hh < 0 || _hh > 23 ||
+    _mi < 0 || _mi > 59 ||
+    _ss < 0 || _ss > 59
+  );
+
+  if (_dateBad){
+    return {
+      status: 'bad',
+      reason: '订单号中的日期/时间字段不合理，判定为伪造。',
+      checksum: checksumIn,
+      no: no
+    };
+  }
+  // ===== 合理性校验结束 =====
 
   var dateFmt = '20' + dateStr.slice(0,2) + '-' + dateStr.slice(2,4) + '-' + dateStr.slice(4,6);
   var timeFmt = timeStr.slice(0,2) + ':' + timeStr.slice(2,4) + ':' + timeStr.slice(4,6);
