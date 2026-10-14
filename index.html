@@ -618,6 +618,20 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 :root[data-theme="light"] .result-desc{color:#4a4a55}
 :root[data-theme="light"] .result-code{background:rgba(0,0,0,0.04);color:#4a4a55}
 @media (prefers-reduced-motion: reduce){*{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important}.grid-bg{animation:none}}
+  /* ========== 桌面端性能优化 ========== */
+@media (hover: hover) and (pointer: fine){
+  .grid-bg{animation:none;opacity:0.5}
+  .particle{animation-duration:40s}
+  .banner-track{animation-duration:60s}
+  .home-hero h1,.hero h1,.section-title,.page-title h1{
+    animation:none;
+    background-position:0 center;
+  }
+  .buy-btn .btn-shine{display:none}
+  .audio-bars span{animation:none;height:20px}
+  *{will-change:auto !important}
+}
+/* ========== 桌面端性能优化结束 ========== */
   /* ========== 分享卡片 ========== */
 .share-float-btn{position:fixed;bottom:calc(84px + var(--safe-bottom));right:24px;width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--primary),#6d28d9);border:1px solid rgba(167,139,250,0.4);display:flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;z-index:100;opacity:0;transform:translateY(20px);transition:opacity 0.4s ease,transform 0.4s ease;pointer-events:none;box-shadow:0 6px 20px rgba(139,92,246,0.35)}
 .share-float-btn.show{opacity:1;transform:translateY(0);pointer-events:auto}
