@@ -749,6 +749,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <button id="navBook">电脑</button>
 <button id="navBuds">耳机</button>
 <button id="navWatch">手表</button>
+  <button id="navTV">电视</button>
 <button id="navSystem">系统</button>
 <button id="navHistory">设备史</button>
 </div>
@@ -1000,6 +1001,42 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <div class="prev-name">Bozi Neo7</div>
 <div class="prev-sub">Bozi 回归人间后的第二台量产旗舰，也是 Neo 系列真正意义上的「新一代」。</div>
 <div class="prev-stats"><span>天玑9600</span><span>2K · 165Hz</span><span>2亿长焦</span></div>
+<div class="prev-arrow">→</div>
+</div>
+</div>
+</div>
+  <!-- 3.5 电视首页（TV 1） -->
+<div class="page" id="page-home-tv1">
+<div class="home-hero reveal">
+<div class="badge book-badge">BOZI® 新品 · 电视</div>
+<h1>Bozi TV 1</h1>
+<p class="sub">全场景智慧中枢，把影院与生态搬进你的客厅。</p>
+<div class="home-stats">
+<div class="home-stat"><div class="num">65-85"</div><div class="lbl">4K Mini-LED</div></div>
+<div class="home-stat"><div class="num">144Hz</div><div class="lbl">原生高刷</div></div>
+<div class="home-stat"><div class="num">1500nit</div><div class="lbl">峰值亮度</div></div>
+</div>
+<div class="home-actions">
+<button class="home-btn primary" id="homeBuyBtnTV1">立即购买</button>
+<button class="home-btn secondary" id="homeMoreBtnTV1">了解更多</button>
+</div>
+<div class="scroll-hint2">↓ 向下滑动，查看亮点 ↓</div>
+</div>
+<div class="home-highlights">
+<div class="hl-card reveal"><div class="hl-tag">画质</div><div class="hl-title">Bozi T1 独立画质引擎</div><div class="hl-desc">4K Mini-LED 屏幕 + 千级分区背光控制。1500nit 峰值亮度，暗部深邃纯净，高光璀璨不刺眼。</div><div class="hl-big">1500nit</div><div class="hl-desc">峰值亮度，HDR 画面层次分明。</div></div>
+<div class="hl-card reveal"><div class="hl-tag">屏幕</div><div class="hl-title">4K Mini-LED · 144Hz 原生高刷</div><div class="hl-desc">体育赛事、主机游戏，画面丝滑流畅，精准捕捉每一帧动态。</div></div>
+<div class="hl-card reveal"><div class="hl-tag">音响</div><div class="hl-title">2.1.2 声道立体声 · 杜比全景声</div><div class="hl-desc">高音通透，低音澎湃，声场饱满开阔。无需外接音箱，客厅瞬间化身私人影院。</div></div>
+<div class="hl-card reveal"><div class="hl-tag">生态</div><div class="hl-title">全场景生态流转</div><div class="hl-desc">手机碰传投屏、Buds 1 深夜空间音频、Watch 1 体感遥控，打破屏幕边界。</div></div>
+<div class="hl-card reveal"><div class="hl-tag">系统</div><div class="hl-title">BoziOS TV · 无广告</div><div class="hl-desc">界面清爽，操作流畅。boziAI 智慧感知，主动推荐内容，支持语音唤醒与智能家居控制。</div></div>
+<div class="hl-card reveal"><div class="hl-tag">设计</div><div class="hl-title">金属全面屏 · 超薄一体化</div><div class="hl-desc">曜夜黑、月岩银、星霜灰。壁挂或座装，自然融入现代家居。</div></div>
+</div>
+<div class="prev-section reveal">
+<div class="prev-title">全场景生态</div>
+<div class="prev-card sys-card-cta" id="goSystemTV1">
+<div class="prev-tag">BOZIOS 2 · BOZIAI 2</div>
+<div class="prev-name">全场景智慧跃迁</div>
+<div class="prev-sub">跨端协同、应用接力、主动服务、隐私守护。TV 1 深度融入 Bozi 生态。</div>
+<div class="prev-stats"><span>跨端协同</span><span>碰传投屏</span><span>智慧中枢</span></div>
 <div class="prev-arrow">→</div>
 </div>
 </div>
@@ -1573,6 +1610,86 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <div class="trust-card"><div class="title">🛡️ 官方保障</div><div class="row"><span class="k">发货方式</span><span class="v">顺丰包邮</span></div><div class="row"><span class="k">售后</span><span class="v">全国联保</span></div><div class="row"><span class="k">退换</span><span class="v">7 天无理由</span></div><div class="row"><span class="k">保修</span><span class="v">首年整机保修</span></div></div>
 <div class="slogan-strip"><div>Peak performance runs on Bozi.</div><div>All chips bow to Bozi.</div></div>
 </div>
+  <!-- 14.5 TV 1 详情页 -->
+<div class="page" id="page-tv1">
+<div class="hero reveal">
+<div class="badge book-badge">BOZI® TV 1</div>
+<h1>智慧巨幕</h1>
+<p class="sub">全场景智慧中枢，把影院与生态搬进你的客厅。</p>
+</div>
+<div class="reveal">
+<div class="section-header"><span class="section-index">SPECS</span><h2 class="section-title">核心参数</h2></div>
+<div class="spec-table">
+<div class="spec-row"><span class="k">产品名称</span><span class="v">Bozi TV 1</span></div>
+<div class="spec-row"><span class="k">画质芯片</span><span class="v blue">Bozi T1 独立画质引擎</span></div>
+<div class="spec-row"><span class="k">屏幕尺寸</span><span class="v blue">65" / 75" / 85"</span></div>
+<div class="spec-row"><span class="k">屏幕技术</span><span class="v blue">4K Mini-LED · 144Hz 原生高刷</span></div>
+<div class="spec-row"><span class="k">峰值亮度</span><span class="v blue">1500nit</span></div>
+<div class="spec-row"><span class="k">背光分区</span><span class="v blue">千级分区背光控制</span></div>
+<div class="spec-row"><span class="k">音响系统</span><span class="v blue">2.1.2 声道立体声 · 杜比全景声</span></div>
+<div class="spec-row"><span class="k">内存/存储</span><span class="v">4GB + 64GB / 4GB + 128GB</span></div>
+<div class="spec-row"><span class="k">系统</span><span class="v blue">boziOS TV</span></div>
+<div class="spec-row"><span class="k">智慧互联</span><span class="v blue">Bozi 生态无缝流转 · 碰传投屏</span></div>
+<div class="spec-row"><span class="k">接口</span><span class="v">HDMI 2.1 × 3 · USB-C · USB-A · 网口</span></div>
+<div class="spec-row"><span class="k">机身设计</span><span class="v">金属全面屏 · 超薄一体化</span></div>
+<div class="spec-row"><span class="k">配色</span><span class="v">曜夜黑 / 月岩银 / 星霜灰</span></div>
+</div>
+</div>
+<div class="reveal">
+<div class="section-header"><span class="section-index">DISPLAY</span><h2 class="section-title">独立画质引擎，重塑视觉体验</h2></div>
+<div class="product-card">
+<div class="card-label">BOZI T1</div>
+<h3 class="product-name">4K Mini-LED · 千级分区背光</h3>
+<p class="desc">搭载全新的 <span class="blue-highlight">Bozi T1 独立画质引擎</span>，配合 4K Mini-LED 屏幕与千级分区背光控制，精准调节每一处明暗细节。<span class="blue-highlight">1500nit 峰值亮度</span>让暗部深邃纯净，高光画面璀璨不刺眼。<span class="blue-highlight">144Hz 原生高刷</span>，无论是观看体育赛事还是接入主机游戏，画面都丝滑流畅。</p>
+<div class="spec-grid">
+<div class="spec-item"><div class="k">画质芯片</div><div class="v blue">Bozi T1</div></div>
+<div class="spec-item"><div class="k">峰值亮度</div><div class="v blue">1500nit</div></div>
+<div class="spec-item"><div class="k">刷新率</div><div class="v blue">144Hz</div></div>
+<div class="spec-item"><div class="k">背光分区</div><div class="v blue">千级分区</div></div>
+</div>
+</div>
+</div>
+<div class="reveal">
+<div class="section-header"><span class="section-index">AUDIO</span><h2 class="section-title">影院级音响，声临其境</h2></div>
+<div class="product-card">
+<div class="card-label">2.1.2 CHANNELS</div>
+<h3 class="product-name">2.1.2 声道立体声 · 杜比全景声</h3>
+<p class="desc">内置 <span class="blue-highlight">2.1.2 声道立体声系统</span>，支持杜比全景声。高音通透，低音澎湃，声场饱满开阔。无需外接音箱，客厅瞬间化身私人影院。</p>
+</div>
+</div>
+<div class="reveal">
+<div class="section-header"><span class="section-index">SYSTEM</span><h2 class="section-title">客厅的智慧大脑</h2></div>
+<div class="product-card">
+<div class="card-label">BOZIOS TV</div>
+<h3 class="product-name">BoziOS TV · 无广告</h3>
+<p class="desc">搭载全新定制的 <span class="blue-highlight">BoziOS TV</span>，界面清爽无广告，操作极其流畅。配合 <span class="blue-highlight">boziAI</span> 的智慧感知，能够深度学习家庭成员的观看习惯，主动推荐内容。支持语音唤醒与智能家居控制，成为客厅的智慧中枢。</p>
+</div>
+</div>
+<div class="reveal">
+<div class="section-header"><span class="section-index">ECOSYSTEM</span><h2 class="section-title">全场景生态流转</h2></div>
+<div class="product-card">
+<div class="card-label">BOZI CONNECT</div>
+<h3 class="product-name">打破屏幕边界</h3>
+<p class="desc">依托 boziOS 底层连接，它不再是一块孤立的屏幕：手机（Neo8）上没看完的电影，碰一下遥控器，直接在电视上<span class="blue-highlight">无缝续播</span>；戴上 Bozi Buds 1，深夜观影不打扰家人，自动切换空间音频；抬起 Bozi Watch 1，瞬间化身体感遥控器或游戏手柄；视频会议一键流转至大屏，工作娱乐自然切换。</p>
+</div>
+</div>
+<div class="reveal">
+<div class="section-header"><span class="section-index">DESIGN</span><h2 class="section-title">客厅美学</h2></div>
+<div class="product-card">
+<div class="card-label">METAL FULL SCREEN</div>
+<h3 class="product-name">超薄金属全面屏</h3>
+<p class="desc">采用金属全面屏设计与超薄一体化机身，无论是壁挂还是座装，都能自然融入现代家居。<span class="blue-highlight">曜夜黑、月岩银、星霜灰</span>三款专属配色，彰显 Bozi 一贯的极简美学。</p>
+</div>
+</div>
+<div class="reveal">
+<div class="section-header"><span class="section-index">PRICE</span><h2 class="section-title">价格与版本</h2></div>
+<div class="price-versions">
+<div class="price-version"><span class="ver">65 英寸</span><span class="price">￥4999</span></div>
+<div class="price-version featured"><span class="ver">75 英寸<span class="badge-mini">推荐</span></span><span class="price">￥6499</span></div>
+<div class="price-version"><span class="ver">85 英寸</span><span class="price">￥8999</span></div>
+</div>
+</div>
+</div>
 
 <!-- 15. Pad 2 详情页 -->
 <div class="page" id="page-pad2">
@@ -1642,6 +1759,30 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <div class="price-version"><span class="ver">12GB + 512GB</span><span class="price">￥2699</span></div>
 </div>
 </div>
+</div>
+  <!-- 15.5 TV 1 购买页 -->
+<div class="page" id="page-buy-tv1">
+<div class="page-title">
+<h1>立即购买</h1>
+<p class="sub">Bozi TV 1 · 现已开启预售</p>
+<div class="live-badge">当前 3,821 人正在浏览</div>
+</div>
+<div class="device-picker"><div class="picker-label">选择尺寸</div><div class="device-scroll" id="deviceScrollTV1"></div></div>
+<div class="device-panel" id="devicePanelTV1">
+<div class="buy-card blue-card">
+<div class="buy-header">
+<div class="info"><div class="name" id="productNameTV1">Bozi TV 1</div><div class="stock">现货 · 当前 <span id="stockNumTV1">9999</span> 台可购</div></div>
+<div class="badge-stock" id="productBadgeTV1">预售</div>
+</div>
+<div class="spec-full" id="specFullTV1"></div>
+<div class="color-picker"><div class="picker-label">选择颜色</div><div class="color-scroll" id="colorScrollTV1"></div></div>
+<div class="total-bar"><div class="label">应付总额</div><div class="amount" id="totalPriceTV1">￥4999</div></div>
+<button class="buy-btn" id="buyBtnTV1"><span class="btn-shine"></span>立即购买</button>
+<div class="buy-note">支付即表示同意《Bozi 用户协议》<br>预售中 · 支持二次售卖 · 无身份绑定</div>
+</div>
+</div>
+<div class="trust-card"><div class="title">🛡️ 官方保障</div><div class="row"><span class="k">发货方式</span><span class="v">顺丰包邮</span></div><div class="row"><span class="k">售后</span><span class="v">全国联保</span></div><div class="row"><span class="k">退换</span><span class="v">7 天无理由</span></div><div class="row"><span class="k">保修</span><span class="v">首年整机保修</span></div></div>
+<div class="slogan-strip"><div>Peak performance runs on Bozi.</div><div>All chips bow to Bozi.</div></div>
 </div>
 
 <!-- 16. Pad 2 购买页 -->
@@ -2381,19 +2522,21 @@ var padPages = ['page-home-pad2','page-home-pad1','page-pad2','page-pad1','page-
 var bookPages = ['page-home-book1','page-book1','page-buy-book1'];
 var budsPages = ['page-home-buds1','page-buds1','page-buy-buds1'];
 var watchPages = ['page-home-watch1','page-watch1','page-buy-watch1'];
+  var tvPages = ['page-home-tv1','page-tv1','page-buy-tv1'];
   if(id === 'page-home') return 'home';
 if(phonePages.indexOf(id) > -1) return 'phone';
 if(padPages.indexOf(id) > -1) return 'pad';
 if(bookPages.indexOf(id) > -1) return 'book';
 if(budsPages.indexOf(id) > -1) return 'buds';
 if(watchPages.indexOf(id) > -1) return 'watch';
+  if(tvPages.indexOf(id) > -1) return 'tv';
 if(id === 'page-system') return 'system';
 if(id === 'page-intro') return 'history';
 return null;
 }
 function updateNavHighlight(id){
 var cat = getCategory(id);
-var navMap = {home:'navHome',phone:'navPhone',pad:'navPad',book:'navBook',buds:'navBuds',watch:'navWatch',system:'navSystem',history:'navHistory'};
+var navMap = {home:'navHome',phone:'navPhone',pad:'navPad',book:'navBook',buds:'navBuds',watch:'navWatch',tv:'navTV',system:'navSystem',history:'navHistory'};
 var activeBtn = null;
 Object.keys(navMap).forEach(function(k){
 var btn = document.getElementById(navMap[k]);
@@ -2448,6 +2591,10 @@ showView('page-home-buds1');
 document.getElementById('navWatch').addEventListener('click', function(){
 pageStack = [];
 showView('page-home-watch1');
+});
+  document.getElementById('navTV').addEventListener('click', function(){
+pageStack = [];
+showView('page-home-tv1');
 });
   document.getElementById('navOrders').addEventListener('click', function(){
 pageStack = [];
@@ -2504,6 +2651,12 @@ document.getElementById('homeMoreBtnBuds1').addEventListener('click', function()
 
 document.getElementById('homeBuyBtnWatch1').addEventListener('click', function(){showView('page-buy-watch1');});
 document.getElementById('homeMoreBtnWatch1').addEventListener('click', function(){showView('page-watch1');});
+  var hBuyTV1El = document.getElementById('homeBuyBtnTV1');
+if(hBuyTV1El) hBuyTV1El.addEventListener('click', function(){showView('page-buy-tv1');});
+var hMoreTV1El = document.getElementById('homeMoreBtnTV1');
+if(hMoreTV1El) hMoreTV1El.addEventListener('click', function(){showView('page-tv1');});
+var gSysTV1El = document.getElementById('goSystemTV1');
+if(gSysTV1El) gSysTV1El.addEventListener('click', function(){showView('page-system');});
 
 var revealEls = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
 function triggerReveal(){
@@ -2594,7 +2747,8 @@ var DEVICE_CODES = {
 'Bozi Pad 1':'P01',
 'Bozi Book 1':'B01',
 'Bozi Buds 1':'D01',
-'Bozi Watch 1':'W01'
+'Bozi Watch 1':'W01',
+'Bozi TV 1':'TV1'
 };
 
 var VERSION_CODES = {
@@ -2606,7 +2760,10 @@ var VERSION_CODES = {
 '16GB + 512GB':'1651',
 '16GB + 1TB':'161T',
 '32GB + 1TB':'321T',
-'标准版':'0000'
+'标准版':'0000',
+'65英寸':'65IN',
+'75英寸':'75IN',
+'85英寸':'85IN'
 };
 
 var COLOR_CODES = {
@@ -2617,7 +2774,8 @@ var COLOR_CODES = {
 '午夜灰':'MID','皓月白':'MWH','天青蓝':'AZR',
 '玄铁灰':'IRN','月岩银':'MSV',
 '幻夜黑':'NBL','云水白':'CWD','极光紫':'AUR','松霜绿':'PGR',
-'月光银':'MSV','晨雾金':'MGD'
+'月光银':'MSV','晨雾金':'MGD',
+'月岩银':'MRS','星霜灰':'FST'
 };
 
 function getDeviceCode(name){
@@ -3053,6 +3211,11 @@ var colorsWatch1 = [
 {name:'月光银',bg:'#c8c8cc',fg:'#1a1a1a'},
 {name:'晨雾金',bg:'#d4b896',fg:'#2a1a00'}
 ];
+var colorsTV1 = [
+{name:'曜夜黑',bg:'#15151a',fg:'#ffffff'},
+{name:'月岩银',bg:'#b8b8b8',fg:'#1a1a1a'},
+{name:'星霜灰',bg:'#5a5a5a',fg:'#ffffff'}
+];
 
 var devices8 = [
 {id:'n8v1',name:'Bozi Neo8',label:'12+256',tag:'￥4699',price:4699,currency:'￥',stock:9999,chip:'天玑9500',
@@ -3128,6 +3291,14 @@ specs:[{k:'版本',v:'标准版',cls:'accent'},{k:'音频芯片',v:'Bozi A1 高�
 var devicesWatch1 = [
 {id:'w1v1',name:'Bozi Watch 1',label:'标准版',tag:'￥899',price:899,currency:'￥',stock:9999,chip:'Bozi W1',
 specs:[{k:'版本',v:'标准版',cls:'green'},{k:'芯片',v:'Bozi W1 低功耗芯片',cls:'green'},{k:'系统',v:'boziOS'},{k:'屏幕',v:'1.43" AMOLED · 466×466 · 60Hz',cls:'green'},{k:'峰值亮度',v:'1000nit'},{k:'表壳',v:'航空级铝合金 + 玻璃表背'},{k:'表带',v:'氟橡胶 / 真皮 / 金属编织'},{k:'健康监测',v:'心率 / 血氧 / 睡眠 / 压力 / 体温',cls:'green'},{k:'运动模式',v:'120+ 种',cls:'green'},{k:'防水',v:'5ATM',cls:'green'},{k:'定位',v:'双频五星定位'},{k:'连接',v:'蓝牙 5.3 · 双设备'},{k:'通话',v:'蓝牙通话 · AI 降噪'},{k:'续航',v:'典型 14 天 / 重度 7 天',cls:'green'},{k:'充电',v:'磁吸无线快充',cls:'green'},{k:'配色',v:'曜夜黑 / 月光银 / 晨雾金'}]}
+];
+  var devicesTV1 = [
+{id:'tv1v1',name:'Bozi TV 1',label:'65"',tag:'￥4999',price:4999,currency:'￥',stock:9999,chip:'Bozi T1',
+specs:[{k:'尺寸',v:'65 英寸',cls:'blue'},{k:'画质芯片',v:'Bozi T1 独立画质引擎',cls:'blue'},{k:'屏幕',v:'4K Mini-LED · 144Hz',cls:'blue'},{k:'峰值亮度',v:'1500nit',cls:'blue'},{k:'背光分区',v:'千级分区',cls:'blue'},{k:'音响',v:'2.1.2 声道 · 杜比全景声',cls:'blue'},{k:'系统',v:'boziOS TV'},{k:'内存',v:'4GB + 64GB'},{k:'互联',v:'Bozi 生态流转'},{k:'接口',v:'HDMI 2.1 × 3 · USB-C · USB-A'},{k:'配色',v:'曜夜黑 / 月岩银 / 星霜灰'}]},
+{id:'tv1v2',name:'Bozi TV 1',label:'75"',tag:'￥6499',price:6499,currency:'￥',stock:9999,chip:'Bozi T1',
+specs:[{k:'尺寸',v:'75 英寸',cls:'blue'},{k:'画质芯片',v:'Bozi T1 独立画质引擎',cls:'blue'},{k:'屏幕',v:'4K Mini-LED · 144Hz',cls:'blue'},{k:'峰值亮度',v:'1500nit',cls:'blue'},{k:'背光分区',v:'千级分区',cls:'blue'},{k:'音响',v:'2.1.2 声道 · 杜比全景声',cls:'blue'},{k:'系统',v:'boziOS TV'},{k:'内存',v:'4GB + 64GB'},{k:'互联',v:'Bozi 生态流转'},{k:'接口',v:'HDMI 2.1 × 3 · USB-C · USB-A'},{k:'配色',v:'曜夜黑 / 月岩银 / 星霜灰'}]},
+{id:'tv1v3',name:'Bozi TV 1',label:'85"',tag:'￥8999',price:8999,currency:'￥',stock:9999,chip:'Bozi T1',
+specs:[{k:'尺寸',v:'85 英寸',cls:'blue'},{k:'画质芯片',v:'Bozi T1 独立画质引擎',cls:'blue'},{k:'屏幕',v:'4K Mini-LED · 144Hz',cls:'blue'},{k:'峰值亮度',v:'1500nit',cls:'blue'},{k:'背光分区',v:'千级分区',cls:'blue'},{k:'音响',v:'2.1.2 声道 · 杜比全景声',cls:'blue'},{k:'系统',v:'boziOS TV'},{k:'内存',v:'4GB + 64GB'},{k:'互联',v:'Bozi 生态流转'},{k:'接口',v:'HDMI 2.1 × 3 · USB-C · USB-A'},{k:'配色',v:'曜夜黑 / 月岩银 / 星霜灰'}]}
 ];
 
 var payMethods = {wechat:'微信支付',alipay:'支付宝',card:'银行卡',balance:'Bozi 余额'};
@@ -3254,6 +3425,11 @@ devices: devicesWatch1, colors: colorsWatch1, scrollId:'deviceScrollWatch1', col
 productNameId:'productNameWatch1', productBadgeId:'productBadgeWatch1', stockNumId:'stockNumWatch1',
 specFullId:'specFullWatch1', totalPriceId:'totalPriceWatch1', buyBtnId:'buyBtnWatch1'
 });
+  var tvSeller1 = setupBuyPage({
+devices: devicesTV1, colors: colorsTV1, scrollId:'deviceScrollTV1', colorScrollId:'colorScrollTV1', panelId:'devicePanelTV1',
+productNameId:'productNameTV1', productBadgeId:'productBadgeTV1', stockNumId:'stockNumTV1',
+specFullId:'specFullTV1', totalPriceId:'totalPriceTV1', buyBtnId:'buyBtnTV1'
+});
 
 function getActiveSeller(){
 if(document.getElementById('page-buy-neo8').classList.contains('active')) return neoSeller8;
@@ -3264,6 +3440,7 @@ if(document.getElementById('page-buy-pad1').classList.contains('active')) return
 if(document.getElementById('page-buy-book1').classList.contains('active')) return bookSeller1;
 if(document.getElementById('page-buy-buds1').classList.contains('active')) return budsSeller1;
 if(document.getElementById('page-buy-watch1').classList.contains('active')) return watchSeller1;
+  if(document.getElementById('page-buy-tv1').classList.contains('active')) return tvSeller1;
 return neoSeller8;
 }
 
@@ -4002,7 +4179,8 @@ var HOME_MATRIX = [
   {icon:'📱',cat:'pad',name:'Bozi Pad 1',tag:'轻盈随行',price:'￥1599 起',page:'page-home-pad1',catName:'平板'},
   {icon:'💻',cat:'book',name:'Bozi Book 1',tag:'轻薄随行',price:'￥4999 起',page:'page-home-book1',catName:'电脑'},
   {icon:'🎧',cat:'buds',name:'Bozi Buds 1',tag:'声临其境',price:'￥699',page:'page-home-buds1',catName:'耳机'},
-  {icon:'⌚',cat:'watch',name:'Bozi Watch 1',tag:'腕上智慧中枢',price:'￥899',page:'page-home-watch1',catName:'手表'}
+  {icon:'⌚',cat:'watch',name:'Bozi Watch 1',tag:'腕上智慧中枢',price:'￥899',page:'page-home-watch1',catName:'手表'},
+  {icon:'📺',cat:'book',name:'Bozi TV 1',tag:'全场景智慧中枢',price:'￥4999 起',page:'page-home-tv1',catName:'电视'}
 ];
 
 (function renderHomeMatrix(){
