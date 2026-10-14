@@ -4216,6 +4216,22 @@ var HOME_MATRIX = [
   if(hisBtn) hisBtn.addEventListener('click', function(){ showView('page-intro'); });
 })();
 /* ========== 首页产品矩阵结束 ========== */
+  /* ========== 访问追踪 ========== */
+(function trackVisit(){
+  try {
+    var today = new Date().toISOString().slice(0,10);
+    var lastTrack = localStorage.getItem('bozi_last_visit');
+    // 每天只上报一次（避免刷新就+1）
+    if(lastTrack === today) return;
+    localStorage.setItem('bozi_last_visit', today);
+    fetch(BOZI_API + '/track/visit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ts: Date.now() })
+    }).catch(function(){});
+  } catch(e){}
+})();
+/* ========== 访问追踪结束 ========== */
   /* ========== PWA Service Worker 注册 ========== */
 if('serviceWorker' in navigator){
   window.addEventListener('load', function(){
