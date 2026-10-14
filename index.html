@@ -477,6 +477,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 .qr-status{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:900;letter-spacing:1px;padding:8px 16px;border-radius:40px;margin-bottom:14px}
 .qr-status.ok{background:rgba(34,197,94,0.12);border:1px solid rgba(34,197,94,0.4);color:var(--success)}
 .qr-status.warn{background:rgba(250,204,21,0.12);border:1px solid rgba(250,204,21,0.4);color:var(--gold)}
+  .qr-status.loading{background:rgba(148,163,184,0.12);border:1px solid rgba(148,163,184,0.4);color:#94a3b8;animation:pulse-soft 1.5s ease-in-out infinite}
 .qr-status.bad{background:rgba(244,114,182,0.12);border:1px solid rgba(244,114,182,0.4);color:var(--accent)}
 .qr-rows{display:flex;flex-direction:column;gap:6px;background:rgba(0,0,0,0.2);border-radius:12px;padding:14px}
 .qr-row{display:flex;justify-content:space-between;font-size:12px;gap:12px;padding:4px 0}
@@ -2933,11 +2934,10 @@ function renderQueryResult(res){
     return;
   }
 
-  var isOk = res.status === 'ok';
-  var statusClass = isOk ? 'ok' : 'warn';
-  var statusText = isOk ? '✅ 真单' : '⚠️ 被篡改';
+    var isOk = res.status === 'ok';
+  var statusClass = isOk ? 'loading' : 'warn';
+  var statusText = isOk ? '⏳ 云端验证中...' : '⚠️ 被篡改';
   var passText = res.pass ? '✅ 通过' : '❌ 失败';
-  var passClass = res.pass ? 'ok' : 'bad';
 
   var hint = '';
   if (!res.pass){
@@ -2946,12 +2946,8 @@ function renderQueryResult(res){
     hint = '<div class="qr-hint warn">⚠️ 版本代号异常，判定为被篡改。</div>';
   }
 
-  var ownArr = loadOrders();
-  var isOwn = ownArr.some(function(o){ return o.no === res.no; });
-  var ownBadge = isOwn ? '<span class="qr-own">来自本机订单</span>' : '';
-
-  box.innerHTML =
-    '<div class="qr-status ' + statusClass + '">' + statusText + ownBadge + '</div>' +
+    box.innerHTML =
+    '<div class="qr-status ' + statusClass + '" id="qrStatusBadge">' + statusText + '</div>' +
     '<div class="qr-rows">' +
       '<div class="qr-row"><span class="k">设备</span><span class="v">' + esc(res.device) + '</span></div>' +
       '<div class="qr-row"><span class="k">版本</span><span class="v">' + esc(res.version) + '</span></div>' +
@@ -2978,20 +2974,29 @@ function bindQueryUI(){
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ orderNo: res.no })
-      }).then(function(r){ return r.json(); }).then(function(j){
-        if(j && j.ok && j.registered === false){
-          var box = document.getElementById('queryResult');
-          if(box){
-            var hint = document.createElement('div');
-            hint.className = 'qr-hint bad';
-            hint.style.marginTop = '10px';
-            hint.textContent = '❌ 后端未找到此订单号记录，判定为伪造。';
-            box.appendChild(hint);
-          }
+           }).then(function(r){ return r.json(); }).then(function(j){
+        var badge = document.getElementById('qrStatusBadge');
+        if(!badge) return;
+        if(j && j.ok && j.registered === true){
+          var ownArr = loadOrders();
+          var isOwn = ownArr.some(function(o){ return o.no === res.no; });
+          var ownBadge = isOwn ? '<span class="qr-own">来自本机订单</span>' : '';
+          badge.className = 'qr-status ok';
+          badge.innerHTML = '✅ 真单' + ownBadge;
+        } else if(j && j.ok && j.registered === false){
+          badge.className = 'qr-status bad';
+          badge.innerHTML = '❌ 伪造订单号';
+        } else {
+          badge.className = 'qr-status warn';
+          badge.innerHTML = '⚠️ 云端返回异常';
         }
-      }).catch(function(){});
-    }
-  });
+      }).catch(function(){
+        var badge = document.getElementById('qrStatusBadge');
+        if(badge){
+          badge.className = 'qr-status warn';
+          badge.innerHTML = '⚠️ 云端连接失败';
+        }
+      });
 
   clearBtn.addEventListener('click', function(){
     input.value = '';
