@@ -2502,6 +2502,7 @@ var _CFG_ = {
   theme: 'dark'
 };
 /* ========== 启动初始化结束 ========== */
+  var BOZI_API = 'https://bozi.bozi0.deno.net';
 /* ========== 订单号生成系统 V2 ========== */
 var MIX_CHARS = 'XZQWMKPRYHNTVS';
 function mixOne(){
@@ -2893,9 +2894,27 @@ function bindQueryUI(){
   var clearBtn = document.getElementById('queryClearBtn');
   if (!input || !goBtn || !clearBtn) return;
 
-  goBtn.addEventListener('click', function(){
+    goBtn.addEventListener('click', function(){
     var res = parseOrderNo(input.value);
     renderQueryResult(res);
+    if(res && res.no && res.status !== 'bad' && res.status !== 'empty'){
+      fetch(BOZI_API + '/verify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ orderNo: res.no })
+      }).then(function(r){ return r.json(); }).then(function(j){
+        if(j && j.ok && j.registered === false){
+          var box = document.getElementById('queryResult');
+          if(box){
+            var hint = document.createElement('div');
+            hint.className = 'qr-hint bad';
+            hint.style.marginTop = '10px';
+            hint.textContent = '❌ 后端未找到此订单号记录，判定为伪造。';
+            box.appendChild(hint);
+          }
+        }
+      }).catch(function(){});
+    }
   });
 
   clearBtn.addEventListener('click', function(){
@@ -3267,6 +3286,18 @@ var orderNo = generateOrderNo(d, c);
   price: formatPrice(d),
   ts: Date.now()
 });
+  try {
+  fetch(BOZI_API + '/register', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      orderNo: orderNo,
+      device: d.name,
+      version: d.specs[0].v,
+      color: c.name
+    })
+  }).catch(function(){});
+} catch(e){}
 document.getElementById('resultDesc').innerHTML='你的订单已提交成功<br><span style="font-size:13px;margin-top:8px;display:block;color:var(--success);font-weight:700;">'+d.name+' · '+d.specs[0].v+' · '+c.name+' · '+formatPrice(d)+'</span><span style="font-size:12px;margin-top:8px;display:block;color:var(--text-sub);">我们将在 24 小时内为你发货</span>';
 var rc = document.getElementById('resultCode');
 rc.textContent = orderNo;
