@@ -729,6 +729,7 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <button class="back-btn" id="backBtn" style="display:none !important" aria-hidden="true">←</button>
 <div class="brand" id="brandBtn">BOZI®</div>
 <div class="nav-pill" id="navPill">
+<button id="navHome">首页</button>
 <button id="navPhone">手机</button>
 <button id="navPad">平板</button>
 <button id="navBook">电脑</button>
@@ -2306,11 +2307,12 @@ updateShareBtn();
 updateBackBtn();
 
 function getCategory(id){
-var phonePages = ['page-home','page-home-neo7','page-home-neo6','page-neo8','page-neo7','page-neo6','page-buy-neo8','page-buy-neo7','page-buy-neo6'];
+var phonePages = ['page-home-neo7','page-home-neo6','page-neo8','page-neo7','page-neo6','page-buy-neo8','page-buy-neo7','page-buy-neo6'];
 var padPages = ['page-home-pad2','page-home-pad1','page-pad2','page-pad1','page-buy-pad2','page-buy-pad1'];
 var bookPages = ['page-home-book1','page-book1','page-buy-book1'];
 var budsPages = ['page-home-buds1','page-buds1','page-buy-buds1'];
 var watchPages = ['page-home-watch1','page-watch1','page-buy-watch1'];
+  if(id === 'page-home') return 'home';
 if(phonePages.indexOf(id) > -1) return 'phone';
 if(padPages.indexOf(id) > -1) return 'pad';
 if(bookPages.indexOf(id) > -1) return 'book';
@@ -2322,7 +2324,7 @@ return null;
 }
 function updateNavHighlight(id){
 var cat = getCategory(id);
-var navMap = {phone:'navPhone',pad:'navPad',book:'navBook',buds:'navBuds',watch:'navWatch',system:'navSystem',history:'navHistory'};
+var navMap = {home:'navHome',phone:'navPhone',pad:'navPad',book:'navBook',buds:'navBuds',watch:'navWatch',system:'navSystem',history:'navHistory'};
 var activeBtn = null;
 Object.keys(navMap).forEach(function(k){
 var btn = document.getElementById(navMap[k]);
@@ -2354,9 +2356,13 @@ pageStack = [];
 showView('page-home');
 });
 
-document.getElementById('navPhone').addEventListener('click', function(){
+document.getElementById('navHome').addEventListener('click', function(){
 pageStack = [];
 showView('page-home');
+});
+document.getElementById('navPhone').addEventListener('click', function(){
+pageStack = [];
+showView('page-neo8');
 });
 document.getElementById('navPad').addEventListener('click', function(){
 pageStack = [];
