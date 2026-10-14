@@ -2324,6 +2324,10 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 <div id="adminSoldList"></div>
 </div>
 <div class="admin-section">
+  <div class="admin-section" id="currentAnnounceSection">
+<div class="as-title">📌 当前公告状态</div>
+<div id="currentAnnounceBox">加载中...</div>
+</div>
 <div class="as-title">📢 发布公告</div>
 <input class="admin-input" id="amTitleInput" placeholder="公告标题（必填）">
 <input class="admin-input" id="amDescInput" placeholder="公告内容">
@@ -4404,6 +4408,21 @@ function renderAdminStats(j){
   document.getElementById('asVisitsToday').textContent = j.visitsToday || 0;
   document.getElementById('asVisitsTotal').textContent = j.visitsTotal || 0;
   document.getElementById('asOrderCount').textContent = j.orderCount || 0;
+    var annBox = document.getElementById('currentAnnounceBox');
+  if(annBox){
+    if(j.announcement){
+      annBox.innerHTML =
+        '<div style="background:rgba(250,204,21,0.08);border:1px solid rgba(250,204,21,0.3);border-radius:12px;padding:14px;margin-bottom:0">' +
+        '<div style="font-size:10px;color:var(--gold);font-weight:700;letter-spacing:2px;margin-bottom:6px">🟢 正在展示中</div>' +
+        '<div style="font-size:14px;font-weight:800;color:#fff;margin-bottom:6px">' + (j.announcement.title || '') + '</div>' +
+        (j.announcement.desc ? '<div style="font-size:12px;color:#cbd5e1;line-height:1.6;margin-bottom:6px">' + j.announcement.desc + '</div>' : '') +
+        (j.announcement.link ? '<div style="font-size:11px;color:var(--primary-glow)">→ 点击跳转到：' + j.announcement.link + '</div>' : '<div style="font-size:11px;color:#94a3b8">无跳转</div>') +
+        '<div style="font-size:10px;color:#94a3b8;margin-top:8px">发布时间：' + new Date(j.announcement.ts).toLocaleString('zh-CN') + '</div>' +
+        '</div>';
+    } else {
+      annBox.innerHTML = '<div style="background:rgba(255,255,255,0.03);border:1px dashed rgba(255,255,255,0.1);border-radius:12px;padding:14px;text-align:center;color:#94a3b8;font-size:12px">⚪ 当前没有正在展示的公告</div>';
+    }
+  }
   var list = document.getElementById('adminSoldList');
   var sold = j.sold || {};
   var h = '';
