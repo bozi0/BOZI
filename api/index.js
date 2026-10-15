@@ -97,6 +97,18 @@ function generateOrderNo(deviceName, versionStr, colorName){
   return arr.join('');
 }
 /* ========== 订单号生成系统结束 ========== */
+/* ========== 防刷单 ========== */
+async function checkRateLimit(ip, action, limit, windowSec) {
+  const now = Date.now();
+  const windowKey = Math.floor(now / (windowSec * 1000));
+  const key = ['ratelimit', action, ip, windowKey];
+  const entry = await kv.get(key);
+  const count = entry.value || 0;
+  if (count >= limit) return false;
+  await kv.set(key, count + 1, { expireIn: windowSec * 1000 });
+  return true;
+}
+/* ========== 防刷单结束 ========== */
 
 const cors = {
   'Access-Control-Allow-Origin': '*',
@@ -154,9 +166,22 @@ Deno.serve(async (req) => {
 
   // ===== 验证订单 =====
     // ===== 生成订单号（由服务端签发） =====
-  if (url.pathname === '/generate-order' && req.method === 'POST') {
+   if (url.pathname === '/generate-order' && req.method === 'POST') {
     try {
-      const { device, version, color } = await req.json();
+      const ip = (req.headers.get('x-forwarded-for') || '').split(',')[0].trim()
+              || req.headers.get('x-real-ip')
+              || 'unknown';
+
+      const allowed = await checkRateLimit(ip, 'order', 5, 60);
+      if (!allowed) {
+        return json({ ok: false, error: 'too many requests' }, 429);
+      }
+
+      const { device, version, color, hp } = await req.json();
+
+      if (hp) {
+        return json({ ok: false, error: 'bot detected' }, 403);
+      }
       if (!device || !version || !color) {
         return json({ ok: false, error: 'missing fields' }, 400);
       }
