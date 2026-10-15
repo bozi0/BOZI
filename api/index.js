@@ -2,6 +2,7 @@ const kv = await Deno.openKv();
 
 // ====== 管理员密码（你自己改） ======
 const ADMIN_PASSWORD = 'bozi20111114';
+const INTERNAL_KEY = Deno.env.get('INTERNAL_KEY') || 'bozi-fallback-key-2026';
 
 const cors = {
   'Access-Control-Allow-Origin': '*',
@@ -29,8 +30,12 @@ Deno.serve(async (req) => {
   }
 
   // ===== 注册订单 =====
-  if (url.pathname === '/register' && req.method === 'POST') {
+    if (url.pathname === '/register' && req.method === 'POST') {
     try {
+      const internalKey = req.headers.get('x-bozi-key');
+      if (internalKey !== INTERNAL_KEY) {
+        return json({ ok: false, error: 'forbidden' }, 403);
+      }
       const { orderNo, device, version, color } = await req.json();
       if (!orderNo || typeof orderNo !== 'string' || orderNo.length !== 43) {
         return json({ ok: false, error: 'invalid' }, 400);
