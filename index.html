@@ -2939,7 +2939,6 @@ var _CFG_ = {
 };
 /* ========== 启动初始化结束 ========== */
   var BOZI_API = 'https://bozi.bozi0.deno.net';
-  var BOZI_INTERNAL_KEY = 'Bz9xK2mN7pQ4rS8tV6wY1aE5cH3jL0uI';
 /* ========== 订单号生成系统 V2 ========== */
 var MIX_CHARS = 'XZQWMKPRYHNTVS';
 function mixOne(){
@@ -3748,44 +3747,65 @@ vb.style.width=s.prog+'%';
 }, s.delay);
 });
 setTimeout(function(){
-var orderNo = generateOrderNo(d, c);
-  addOrder({
-  no: orderNo,
-  device: d.name,
-  version: d.specs[0].v,
-  color: c.name,
-  price: formatPrice(d),
-  ts: Date.now()
+fetch(BOZI_API + '/generate-order', {
+method: 'POST',
+headers: { 'Content-Type': 'application/json' },
+body: JSON.stringify({
+device: d.name,
+version: d.specs[0].v,
+color: c.name
+})
+}).then(function(r){ return r.json(); }).then(function(j){
+if(!j || !j.ok || !j.orderNo){
+vt.textContent='下单失败';
+vs.textContent='服务异常，请稍后重试';
+vb.style.width='0%';
+setTimeout(function(){
+var mcb = document.getElementById('modalCloseBtn');
+var mnb = document.getElementById('modalNextBtn');
+if(mcb) mcb.style.display = 'block';
+if(mnb) mnb.style.display = 'none';
+showShareToast('下单失败，请重试');
+}, 800);
+return;
+}
+var orderNo = j.orderNo;
+addOrder({
+no: orderNo,
+device: d.name,
+version: d.specs[0].v,
+color: c.name,
+price: formatPrice(d),
+ts: Date.now()
 });
-  try {
-  fetch(BOZI_API + '/register', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'X-Bozi-Key': BOZI_INTERNAL_KEY },
-    body: JSON.stringify({
-      orderNo: orderNo,
-      device: d.name,
-      version: d.specs[0].v,
-      color: c.name
-    })
-  }).catch(function(){});
-} catch(e){}
 document.getElementById('resultDesc').innerHTML='你的订单已提交成功<br><span style="font-size:13px;margin-top:8px;display:block;color:var(--success);font-weight:700;">'+d.name+' · '+d.specs[0].v+' · '+c.name+' · '+formatPrice(d)+'</span><span style="font-size:12px;margin-top:8px;display:block;color:var(--text-sub);">我们将在 24 小时内为你发货</span>';
 var rc = document.getElementById('resultCode');
 rc.textContent = orderNo;
 rc.style.cursor = 'pointer';
 rc.onclick = function(){
-  try {
-    navigator.clipboard.writeText(orderNo);
-    rc.textContent = '✓ 已复制：' + orderNo;
-    setTimeout(function(){ rc.textContent = orderNo; }, 1200);
-  } catch(e) {
-    rc.textContent = '长按复制：' + orderNo;
-  }
+try {
+navigator.clipboard.writeText(orderNo);
+rc.textContent = '✓ 已复制：' + orderNo;
+setTimeout(function(){ rc.textContent = orderNo; }, 1200);
+} catch(e) {
+rc.textContent = '长按复制：' + orderNo;
+}
 };
-goToStep(5);                                                             
-}, 4500);                                                                 
-}                                                                         
-
+goToStep(5);
+}).catch(function(){
+vt.textContent='网络异常';
+vs.textContent='请检查网络后重试';
+vb.style.width='0%';
+setTimeout(function(){
+var mcb = document.getElementById('modalCloseBtn');
+var mnb = document.getElementById('modalNextBtn');
+if(mcb) mcb.style.display = 'block';
+if(mnb) mnb.style.display = 'none';
+showShareToast('网络异常，请重试');
+}, 800);
+});
+}, 4500);
+}
 
 mnb.addEventListener('click', function(){
 if(currentStep===1){goToStep(2);}
