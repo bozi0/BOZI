@@ -7,7 +7,7 @@ const INTERNAL_KEY = Deno.env.get('INTERNAL_KEY') || 'bozi-fallback-key-2026';
 const cors = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type',
+ 'Access-Control-Allow-Headers': 'Content-Type, X-Bozi-Key',
 };
 
 function json(data, status = 200) {
