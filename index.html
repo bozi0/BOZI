@@ -4487,7 +4487,9 @@ var adminOrders = [];
 function adminLogin(){
   var pwd = document.getElementById('adminPwd').value.trim();
   if(!pwd){ showShareToast('请输入密码'); return; }
-  fetch(BOZI_API + '/admin/stats?pwd=' + encodeURIComponent(pwd))
+    fetch(BOZI_API + '/admin/stats', {
+    headers: { 'X-Admin-Pwd': pwd }
+  })
     .then(function(r){ return r.json(); })
     .then(function(j){
       if(j && j.ok){
@@ -4532,7 +4534,9 @@ function renderAdminStats(j){
 }
 
 function loadAdminOrders(){
-  fetch(BOZI_API + '/admin/orders?pwd=' + encodeURIComponent(ADMIN_PWD))
+    fetch(BOZI_API + '/admin/orders', {
+    headers: { 'X-Admin-Pwd': ADMIN_PWD }
+  })
     .then(function(r){ return r.json(); })
     .then(function(j){
       if(!j || !j.ok) return;
@@ -4560,8 +4564,8 @@ function adminPublish(){
   if(!title){ showShareToast('请输入公告标题'); return; }
   fetch(BOZI_API + '/admin/publish', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ pwd: ADMIN_PWD, title: title, desc: desc, link: link })
+   headers: { 'Content-Type': 'application/json', 'X-Admin-Pwd': ADMIN_PWD },
+    body: JSON.stringify({ title: title, desc: desc, link: link })
   }).then(function(r){ return r.json(); }).then(function(j){
     if(j && j.ok){
       showShareToast('✓ 公告已发布');
@@ -4569,7 +4573,9 @@ function adminPublish(){
       document.getElementById('amDescInput').value = '';
       document.getElementById('amLinkInput').value = '';
       // 重新拉取数据刷新状态
-      fetch(BOZI_API + '/admin/stats?pwd=' + encodeURIComponent(ADMIN_PWD))
+           fetch(BOZI_API + '/admin/stats', {
+        headers: { 'X-Admin-Pwd': ADMIN_PWD }
+      })
         .then(function(r){ return r.json(); })
         .then(function(stats){ if(stats && stats.ok) renderAdminStats(stats); })
         .catch(function(){});
@@ -4580,15 +4586,18 @@ function adminPublish(){
 }
 
 function adminCloseAnnounce(){
-  fetch(BOZI_API + '/admin/close-announcement', {
+    fetch(BOZI_API + '/admin/close-announcement', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ pwd: ADMIN_PWD })
+    headers: { 'Content-Type': 'application/json', 'X-Admin-Pwd': ADMIN_PWD },
+    body: JSON.stringify({})
+  })
   }).then(function(r){ return r.json(); }).then(function(j){
     if(j && j.ok){
       showShareToast('✓ 公告已关闭');
       // 重新拉取数据刷新状态
-      fetch(BOZI_API + '/admin/stats?pwd=' + encodeURIComponent(ADMIN_PWD))
+           fetch(BOZI_API + '/admin/stats', {
+        headers: { 'X-Admin-Pwd': ADMIN_PWD }
+      })
         .then(function(r){ return r.json(); })
         .then(function(stats){ if(stats && stats.ok) renderAdminStats(stats); })
         .catch(function(){});
@@ -4638,10 +4647,7 @@ function adminLogout(){
   document.getElementById('adminLogoutBtn').addEventListener('click', adminLogout);
 
   // 检测 URL 参数进入后台
-  if(window.location.search.indexOf('admin=1') > -1){
-    setTimeout(function(){ showView('page-admin'); }, 500);
-  }
-
+  
   // sessionStorage 自动登录
   try {
     var savedPwd = sessionStorage.getItem('bozi_admin_pwd');
