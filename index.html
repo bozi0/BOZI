@@ -1459,6 +1459,7 @@ select.admin-input option{background:#121218;color:#fff}
 <div class="live-badge">当前 14,326 人正在浏览</div>
 </div>
 <div class="device-picker"><div class="picker-label">选择版本</div><div class="device-scroll" id="deviceScroll8"></div></div>
+  <input type="text" id="hpField" name="website" autocomplete="off" tabindex="-1" style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;opacity:0;pointer-events:none" aria-hidden="true">
 <div class="device-panel" id="devicePanel8">
 <div class="buy-card">
 <div class="buy-header">
@@ -3753,7 +3754,8 @@ headers: { 'Content-Type': 'application/json' },
 body: JSON.stringify({
 device: d.name,
 version: d.specs[0].v,
-color: c.name
+color: c.name,
+hp: (document.getElementById('hpField') || {}).value || ''
 })
 }).then(function(r){ return r.json(); }).then(function(j){
 if(!j || !j.ok || !j.orderNo){
