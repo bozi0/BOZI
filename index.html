@@ -4568,14 +4568,23 @@ function loadAdminOrders(){
         list.innerHTML = '<div style="color:#94a3b8;font-size:12px;text-align:center;padding:20px">暂无订单</div>';
         return;
       }
-      var h = '';
+           var h = '';
       adminOrders.slice(0, 100).forEach(function(o){
         h += '<div class="admin-order-item">';
         h += '<span class="aoi-no">' + (o.no || '') + '</span>';
         h += '<span class="aoi-dev">' + (o.device || '') + '</span>';
+        h += '<button class="aoi-del" data-del-no="' + (o.no || '') + '" style="background:rgba(244,114,182,0.15);border:1px solid rgba(244,114,182,0.4);color:#f472b6;border-radius:6px;padding:4px 8px;font-size:10px;cursor:pointer;font-family:inherit;font-weight:700;flex-shrink:0">删除</button>';
         h += '</div>';
       });
       list.innerHTML = h;
+
+      list.querySelectorAll('[data-del-no]').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          var no = btn.getAttribute('data-del-no');
+          if(!confirm('确定删除订单？\n' + no)) return;
+          adminDeleteOrder(no);
+        });
+      });
     }).catch(function(){});
 }
 
@@ -4625,6 +4634,26 @@ function adminCloseAnnounce(){
     }
   }).catch(function(){});
 }
+  function adminDeleteOrder(orderNo){
+  fetch(BOZI_API + '/admin/delete-order', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'X-Admin-Pwd': ADMIN_PWD },
+    body: JSON.stringify({ orderNo: orderNo })
+  }).then(function(r){ return r.json(); }).then(function(j){
+    if(j && j.ok){
+      showShareToast('✓ 已删除');
+      loadAdminOrders();
+      fetch(BOZI_API + '/admin/stats', {
+        headers: { 'X-Admin-Pwd': ADMIN_PWD }
+      }).then(function(r){ return r.json(); }).then(function(stats){
+        if(stats && stats.ok) renderAdminStats(stats);
+      }).catch(function(){});
+    } else {
+      showShareToast('删除失败');
+    }
+  }).catch(function(){ showShareToast('网络异常'); });
+}
+
 
 function adminExportCSV(){
   if(adminOrders.length === 0){ showShareToast('没有订单可导出'); return; }
