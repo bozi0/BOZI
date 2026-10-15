@@ -3159,7 +3159,7 @@ function renderOrders(){
     var nosToCheck = arr.slice(0, 20).map(function(o){ return o.no; });
     (function syncCloud(){
       var tasks = nosToCheck.map(function(no){
-              return fetch(BOZI_API + '/verify', {
+        return fetch(BOZI_API + '/verify', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ orderNo: no })
@@ -3402,7 +3402,7 @@ function bindQueryUI(){
       fetch(BOZI_API + '/verify', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-         body: JSON.stringify({ orderNo: res.no })
+        body: JSON.stringify({ orderNo: res.no })
       }).then(function(r){
         return r.json();
       }).then(function(j){
@@ -3813,7 +3813,8 @@ setTimeout(function(){
 fetch(BOZI_API + '/generate-order', {
 method: 'POST',
 headers: { 'Content-Type': 'application/json' },
-
+body: JSON.stringify({
+device: d.name,body: JSON.stringify({
 device: d.name,
 version: d.specs[0].v,
 color: c.name,
@@ -4519,7 +4520,7 @@ var HOME_MATRIX = [
     fetch(BOZI_API + '/track/visit', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-       ts: Date.now() })
+      body: JSON.stringify({ ts: Date.now() })
     }).catch(function(){});
   } catch(e){}
 })();
@@ -4659,7 +4660,7 @@ function adminPublish(){
   fetch(BOZI_API + '/admin/publish', {
     method: 'POST',
    headers: { 'Content-Type': 'application/json', 'X-Admin-Pwd': ADMIN_PWD },
-     title: title, desc: desc, link: link })
+    body: JSON.stringify({ title: title, desc: desc, link: link })
   }).then(function(r){ return r.json(); }).then(function(j){
     if(j && j.ok){
       showShareToast('✓ 公告已发布');
@@ -4683,7 +4684,7 @@ function adminCloseAnnounce(){
     fetch(BOZI_API + '/admin/close-announcement', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'X-Admin-Pwd': ADMIN_PWD },
-       })
+       body: JSON.stringify({})
   }).then(function(r){ return r.json(); }).then(function(j){
     if(j && j.ok){
       showShareToast('✓ 公告已关闭');
@@ -4701,7 +4702,7 @@ function adminCloseAnnounce(){
   fetch(BOZI_API + '/admin/delete-order', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'X-Admin-Pwd': ADMIN_PWD },
-     orderNo: orderNo })
+    body: JSON.stringify({ orderNo: orderNo })
   }).then(function(r){ return r.json(); }).then(function(j){
     if(j && j.ok){
       showShareToast('✓ 已删除');
@@ -4845,7 +4846,7 @@ function adminLogout(){
     fetch(BOZI_API + '/track/visit', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-       ts: Date.now() })
+      body: JSON.stringify({ ts: Date.now() })
     }).catch(function(){});
   } catch(e){}
 })();
