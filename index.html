@@ -3119,6 +3119,31 @@ function renderOrders(){
 
   var arr = loadOrders();
   countEl.textContent = arr.length;
+    // 云端同步：检测本地订单在云端是否还存在
+  if(arr.length > 0){
+    var nosToCheck = arr.slice(0, 20).map(function(o){ return o.no; });
+    (function syncCloud(){
+      var tasks = nosToCheck.map(function(no){
+        return fetch(BOZI_API + '/verify', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ orderNo: no })
+        }).then(function(r){ return r.json(); }).then(function(j){
+          return { no: no, exists: j && j.ok && j.registered === true };
+        }).catch(function(){
+          return { no: no, exists: true };
+        });
+      });
+      Promise.all(tasks).then(function(results){
+        var removed = results.filter(function(r){ return !r.exists; });
+        if(removed.length === 0) return;
+        var nosToRemove = removed.map(function(r){ return r.no; });
+        var newArr = loadOrders().filter(function(o){ return nosToRemove.indexOf(o.no) === -1; });
+        saveOrders(newArr);
+        showShareToast('已同步：' + removed.length + ' 条订单已失效');
+      });
+    })();
+  }
 
   if(arr.length === 0){
     list.innerHTML = '';
