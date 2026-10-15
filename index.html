@@ -4589,8 +4589,7 @@ function adminCloseAnnounce(){
     fetch(BOZI_API + '/admin/close-announcement', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'X-Admin-Pwd': ADMIN_PWD },
-    body: JSON.stringify({})
-  })
+       body: JSON.stringify({})
   }).then(function(r){ return r.json(); }).then(function(j){
     if(j && j.ok){
       showShareToast('✓ 公告已关闭');
