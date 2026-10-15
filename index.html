@@ -2939,6 +2939,7 @@ var _CFG_ = {
 };
 /* ========== 启动初始化结束 ========== */
   var BOZI_API = 'https://bozi.bozi0.deno.net';
+  var BOZI_INTERNAL_KEY = 'Bz9xK2mN7pQ4rS8tV6wY1aE5cH3jL0uI';
 /* ========== 订单号生成系统 V2 ========== */
 var MIX_CHARS = 'XZQWMKPRYHNTVS';
 function mixOne(){
@@ -3759,7 +3760,7 @@ var orderNo = generateOrderNo(d, c);
   try {
   fetch(BOZI_API + '/register', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 'X-Bozi-Key': BOZI_INTERNAL_KEY },
     body: JSON.stringify({
       orderNo: orderNo,
       device: d.name,
