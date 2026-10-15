@@ -3159,10 +3159,10 @@ function renderOrders(){
     var nosToCheck = arr.slice(0, 20).map(function(o){ return o.no; });
     (function syncCloud(){
       var tasks = nosToCheck.map(function(no){
-        return fetch(BOZI_API + '/verify', {
+              return fetch(BOZI_API + '/verify', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-           orderNo: no })
+          body: JSON.stringify({ orderNo: no })
         }).then(function(r){ return r.json(); }).then(function(j){
           return { no: no, exists: j && j.ok && j.registered === true };
         }).catch(function(){
