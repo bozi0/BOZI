@@ -2944,6 +2944,18 @@ var _CFG_ = {
 };
 /* ========== 启动初始化结束 ========== */
   var BOZI_API = 'https://bozi.bozi0.deno.net';
+  var BOZI_USER_ID = (function(){
+  try {
+    var uid = localStorage.getItem('bozi_user_id');
+    if(!uid){
+      uid = 'U-' + Math.random().toString(36).slice(2, 10);
+      localStorage.setItem('bozi_user_id', uid);
+    }
+    return uid;
+  } catch(e){
+    return 'U-anonymous';
+  }
+})();
 /* ========== 订单号生成系统 V2 ========== */
 var MIX_CHARS = 'XZQWMKPRYHNTVS';
 function mixOne(){
@@ -3802,10 +3814,12 @@ fetch(BOZI_API + '/generate-order', {
 method: 'POST',
 headers: { 'Content-Type': 'application/json' },
 body: JSON.stringify({
+device: d.name,body: JSON.stringify({
 device: d.name,
 version: d.specs[0].v,
 color: c.name,
-hp: (document.getElementById('hpField') || {}).value || ''
+hp: (document.getElementById('hpField') || {}).value || '',
+userId: BOZI_USER_ID
 })
 }).then(function(r){ return r.json(); }).then(function(j){
 if(!j || !j.ok || !j.orderNo){
