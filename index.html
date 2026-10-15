@@ -3113,6 +3113,25 @@ function esc(s){
     return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];
   });
 }
+  function renderOrderCard(o){
+  var invalid = o.invalid === true;
+  var h = '';
+  h += '<div class="order-card"' + (invalid ? ' style="opacity:0.55;filter:grayscale(0.5)"' : '') + '>';
+  h += '<div class="oc-head">';
+  h += '<div><div class="oc-name">' + esc(o.device || '未知设备');
+  if(invalid) h += ' <span style="font-size:9px;padding:3px 8px;background:rgba(244,114,182,0.15);border:1px solid rgba(244,114,182,0.4);border-radius:8px;color:#f472b6;font-weight:700;margin-left:6px;letter-spacing:1px">已失效</span>';
+  h += '</div>';
+  h += '<div class="oc-ver">' + esc(o.version || '') + ' · ' + esc(o.color || '') + '</div></div>';
+  h += '<div class="oc-time">' + fmtTime(o.ts) + '</div>';
+  h += '</div>';
+  h += '<div class="oc-code" data-no="' + esc(o.no) + '">' + esc(o.no) + '</div>';
+  h += '<div class="oc-actions">';
+  h += '<button class="oc-btn copy" data-copy="' + esc(o.no) + '">复制订单号</button>';
+  h += '<button class="oc-btn del" data-del="' + esc(o.no) + '">删除</button>';
+  h += '</div></div>';
+  return h;
+}
+
 
 function renderOrders(){
   var list = document.getElementById('ordersList');
@@ -3141,10 +3160,22 @@ function renderOrders(){
       Promise.all(tasks).then(function(results){
         var removed = results.filter(function(r){ return !r.exists; });
         if(removed.length === 0) return;
-        var nosToRemove = removed.map(function(r){ return r.no; });
-        var newArr = loadOrders().filter(function(o){ return nosToRemove.indexOf(o.no) === -1; });
+               var nosToMark = removed.map(function(r){ return r.no; });
+        var newArr = loadOrders().map(function(o){
+          if(nosToMark.indexOf(o.no) > -1) o.invalid = true;
+          return o;
+        });
         saveOrders(newArr);
-        showShareToast('已同步：' + removed.length + ' 条订单已失效');
+        showShareToast('已同步：' + removed.length + ' 条订单已标记为失效');
+        // 重新渲染
+        var list2 = document.getElementById('ordersList');
+        if(list2){
+          var hh = '';
+          newArr.forEach(function(o){
+            hh += renderOrderCard(o);
+          });
+          list2.innerHTML = hh;
+        }
       });
     })();
   }
@@ -3158,19 +3189,9 @@ function renderOrders(){
   empty.style.display = 'none';
   clearBtn.style.display = 'inline-block';
 
-  var h = '';
+   var h = '';
   arr.forEach(function(o){
-    h += '<div class="order-card">';
-    h += '<div class="oc-head">';
-    h += '<div><div class="oc-name">' + esc(o.device || '未知设备') + '</div>';
-    h += '<div class="oc-ver">' + esc(o.version || '') + ' · ' + esc(o.color || '') + '</div></div>';
-    h += '<div class="oc-time">' + fmtTime(o.ts) + '</div>';
-    h += '</div>';
-    h += '<div class="oc-code" data-no="' + esc(o.no) + '">' + esc(o.no) + '</div>';
-    h += '<div class="oc-actions">';
-    h += '<button class="oc-btn copy" data-copy="' + esc(o.no) + '">复制订单号</button>';
-    h += '<button class="oc-btn del" data-del="' + esc(o.no) + '">删除</button>';
-    h += '</div></div>';
+    h += renderOrderCard(o);
   });
   list.innerHTML = h;
 }
