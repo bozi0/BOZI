@@ -2318,6 +2318,10 @@ select.admin-input option{background:#121218;color:#fff}
 <button id="adminLoginBtn">进入后台</button>
 </div>
 <div class="admin-panel" id="adminPanel">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+<div style="font-size:12px;color:var(--text-sub);letter-spacing:1px" id="adminLastRefresh">数据加载中...</div>
+<button id="adminRefreshBtn" style="background:rgba(139,92,246,0.15);border:1px solid rgba(167,139,250,0.4);color:var(--primary-glow);border-radius:10px;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit">🔄 刷新</button>
+</div>
 <div class="admin-stats">
 <div class="admin-stat"><div class="as-num" id="asVisitsToday">0</div><div class="as-lbl">今日访问</div></div>
 <div class="admin-stat"><div class="as-num" id="asVisitsTotal">0</div><div class="as-lbl">总访问</div></div>
@@ -4700,6 +4704,55 @@ function adminExportCSV(){
   setTimeout(function(){ URL.revokeObjectURL(url); }, 1500);
   showShareToast('✓ CSV 已下载');
 }
+  function adminRefreshAll(){
+  if(!ADMIN_PWD) return;
+  Promise.all([
+    fetch(BOZI_API + '/admin/stats', {
+      headers: { 'X-Admin-Pwd': ADMIN_PWD }
+    }).then(function(r){ return r.json(); }),
+    fetch(BOZI_API + '/admin/orders', {
+      headers: { 'X-Admin-Pwd': ADMIN_PWD }
+    }).then(function(r){ return r.json(); })
+  ]).then(function(results){
+    var stats = results[0], ordersData = results[1];
+    if(stats && stats.ok) renderAdminStats(stats);
+    if(ordersData && ordersData.ok){
+      adminOrders = ordersData.orders || [];
+      var list = document.getElementById('adminOrdersList');
+      if(list){
+        if(adminOrders.length === 0){
+          list.innerHTML = '<div style="color:#94a3b8;font-size:12px;text-align:center;padding:20px">暂无订单</div>';
+        } else {
+          var h = '';
+          adminOrders.slice(0, 100).forEach(function(o){
+            h += '<div class="admin-order-item">';
+            h += '<span class="aoi-no">' + (o.no || '') + '</span>';
+            h += '<span class="aoi-dev">' + (o.device || '') + '</span>';
+            h += '<button class="aoi-del" data-del-no="' + (o.no || '') + '" style="background:rgba(244,114,182,0.15);border:1px solid rgba(244,114,182,0.4);color:#f472b6;border-radius:6px;padding:4px 8px;font-size:10px;cursor:pointer;font-family:inherit;font-weight:700;flex-shrink:0">删除</button>';
+            h += '</div>';
+          });
+          list.innerHTML = h;
+          list.querySelectorAll('[data-del-no]').forEach(function(btn){
+            btn.addEventListener('click', function(){
+              var no = btn.getAttribute('data-del-no');
+              if(!confirm('确定删除订单？\n' + no)) return;
+              adminDeleteOrder(no);
+            });
+          });
+        }
+      }
+    }
+    var timeEl = document.getElementById('adminLastRefresh');
+    if(timeEl){
+      var now = new Date();
+      timeEl.textContent = '最后刷新：' + 
+        String(now.getHours()).padStart(2,'0') + ':' + 
+        String(now.getMinutes()).padStart(2,'0') + ':' + 
+        String(now.getSeconds()).padStart(2,'0');
+    }
+  }).catch(function(){});
+}
+
 
 function adminLogout(){
   ADMIN_PWD = '';
@@ -4720,6 +4773,16 @@ function adminLogout(){
   document.getElementById('amCloseAnnounceBtn').addEventListener('click', adminCloseAnnounce);
   document.getElementById('adminExportBtn').addEventListener('click', adminExportCSV);
   document.getElementById('adminLogoutBtn').addEventListener('click', adminLogout);
+    var rfb = document.getElementById('adminRefreshBtn');
+  if(rfb) rfb.addEventListener('click', adminRefreshAll);
+
+  // 每 30 秒自动刷新（只在后台页面激活时）
+  setInterval(function(){
+    var adminPage = document.getElementById('page-admin');
+    if(adminPage && adminPage.classList.contains('active') && ADMIN_PWD){
+      adminRefreshAll();
+    }
+  }, 30000);
 
   // 检测 URL 参数进入后台
   
