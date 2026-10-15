@@ -1,13 +1,13 @@
 const kv = await Deno.openKv();
 
 // ====== 管理员密码（你自己改） ======
-const ADMIN_PASSWORD = 'bozi20111114';
+const ADMIN_PASSWORD = Deno.env.get('ADMIN_PASSWORD') || 'fallback-change-me';
 const INTERNAL_KEY = Deno.env.get('INTERNAL_KEY') || 'bozi-fallback-key-2026';
 
 const cors = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
- 'Access-Control-Allow-Headers': 'Content-Type, X-Bozi-Key',
+ 'Access-Control-Allow-Headers': 'Content-Type, X-Bozi-Key, X-Admin-Pwd',
 };
 
 function json(data, status = 200) {
@@ -112,7 +112,7 @@ Deno.serve(async (req) => {
     if (req.method === 'POST') {
       try { body = await req.json(); } catch (e) {}
     }
-    const password = url.searchParams.get('pwd') || body.pwd;
+       const password = req.headers.get('x-admin-pwd') || body.pwd;
     if (password !== ADMIN_PASSWORD) {
       return json({ ok: false, error: 'unauthorized' }, 401);
     }
