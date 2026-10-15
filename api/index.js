@@ -291,15 +291,15 @@ Deno.serve(async (req) => {
     }
 
     // 获取所有订单
-    if (url.pathname === '/admin/orders' && req.method === 'GET') {
+        if (url.pathname === '/admin/orders' && req.method === 'GET') {
       try {
         const orders = [];
-        const iter = kv.list({ prefix: ['orders'] }, { reverse: true });
+        const iter = kv.list({ prefix: ['orders'] });
         for await (const entry of iter) {
           orders.push({ no: entry.key[1], ...entry.value });
-          if (orders.length >= 500) break;
         }
-        return json({ ok: true, orders });
+        orders.sort(function(a, b){ return (b.ts || 0) - (a.ts || 0); });
+        return json({ ok: true, orders: orders.slice(0, 500) });
       } catch (e) {
         return json({ ok: false, error: 'server' }, 500);
       }
