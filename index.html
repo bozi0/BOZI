@@ -4623,6 +4623,7 @@ function loadAdminOrders(){
         h += '<div class="admin-order-item">';
         h += '<span class="aoi-no">' + (o.no || '') + '</span>';
         h += '<span class="aoi-dev">' + (o.device || '') + '</span>';
+        h += '<span class="aoi-time" style="font-size:10px;color:#94a3b8;white-space:nowrap">' + fmtAdminTime(o.ts) + '</span>';
         h += '<button class="aoi-del" data-del-no="' + (o.no || '') + '" style="background:rgba(244,114,182,0.15);border:1px solid rgba(244,114,182,0.4);color:#f472b6;border-radius:6px;padding:4px 8px;font-size:10px;cursor:pointer;font-family:inherit;font-weight:700;flex-shrink:0">删除</button>';
         h += '</div>';
       });
@@ -4683,6 +4684,13 @@ function adminCloseAnnounce(){
         .catch(function(){});
     }
   }).catch(function(){});
+}
+  function fmtAdminTime(ts){
+  if(!ts) return '';
+  var d = new Date(ts);
+  var pad = function(n){ return String(n).padStart(2,'0'); };
+  return d.getFullYear() + '-' + pad(d.getMonth()+1) + '-' + pad(d.getDate())
+       + ' ' + pad(d.getHours()) + ':' + pad(d.getMinutes());
 }
   function adminDeleteOrder(orderNo){
   fetch(BOZI_API + '/admin/delete-order', {
@@ -4749,6 +4757,7 @@ function adminExportCSV(){
             h += '<div class="admin-order-item">';
             h += '<span class="aoi-no">' + (o.no || '') + '</span>';
             h += '<span class="aoi-dev">' + (o.device || '') + '</span>';
+            h += '<span class="aoi-time" style="font-size:10px;color:#94a3b8;white-space:nowrap">' + fmtAdminTime(o.ts) + '</span>';
             h += '<button class="aoi-del" data-del-no="' + (o.no || '') + '" style="background:rgba(244,114,182,0.15);border:1px solid rgba(244,114,182,0.4);color:#f472b6;border-radius:6px;padding:4px 8px;font-size:10px;cursor:pointer;font-family:inherit;font-weight:700;flex-shrink:0">删除</button>';
             h += '</div>';
           });
