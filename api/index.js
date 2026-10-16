@@ -111,7 +111,7 @@ async function checkRateLimit(ip, action, limit, windowSec) {
 /* ========== 防刷单结束 ========== */
 
 const cors = {
-  'Access-Control-Allow-Origin': '*',
+ 'Access-Control-Allow-Origin': 'https://bozi0.github.io',
   'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
  'Access-Control-Allow-Headers': 'Content-Type, X-Bozi-Key, X-Admin-Pwd',
 };
