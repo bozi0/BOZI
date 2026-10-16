@@ -141,9 +141,9 @@ Deno.serve(async (req) => {
     // ===== 生成订单号（由服务端签发） =====
    if (url.pathname === '/generate-order' && req.method === 'POST') {
     try {
-      const ip = (req.headers.get('x-forwarded-for') || '').split(',')[0].trim()
-              || req.headers.get('x-real-ip')
-              || 'unknown';
+            const xff = req.headers.get('x-forwarded-for') || '';
+      const parts = xff.split(',').map(function(s){ return s.trim(); }).filter(Boolean);
+      const ip = parts.length > 0 ? parts[parts.length - 1] : 'unknown';
 
       const allowed = await checkRateLimit(ip, 'order', 5, 60);
       if (!allowed) {
