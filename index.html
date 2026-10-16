@@ -2360,6 +2360,7 @@ select.admin-input option{background:#121218;color:#fff}
 <div class="admin-section">
 <div class="as-title">📦 最近订单</div>
 <button class="admin-btn secondary" id="adminExportBtn">导出 CSV</button>
+  <button class="admin-btn danger" id="adminDeleteAllBtn" style="margin-top:8px">⚠️ 删除所有订单</button>
 <div class="admin-orders" id="adminOrdersList">加载中...</div>
 </div>
 <button class="admin-btn danger" id="adminLogoutBtn" style="margin-top:16px">退出登录</button>
@@ -4802,6 +4803,32 @@ function adminLogout(){
   document.getElementById('amPublishBtn').addEventListener('click', adminPublish);
   document.getElementById('amCloseAnnounceBtn').addEventListener('click', adminCloseAnnounce);
   document.getElementById('adminExportBtn').addEventListener('click', adminExportCSV);
+    var delAllBtn = document.getElementById('adminDeleteAllBtn');
+  if(delAllBtn){
+    delAllBtn.addEventListener('click', function(){
+      var confirm1 = confirm('⚠️ 警告：这会删除【所有订单】！\n\n共 ' + adminOrders.length + ' 条订单。\n\n此操作不可恢复。是否继续？');
+      if(!confirm1) return;
+      var confirm2 = prompt('请输入「DELETE ALL」以确认（全部大写，中间一个空格）');
+      if(confirm2 !== 'DELETE ALL'){
+        showShareToast('已取消');
+        return;
+      }
+      fetch(BOZI_API + '/admin/delete-all-orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-Admin-Pwd': ADMIN_PWD },
+        body: JSON.stringify({})
+      }).then(function(r){ return r.json(); }).then(function(j){
+        if(j && j.ok){
+          showShareToast('✓ 已删除 ' + j.deleted + ' 条订单');
+          adminOrders = [];
+          loadAdminOrders();
+          adminRefreshAll();
+        } else {
+          showShareToast('删除失败');
+        }
+      }).catch(function(){ showShareToast('网络异常'); });
+    });
+  }
   document.getElementById('adminLogoutBtn').addEventListener('click', adminLogout);
     var rfb = document.getElementById('adminRefreshBtn');
   if(rfb) rfb.addEventListener('click', adminRefreshAll);
