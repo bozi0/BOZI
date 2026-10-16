@@ -123,7 +123,7 @@ function json(data, status = 200) {
   });
 }
 
-Deno.serve(async (req) => {
+Deno.serve(async (req, conn) => {
   const url = new URL(req.url);
 
   if (req.method === 'OPTIONS') {
@@ -141,9 +141,9 @@ Deno.serve(async (req) => {
     // ===== 生成订单号（由服务端签发） =====
    if (url.pathname === '/generate-order' && req.method === 'POST') {
     try {
-            const xff = req.headers.get('x-forwarded-for') || '';
-      const parts = xff.split(',').map(function(s){ return s.trim(); }).filter(Boolean);
-      const ip = parts.length > 0 ? parts[parts.length - 1] : 'unknown';
+                 const ip = (conn && conn.remoteAddr && conn.remoteAddr.hostname)
+                 ? conn.remoteAddr.hostname
+                 : 'unknown';
 
       const allowed = await checkRateLimit(ip, 'order', 5, 60);
       if (!allowed) {
