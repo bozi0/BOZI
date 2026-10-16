@@ -158,14 +158,14 @@ Deno.serve(async (req, conn) => {
       if (!device || !version || !color) {
         return json({ ok: false, error: 'missing fields' }, 400);
       }
-      if (!DEVICE_CODES[device]) {
+           if (!DEVICE_CODES[device]) {
         return json({ ok: false, error: 'unknown device' }, 400);
-              if (!VERSION_CODES[version]) {
+      }
+      if (!VERSION_CODES[version]) {
         return json({ ok: false, error: 'unknown version' }, 400);
       }
       if (!COLOR_CODES[color]) {
         return json({ ok: false, error: 'unknown color' }, 400);
-      }
       }
       const orderNo = generateOrderNo(device, version, color);
 
