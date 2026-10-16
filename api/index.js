@@ -306,6 +306,26 @@ Deno.serve(async (req, conn) => {
 
     // 关闭公告
         // ===== 删除订单（管理员） =====
+        // ===== 删除全部订单（危险操作） =====
+    if (url.pathname === '/admin/delete-all-orders' && req.method === 'POST') {
+      try {
+        let count = 0;
+        const iter = kv.list({ prefix: ['orders'] });
+        for await (const entry of iter) {
+          await kv.delete(entry.key);
+          count++;
+        }
+        // 清空所有销量计数
+        const devices = ['Bozi Neo8','Bozi Neo7','Bozi Neo6','Bozi Pad 2','Bozi Pad 1','Bozi Book 1','Bozi Buds 1','Bozi Watch 1','Bozi TV 1'];
+        for (const d of devices) {
+          await kv.delete(['sold', d]);
+        }
+        return json({ ok: true, deleted: count });
+      } catch (e) {
+        return json({ ok: false, error: 'server' }, 500);
+      }
+    }
+
     if (url.pathname === '/admin/delete-order' && req.method === 'POST') {
       try {
         const { orderNo } = body;
