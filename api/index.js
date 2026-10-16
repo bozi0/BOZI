@@ -135,34 +135,7 @@ Deno.serve(async (req) => {
     return new Response('Bozi API is running. 🚀', { headers: cors });
   }
 
-  // ===== 注册订单 =====
-    if (url.pathname === '/register' && req.method === 'POST') {
-    try {
-      const internalKey = req.headers.get('x-bozi-key');
-      if (internalKey !== INTERNAL_KEY) {
-        return json({ ok: false, error: 'forbidden' }, 403);
-      }
-      const { orderNo, device, version, color } = await req.json();
-      if (!orderNo || typeof orderNo !== 'string' || orderNo.length !== 43) {
-        return json({ ok: false, error: 'invalid' }, 400);
-      }
-      await kv.set(['orders', orderNo], {
-        ts: Date.now(),
-        device: device || '',
-        version: version || '',
-        color: color || '',
-      });
-      // 销量 +1
-      if (device) {
-        const soldKey = ['sold', device];
-        const entry = await kv.get(soldKey);
-        await kv.set(soldKey, (entry.value || 0) + 1);
-      }
-      return json({ ok: true });
-    } catch (e) {
-      return json({ ok: false, error: 'server' }, 500);
-    }
-  }
+ 
 
   // ===== 验证订单 =====
     // ===== 生成订单号（由服务端签发） =====
