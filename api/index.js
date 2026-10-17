@@ -89,7 +89,7 @@ function generateOrderNo(deviceName, versionStr, colorName){
     { pos: [7, 16, 28], perm: [1, 2, 0], str: cCode },
     { pos: [9, 18, 30, 37, 39, 41], perm: [3, 0, 5, 1, 4, 2], str: dateStr },
     { pos: [10, 19, 31, 38, 40, 42], perm: [5, 2, 0, 4, 1, 3], str: timeStr },
-        { pos: [2, 13, 21, 25, 29, 33, 34, 37], perm: [7, 0, 6, 1, 5, 2, 4, 3], str: rand8 },
+        { pos: [2, 13, 21, 25, 29, 33, 34, 36], perm: [7, 0, 6, 1, 5, 2, 4, 3], str: rand8 },
     { pos: [4, 22], perm: [0, 1], str: checksum }
   ];
   for(let i=0;i<data.length;i++){
@@ -120,7 +120,7 @@ async function checkRateLimit(ip, action, limit, windowSec) {
 const cors = {
  'Access-Control-Allow-Origin': 'https://bozi0.github.io',
   'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
- 'Access-Control-Allow-Headers': 'Content-Type, X-Bozi-Key, X-Admin-Pwd',
+ 'Access-Control-Allow-Headers': 'Content-Type, X-Admin-Pwd',
 };
 
 function json(data, status = 200) {
