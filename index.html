@@ -4939,57 +4939,44 @@ window.addEventListener('popstate', function(e){
   console.error('Bozi JS error:', err);
 }
 })();
-  /* ========== 魔法光标：导航滑动指示器 ========== */
+ /* ========== 极速魔法光标：导航滑动指示器 ========== */
 (function(){
   var pill = document.getElementById('navPill');
   var glider = document.getElementById('navGlider');
   if(!pill || !glider) return;
 
+  // 核心：让滑块瞬移到指定的按钮
   function setGlider(btn){
+    if(!btn) return;
     glider.style.width = btn.offsetWidth + 'px';
     glider.style.transform = 'translateX(' + btn.offsetLeft + 'px)';
+    glider.classList.add('ready');
   }
 
+  // 跟随当前激活的按钮（用于初始化或代码触发时）
   function updateNavGlider(){
     var active = pill.querySelector('button.active');
-    if(active){
-      setGlider(active);
-      glider.classList.add('ready');
-    } else {
-      glider.classList.remove('ready');
-    }
+    if(active) setGlider(active);
   }
   
   window.updateNavGlider = updateNavGlider;
 
+  // 关键改动：用户点击的瞬间，滑块立刻滑过去！不等页面动画！
   pill.addEventListener('click', function(e){
     var btn = e.target.closest('button');
     if(!btn) return;
-    requestAnimationFrame(updateNavGlider);
+    // 立即滑动，无视 300ms 的页面切换延迟
+    setGlider(btn); 
   });
 
-  if(window.MutationObserver){
-    var mo = new MutationObserver(function(muts){
-      for(var i = 0; i < muts.length; i++){
-        if(muts[i].attributeName === 'class'){ updateNavGlider(); break; }
-      }
-    });
-    var btns = pill.querySelectorAll('button');
-    for(var j = 0; j < btns.length; j++){
-      mo.observe(btns[j], { attributes: true, attributeFilter: ['class'] });
-    }
-  }
-
-  var rt = null;
+  // 监听窗口变化，重新对齐
   window.addEventListener('resize', function(){
-    clearTimeout(rt);
-    rt = setTimeout(updateNavGlider, 120);
+    updateNavGlider();
   });
-  if(document.fonts && document.fonts.ready){
-    document.fonts.ready.then(updateNavGlider);
-  }
 
-  updateNavGlider();
+  // 页面加载完后初始化
+  setTimeout(updateNavGlider, 100);
+  window.addEventListener('load', updateNavGlider);
 })();
 </script>
 </body>
