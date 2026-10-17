@@ -67,7 +67,7 @@ function getVersionCode(v){
 function generateOrderNo(deviceName, versionStr, colorName){
   const pad = n => String(n).padStart(2,'0');
     // 获取东八区（北京时间）
-  const now = new Date(Date.now() + 8 * 60 * 60 * 1000);
+    const now = new Date(Date.now() + (new Date().getTimezoneOffset() + 480) * 60000);
   const dCode = DEVICE_CODES[deviceName] || 'X00';
   const vCode = getVersionCode(versionStr);
   const cCode = COLOR_CODES[colorName] || 'CLR';
