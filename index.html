@@ -3255,7 +3255,7 @@ function parseOrderNo(rawInput){
   var cCode = _extractField(no, [7,16,28], [1,2,0]);
   var dateStr = _extractField(no, [9,18,30,37,39,41], [3,0,5,1,4,2]);
   var timeStr = _extractField(no, [10,19,31,38,40,42], [5,2,0,4,1,3]);
-  var rand4 = _extractField(no, [11,20,32,36], [2,0,3,1]);
+  var rand8 = _extractField(no, [2,13,21,25,29,33,34,36], [7,0,6,1,5,2,4,3]);
   var checksumIn = no[4] + no[22];
 
   var deviceName = _REV_DEVICE[dCode] || null;
@@ -3273,7 +3273,7 @@ function parseOrderNo(rawInput){
     };
   }
 
-  var core = dCode + vCode + cCode + dateStr + timeStr + rand4;
+  var core = dCode + vCode + cCode + dateStr + timeStr + rand8;
   var checksumCalc = calcChecksum(core);
   var pass = (checksumCalc === checksumIn);
     // ===== 合理性校验：挡住乱敲的伪造订单 =====
@@ -3318,7 +3318,7 @@ function parseOrderNo(rawInput){
     color: colorName,
     date: dateFmt,
     time: timeFmt,
-    rand: rand4,
+    rand: rand8
     checksum: checksumIn,
     checksumCalc: checksumCalc,
     pass: pass,
