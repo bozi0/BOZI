@@ -850,6 +850,20 @@ select.admin-input option{background:#121218;color:#fff}
   background: transparent !important; /* 去掉原来的背景色 */
   box-shadow: none !important;
 }
+  /* ========== 修复暗黑模式下页面切换文字闪烁/变黑 ========== */
+.page {
+  /* 强制给整个页面层垫上一个深色背景，杜绝透出底层导致混色 */
+  background-color: var(--bg-base) !important; 
+  /* 强制开启独立的 GPU 渲染层，防止退场动画时文字被重新反锯齿计算变黑 */
+  transform: translateZ(0) !important; 
+  -webkit-backface-visibility: hidden !important;
+  backface-visibility: hidden !important;
+}
+
+/* 确保在动画过程中，文字颜色绝对不被篡改 */
+.page.active, .page.fading-out {
+  color: var(--text-primary) !important;
+}
 </style>
 </head>
 <body>
