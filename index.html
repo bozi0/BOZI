@@ -792,6 +792,24 @@ select.admin-input option{background:#121218;color:#fff}
 :root[data-theme="light"] .feature-card{background:linear-gradient(160deg,rgba(250,204,21,0.12),rgba(139,92,246,0.08))}
 :root[data-theme="light"] .system-banner{background:linear-gradient(135deg,rgba(34,211,238,0.1),rgba(139,92,246,0.06))}
 :root[data-theme="light"] .history-cta{background:linear-gradient(160deg,rgba(139,92,246,0.12),rgba(244,114,182,0.06))}
+  /* ========== 封印返回键 ========== */
+.topbar .back-btn { display: none !important; }
+
+/* ========== 魔法光标（滑动指示器） ========== */
+.topbar .nav-pill { position: relative; }
+.topbar .nav-pill button { position: relative; z-index: 1; }
+.topbar .nav-pill button.active { background: transparent; color: var(--text-on-accent); box-shadow: none; }
+
+.topbar .nav-glider {
+  position: absolute; top: 4px; left: 0; z-index: 0; height: calc(100% - 8px); width: 0;
+  border-radius: var(--radius-full);
+  background: var(--accent-gradient);
+  box-shadow: 0 2px 12px rgba(124,92,255,0.5), 0 0 24px rgba(124,92,255,0.35), var(--highlight-glass);
+  pointer-events: none; opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), width 0.4s cubic-bezier(0.34,1.56,0.64,1), opacity 0.3s var(--ease-standard);
+  will-change: transform, width;
+}
+.topbar .nav-glider.ready { opacity: 1; }
 </style>
 </head>
 <body>
@@ -804,6 +822,7 @@ select.admin-input option{background:#121218;color:#fff}
 <button class="back-btn" id="backBtn" style="display:none !important" aria-hidden="true">←</button>
 <div class="brand" id="brandBtn">BOZI®</div>
 <div class="nav-pill" id="navPill">
+<div class="nav-glider" id="navGlider" aria-hidden="true"></div>
 <button id="navHome">首页</button>
 <button id="navPhone">手机</button>
 <button id="navPad">平板</button>
@@ -4879,6 +4898,58 @@ window.addEventListener('popstate', function(e){
 } catch(err) {
   console.error('Bozi JS error:', err);
 }
+})();
+  /* ========== 魔法光标：导航滑动指示器 ========== */
+(function(){
+  var pill = document.getElementById('navPill');
+  var glider = document.getElementById('navGlider');
+  if(!pill || !glider) return;
+
+  function setGlider(btn){
+    glider.style.width = btn.offsetWidth + 'px';
+    glider.style.transform = 'translateX(' + btn.offsetLeft + 'px)';
+  }
+
+  function updateNavGlider(){
+    var active = pill.querySelector('button.active');
+    if(active){
+      setGlider(active);
+      glider.classList.add('ready');
+    } else {
+      glider.classList.remove('ready');
+    }
+  }
+  
+  window.updateNavGlider = updateNavGlider;
+
+  pill.addEventListener('click', function(e){
+    var btn = e.target.closest('button');
+    if(!btn) return;
+    requestAnimationFrame(updateNavGlider);
+  });
+
+  if(window.MutationObserver){
+    var mo = new MutationObserver(function(muts){
+      for(var i = 0; i < muts.length; i++){
+        if(muts[i].attributeName === 'class'){ updateNavGlider(); break; }
+      }
+    });
+    var btns = pill.querySelectorAll('button');
+    for(var j = 0; j < btns.length; j++){
+      mo.observe(btns[j], { attributes: true, attributeFilter: ['class'] });
+    }
+  }
+
+  var rt = null;
+  window.addEventListener('resize', function(){
+    clearTimeout(rt);
+    rt = setTimeout(updateNavGlider, 120);
+  });
+  if(document.fonts && document.fonts.ready){
+    document.fonts.ready.then(updateNavGlider);
+  }
+
+  updateNavGlider();
 })();
 </script>
 </body>
