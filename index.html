@@ -810,6 +810,27 @@ select.admin-input option{background:#121218;color:#fff}
   will-change: transform, width;
 }
 .topbar .nav-glider.ready { opacity: 1; }
+  /* 强行让滑块发光，无视一切遮挡 */
+.topbar .nav-glider {
+  z-index: 99 !important; /* 极高层级，压在所有按钮上面 */
+  background: rgba(124, 92, 255, 0.4) !important; /* 半透明紫色底色 */
+  backdrop-filter: blur(8px) !important; /* 毛玻璃效果 */
+  border: 1px solid rgba(255, 255, 255, 0.3) !important; /* 极细白边 */
+  box-shadow: 0 0 15px rgba(124, 92, 255, 0.8), inset 0 0 10px rgba(255,255,255,0.2) !important;
+  opacity: 1 !important;
+}
+
+/* 确保所有按钮的背景透明，把舞台让给滑块 */
+.topbar .nav-pill button { 
+  background: transparent !important; 
+  z-index: 100 !important; /* 按钮文字在滑块上面 */
+}
+
+/* 激活状态的按钮文字变色 */
+.topbar .nav-pill button.active { 
+  color: #fff !important; 
+  font-weight: bold !important;
+}
 </style>
 </head>
 <body>
