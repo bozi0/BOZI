@@ -1,8 +1,9 @@
 const kv = await Deno.openKv();
 
 // ====== 管理员密码（你自己改） ======
-const ADMIN_PASSWORD = Deno.env.get('ADMIN_PASSWORD') || 'fallback-change-me';
-const INTERNAL_KEY = Deno.env.get('INTERNAL_KEY') || 'bozi-fallback-key-2026';
+const ADMIN_PASSWORD = Deno.env.get('ADMIN_PASSWORD');
+if (!ADMIN_PASSWORD) throw new Error('ADMIN_PASSWORD is not set');
+// INTERNAL_KEY 已废弃，直接删掉这行
 /* ========== 订单号生成系统 ========== */
 const _BOOT_ = ['Zm9', 'Kq7', 'X'];
 const _BOOT_KEY = _BOOT_.join('');
@@ -35,9 +36,10 @@ const COLOR_CODES = {
 };
 
 function mixOne(){
-  return MIX_CHARS[Math.floor(Math.random()*MIX_CHARS.length)];
+  const arr = new Uint8Array(1);
+  crypto.getRandomValues(arr);
+  return MIX_CHARS[arr[0] % MIX_CHARS.length];
 }
-
 function calcChecksum(str){
   let s = 0;
   const mix = _BOOT_KEY + str + _BOOT_KEY_REV;
@@ -70,8 +72,13 @@ function generateOrderNo(deviceName, versionStr, colorName){
   const cCode = COLOR_CODES[colorName] || 'CLR';
   const dateStr = String(now.getFullYear()).slice(-2) + pad(now.getMonth()+1) + pad(now.getDate());
   const timeStr = pad(now.getHours()) + pad(now.getMinutes()) + pad(now.getSeconds());
-  const rand4 = String(Math.floor(Math.random()*10000)).padStart(4,'0');
-  const core = dCode + vCode + cCode + dateStr + timeStr + rand4;
+    // 用 crypto 生成 8 位高熵随机串（替换原 4 位数字）
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  const randArr = new Uint8Array(8);
+  crypto.getRandomValues(randArr);
+  let rand8 = '';
+  for(let i=0;i<8;i++) rand8 += chars[randArr[i] % chars.length];
+  const core = dCode + vCode + cCode + dateStr + timeStr + rand8;
   const checksum = calcChecksum(core);
 
   const arr = new Array(43);
@@ -82,7 +89,7 @@ function generateOrderNo(deviceName, versionStr, colorName){
     { pos: [7, 16, 28], perm: [1, 2, 0], str: cCode },
     { pos: [9, 18, 30, 37, 39, 41], perm: [3, 0, 5, 1, 4, 2], str: dateStr },
     { pos: [10, 19, 31, 38, 40, 42], perm: [5, 2, 0, 4, 1, 3], str: timeStr },
-    { pos: [11, 20, 32, 36], perm: [2, 0, 3, 1], str: rand4 },
+        { pos: [2, 13, 21, 25, 29, 33, 34, 37], perm: [7, 0, 6, 1, 5, 2, 4, 3], str: rand8 },
     { pos: [4, 22], perm: [0, 1], str: checksum }
   ];
   for(let i=0;i<data.length;i++){
@@ -193,7 +200,7 @@ Deno.serve(async (req, conn) => {
       }
       const entry = await kv.get(['orders', orderNo]);
       if (entry.value) {
-        return json({ ok: true, registered: true, data: entry.value });
+       return json({ ok: true, registered: true });
       }
       return json({ ok: true, registered: false });
     } catch (e) {
@@ -203,7 +210,13 @@ Deno.serve(async (req, conn) => {
 
   // ===== 记录访问 =====
   if (url.pathname === '/track/visit' && req.method === 'POST') {
-    try {
+        try {
+      const ip = (conn && conn.remoteAddr && conn.remoteAddr.hostname) ? conn.remoteAddr.hostname : 'unknown';
+      // 新增：每 IP 每分钟最多 30 次访问上报
+      const allowed = await checkRateLimit(ip, 'visit', 30, 60);
+      if (!allowed) {
+        return json({ ok: false, error: 'too many requests' }, 429);
+      }
       const today = new Date().toISOString().slice(0, 10);
       const visitKey = ['visits', today];
       const entry = await kv.get(visitKey);
@@ -234,7 +247,11 @@ Deno.serve(async (req, conn) => {
 
   // ===== 管理接口（需密码） =====
   if (url.pathname.startsWith('/admin/')) {
-    let body = {};
+  const validAdminRoutes = ['/admin/stats', '/admin/orders', '/admin/publish', '/admin/close-announcement', '/admin/delete-order', '/admin/delete-all-orders'];
+  if (!validAdminRoutes.includes(url.pathname)) {
+    return json({ ok: false, error: 'not found' }, 404);
+  }
+  let body = {};
     if (req.method === 'POST') {
       try { body = await req.json(); } catch (e) {}
     }
