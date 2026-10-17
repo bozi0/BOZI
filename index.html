@@ -2984,7 +2984,7 @@ var COLOR_CODES = {
 '曜夜黑':'BLK','流光银':'SLV','晴空蓝':'SKY',
 '陨石灰':'MET','薄荷绿':'MNT','霞光紫':'PUR','星辰白':'WHT',
 '午夜灰':'MID','皓月白':'MWH','天青蓝':'AZR',
-'玄铁灰':'IRN','月岩银':'MSV',
+'玄铁灰':'IRN',
 '幻夜黑':'NBL','云水白':'CWD','极光紫':'AUR','松霜绿':'PGR',
 '月光银':'MSV','晨雾金':'MGD',
 '月岩银':'MRS','星霜灰':'FST'
@@ -3018,51 +3018,6 @@ var c1 = String.fromCharCode(65 + (s % 26));
 var c2 = String.fromCharCode(65 + Math.floor(s / 26) % 26);
 return c1 + c2;
 }
-function generateOrderNo(device, color){
-var pad = function(n){return String(n).padStart(2,'0');};
-var now = new Date();
-var dCode = getDeviceCode(device.name);
-var vCode = getVersionCode(device.specs[0].v);
-var cCode = getColorCode(color.name);
-var yy = String(now.getFullYear()).slice(-2);
-var mo = pad(now.getMonth()+1);
-var dd = pad(now.getDate());
-var hh = pad(now.getHours());
-var mi = pad(now.getMinutes());
-var ss = pad(now.getSeconds());
-var dateStr = yy + mo + dd;
-var timeStr = hh + mi + ss;
-var rand4 = String(Math.floor(Math.random()*10000)).padStart(4,'0');
-var core = dCode + vCode + cCode + dateStr + timeStr + rand4;
-var checksum = calcChecksum(core);
-
-var arr = new Array(43);
-arr[0] = 'B';
-
-var data = [
-  { pos: [3, 12, 24], perm: [2, 1, 0], str: dCode },
-  { pos: [5, 14, 26, 35], perm: [1, 3, 0, 2], str: vCode },
-  { pos: [7, 16, 28], perm: [1, 2, 0], str: cCode },
-  { pos: [9, 18, 30, 37, 39, 41], perm: [3, 0, 5, 1, 4, 2], str: dateStr },
-  { pos: [10, 19, 31, 38, 40, 42], perm: [5, 2, 0, 4, 1, 3], str: timeStr },
-{ pos: [2, 13, 21, 25, 29, 33, 34, 36], perm: [7, 0, 6, 1, 5, 2, 4, 3], str: rand8 },
-  { pos: [4, 22], perm: [0, 1], str: checksum }
-];
-
-for(var i=0;i<data.length;i++){
-var d = data[i];
-for(var j=0;j<d.pos.length;j++){
-arr[d.pos[j]] = d.str[d.perm[j]];
-}
-}
-
-for(var k=1;k<=42;k++){
-if(!arr[k]) arr[k] = mixOne();
-}
-
-return arr.join('');
-}
-/* ========== 订单号生成系统 V2 结束 ========== */
   /* ========== 订单历史存储 ========== */
 var ORDERS_KEY = 'bozi_orders_v1';
 var ORDERS_MAX = 100;
@@ -3262,7 +3217,7 @@ function parseOrderNo(rawInput){
   var versionName = _REV_VERSION[vCode] || null;
   var colorName = _REV_COLOR[cCode] || null;
 
-  var isTrap = (vCode === '161T' || vCode === '321T');
+  var isTrap = false; // 1TB 是真机，取消陷阱误伤
 
   if (!deviceName || !versionName || !colorName){
     return {
@@ -3400,7 +3355,7 @@ function bindQueryUI(){
         if(j && j.ok && j.registered === true){
           var ownArr = loadOrders();
           var isOwn = ownArr.some(function(o){ return o.no === res.no; });
-          var ownBadge = isOwn ? '<span class="qr-own">来自本机订单</span>' : '';
+          var ownBadge = isOwn ? '<span class="qr-own">本机存有记录</span>' : '';
           badge.className = 'qr-status ok';
           badge.innerHTML = '✅ 真单' + ownBadge;
         } else if(j && j.ok && j.registered === false){
@@ -4571,7 +4526,6 @@ function adminLogin(){
         document.getElementById('adminPanel').classList.add('show');
         renderAdminStats(j);
         loadAdminOrders();
-        try { sessionStorage.setItem('bozi_admin_pwd', pwd); } catch(e){}
       } else {
         showShareToast('密码错误');
       }
@@ -4585,15 +4539,14 @@ function renderAdminStats(j){
     var annBox = document.getElementById('currentAnnounceBox');
   if(annBox){
     if(j.announcement){
-      annBox.innerHTML =
-        '<div style="background:rgba(250,204,21,0.08);border:1px solid rgba(250,204,21,0.3);border-radius:12px;padding:14px;margin-bottom:0">' +
-        '<div style="font-size:10px;color:var(--gold);font-weight:700;letter-spacing:2px;margin-bottom:6px">🟢 正在展示中</div>' +
-        '<div style="font-size:14px;font-weight:800;color:#fff;margin-bottom:6px">' + (j.announcement.title || '') + '</div>' +
-        (j.announcement.desc ? '<div style="font-size:12px;color:#cbd5e1;line-height:1.6;margin-bottom:6px">' + j.announcement.desc + '</div>' : '') +
-        (j.announcement.link ? '<div style="font-size:11px;color:var(--primary-glow)">→ 点击跳转到：' + j.announcement.link + '</div>' : '<div style="font-size:11px;color:#94a3b8">无跳转</div>') +
-        '<div style="font-size:10px;color:#94a3b8;margin-top:8px">发布时间：' + new Date(j.announcement.ts).toLocaleString('zh-CN') + '</div>' +
-        '</div>';
-    } else {
+             annBox.innerHTML = 
+          '<div style="background:rgba(250,204,21,0.08);border:1px solid rgba(250,204,21,0.3);border-radius:12px;padding:14px;margin-bottom:0">' +
+          '<div style="font-size:10px;color:var(--gold);font-weight:700;letter-spacing:2px;margin-bottom:6px">🟢 正在展示中</div>' +
+          '<div style="font-size:14px;font-weight:800;color:#fff;margin-bottom:6px">' + esc(j.announcement.title || '') + '</div>' +
+          (j.announcement.desc ? '<div style="font-size:12px;color:#cbd5e1;line-height:1.6;margin-bottom:6px">' + esc(j.announcement.desc) + '</div>' : '') +
+          (j.announcement.link ? '<div style="font-size:11px;color:var(--primary-glow)">→ 点击跳转到：' + esc(j.announcement.link) + '</div>' : '<div style="font-size:11px;color:#94a3b8">无跳转</div>') +
+          '<div style="font-size:10px;color:#94a3b8;margin-top:8px">发布时间：' + new Date(j.announcement.ts).toLocaleString('zh-CN') + '</div>' +
+          '</div>';
       annBox.innerHTML = '<div style="background:rgba(255,255,255,0.03);border:1px dashed rgba(255,255,255,0.1);border-radius:12px;padding:14px;text-align:center;color:#94a3b8;font-size:12px">⚪ 当前没有正在展示的公告</div>';
     }
   }
@@ -4843,19 +4796,7 @@ function adminLogout(){
 
   // 检测 URL 参数进入后台
   
-  // sessionStorage 自动登录
-  try {
-    var savedPwd = sessionStorage.getItem('bozi_admin_pwd');
-    if(savedPwd){
-      document.getElementById('adminPwd').value = savedPwd;
-      setTimeout(function(){
-        if(document.querySelector('.page.active') &&
-           document.querySelector('.page.active').id === 'page-admin'){
-          adminLogin();
-        }
-      }, 800);
-    }
-  } catch(e){}
+  
 })();
 /* ========== 管理后台结束 ========== */
   /* ========== 访问追踪 ========== */
