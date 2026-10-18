@@ -85,8 +85,8 @@ body::before{content:'';position:fixed;width:150vw;height:150vh;top:-25vh;left:-
 @keyframes ripple-anim{0%{transform:translate3d(-50%,-50%,0) scale(0);opacity:1}100%{transform:translate3d(-50%,-50%,0) scale(1);opacity:0}}
 .app-container{width:100%;max-width:560px;position:relative;z-index:2;padding:40px 20px;padding-top:calc(140px + env(safe-area-inset-top));padding-bottom:calc(120px + var(--safe-bottom))}
 .page{display:none;flex-direction:column;gap:80px}
-.page.active{display:flex;animation:pageIn 0.4s ease-out}
-.page.fading-out{display:flex;animation:pageOut 0.4s ease-in forwards}
+.page.active{display:flex;animation:pageIn 0.4s cubic-bezier(0.22,1,0.36,1)}
+.page.fading-out{display:flex;animation:pageOut 0.3s linear forwards,pageFade 0.3s ease-in-out forwards}
 /* 旧的页面：向左退场，稍微缩小变暗 */
 @keyframes pageOut{
   from{opacity:1;transform:translateX(0) scale(1)}
@@ -1028,6 +1028,20 @@ select.admin-input option{background:#121218;color:#fff}
   font-weight: 800 !important;
   margin-top: auto !important;
   color: #facc15 !important; /* 金色价格 */
+}
+  /* ========== 覆盖旧的动画逻辑：解决停顿感 ========== */
+.page.active { display: flex; animation: pageIn 0.4s cubic-bezier(0.22,1,0.36,1) !important; }
+.page.fading-out { display: flex; animation: pageOut 0.3s linear forwards, pageFade 0.3s ease-in-out forwards !important; }
+
+@keyframes pageOut { from { transform: translateX(0) scale(1); } to { transform: translateX(-35%) scale(0.94); } }
+@keyframes pageFade { from { opacity: 1; } to { opacity: 0; } }
+@keyframes pageIn { from { transform: translateX(100%) scale(0.98); } to { transform: translateX(0) scale(1); } }
+
+.reveal { 
+  opacity: 0; 
+  transform: translateY(24px); 
+  transition: opacity .35s ease, transform .35s cubic-bezier(.2,.9,.3,1) !important; 
+  will-change: auto !important; /* 干掉之前的性能累赘 */
 }
 </style>
 </head>
