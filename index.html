@@ -1049,6 +1049,33 @@ select.admin-input option{background:#121218;color:#fff}
   margin-top: auto !important;
   color: #facc15 !important; /* 金色价格 */
 }
+  /* ========== 终极覆盖：强制使用 iOS 左右推拉动画 ========== */
+.page.active {
+  display: flex !important;
+  animation: pageInNew 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards !important;
+}
+
+.page.fading-out {
+  display: flex !important;
+  animation: pageOutNew 0.3s linear forwards, pageFadeNew 0.3s ease-in-out forwards !important;
+  pointer-events: none !important;
+}
+
+/* 换了新名字，防止和旧代码重名冲突 */
+@keyframes pageInNew {
+  from { transform: translateX(100%) scale(0.98); }
+  to { transform: translateX(0) scale(1); }
+}
+
+@keyframes pageOutNew {
+  from { transform: translateX(0) scale(1); }
+  to { transform: translateX(-35%) scale(0.94); }
+}
+
+@keyframes pageFadeNew {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
  
 </style>
 </head>
