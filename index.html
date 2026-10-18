@@ -1063,8 +1063,8 @@ select.admin-input option{background:#121218;color:#fff}
 
 /* 换了新名字，防止和旧代码重名冲突 */
 @keyframes pageInNew {
-  from { transform: translateX(100%) scale(0.98); }
-  to { transform: translateX(0) scale(1); }
+  from { opacity: 0; transform: translateX(40px) scale(0.98); }
+  to { opacity: 1; transform: translateX(0) scale(1); }
 }
 
 @keyframes pageOutNew {
@@ -2908,20 +2908,24 @@ function showView(id, noPush){
 var current = document.querySelector('.page.active');
 var target = document.getElementById(id);
 if(!current || current === target) return;
-if(!noPush && current){
-  pageStack.push(current.id);
-  try { history.pushState({ boziPage: current.id }, ''); } catch(e){}
-}
+if(!noPush && current) pageStack.push(id);
+
+// 1. 当前页面开始向左退场
 current.classList.add('fading-out');
 current.classList.remove('active');
-setTimeout(function(){
-current.classList.remove('fading-out');
+
+// 2. 目标页面立刻从右侧滑入（不要等待300ms，立刻同时进行！）
 target.classList.add('active');
+
 window.scrollTo({top:0, behavior:'auto'});
 updateBackBtn();
 updateNavHighlight(id);
 setTimeout(triggerReveal, 60);
-}, 300);
+
+// 3. 等新页面滑入完成后（400ms），彻底隐藏旧页面
+setTimeout(function(){
+  current.classList.remove('fading-out');
+}, 400);
 }
 
 function updateBackBtn(){
