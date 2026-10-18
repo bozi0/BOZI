@@ -864,6 +864,25 @@ select.admin-input option{background:#121218;color:#fff}
 .page.active, .page.fading-out {
   color: var(--text-primary) !important;
 }
+  /* ========== 修复光块滑动时文字“隐身”的问题 ========== */
+.topbar .nav-pill button {
+  transition: background 0.3s ease, transform 0.3s ease !important; /* 绝对不要过渡颜色 */
+  color: rgba(255, 255, 255, 0.6) !important; /* 默认文字为半透明白 */
+}
+
+.topbar .nav-pill button.active {
+  color: #ffffff !important; /* 激活态强制纯白！不要黑字！ */
+  font-weight: 800 !important;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3); /* 加一点阴影，保证在白底和紫底上都清晰 */
+}
+
+/* 如果你用的是亮色模式，再把文字强行改回黑色 */
+:root[data-theme="light"] .topbar .nav-pill button {
+  color: rgba(0, 0, 0, 0.6) !important;
+}
+:root[data-theme="light"] .topbar .nav-pill button.active {
+  color: #0a0a0f !important; 
+}
 </style>
 </head>
 <body>
