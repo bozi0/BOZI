@@ -2904,6 +2904,28 @@ var backToTop = document.getElementById('backToTop');
 var pageStack = [];
 
 function showView(id, noPush){
+  var current = document.querySelector('.page.active');
+  var target = document.getElementById(id);
+  if(!current || current === target) return;
+  
+  if(!noPush && current) pageStack.push(current.id);
+  
+  // 【新增：每次跳转页面，都往手机系统里塞一条历史记录】
+  if(!noPush) {
+    try { history.pushState({ boziView: id }, ''); } catch(e){}
+  }
+
+  current.classList.add('fading-out');
+  current.classList.remove('active');
+  setTimeout(function(){
+    current.classList.remove('fading-out');
+    target.classList.add('active');
+    window.scrollTo({top:0, behavior:'auto'});
+    updateBackBtn();
+    updateNavHighlight(id);
+    setTimeout(triggerReveal, 60);
+  }, 300);
+}
 var current = document.querySelector('.page.active');
 var target = document.getElementById(id);
 if(!current || current === target) return;
@@ -5131,7 +5153,7 @@ function __boziCloseLayerClean(name){
 }
 
 window.addEventListener('popstate', function(e){
-  if(__boziIgnorePop > 0){ __boziIgnorePop--; return; } // ← 把这行加回来
+  if(__boziIgnorePop > 0){ __boziIgnorePop--; return; }
 
   // 1. 如果有弹窗开着，按返回先关弹窗
   var mw = document.getElementById('modalWrapper');
@@ -5144,27 +5166,18 @@ window.addEventListener('popstate', function(e){
   // 2. 如果不在首页，按返回就回上一页
   var prev = pageStack.pop();
   if(prev){
-    showView(prev, true);
+    showView(prev, true); // 注意：这里传了 true，代表不重复垫砖头
   } else {
     // 3. 【救命代码】如果没上一页了，强制回首页！
     var current = document.querySelector('.page.active');
     if(current && current.id !== 'page-home'){
       showView('page-home', true);
     }
-    // 4. 【垫砖头】偷偷再塞一条历史记录，防止下一次按返回又退出了
-    history.pushState({ boziPage: 'page-home' }, '');
+    
+    // 4. 【终极垫砖头】无论怎么按，最后都再垫一条记录，保证永远退不出 PWA
+    try { history.pushState({ boziView: 'page-home' }, ''); } catch(err){}
   }
 });
-
-// 【垫砖头】页面一加载，先塞一条记录进去，让系统以为有上一页
-history.pushState({ boziPage: 'page-home' }, '');
-  
-  bindQueryUI();
-  bindHotTags();
-} catch(err) {
-  console.error('Bozi JS error:', err);
-}
-})();
  /* ========== 极速魔法光标：导航滑动指示器 ========== */
 (function(){
   var pill = document.getElementById('navPill');
