@@ -2975,7 +2975,9 @@ nav.scrollLeft += br.right - nr.right + 6;
 }
 }
 var ordersBtn = document.getElementById('navOrders');
-if(ordersBtn) ordersBtn.classList.toggle('active', id === 'page-orders');}
+if(ordersBtn) ordersBtn.classList.toggle('active', id === 'page-orders');
+if(typeof window.updateNavGlider === 'function') window.updateNavGlider();
+}
 updateNavHighlight('page-home');
 
 document.getElementById('backBtn').addEventListener('click', function(){
