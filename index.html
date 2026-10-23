@@ -5131,30 +5131,33 @@ function __boziCloseLayerClean(name){
 }
 
 window.addEventListener('popstate', function(e){
-  if(__boziIgnorePop > 0){ __boziIgnorePop--; return; }
+  if(__boziIgnorePop > 0){ __boziIgnorePop--; return; } // ← 把这行加回来
 
+  // 1. 如果有弹窗开着，按返回先关弹窗
   var mw = document.getElementById('modalWrapper');
-  if(mw && mw.classList.contains('show')){
-    if(typeof closeModal === 'function') closeModal();
-    return;
-  }
+  if(mw && mw.classList.contains('show')){ if(typeof closeModal === 'function') closeModal(); return; }
   var sw = document.getElementById('shareModalWrapper');
-  if(sw && sw.classList.contains('show')){
-    if(typeof closeShareModal === 'function') closeShareModal();
-    return;
-  }
+  if(sw && sw.classList.contains('show')){ if(typeof closeShareModal === 'function') closeShareModal(); return; }
   var sp = document.getElementById('searchPanel');
-  if(sp && sp.classList.contains('show')){
-    if(typeof closeSearch === 'function') closeSearch();
-    return;
-  }
+  if(sp && sp.classList.contains('show')){ if(typeof closeSearch === 'function') closeSearch(); return; }
 
+  // 2. 如果不在首页，按返回就回上一页
   var prev = pageStack.pop();
   if(prev){
     showView(prev, true);
+  } else {
+    // 3. 【救命代码】如果没上一页了，强制回首页！
+    var current = document.querySelector('.page.active');
+    if(current && current.id !== 'page-home'){
+      showView('page-home', true);
+    }
+    // 4. 【垫砖头】偷偷再塞一条历史记录，防止下一次按返回又退出了
+    history.pushState({ boziPage: 'page-home' }, '');
   }
 });
-/* ========== 系统返回手势支持结束 ========== */
+
+// 【垫砖头】页面一加载，先塞一条记录进去，让系统以为有上一页
+history.pushState({ boziPage: 'page-home' }, '');
   
   bindQueryUI();
   bindHotTags();
