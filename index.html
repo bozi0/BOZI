@@ -5163,6 +5163,13 @@ window.addEventListener('popstate', function(e){
     try { history.pushState({ boziView: 'page-home' }, ''); } catch(err){}
   }
 });
+    bindQueryUI();
+  bindHotTags();
+} catch(err) {
+  console.error('Bozi JS error:', err);
+}
+})();
+
  /* ========== 极速魔法光标：导航滑动指示器 ========== */
 (function(){
   var pill = document.getElementById('navPill');
