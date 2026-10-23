@@ -2910,7 +2910,7 @@ function showView(id, noPush){
   
   if(!noPush && current) pageStack.push(current.id);
   
-  // 【新增：每次跳转页面，都往手机系统里塞一条历史记录】
+  // 每次跳转页面，都往手机系统里塞一条历史记录
   if(!noPush) {
     try { history.pushState({ boziView: id }, ''); } catch(e){}
   }
@@ -2926,22 +2926,7 @@ function showView(id, noPush){
     setTimeout(triggerReveal, 60);
   }, 300);
 }
-var current = document.querySelector('.page.active');
-var target = document.getElementById(id);
-if(!current || current === target) return;
-if(!noPush && current) pageStack.push(current.id);
-current.classList.add('fading-out');
-current.classList.remove('active');
-setTimeout(function(){
-current.classList.remove('fading-out');
-target.classList.add('active');
-window.scrollTo({top:0, behavior:'auto'});
-updateBackBtn();
-updateNavHighlight(id);
-setTimeout(triggerReveal, 60);
-}, 300);
-}
-
+  
 function updateBackBtn(){
 var onHome = viewHome.classList.contains('active');
 var backBtn = document.getElementById('backBtn');
