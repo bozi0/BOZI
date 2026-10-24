@@ -1080,6 +1080,50 @@ select.admin-input option{background:#121218;color:#fff}
 @keyframes pageInNew{  from{ translate:100% 0;  scale:0.98 }  to{ translate:0 0;  scale:1 } }
 @keyframes pageOutNew{ from{ translate:0 0;     scale:1 }     to{ translate:-35% 0; scale:0.94 } }
 @keyframes pageFadeNew{from{ opacity:1 }                     to{ opacity:0 } } 
+  /* ===== 提交按钮三段变化（去支付） ===== */
+#modalNextBtn{
+  position:relative; overflow:hidden; white-space:nowrap;
+  transition:
+    width .3s ease-in-out, padding .3s ease-in-out, border-radius .3s ease-in-out,
+    background .3s ease, color .18s ease, box-shadow .3s ease;
+}
+#modalNextBtn.morph{                 /* 第 2 段：收缩成圆 */
+  padding:0 !important; min-width:0;
+  border-radius:50% !important;
+  color:transparent !important;      /* 文字淡出 */
+  pointer-events:none;
+}
+#modalNextBtn::after{                /* 加载圆环 */
+  content:''; position:absolute; left:50%; top:50%;
+  width:22px; height:22px; margin:-11px 0 0 -11px;
+  border-radius:50%;
+  border:2.5px solid rgba(255,255,255,.25);
+  border-top-color:#fff;
+  opacity:0; animation:morphSpin .7s linear infinite;
+}
+#modalNextBtn.morph::after{ opacity:1; transition:opacity .18s ease .28s; }
+#modalNextBtn::before{               /* 对勾（先藏起来） */
+  content:''; position:absolute; left:50%; top:50%;
+  width:7px; height:14px;
+  border-right:3px solid #fff; border-bottom:3px solid #fff;
+  transform:translate(-50%,-56%) rotate(45deg) scale(0);
+  opacity:0;
+}
+#modalNextBtn.morph.is-done{         /* 第 3 段：变绿 */
+  background:linear-gradient(135deg,#22c55e,#15803d) !important;
+  box-shadow:0 0 0 6px rgba(34,197,94,.15), 0 10px 26px rgba(34,197,94,.35);
+}
+#modalNextBtn.morph.is-done::after{ opacity:0; transition:opacity .12s ease; }
+#modalNextBtn.morph.is-done::before{
+  opacity:1;
+  animation:checkPop .34s cubic-bezier(.2,.9,.3,1.5) forwards;
+}
+@keyframes morphSpin{ to{ transform:rotate(360deg); } }
+@keyframes checkPop{
+  0%  { transform:translate(-50%,-56%) rotate(45deg) scale(0); }
+  60% { transform:translate(-50%,-56%) rotate(45deg) scale(1.12); }
+  100%{ transform:translate(-50%,-56%) rotate(45deg) scale(1); }
+}
 </style>
 </head>
 <body>
@@ -5216,5 +5260,157 @@ window.addEventListener('popstate', function(e){
   window.addEventListener('load', updateNavGlider);
 })();
 </script>
-</body>
+    <script type="text/plain">
+(function(){
+  var T_COLLAPSE = 300;    /* 收缩成圆 */
+  var T_LOADING  = 1200;   /* 转圈多久后变绿 */
+  var T_DONE     = 1000;   /* 对勾停留 */
+  var T_RESTORE  = 320;    /* 恢复原状 */
+
+  document.addEventListener('click', function(e){
+    var btn = e.target && e.target.closest ? e.target.closest('#modalNextBtn') : null;
+    if(!btn) return;
+
+    if(btn.dataset.morphPass === '1'){ btn.dataset.morphPass = ''; return; } /* 放行 */
+    if(btn.dataset.morphBusy === '1' || btn.disabled) return;
+    if(btn.textContent.trim() !== '去支付') return;   /* 只在第 2 步触发 */
+
+    e.preventDefault();
+    e.stopPropagation();          /* 先截住，原逻辑这一步不执行 */
+    btn.dataset.morphBusy = '1';
+
+    var w = btn.offsetWidth;
+    btn.classList.add('morph');
+    btn.style.width = w + 'px';
+    void btn.offsetWidth;          /* 强制回流，让动画从满宽开始 */
+    btn.style.width = btn.offsetHeight + 'px';   /* 收成正圆 */
+
+    setTimeout(function(){ btn.classList.add('is-done'); }, T_COLLAPSE + T_LOADING);
+
+    setTimeout(function(){
+      btn.classList.remove('morph','is-done');
+      btn.style.width = w + 'px';
+      setTimeout(function(){
+        btn.style.width = '';
+        btn.dataset.morphBusy = '';
+        btn.dataset.morphPass = '1';    /* 这一次放行 */
+        btn.click();                    /* 原逻辑：goToStep(3) 进协议页 */
+      }, T_RESTORE);
+    }, T_COLLAPSE + T_LOADING + T_DONE);
+  }, true);
+
+  /* 保险：动画中途关掉弹窗也不会把按钮卡死 */
+  setInterval(function(){
+    var b = document.getElementById('modalNextBtn');
+    if(b && b.dataset.morphBusy === '1' && !b.classList.contains('morph')){
+      b.dataset.morphBusy = '';
+    }
+  }, 2000);
+})();
+</script>
+<script>
+/* ============ Bozi ·「去支付」按钮三段变化（单块安装版） ============ */
+(function () {
+  if (window.__buyMorphReady) return;
+  window.__buyMorphReady = true;
+
+  /* ---------- 1. 样式：运行时注入，不用去 <style> 里找位置 ---------- */
+  var css = [
+    '#modalNextBtn{position:relative;overflow:hidden;white-space:nowrap;',
+    'transition:width .3s ease-in-out,height .3s ease-in-out,padding .3s ease-in-out,',
+    'border-radius .3s ease-in-out,background .3s ease,color .18s ease,box-shadow .3s ease;}',
+
+    '#modalNextBtn.morph{padding:0 !important;min-width:0;display:block;margin:0 auto;',
+    'border-radius:50% !important;color:transparent !important;pointer-events:none;}',
+
+    '#modalNextBtn::after{content:"";position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;',
+    'box-sizing:border-box;width:22px;height:22px;border-radius:50%;border:2.5px solid rgba(255,255,255,.25);',
+    'border-top-color:#fff;opacity:0;animation:morphSpin .7s linear infinite;}',
+    '#modalNextBtn.morph::after{opacity:1;transition:opacity .18s ease .28s;}',
+
+    '#modalNextBtn::before{content:"";position:absolute;left:0;right:0;top:0;bottom:0;margin:auto;',
+    'box-sizing:border-box;width:8px;height:15px;border-right:3px solid #fff;border-bottom:3px solid #fff;',
+    'opacity:0;transform:translate(-1px,-1px) rotate(45deg) scale(0);}',
+
+    '#modalNextBtn.morph.is-done{background:linear-gradient(135deg,#22c55e,#15803d) !important;',
+    'box-shadow:0 0 0 6px rgba(34,197,94,.15),0 10px 26px rgba(34,197,94,.35);}',
+    '#modalNextBtn.morph.is-done::after{opacity:0;transition:opacity .12s ease;}',
+    '#modalNextBtn.morph.is-done::before{opacity:1;',
+    'animation:checkPop .34s cubic-bezier(.2,.9,.3,1.5) forwards;}',
+
+    '@keyframes morphSpin{to{transform:rotate(360deg)}}',
+    '@keyframes checkPop{',
+    '0%{transform:translate(-1px,-1px) rotate(45deg) scale(0)}',
+    '60%{transform:translate(-1px,-1px) rotate(45deg) scale(1.12)}',
+    '100%{transform:translate(-1px,-1px) rotate(45deg) scale(1)}}',
+
+    '@media (prefers-reduced-motion: reduce){',
+    '#modalNextBtn{transition:none !important}',
+    '#modalNextBtn::after{animation:none !important}',
+    '#modalNextBtn.morph.is-done::before{transform:translate(-1px,-1px) rotate(45deg) scale(1) !important;}}'
+  ].join('');
+
+  var st = document.createElement('style');
+  st.id = 'buy-morph-style';
+  st.appendChild(document.createTextNode(css));
+  document.head.appendChild(st);
+
+  /* ---------- 2. 时间轴（想调就改这四个数字） ---------- */
+  var T_COLLAPSE = 300;    /* 收缩成圆 */
+  var T_LOADING  = 1200;   /* 转圈多久后变绿 */
+  var T_DONE     = 1000;   /* 对勾停留 */
+  var T_RESTORE  = 320;    /* 恢复原状 */
+
+  /* ---------- 3. 逻辑：先截住这次点击，播完动画再放行 ---------- */
+  document.addEventListener('click', function (e) {
+    var t = e.target;
+    var btn = (t && t.closest) ? t.closest('#modalNextBtn') : null;
+    if (!btn) return;
+
+    /* 放行模式：下面自己触发的那一次点击，直接交给原逻辑 */
+    if (btn.dataset.morphPass === '1') { btn.dataset.morphPass = ''; return; }
+    if (btn.dataset.morphBusy === '1' || btn.disabled) return;
+    if (btn.textContent.trim() !== '去支付') return;   /* 只在第 2 步触发 */
+
+    e.preventDefault();
+    e.stopPropagation();
+    btn.dataset.morphBusy = '1';
+
+    var w = btn.offsetWidth;
+    var h = btn.offsetHeight;          /* 先把高度量出来，锁死，防止变扁 */
+
+    btn.classList.add('morph');
+    btn.style.width  = w + 'px';
+    btn.style.height = h + 'px';
+    void btn.offsetWidth;              /* 强制回流，让收缩从满宽开始 */
+    btn.style.width  = h + 'px';       /* 收成正圆：宽 = 高 */
+
+    setTimeout(function () { btn.classList.add('is-done'); }, T_COLLAPSE + T_LOADING);
+
+    setTimeout(function () {
+      btn.classList.remove('morph', 'is-done');
+      btn.style.width = w + 'px';
+      setTimeout(function () {
+        btn.style.width  = '';
+        btn.style.height = '';
+        btn.dataset.morphBusy = '';
+        btn.dataset.morphPass = '1';   /* 放行这一次 */
+        btn.click();                   /* 原逻辑：goToStep(3) 进协议页 */
+      }, T_RESTORE);
+    }, T_COLLAPSE + T_LOADING + T_DONE);
+  }, true);
+
+  /* 保险：万一动画中途把弹窗关了，按钮不会卡在“忙碌”状态 */
+  setInterval(function () {
+    var b = document.getElementById('modalNextBtn');
+    if (!b) return;
+    if (b.dataset.morphBusy === '1' && !b.classList.contains('morph')) {
+      b.dataset.morphBusy = '';
+      b.dataset.morphPass = '';
+      b.style.width  = '';
+      b.style.height = '';
+    }
+  }, 2000);
+})();
+</script></body>
 </html>
