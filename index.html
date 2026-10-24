@@ -1075,7 +1075,11 @@ select.admin-input option{background:#121218;color:#fff}
   from { opacity: 1; }
   to { opacity: 0; }
 }
- 
+  
+/* 修正：transform 被 !important 锁死，改用独立属性 translate/scale 做真推拉 */
+@keyframes pageInNew{  from{ translate:100% 0;  scale:0.98 }  to{ translate:0 0;  scale:1 } }
+@keyframes pageOutNew{ from{ translate:0 0;     scale:1 }     to{ translate:-35% 0; scale:0.94 } }
+@keyframes pageFadeNew{from{ opacity:1 }                     to{ opacity:0 } } 
 </style>
 </head>
 <body>
