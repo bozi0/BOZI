@@ -5412,5 +5412,52 @@ window.addEventListener('popstate', function(e){
     }
   }, 2000);
 })();
-</script></body>
+</script>
+  <style>
+/* ===== 老版推拉 + 柔和回弹（进场 600ms · 100% 位移 · 余震 5%） ===== */
+.page.active{
+  position:relative;
+  z-index:auto;
+  animation:pageInC .6s linear both !important;
+}
+.page.fading-out{
+  position:static !important;
+  z-index:auto;
+  max-width:none;
+  margin:0;
+  padding:0;
+  overflow:visible;
+  display:flex !important;
+  pointer-events:none;
+  animation:pageOutC .3s linear forwards,
+            pageFadeC .3s ease-in-out forwards !important;
+}
+@keyframes pageInC{
+  0%  {translate:100% 0;   scale:.980}
+  5%  {translate:66.4% 0;  scale:.987}
+  10% {translate:38.7% 0;  scale:.992}
+  15% {translate:18.8% 0;  scale:.996}
+  20% {translate:6.5% 0;   scale:.999}
+  25% {translate:0 0;      scale:1.000}
+  30% {translate:-4.47% 0; scale:1.0015}
+  35% {translate:-5.04% 0; scale:1.0015}
+  40% {translate:-3.96% 0; scale:1.0012}
+  45% {translate:-2.54% 0; scale:1.0008}
+  50% {translate:-1.37% 0; scale:1.0004}
+  55% {translate:-0.61% 0; scale:1.0002}
+  60% {translate:-0.23% 0; scale:1.000}
+  65% {translate:-0.07% 0; scale:1.000}
+  75% {translate:0 0;      scale:1.000}
+  100%{translate:0 0;      scale:1}
+}
+@keyframes pageOutC{
+  from{translate:0 0;    scale:1}
+  to  {translate:-35% 0; scale:.94}
+}
+@keyframes pageFadeC{
+  from{opacity:1}
+  to  {opacity:0}
+}
+</style>
+</body>
 </html>
